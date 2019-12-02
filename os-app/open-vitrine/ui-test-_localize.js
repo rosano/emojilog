@@ -33,8 +33,8 @@ describe(`EMTVitrine_Localize-${ languageCode }`, function () {
 		deepEqual(browser.query(EMTVitrineContent).textContent.trim().slice(0, 20), item.slice(0, 20))
 	});
 
-	it('localizes EMO_SHARED_GITHUB_URL', function() {
-		browser.assert.element(`a[href="${ process.env.EMO_SHARED_GITHUB_URL }"]`);
+	it('localizes EMT_SHARED_GITHUB_URL', function() {
+		browser.assert.element(`a[href="${ process.env.EMT_SHARED_GITHUB_URL }"]`);
 	});
 
 });

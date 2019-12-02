@@ -3,25 +3,25 @@ import { deepEqual } from 'assert';
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
-	EMORootLink: '.EMORootLink',
+	EMTRootLink: '.EMTRootLink',
 	
-	EMORootLinkIcon: '.EMORootLinkIcon',
+	EMTRootLinkLogo: '.EMTRootLinkLogo',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
 
-describe('EMORootLink_Access', function () {
+describe('EMTRootLink_Access', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
 	
-	it('shows EMORootLink', function() {
-		browser.assert.elements(EMORootLink, 1);
+	it('shows EMTRootLink', function() {
+		browser.assert.elements(EMTRootLink, 1);
 	});
 	
-	it('shows EMORootLinkIcon', function() {
-		browser.assert.elements(EMORootLinkIcon, 1);
+	it('shows EMTRootLinkLogo', function() {
+		browser.assert.elements(EMTRootLinkLogo, 1);
 	});
 
 });

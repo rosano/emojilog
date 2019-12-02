@@ -5,8 +5,8 @@ const mod = {
 			throw new Error('EMTErrorInputNotValid');
 		}
 
-		if (!(inputData.EMO_SHARED_GITHUB_URL || '').trim()) {
-			return new Error('EMO_SHARED_GITHUB_URL not defined');
+		if (!(inputData.EMT_SHARED_GITHUB_URL || '').trim()) {
+			return new Error('EMT_SHARED_GITHUB_URL not defined');
 		}
 	},
 

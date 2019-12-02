@@ -2,20 +2,20 @@ import { deepEqual } from 'assert';
 
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-describe('EMORootLink_Misc', function () {
+describe('EMTRootLink_Misc', function () {
 
 	before(function () {
 		return browser.visit(kDefaultRoute.OLSKRoutePath)
 	});
 
-	context('EMORootLinkIcon', function () {
+	context('EMTRootLinkLogo', function () {
 		
 		it('sets role', function () {
-			browser.assert.attribute(EMORootLinkIcon, 'role', 'img')
+			browser.assert.attribute(EMTRootLinkLogo, 'role', 'img')
 		});
 	
 		it('sets src', function () {
-			browser.assert.attribute(EMORootLinkIcon, 'src', '/_shared/EMORootLink/ui-assets/icon.svg')
+			browser.assert.attribute(EMTRootLinkLogo, 'src', '/_shared/EMTRootLink/ui-assets/logo.svg')
 		});
 	
 	});

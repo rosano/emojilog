@@ -10,7 +10,7 @@ const uLocalized = function (inputData) {
 	return OLSKTestingLocalized(inputData, languageCode);
 };
 
-describe(`EMORootLink_Localize-${ languageCode }`, function () {
+describe(`EMTRootLink_Localize-${ languageCode }`, function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
@@ -19,11 +19,11 @@ describe(`EMORootLink_Localize-${ languageCode }`, function () {
 	});
 
 	it('localizes title', function () {
-		browser.assert.attribute(EMORootLink, 'title', uFormatted(uLocalized('EMOSharedColonSeparatedFormat'), uLocalized('EMORootLinkLogoLabel'), uLocalized('EMORootLinkText')))
+		browser.assert.attribute(EMTRootLink, 'title', uFormatted(uLocalized('EMTSharedColonSeparatedFormat'), uLocalized('EMTRootLinkLogoLabel'), uLocalized('EMTRootLinkText')))
 	});
 
 	it('localizes href', function () {
-		browser.assert.attribute(EMORootLink, 'href', OLSKTestingCanonicalFor('/', {
+		browser.assert.attribute(EMTRootLink, 'href', OLSKTestingCanonicalFor('/', {
 			OLSKRoutingLanguage: languageCode,
 		}));
 	});
