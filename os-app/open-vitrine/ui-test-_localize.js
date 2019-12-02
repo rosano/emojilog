@@ -29,7 +29,7 @@ describe(`EMTVitrine_Localize-${ languageCode }`, function () {
 	});
 
 	it('localizes EMTVitrineContent', function() {
-		const item = require('fs').readFileSync(require('path').join(__dirname, `text.${ languageCode }.md`), 'utf-8').replace(/_/g, '');
+		const item = require('fs').readFileSync(require('path').join(__dirname, `text.${ languageCode }.md`), 'utf-8').replace(/_/g, '').replace('\n\n', '\n');
 		deepEqual(browser.query(EMTVitrineContent).textContent.trim().slice(0, 20), item.slice(0, 20))
 	});
 
