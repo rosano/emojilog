@@ -2,7 +2,7 @@ const mod = {
 
 	EMTSharedDonateLinkGuard (inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
-			throw new Error('LCHErrorInputNotValid');
+			throw new Error('EMTErrorInputNotValid');
 		}
 
 		if (!(inputData.EMT_SHARED_DONATE_URL || '').trim()) {

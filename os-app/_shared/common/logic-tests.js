@@ -13,7 +13,7 @@ describe('EMTSharedDonateLinkGuard', function testEMTSharedDonateLinkGuard() {
 	it('throws if not object', function() {
 		throws(function() {
 			mainModule.EMTSharedDonateLinkGuard(null);
-		}, /LCHErrorInputNotValid/);
+		}, /EMTErrorInputNotValid/);
 	});
 
 	it('returns error if no EMT_SHARED_DONATE_URL', function () {
