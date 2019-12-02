@@ -1,5 +1,15 @@
 const mod = {
 
+	EMTSharedDonateLinkGuard (inputData) {
+		if (typeof inputData !== 'object' || inputData === null) {
+			throw new Error('LCHErrorInputNotValid');
+		}
+
+		if (!(inputData.EMT_SHARED_DONATE_URL || '').trim()) {
+			return new Error('EMT_SHARED_DONATE_URL not defined');
+		}
+	},
+
 	EMTSharedGitHubLinkGuard (inputData) {
 		if (typeof inputData !== 'object' || inputData === null) {
 			throw new Error('EMTErrorInputNotValid');

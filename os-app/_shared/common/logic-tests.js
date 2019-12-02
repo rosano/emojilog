@@ -2,6 +2,34 @@ const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./logic.js');
 
+describe('EMTSharedDonateLinkGuard', function testEMTSharedDonateLinkGuard() {
+
+	const StubEnvValid = function () {
+		return {
+			EMT_SHARED_DONATE_URL: 'alfa',
+		};
+	};
+
+	it('throws if not object', function() {
+		throws(function() {
+			mainModule.EMTSharedDonateLinkGuard(null);
+		}, /LCHErrorInputNotValid/);
+	});
+
+	it('returns error if no EMT_SHARED_DONATE_URL', function () {
+		deepEqual(mainModule.EMTSharedDonateLinkGuard(Object.assign(StubEnvValid(), {
+			EMT_SHARED_DONATE_URL: null,
+		})), new Error('EMT_SHARED_DONATE_URL not defined'));
+	});
+
+	it('returns error if EMT_SHARED_DONATE_URL blank', function () {
+		deepEqual(mainModule.EMTSharedDonateLinkGuard(Object.assign(StubEnvValid(), {
+			EMT_SHARED_DONATE_URL: ' ',
+		})), new Error('EMT_SHARED_DONATE_URL not defined'));
+	});
+
+});
+
 describe('EMTSharedGitHubLinkGuard', function testEMTSharedGitHubLinkGuard() {
 
 	const StubEnvValid = function () {
