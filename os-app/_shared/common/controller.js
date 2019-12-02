@@ -6,3 +6,8 @@ exports.OLSKControllerSharedMiddlewares = function() {
 	};
 };
 
+exports.OLSKControllerSharedStaticAssetFolders = function() {
+	return [
+		'_shared/__external',
+	];
+};
