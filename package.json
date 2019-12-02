@@ -1,0 +1,53 @@
+{
+  "scripts": {
+    "preinstall": "node ./package-preinstall.js",
+    "postinstall": "node ./package-postinstall.js",
+    
+    "start": "olsk-app",
+
+    "test": "olsk-spec",
+
+    "build": "rollup -c rollup-config.js",
+    "build-watch": "rollup -w -c rollup-config.js"
+  },
+  "dependencies": {
+    "// OLDSKOOL": null,
+    "OLSKApp": "olsk/OLSKApp",
+
+    "// FRONTEND NORMALIZE CSS": null,
+    "normalize.css": "latest",
+    "OLSKLayout": "olsk/OLSKLayout",
+
+    "// FRONTEND TEXT": null,
+    "marked": "latest",
+    "OLSKString": "olsk/OLSKString",
+
+    "// I sacrifice myself for the commas of others": null
+  },
+  "devDependencies": {
+    "// TESTS": null,
+    "mocha": "latest",
+    "supervisor": "latest",
+
+    "// UI TESTS": null,
+    "zombie": "latest",
+
+    "// MOCHA PREPROCESS": null,
+    "OLSKTesting": "olsk/OLSKTesting",
+
+    "// SVELTE": null,
+    "svelte": "latest",
+    "OLSKRollup": "olsk/OLSKRollup",
+
+    "// LIVERELOAD": null,
+    "livereload": "latest",
+
+    "// PRODUCTION BUILD": null,
+    "OLSKDisk": "olsk/OLSKDisk",
+
+    "// SPEC": null,
+    "OLSKSpec": "olsk/OLSKSpec",
+
+    "// I sacrifice myself for the commas of others": null    
+  }
+}
