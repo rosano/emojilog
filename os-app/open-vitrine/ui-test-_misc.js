@@ -16,14 +16,14 @@ describe('EMTVitrine_Misc', function () {
 	
 	});
 
-	context('EMTVitrineIdentityIcon', function () {
+	context('EMTVitrineIdentityLogo', function () {
 		
 		it('sets role', function () {
-			browser.assert.attribute(EMTVitrineIdentityIcon, 'role', 'image')
+			browser.assert.attribute(EMTVitrineIdentityLogo, 'role', 'image')
 		});
 		
 		it('sets src', function () {
-			browser.assert.attribute(EMTVitrineIdentityIcon, 'src', '/_shared/EMORootLink/ui-assets/logo.svg')
+			browser.assert.attribute(EMTVitrineIdentityLogo, 'src', '/_shared/EMTRootLink/ui-assets/logo.svg')
 		});
 	
 	});

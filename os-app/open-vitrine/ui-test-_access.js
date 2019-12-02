@@ -6,7 +6,7 @@ Object.entries({
 	EMTVitrine: '.EMTVitrine',
 	
 	EMTVitrineIdentity: '.EMTVitrineIdentity',
-	EMTVitrineIdentityIcon: '.EMTVitrineIdentityIcon',
+	EMTVitrineIdentityLogo: '.EMTVitrineIdentityLogo',
 	EMTVitrineIdentityName: '.EMTVitrineIdentityName',
 
 	EMTVitrineContent: '.EMTVitrineContent',
@@ -32,8 +32,8 @@ describe('EMTVitrine_Access', function () {
 		browser.assert.elements(EMTVitrineIdentity, 1)
 	});
 	
-	it('shows EMTVitrineIdentityIcon', function() {
-		browser.assert.elements(EMTVitrineIdentityIcon, 1)
+	it('shows EMTVitrineIdentityLogo', function() {
+		browser.assert.elements(EMTVitrineIdentityLogo, 1)
 	});
 	
 	it('shows EMTVitrineIdentityName', function() {
