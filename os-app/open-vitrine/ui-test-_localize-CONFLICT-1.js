@@ -24,7 +24,7 @@ describe(`EMTVitrine_Localize-${ languageCode }`, function () {
 		browser.assert.attribute('meta[name=description]', 'content', uLocalized('EMTVitrineDescription'))
 	});
 
-	it('localize EMTVitrineIdentityName', function () {
+	it('localizes EMTVitrineIdentityName', function () {
 		browser.assert.text(EMTVitrineIdentityName, uLocalized('EMTVitrineTitle'));
 	});
 

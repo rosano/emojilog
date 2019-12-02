@@ -1,0 +1,27 @@
+<%
+locals.OLSKPageTitle = OLSKLocalized('EMTTrackTitle');
+locals.OLSKPageAssets = [
+	'/_shared/__external/normalize.css/normalize.css',
+	'/_shared/__external/OLSKLayout/ui-style.css',
+	'/_shared/__external/OLSKStorageWidget/__compiled/OLSKStorageWidget.js',
+	'/_shared/__external/OLSKStorageWidget/__compiled/OLSKStorageWidget.css',
+	'/_shared/common/ui-style.css',
+	'__compiled/ui-style.css',
+];
+locals.OLSKPagePublicRouteKeys = [
+	OLSKSharedActiveRouteConstant,
+	'EMTServiceWorkerRoute',
+];
+locals.OLSKPagePublicConstants = {
+	OLSKSharedActiveRouteConstant,
+	OLSKSharedPageLanguagesAvailable,
+	OLSKSharedPageCurrentLanguage,
+	EMT_SHARED_DONATE_URL: process.env.EMT_SHARED_DONATE_URL,
+};
+%>
+
+<%- include('../_shared/common/layout-header.ejs') %>
+
+<script src="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-behaviour.js"></script>
+
+<%- include('../_shared/common/layout-footer.ejs') %>

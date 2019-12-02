@@ -38,8 +38,14 @@
     "OLSKToolbar": "olsk/OLSKToolbar",
     "OLSKToolbarElementGroup": "olsk/OLSKToolbarElementGroup",
 
+    "// FRONTEND THROTTLE": null,
+    "OLSKThrottle": "olsk/OLSKThrottle",
+
     "// FRONTEND RELOAD BUTTON": null,
     "OLSKReloadButton": "olsk/OLSKReloadButton",
+
+    "// FRONTEND ROUTING": null,
+    "OLSKRouting": "olsk/OLSKRouting",
 
     "// I sacrifice myself for the commas of others": null
   },

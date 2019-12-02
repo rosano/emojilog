@@ -1,0 +1,52 @@
+.Container {
+	border-top: var(--EMTBorderStyle);
+	
+	/* AppContainerFlexboxChild */
+	flex-shrink: 0;
+
+	/* ContainerFlexboxParent */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.Container :global(.OLSKToolbar) {
+	flex-grow: 1;
+}
+
+.Container :global(.OLSKToolbar > div) {
+	display: flex;
+	align-items: center;
+}
+
+h1 {
+	margin: 0;
+
+	font-size: 20px;
+}
+
+.Container :global(.OLSKToolbarElementGroup > *:not(:first-child)) {
+	margin-left: 10px;
+}
+
+:global(#RCSLanguageSwitcher span) {
+	/* browser quirks */
+	padding-left: 4px;
+}
+
+.EMTTrackFooterStorageButton {
+	padding: 0 5px;
+}
+
+.EMTTrackFooterStorageButton :global(svg,img) {
+	width: 20px;
+	height: 20px;
+}
+
+.EMTTrackFooterStorageButton :global(path) {
+	fill: black;
+}
+
+.EMTTrackFooterStorageButton.OSWIconVisible img {
+	display: none;
+}

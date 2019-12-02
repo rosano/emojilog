@@ -1,0 +1,51 @@
+.Container {
+	/* ContainerFlexboxParent */
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	border-bottom: var(--EMTBorderStyle);
+}
+
+.FormContainer {
+	padding: 5px;
+
+	overflow-y: scroll;
+}
+
+p:nth-child(1) {
+	margin-top: 0;
+}
+
+.FormContainer hr {
+	width: 100%;
+	height: 1px;
+	border: none;
+
+	background: #e6e6e6;
+}
+
+input[type=text] {
+	width: 50%;
+	border: var(--EMTBorderStyle);
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.PlaceholderContainer {
+	opacity: 0.5;
+	text-align: center;
+
+	/* ContainerFlexboxChild */
+	flex-grow: 1;
+
+	/* PlaceholderContainerFlexboxParent */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+:global(.OLSKIsLoading) .PlaceholderContainer {
+	visibility: hidden;
+}
