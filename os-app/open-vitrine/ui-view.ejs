@@ -1,0 +1,42 @@
+<%
+locals.OLSKPageTitle = OLSKLocalized('EMTVitrineTitle');
+locals.OLSKPageDescription = OLSKLocalized('EMTVitrineDescription');
+locals.OLSKPageAssets = [
+	'/_shared/__external/normalize.css/normalize.css',
+	'/_shared/__external/OLSKLayout/ui-style.css',
+	'/_shared/common/ui-style.css',
+	'ui-style.css',
+	'__compiled/ui-behaviour.js',
+];
+locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
+locals.OLSKPagePublicConstants = {
+	OLSKSharedPageCurrentLanguage: OLSKSharedPageCurrentLanguage,
+};
+%>
+
+<%- include('../_shared/common/layout-header.ejs') %>
+
+<div class="EMTVitrine OLSKCommon">
+
+<%- include('../_shared/RCSLanguageSwitcher/main.ejs') %>
+
+<hr>
+
+<div class="EMTVitrineIdentity">
+	<img class="EMTVitrineIdentityIcon" src="/_shared/EMORootLink/ui-assets/icon.svg" role="image" />
+	<h1 class="EMTVitrineIdentityName"><%= OLSKLocalized('EMTVitrineTitle') %></h1>
+</div>
+
+<article class="EMTVitrineContent">
+
+<%- OLSKStringReplaceTokens(EMTVitrineContent, {}) %>
+
+</article>
+
+<hr />
+
+<%- include('../_shared/ROCORootLink/main.ejs') %>
+
+</div>
+
+<%- include('../_shared/common/layout-footer.ejs') %>
