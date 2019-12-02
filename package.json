@@ -14,6 +14,14 @@
     "// OLDSKOOL": null,
     "OLSKApp": "olsk/OLSKApp",
 
+    "// REMOTE STORAGE": null,
+    "remotestoragejs": "latest",
+    "OLSKRemoteStorage": "olsk/OLSKRemoteStorage",
+    "OLSKStorageWidget": "olsk/OSWPackage",
+
+    "// UNIQUE IDS": null,
+    "ulid": "latest",
+
     "// FRONTEND NORMALIZE CSS": null,
     "normalize.css": "latest",
     "OLSKLayout": "olsk/OLSKLayout",
@@ -21,6 +29,9 @@
     "// FRONTEND TEXT": null,
     "marked": "latest",
     "OLSKString": "olsk/OLSKString",
+
+    "// FRONTEND SERVICE WORKER": null,
+    "OLSKServiceWorker": "olsk/OLSKServiceWorker",
 
     "// I sacrifice myself for the commas of others": null
   },
