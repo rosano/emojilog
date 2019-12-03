@@ -9,12 +9,12 @@ import EMTTrackLogic from './ui-logic.js';
 
 import { writable } from 'svelte/store';
 
-export const DocumentsAllStore = writable([]);
-export const DocumentSelectedStore = writable(null);
+export const EMTDocumentsAllStore = writable([]);
+export const EMTDocumentSelectedStore = writable(null);
 export const EMTPersistenceIsLoading = writable(true);
 
 let _DocumentSelected;
-DocumentSelectedStore.subscribe(function (val) {
+EMTDocumentSelectedStore.subscribe(function (val) {
 	_DocumentSelected = val;
 });
 export const storageClient = EMTStorageClient.EMTStorageClient({
@@ -28,7 +28,7 @@ export const storageClient = EMTStorageClient.EMTStorageClient({
 						OLSKChangeDelegateCreate: function (inputData) {
 							// console.log('OLSKChangeDelegateCreate', inputData);
 
-							DocumentsAllStore.update(function (val) {
+							EMTDocumentsAllStore.update(function (val) {
 								return val.filter(function (e) { // @Hotfix Dropbox sending DelegateAdd
 									return e.EMTDocumentID !== inputData.EMTDocumentID;
 								}).concat(inputData).sort(EMTTrackLogic.EMTTrackSort);
@@ -38,12 +38,12 @@ export const storageClient = EMTStorageClient.EMTStorageClient({
 							// console.log('OLSKChangeDelegateUpdate', inputData);
 
 							if (_DocumentSelected && (_DocumentSelected.EMTDocumentID === inputData.EMTDocumentID)) {
-								DocumentSelectedStore.update(function (val) {
+								EMTDocumentSelectedStore.update(function (val) {
 									return Object.assign(val, inputData);
 								});
 							}
 
-							DocumentsAllStore.update(function (val) {
+							EMTDocumentsAllStore.update(function (val) {
 								return val.map(function (e) {
 									return Object.assign(e, e.EMTDocumentID === inputData.EMTDocumentID ? inputData : {});
 								});
@@ -53,10 +53,10 @@ export const storageClient = EMTStorageClient.EMTStorageClient({
 							// console.log('OLSKChangeDelegateDelete', inputData);
 
 							if (_DocumentSelected && (_DocumentSelected.EMTDocumentID === inputData.EMTDocumentID)) {
-								DocumentSelectedStore.set(null);
+								EMTDocumentSelectedStore.set(null);
 							}
 
-							DocumentsAllStore.update(function (val) {
+							EMTDocumentsAllStore.update(function (val) {
 								return val.filter(function (e) {
 									return e.EMTDocumentID !== inputData.EMTDocumentID;
 								});
@@ -82,7 +82,7 @@ remoteStorage.on('ready', async () => {
 
 
 	await remoteStorage.emojitimer.emt_documents.init();
-	DocumentsAllStore.set((await EMTDocumentActionList(storageClient)).sort(EMTTrackLogic.EMTTrackSort));
+	EMTDocumentsAllStore.set((await EMTDocumentActionList(storageClient)).sort(EMTTrackLogic.EMTTrackSort));
 
 
 	EMTPersistenceIsLoading.set(false);

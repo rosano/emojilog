@@ -9,7 +9,7 @@ import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import * as EMTDocumentAction from '../_shared/EMTDocument/action.js';
 import EMTTrackLogic from './ui-logic.js';
-import { storageClient, EMTPersistenceIsLoading, DocumentsAllStore, DocumentSelectedStore } from './persistence.js';
+import { storageClient, EMTPersistenceIsLoading, EMTDocumentsAllStore, EMTDocumentSelectedStore } from './persistence.js';
 
 const mod = {
 
@@ -66,17 +66,17 @@ const mod = {
 	},
 
 	MessageDocumentsAllDidChange() {
-		mod._ValueDocumentsAll = $DocumentsAllStore;
+		mod._ValueDocumentsAll = $EMTDocumentsAllStore;
 	},
 
 	// COMMAND
 
 	CommandDocumentSave() {
-		DocumentsAllStore.update(function (val) {
+		EMTDocumentsAllStore.update(function (val) {
 			return val;
 		});
 
-		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveThrottleMap, $DocumentSelectedStore.EMTDocumentID, function (inputData) {
+		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveThrottleMap, $EMTDocumentSelectedStore.EMTDocumentID, function (inputData) {
 			return {
 				OLSKThrottleDuration: 500,
 				OLSKThrottleCallback: async function () {
@@ -85,10 +85,10 @@ const mod = {
 					await EMTDocumentAction.EMTDocumentActionUpdate(storageClient, inputData);
 				},
 			};
-		}, $DocumentSelectedStore);
+		}, $EMTDocumentSelectedStore);
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
-			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[$DocumentSelectedStore.EMTDocumentID])	
+			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[$EMTDocumentSelectedStore.EMTDocumentID])	
 		};
 	},
 
@@ -98,7 +98,7 @@ const mod = {
 			EMTDocumentModificationDate: new Date(),
 		});
 
-		DocumentsAllStore.update(function (val) {
+		EMTDocumentsAllStore.update(function (val) {
 			return val.concat(item).sort(EMTTrackLogic.EMTTrackSort);
 		});
 
@@ -106,11 +106,11 @@ const mod = {
 	},
 	
 	CommandDocumentSelect(inputData) {
-		return DocumentSelectedStore.set(inputData);
+		return EMTDocumentSelectedStore.set(inputData);
 	},
 	
 	async CommandDocumentDiscard (inputData) {
-		DocumentsAllStore.update(function (val) {
+		EMTDocumentsAllStore.update(function (val) {
 			return val.filter(function(e) {
 				return e !== inputData;
 			});
@@ -118,7 +118,7 @@ const mod = {
 
 		await EMTDocumentAction.EMTDocumentActionDelete(storageClient, inputData.EMTDocumentID);
 
-		DocumentSelectedStore.set(null);
+		EMTDocumentSelectedStore.set(null);
 	},
 
 	// SETUP
@@ -147,9 +147,9 @@ const mod = {
 
 };
 
-DocumentsAllStore.subscribe(mod.MessageDocumentsAllDidChange);
+EMTDocumentsAllStore.subscribe(mod.MessageDocumentsAllDidChange);
 
-DocumentSelectedStore.subscribe(mod.MessageDocumentSelectedDidChange);
+EMTDocumentSelectedStore.subscribe(mod.MessageDocumentSelectedDidChange);
 
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
@@ -164,9 +164,9 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 <div class="Container OLSKViewport" class:OLSKIsLoading={ $EMTPersistenceIsLoading }>
 
 <OLSKViewportContent>
-	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueDocumentsAll } EMTTrackMasterListItemSelected={ $DocumentSelectedStore } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } />
+	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueDocumentsAll } EMTTrackMasterListItemSelected={ $EMTDocumentSelectedStore } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } />
 	
-	<EMTTrackDetail EMTTrackDetailItem={ $DocumentSelectedStore } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } EMTTrackDetailDispatchUpdate={ mod.EMTTrackDetailDispatchUpdate } />
+	<EMTTrackDetail EMTTrackDetailItem={ $EMTDocumentSelectedStore } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } EMTTrackDetailDispatchUpdate={ mod.EMTTrackDetailDispatchUpdate } />
 </OLSKViewportContent>
 
 <div id="EMTTrackStorageWidget" class:EMTTrackStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
