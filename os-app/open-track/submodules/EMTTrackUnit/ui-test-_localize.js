@@ -41,6 +41,16 @@ describe(`EMTTrackUnit_Localize-${ languageCode }`, function () {
 		it('localizes EMTTrackUnitFormNameField', function () {
 			browser.assert.attribute(EMTTrackUnitFormNameField, 'placeholder', uLocalized('EMTTrackUnitFormNameFieldPlaceholderText'));
 		});
+
+		context('on discard', function () {
+			
+			it('localizes EMTTrackUnitDiscardPrompt', async function() {
+				deepEqual((await browser.OLSKConfirm(async function () {
+					browser.pressButton(EMTTrackUnitToolbarDiscardButton);
+				})).question, uLocalized('EMTTrackUnitDiscardPromptText'));
+			});
+		
+		});
 		
 	});
 
