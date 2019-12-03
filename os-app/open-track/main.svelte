@@ -8,6 +8,7 @@ import { storageClient, isLoading, DocumentsAllStore, DocumentSelectedStore } fr
 import { EMTTrackSort } from './ui-logic.js';
 import * as EMTDocumentAction from '../_shared/EMTDocument/action.js';
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
+import OLSKThrottle from 'OLSKThrottle';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 
 const mod = {
@@ -16,9 +17,13 @@ const mod = {
 
 	_ValueDocumentsVisible: [],
 	
+	_ValueDocumentSelected: undefined,
+	
 	_ValueStorageWidgetHidden: true,
 
 	_ValueFooterStorageStatus: '',
+
+	_ValueSaveThrottleMap: {},
 
 	// MESSAGE
 
@@ -34,7 +39,50 @@ const mod = {
 		mod.CommandDocumentSelect(inputData);
 	},
 
+	EMTTrackUnitDispatchBack () {},
+
+	EMTTrackUnitDispatchDiscard () {
+		mod.CommandDocumentDiscard();
+	},
+
+	MessageDocumentSelectedDidChange (inputData) {
+		if (!inputData) {
+			return;
+		}
+
+		if (inputData === mod._ValueDocumentSelected) {
+			return;
+		};
+
+		setTimeout(function () {
+			document.querySelector('.EMTTrackUnitFormNameField').focus();
+		});
+
+		mod._ValueDocumentSelected = inputData;
+	},
+
 	// COMMAND
+
+	CommandDocumentSave() {
+		DocumentsAllStore.update(function (val) {
+			return val;
+		});
+
+		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveThrottleMap, $DocumentSelectedStore.EMTDocumentID, function (inputData) {
+			return {
+				OLSKThrottleDuration: 500,
+				OLSKThrottleCallback: async function () {
+					delete mod._ValueSaveThrottleMap[inputData.EMTDocumentID];
+
+					await EMTDocumentAction.EMTDocumentActionUpdate(storageClient, inputData);
+				},
+			};
+		}, $DocumentSelectedStore);
+
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[$DocumentSelectedStore.EMTDocumentID])	
+		};
+	},
 
 	async CommandDocumentCreate() {
 		let item = await EMTDocumentAction.EMTDocumentActionCreate(storageClient, {
@@ -51,6 +99,18 @@ const mod = {
 	
 	CommandDocumentSelect(inputData) {
 		return DocumentSelectedStore.set(inputData);
+	},
+	
+	async CommandDocumentDiscard() {
+		DocumentsAllStore.update(function (val) {
+			return val.filter(function(e) {
+				return e !== $DocumentSelectedStore;
+			});
+		});
+
+		await EMTDocumentAction.EMTDocumentActionDelete(storageClient, $DocumentSelectedStore.EMTDocumentID);
+
+		return DocumentSelectedStore.set(null);
 	},
 
 	// REACT
@@ -87,12 +147,14 @@ const mod = {
 
 DocumentsAllStore.subscribe(mod.ReactDocumentsVisible);
 
+DocumentSelectedStore.subscribe(mod.MessageDocumentSelectedDidChange);
+
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
 import OLSKViewportContent from 'OLSKViewportContent';
 import EMTTrackMaster from './submodules/EMTTrackMaster/main.svelte';
-import EMTTrackDetail from './submodules/EMTTrackDetail/main.svelte';
+import EMTTrackUnit from './submodules/EMTTrackUnit/main.svelte';
 import EMTTrackFooter from './submodules/EMTTrackFooter/main.svelte';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
@@ -101,7 +163,8 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 
 <OLSKViewportContent>
 	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueDocumentsVisible } EMTTrackMasterListItemSelected={ $DocumentSelectedStore } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } />
-	<EMTTrackDetail />
+	
+	<EMTTrackUnit EMTTrackUnitItem={ $DocumentSelectedStore } EMTTrackUnitDispatchBack={ mod.EMTTrackUnitDispatchBack } EMTTrackUnitDispatchDiscard={ mod.EMTTrackUnitDispatchDiscard } />
 </OLSKViewportContent>
 
 <div id="EMTTrackStorageWidget" class:EMTTrackStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>

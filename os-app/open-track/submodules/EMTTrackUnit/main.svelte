@@ -12,7 +12,7 @@ import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 </script>
 
-<div class="EMTTrackUnit">
+<div class="EMTTrackUnit OLSKViewportDetail">
 
 {#if !EMTTrackUnitItem}
 <div class="EMTTrackUnitPlaceholder">
@@ -35,9 +35,51 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 
 <div class="EMTTrackUnitForm">
 	<p>
-		<input class="EMTTrackUnitFormNameField" bind:value={ EMTTrackUnitItem.EMTDocumentName } placeholder="{ OLSKLocalized('EMTTrackUnitFormNameFieldPlaceholderText') }" autofocus />
+		<input type="text" class="EMTTrackUnitFormNameField" bind:value={ EMTTrackUnitItem.EMTDocumentName } placeholder="{ OLSKLocalized('EMTTrackUnitFormNameFieldPlaceholderText') }" autofocus />
 	</p>
 </div>
 {/if}
 
 </div>
+
+<style>
+.EMTTrackUnit {
+	/* EMTTrackUnitFlexboxParent */
+	display: flex;
+	flex-direction: column;
+}
+
+.EMTTrackUnitPlaceholder {
+	opacity: 0.5;
+	text-align: center;
+
+	/* EMTTrackUnitFlexboxChild */
+	flex-grow: 1;
+
+	/* EMTTrackUnitPlaceholderFlexboxParent */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+:global(.OLSKIsLoading) .EMTTrackUnitPlaceholder {
+	visibility: hidden;
+}
+
+.EMTTrackUnitToolbar {
+	border-bottom: var(--EMTBorderStyle);
+}
+
+.EMTTrackUnitForm {
+	padding: 5px;
+
+	overflow-y: scroll;
+}
+
+.EMTTrackUnitForm input[type=text] {
+	width: 50%;
+	border: var(--EMTBorderStyle);
+	border-radius: 5px;
+	padding: 5px;
+}
+</style>

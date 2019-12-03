@@ -18,10 +18,10 @@ describe('EMTTrack_Misc', function () {
 
 	context('on create', async function() {
 
-		it('focuses EMTTrackFormNameField', async function() {
+		it('sets document.activeElement', async function() {
 			await uCreateItem(browser);
 
-			deepEqual(browser.document.activeElement, browser.query(EMTTrackFormNameField));
+			deepEqual(browser.document.activeElement, browser.query('.EMTTrackUnitFormNameField'));
 		});
 
 	});

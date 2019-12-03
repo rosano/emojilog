@@ -16,6 +16,14 @@ describe('EMTTrackUnit_Misc', function () {
 		});
 	});
 
+	describe('EMTTrackUnit', function () {
+		
+		it('sets class', function () {
+			browser.assert.hasClass(EMTTrackUnit, 'OLSKViewportDetail')
+		});
+	
+	});
+
 	describe('OLSKToolbar', function () {
 		
 		it('sets class', function () {
