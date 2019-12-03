@@ -60,6 +60,28 @@ describe('EMTTrackList_Misc', function () {
 		it('sets text', function () {
 			browser.assert.text(EMTTrackListItem, 'bravo');
 		});
+
+
+		context('click', function () {
+			
+			before(function () {
+				browser.assert.text('#TestEMTTrackListDispatchSelect', '0')
+				browser.assert.text('#TestEMTTrackListDispatchSelectData', 'undefined')
+			});
+			
+			before(function () {
+				return browser.click(EMTTrackListItem);
+			});
+
+			it('sends EMTTrackListDispatchSelect', function () {
+				browser.assert.text('#TestEMTTrackListDispatchSelect', '1')
+				browser.assert.text('#TestEMTTrackListDispatchSelectData', JSON.stringify({
+					EMTDocumentID: 'alfa',
+					EMTDocumentName: 'bravo',
+				}));
+			});
+		
+		});
 		
 	});
 
@@ -83,7 +105,7 @@ describe('EMTTrackList_Misc', function () {
 
 		it('sets class', function () {
 			browser.assert.elements('.EMTTrackListItemSelected', 1);
-			browser.assert.hasClass(`${ EMTTrackListItem }:nth-child(1)`, 'EMTTrackListItemSelected');
+			browser.assert.hasClass(`${ EMTTrackListItem }:nth-child(2)`, 'EMTTrackListItemSelected');
 		});
 		
 	});

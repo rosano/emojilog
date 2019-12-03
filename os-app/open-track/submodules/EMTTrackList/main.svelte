@@ -2,6 +2,7 @@
 export let EMTTrackListItems;
 export let EMTTrackListItemSelected = null;
 export let EMTTrackListDispatchCreate;
+export let EMTTrackListDispatchSelect;
 
 import OLSKInternational from 'OLSKInternational';
 export const OLSKLocalized = function(translationConstant) {
@@ -22,7 +23,7 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 
 <div>
 	{#each EMTTrackListItems as e}
-		<div class="EMTTrackListItem OLSKLayoutElementTappable" class:EMTTrackListItemSelected={ (EMTTrackListItemSelected || {}).EMTDocumentID === e.EMTDocumentID } >
+		<div class="EMTTrackListItem OLSKLayoutElementTappable" class:EMTTrackListItemSelected={ (EMTTrackListItemSelected || {}).EMTDocumentID === e.EMTDocumentID } on:click={ () => EMTTrackListDispatchSelect(e) } >
 			<strong>{ e.EMTDocumentName || e.EMTDocumentID }</strong>
 		</div>
 	{/each}

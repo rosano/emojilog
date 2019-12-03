@@ -7,6 +7,10 @@ const EMTTrackList = new RollupStart({
 		EMTTrackListDispatchCreate () {
 			window.TestEMTTrackListDispatchCreate.innerHTML = parseInt(window.TestEMTTrackListDispatchCreate.innerHTML) + 1;
 		},
+		EMTTrackListDispatchSelect (inputData) {
+			window.TestEMTTrackListDispatchSelect.innerHTML = parseInt(window.TestEMTTrackListDispatchSelect.innerHTML) + 1;
+			window.TestEMTTrackListDispatchSelectData.innerHTML = JSON.stringify(inputData);
+		},
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
 		if (['EMTTrackListItems', 'EMTTrackListItemSelected'].includes(e[0])) {
 			e[1] = JSON.parse(e[1]);
