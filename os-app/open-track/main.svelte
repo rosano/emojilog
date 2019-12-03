@@ -18,7 +18,7 @@ const mod = {
 
 	// MESSAGE
 
-	EMTTrackFootetDispatchStorage () {
+	EMTTrackFooterDispatchStorage () {
 		mod._ValueStorageWidgetHidden = !mod._ValueStorageWidgetHidden;
 	},
 
@@ -67,7 +67,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 
 <div id="EMTTrackStorageWidget" class:EMTTrackStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
 
-<EMTTrackFooter EMTTrackFooterStorageStatus={ mod._ValueFooterStorageStatus } on:EMTTrackFootetDispatchStorage={ mod.EMTTrackFootetDispatchStorage } />
+<EMTTrackFooter EMTTrackFooterStorageStatus={ mod._ValueFooterStorageStatus } on:EMTTrackFooterDispatchStorage={ mod.EMTTrackFooterDispatchStorage } />
 
 </div>
 

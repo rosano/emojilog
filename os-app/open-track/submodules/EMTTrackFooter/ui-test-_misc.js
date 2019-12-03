@@ -1,6 +1,6 @@
 import { deepEqual } from 'assert';
 
-const kDefaultRoute = require('../../controller.js').OLSKControllerRoutes().shift();
+const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('EMTTrackFooter_Misc', function () {
 
@@ -20,7 +20,7 @@ describe('EMTTrackFooterDonateLink', function testEMTTrackFooterDonateLink () {
 
 });
 
-describe.skip('EMTTrackFooterStorageStatus', function testEMTTrackFooterStorageStatus () {
+describe('EMTTrackFooterStorageStatus', function testEMTTrackFooterStorageStatus () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
@@ -34,25 +34,47 @@ describe.skip('EMTTrackFooterStorageStatus', function testEMTTrackFooterStorageS
 
 });
 
-describe.skip('EMTTrackFooterStorageButton', function testEMTTrackFooterStorageButton () {
+describe('EMTTrackFooterStorageButton', function testEMTTrackFooterStorageButton () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
-
-	before(function () {
-		browser.assert.text('#TestEMTTrackFootetDispatchStorage', '0')
-
-		browser.click(EMTTrackFooterStorageButton)
-	});
 	
-	it('has class', function () {
+	it('sets class', function () {
 		browser.assert.hasClass(EMTTrackFooterStorageButton, 'OLSKLayoutButtonNoStyle')
 		browser.assert.hasClass(EMTTrackFooterStorageButton, 'OLSKLayoutElementTappable')
 	});
+
+	context('click', function () {
+
+		before(function () {
+			browser.assert.text('#TestEMTTrackFooterDispatchStorage', '0')
+		});
+
+		before(function () {
+			browser.click(EMTTrackFooterStorageButton);
+		});
 	
-	it('sends EMTTrackFootetDispatchStorage', function () {
-		browser.assert.text('#TestEMTTrackFootetDispatchStorage', '1')
+		it('sends EMTTrackFooterDispatchStorage', function () {
+			browser.assert.text('#TestEMTTrackFooterDispatchStorage', '1')
+		});
+	
+	});
+
+});
+
+describe('EMTTrackFooterStorageButtonImage', function testEMTTrackFooterStorageButtonImage () {
+
+	before(function() {
+		return browser.OLSKVisit(kDefaultRoute);
+	});
+	
+	it('sets role', function () {
+		browser.assert.attribute(EMTTrackFooterStorageButtonImage, 'role', 'img')
+	});
+	
+	it('sets src', function () {
+		browser.assert.attribute(EMTTrackFooterStorageButtonImage, 'src', '/open-track/submodules/EMTTrackFooter/ui-images/EMTTrackFooterStorageButton.svg')
 	});
 
 });

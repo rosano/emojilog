@@ -1,20 +1,20 @@
-.Container {
+.EMTTrackFooter {
 	border-top: var(--EMTBorderStyle);
 	
 	/* AppContainerFlexboxChild */
 	flex-shrink: 0;
 
-	/* ContainerFlexboxParent */
+	/* EMTTrackFooterFlexboxParent */
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.Container :global(.OLSKToolbar) {
+.EMTTrackFooter :global(.OLSKToolbar) {
 	flex-grow: 1;
 }
 
-.Container :global(.OLSKToolbar > div) {
+.EMTTrackFooter :global(.OLSKToolbar > div) {
 	display: flex;
 	align-items: center;
 }
@@ -25,7 +25,7 @@ h1 {
 	font-size: 20px;
 }
 
-.Container :global(.OLSKToolbarElementGroup > *:not(:first-child)) {
+.EMTTrackFooter :global(.OLSKToolbarElementGroup > *:not(:first-child)) {
 	margin-left: 10px;
 }
 
