@@ -45,6 +45,10 @@ const mod = {
 		mod.CommandDocumentDiscard(inputData);
 	},
 
+	EMTTrackDetailDispatchUpdate () {
+		mod.CommandDocumentSave();
+	},
+
 	MessageDocumentSelectedDidChange (inputData) {
 		if (!inputData) {
 			return;
@@ -162,7 +166,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 <OLSKViewportContent>
 	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueDocumentsAll } EMTTrackMasterListItemSelected={ $DocumentSelectedStore } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } />
 	
-	<EMTTrackDetail EMTTrackDetailItem={ $DocumentSelectedStore } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } />
+	<EMTTrackDetail EMTTrackDetailItem={ $DocumentSelectedStore } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } EMTTrackDetailDispatchUpdate={ mod.EMTTrackDetailDispatchUpdate } />
 </OLSKViewportContent>
 
 <div id="EMTTrackStorageWidget" class:EMTTrackStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
