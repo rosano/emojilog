@@ -15,18 +15,6 @@ describe('EMTTrackUnit_Misc', function () {
 			EMTTrackUnitItem: JSON.stringify(uItem()),
 		});
 	});
-	
-	describe('EMTTrackUnitFormNameField', function() {
-		
-		it('sets autofocus', function () {
-			browser.assert.attribute(EMTTrackUnitFormNameField, 'autofocus', '')
-		});
-		
-		it('binds EMTDocumentName', function () {
-			browser.assert.input(EMTTrackUnitFormNameField, uItem().EMTDocumentName);
-		});
-
-	});
 
 	describe('OLSKToolbar', function () {
 		
@@ -84,6 +72,18 @@ describe('EMTTrackUnit_Misc', function () {
 		
 		});
 	
+	});
+	
+	describe('EMTTrackUnitFormNameField', function() {
+		
+		it('sets autofocus', function () {
+			browser.assert.attribute(EMTTrackUnitFormNameField, 'autofocus', '')
+		});
+		
+		it('binds EMTDocumentName', function () {
+			browser.assert.input(EMTTrackUnitFormNameField, uItem().EMTDocumentName);
+		});
+
 	});
 
 });

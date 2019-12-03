@@ -27,7 +27,6 @@ describe('EMTTrackList_Misc', function () {
 			browser.assert.attribute(EMTTrackListCreateButton, 'accesskey', 'n')
 		});
 
-
 		context('click', function () {
 			
 			before(function () {
