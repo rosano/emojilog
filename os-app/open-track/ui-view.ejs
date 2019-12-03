@@ -7,8 +7,6 @@ locals.OLSKPageAssets = [
 	'/_shared/__external/OLSKStorageWidget/__compiled/OLSKStorageWidget.css',
 	'/_shared/common/ui-style.css',
 	'__compiled/ui-style.css',
-	'__compiled/ui-behaviour.js',
-	'ui-behaviour.js',
 ];
 locals.OLSKPagePublicRouteKeys = [
 	OLSKSharedActiveRouteConstant,
@@ -24,8 +22,6 @@ locals.OLSKPagePublicConstants = {
 
 <%- include('../_shared/common/layout-header.ejs') %>
 
-<script type="text/javascript">
-	EMTTrackBehaviour.LifecyclePageWillLoad();
-</script>
+<script src="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-behaviour.js"></script>
 
 <%- include('../_shared/common/layout-footer.ejs') %>
