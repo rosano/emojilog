@@ -5,7 +5,7 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 Object.entries({
 	EMTTrackCreateButton: '#EMTTrackCreateButton',
 
-	EMTTrackListItem: '.ListItem',
+	EMTTrackListItemLegacy: '.ListItem',
 
 	EMTTrackDetailPlaceholderContainer: '.PlaceholderContainer',
 
@@ -21,7 +21,7 @@ Object.entries({
 
 	async uCreateItem (browser) {
 		browser.pressButton(EMTTrackCreateButton);
-		await browser.wait({ element: EMTTrackListItem });
+		await browser.wait({ element: EMTTrackListItemLegacy });
 	},
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
@@ -37,8 +37,8 @@ describe('EMTTrack_Access', function () {
 		browser.assert.elements(EMTTrackCreateButton, 1);
 	});
 
-	it('hides EMTTrackListItem', function () {
-		browser.assert.elements(EMTTrackListItem, 0);
+	it('hides EMTTrackListItemLegacy', function () {
+		browser.assert.elements(EMTTrackListItemLegacy, 0);
 	});
 
 	it('shows EMTTrackDetailPlaceholderContainer', function () {
@@ -60,7 +60,7 @@ describe('EMTTrack_Access', function () {
 	it('on create', async function() {
 		await uCreateItem(browser);
 
-		browser.assert.elements(EMTTrackListItem, 1);
+		browser.assert.elements(EMTTrackListItemLegacy, 1);
 
 		browser.assert.elements(EMTTrackDetailPlaceholderContainer, 0);
 
@@ -74,7 +74,7 @@ describe('EMTTrack_Access', function () {
 	it('on create nth item', async function() {
 		await uCreateItem(browser);
 
-		browser.assert.elements(EMTTrackListItem, 2);
+		browser.assert.elements(EMTTrackListItemLegacy, 2);
 
 		browser.assert.elements(EMTTrackDetailToolbar, 1);
 	});
@@ -90,7 +90,7 @@ describe('EMTTrack_Access', function () {
 				return dialog;
 			});
 
-			await browser.wait({ element: EMTTrackListItem });
+			await browser.wait({ element: EMTTrackListItemLegacy });
 
 			browser.assert.elements(EMTTrackDetailPlaceholderContainer, 0);
 
@@ -102,7 +102,7 @@ describe('EMTTrack_Access', function () {
 				browser.pressButton(EMTTrackDetailToolbarDiscardButton);
 			});
 
-			await browser.wait({ element: EMTTrackListItem });
+			await browser.wait({ element: EMTTrackListItemLegacy });
 
 			browser.assert.elements(EMTTrackDetailPlaceholderContainer, 1);
 
