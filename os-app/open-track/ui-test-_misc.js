@@ -8,14 +8,6 @@ describe('EMTTrack_Misc', function () {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
 
-	context('EMTTrackCreateButton', function () {
-		
-		it('sets accesskey', function () {
-			browser.assert.attribute(EMTTrackCreateButton, 'accesskey', 'n')
-		});
-	
-	});
-
 	context('EMTTrackStorageWidget', function () {
 		
 		it('sets class', function () {

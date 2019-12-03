@@ -4,13 +4,17 @@ export const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
 };
 
-import { storageClient, isLoading, DocumentsAllStore } from './persistence.js';
+import { storageClient, isLoading, DocumentsAllStore, DocumentSelectedStore } from './persistence.js';
+import { EMTTrackSort } from './ui-logic.js';
+import * as EMTDocumentAction from '../_shared/EMTDocument/action.js';
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 
 const mod = {
 
 	// VALUE
+
+	_ValueDocumentsVisible: [],
 	
 	_ValueStorageWidgetHidden: true,
 
@@ -20,6 +24,39 @@ const mod = {
 
 	EMTTrackFooterDispatchStorage () {
 		mod._ValueStorageWidgetHidden = !mod._ValueStorageWidgetHidden;
+	},
+
+	EMTTrackListDispatchCreate () {
+		mod.CommandDocumentCreate();
+	},
+
+	EMTTrackListDispatchSelect (inputData) {
+		mod.CommandDocumentSelect(inputData);
+	},
+
+	// COMMAND
+
+	async CommandDocumentCreate() {
+		let item = await EMTDocumentAction.EMTDocumentActionCreate(storageClient, {
+			EMTDocumentName: '',
+			EMTDocumentModificationDate: new Date(),
+		});
+
+		DocumentsAllStore.update(function (val) {
+			return val.concat(item).sort(EMTTrackSort);
+		});
+
+		mod.CommandDocumentSelect(item);
+	},
+	
+	CommandDocumentSelect(inputData) {
+		return DocumentSelectedStore.set(inputData);
+	},
+
+	// REACT
+
+	ReactDocumentsVisible() {
+		mod._ValueDocumentsVisible = $DocumentsAllStore;
 	},
 
 	// SETUP
@@ -48,11 +85,13 @@ const mod = {
 
 };
 
+DocumentsAllStore.subscribe(mod.ReactDocumentsVisible);
+
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
 import OLSKViewportContent from 'OLSKViewportContent';
-import EMTTrackMaster from './submodules/EMTTrackMaster/main.svelte';
+import EMTTrackList from './submodules/EMTTrackList/main.svelte';
 import EMTTrackDetail from './submodules/EMTTrackDetail/main.svelte';
 import EMTTrackFooter from './submodules/EMTTrackFooter/main.svelte';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
@@ -61,7 +100,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 <div class="Container OLSKViewport" class:OLSKIsLoading={ $isLoading }>
 
 <OLSKViewportContent>
-	<EMTTrackMaster />
+	<EMTTrackList EMTTrackListItems={ mod._ValueDocumentsVisible } EMTTrackListItemSelected={ $DocumentSelectedStore } EMTTrackListDispatchCreate={ mod.EMTTrackListDispatchCreate } EMTTrackListDispatchSelect={ mod.EMTTrackListDispatchSelect } />
 	<EMTTrackDetail />
 </OLSKViewportContent>
 

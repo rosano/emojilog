@@ -1,7 +1,3 @@
-import RollupStart from './main.svelte';
-
-const EMTTrack = new RollupStart({
-	target: document.body,
-});
+import EMTTrack from './main.svelte';
 
 export default EMTTrack;

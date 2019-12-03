@@ -15,18 +15,46 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 
 <div class="EMTTrackList OLSKViewportMaster">
 
-<OLSKToolbar>
-	<OLSKToolbarElementGroup>
-		<button class="EMTTrackListCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackListDispatchCreate } accesskey="n">{ OLSKLocalized('EMTTrackListCreateButtonText') }</button>
-	</OLSKToolbarElementGroup>
-</OLSKToolbar>
+<header>
+	<OLSKToolbar>
+		<OLSKToolbarElementGroup>
+			<button class="EMTTrackListCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackListDispatchCreate } accesskey="n">{ OLSKLocalized('EMTTrackListCreateButtonText') }</button>
+		</OLSKToolbarElementGroup>
+	</OLSKToolbar>
+</header>
 
-<div>
+<section>
 	{#each EMTTrackListItems as e}
 		<div class="EMTTrackListItem OLSKLayoutElementTappable" class:EMTTrackListItemSelected={ (EMTTrackListItemSelected || {}).EMTDocumentID === e.EMTDocumentID } on:click={ () => EMTTrackListDispatchSelect(e) } >
 			<strong>{ e.EMTDocumentName || e.EMTDocumentID }</strong>
 		</div>
 	{/each}
-</div>
+</section>
 
 </div>
+
+<style>
+.EMTTrackList {
+	border-right: var(--EMTBorderStyle);
+
+	/* EMTTrackListFlexboxParent */
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	border-bottom: var(--EMTBorderStyle);
+}
+
+section {
+	/* EMTTrackListFlexboxChild */
+	flex-grow: 1;
+	overflow: auto;
+}
+
+.EMTTrackListItem {
+	min-height: 40px;
+	padding: 5px;
+	border-bottom: var(--EMTBorderStyle)
+}
+</style>
