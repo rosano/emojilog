@@ -18,6 +18,10 @@ describe('EMTTrack_Access', function () {
 		browser.assert.elements('.EMTTrackMaster', 1);
 	});
 
+	it('hides EMTTrackMasterListItem', function () {
+		browser.assert.elements('.EMTTrackMasterListItem', 0);
+	});
+
 	it('shows EMTTrackDetail', function () {
 		browser.assert.elements('.EMTTrackDetail', 1);
 	});

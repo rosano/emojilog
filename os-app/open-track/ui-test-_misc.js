@@ -13,6 +13,18 @@ describe('EMTTrack_Misc', function () {
 		it('sets class', function () {
 			browser.assert.hasClass(EMTTrackStorageWidget, 'EMTTrackStorageWidgetHidden');
 		});
+
+		context('click EMTTrackFooterStorageButton', function () {
+			
+			before(function () {
+				return browser.pressButton('.EMTTrackFooterStorageButton');
+			});
+			
+			it('sets class', function () {
+				browser.assert.hasNoClass(EMTTrackStorageWidget, 'EMTTrackStorageWidgetHidden');
+			});
+		
+		});
 	
 	});
 
