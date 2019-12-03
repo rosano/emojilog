@@ -11,7 +11,7 @@ import { writable } from 'svelte/store';
 
 export const DocumentsAllStore = writable([]);
 export const DocumentSelectedStore = writable(null);
-export const isLoading = writable(true);
+export const EMTPersistenceIsLoading = writable(true);
 
 let _DocumentSelected;
 DocumentSelectedStore.subscribe(function (val) {
@@ -85,7 +85,7 @@ remoteStorage.on('ready', async () => {
 	DocumentsAllStore.set((await EMTDocumentActionList(storageClient)).sort(EMTTrackLogic.EMTTrackSort));
 
 
-	isLoading.set(false);
+	EMTPersistenceIsLoading.set(false);
 	// setupFinalize(); remove loading class
 });
 

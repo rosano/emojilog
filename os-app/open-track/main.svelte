@@ -9,7 +9,7 @@ import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import * as EMTDocumentAction from '../_shared/EMTDocument/action.js';
 import EMTTrackLogic from './ui-logic.js';
-import { storageClient, isLoading, DocumentsAllStore, DocumentSelectedStore } from './persistence.js';
+import { storageClient, EMTPersistenceIsLoading, DocumentsAllStore, DocumentSelectedStore } from './persistence.js';
 
 const mod = {
 
@@ -161,7 +161,7 @@ import EMTTrackFooter from './submodules/EMTTrackFooter/main.svelte';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
 
-<div class="Container OLSKViewport" class:OLSKIsLoading={ $isLoading }>
+<div class="Container OLSKViewport" class:OLSKIsLoading={ $EMTPersistenceIsLoading }>
 
 <OLSKViewportContent>
 	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueDocumentsAll } EMTTrackMasterListItemSelected={ $DocumentSelectedStore } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } />
