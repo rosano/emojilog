@@ -16,12 +16,12 @@ describe(`EMTTrackFooter_Localize-${ languageCode }`, function () {
 		});
 	});
 	
-	it('localizes EMTTrackFooterStorageButton', function() {
-		browser.assert.attribute(EMTTrackFooterStorageButton, 'title', uLocalized('EMTTrackFooterStorageButtonText'));
-	});
-	
 	it('localizes EMTTrackFooterDonateLink', function() {
 		browser.assert.text(EMTTrackFooterDonateLink, uLocalized('EMTTrackFooterDonateLinkText'));
+	});
+	
+	it('localizes EMTTrackFooterStorageButton', function() {
+		browser.assert.attribute(EMTTrackFooterStorageButton, 'title', uLocalized('EMTTrackFooterStorageButtonText'));
 	});
 
 });

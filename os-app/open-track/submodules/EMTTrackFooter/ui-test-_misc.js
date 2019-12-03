@@ -20,6 +20,20 @@ describe('EMTTrackFooterDonateLink', function testEMTTrackFooterDonateLink () {
 
 });
 
+describe.skip('EMTTrackFooterStorageStatus', function testEMTTrackFooterStorageStatus () {
+
+	before(function() {
+		return browser.OLSKVisit(kDefaultRoute, {
+			EMTTrackFooterStorageStatus: 'alfa',
+		});
+	});
+
+	it('sets text', function () {
+		browser.assert.text(EMTTrackFooterStorageStatus, 'alfa')
+	});
+
+});
+
 describe.skip('EMTTrackFooterStorageButton', function testEMTTrackFooterStorageButton () {
 
 	before(function() {
@@ -39,20 +53,6 @@ describe.skip('EMTTrackFooterStorageButton', function testEMTTrackFooterStorageB
 	
 	it('sends EMTTrackFootetDispatchStorage', function () {
 		browser.assert.text('#TestEMTTrackFootetDispatchStorage', '1')
-	});
-
-});
-
-describe.skip('EMTTrackFooterStorageStatus', function testEMTTrackFooterStorageStatus () {
-
-	before(function() {
-		return browser.OLSKVisit(kDefaultRoute, {
-			EMTTrackFooterStorageStatus: 'alfa',
-		});
-	});
-
-	it('sets text', function () {
-		browser.assert.text(EMTTrackFooterStorageStatus, 'alfa')
 	});
 
 });

@@ -6,6 +6,7 @@ Object.entries({
 	OLSKReloadButton: '.OLSKReloadButton',
 
 	RCSLanguageSwitcher: '#RCSLanguageSwitcher',
+	
 	EMTTrackFooterDonateLink: '.EMTTrackFooterDonateLink',
 	
 	EMTTrackFooterStorageStatus: '.EMTTrackFooterStorageStatus',
