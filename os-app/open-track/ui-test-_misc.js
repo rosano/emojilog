@@ -21,7 +21,7 @@ describe('EMTTrack_Misc', function () {
 		it('sets document.activeElement', async function() {
 			await uCreateItem(browser);
 
-			deepEqual(browser.document.activeElement, browser.query('.EMTTrackUnitFormNameField'));
+			deepEqual(browser.document.activeElement, browser.query('.EMTTrackDetailFormNameField'));
 		});
 
 	});

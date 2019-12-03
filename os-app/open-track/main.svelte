@@ -39,9 +39,9 @@ const mod = {
 		mod.CommandDocumentSelect(inputData);
 	},
 
-	EMTTrackUnitDispatchBack () {},
+	EMTTrackDetailDispatchBack () {},
 
-	EMTTrackUnitDispatchDiscard () {
+	EMTTrackDetailDispatchDiscard () {
 		mod.CommandDocumentDiscard();
 	},
 
@@ -55,7 +55,7 @@ const mod = {
 		};
 
 		setTimeout(function () {
-			document.querySelector('.EMTTrackUnitFormNameField').focus();
+			document.querySelector('.EMTTrackDetailFormNameField').focus();
 		});
 
 		mod._ValueDocumentSelected = inputData;
@@ -154,7 +154,7 @@ onMount(mod.LifecycleModuleWillMount);
 
 import OLSKViewportContent from 'OLSKViewportContent';
 import EMTTrackMaster from './submodules/EMTTrackMaster/main.svelte';
-import EMTTrackUnit from './submodules/EMTTrackUnit/main.svelte';
+import EMTTrackDetail from './submodules/EMTTrackDetail/main.svelte';
 import EMTTrackFooter from './submodules/EMTTrackFooter/main.svelte';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
@@ -164,7 +164,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 <OLSKViewportContent>
 	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueDocumentsVisible } EMTTrackMasterListItemSelected={ $DocumentSelectedStore } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } />
 	
-	<EMTTrackUnit EMTTrackUnitItem={ $DocumentSelectedStore } EMTTrackUnitDispatchBack={ mod.EMTTrackUnitDispatchBack } EMTTrackUnitDispatchDiscard={ mod.EMTTrackUnitDispatchDiscard } />
+	<EMTTrackDetail EMTTrackDetailItem={ $DocumentSelectedStore } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } />
 </OLSKViewportContent>
 
 <div id="EMTTrackStorageWidget" class:EMTTrackStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>

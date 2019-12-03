@@ -23,12 +23,12 @@ describe('EMTTrack_Access', function () {
 		browser.assert.elements('.EMTTrackMaster', 1);
 	});
 
-	it('shows EMTTrackUnit', function () {
-		browser.assert.elements('.EMTTrackUnit', 1);
+	it('shows EMTTrackDetail', function () {
+		browser.assert.elements('.EMTTrackDetail', 1);
 	});
 
-	it('shows EMTTrackUnitPlaceholder', function () {
-		browser.assert.elements('.EMTTrackUnitPlaceholder', 1);
+	it('shows EMTTrackDetailPlaceholder', function () {
+		browser.assert.elements('.EMTTrackDetailPlaceholder', 1);
 	});
 
 	it('shows EMTTrackFooter', function () {
@@ -49,8 +49,8 @@ describe('EMTTrack_Access', function () {
 			browser.assert.elements('.EMTTrackMasterListItem', 1);
 		});
 
-		it('hides EMTTrackUnitPlaceholder', function () {
-			browser.assert.elements('.EMTTrackUnitPlaceholder', 0);
+		it('hides EMTTrackDetailPlaceholder', function () {
+			browser.assert.elements('.EMTTrackDetailPlaceholder', 0);
 		});
 	
 	});
@@ -61,7 +61,7 @@ describe('EMTTrack_Access', function () {
 			
 			before(async function () {
 				return browser.OLSKConfirm(function () {
-					browser.pressButton('.EMTTrackUnitToolbarDiscardButton');
+					browser.pressButton('.EMTTrackDetailToolbarDiscardButton');
 				}, function (dialog) {
 					dialog.response = false;
 
@@ -69,8 +69,8 @@ describe('EMTTrack_Access', function () {
 				});
 			});
 
-			it('hides EMTTrackUnitPlaceholder', function () {
-				browser.assert.elements('.EMTTrackUnitPlaceholder', 0);
+			it('hides EMTTrackDetailPlaceholder', function () {
+				browser.assert.elements('.EMTTrackDetailPlaceholder', 0);
 			});
 		
 		});
@@ -79,7 +79,7 @@ describe('EMTTrack_Access', function () {
 			
 			before(async function () {
 				return browser.OLSKConfirm(function () {
-					return browser.pressButton('.EMTTrackUnitToolbarDiscardButton');
+					return browser.pressButton('.EMTTrackDetailToolbarDiscardButton');
 				});
 			});
 
@@ -87,8 +87,8 @@ describe('EMTTrack_Access', function () {
 				browser.assert.elements('.EMTTrackMasterListItem', 0);
 			});
 
-			it('shows EMTTrackUnitPlaceholder', function () {
-				browser.assert.elements('.EMTTrackUnitPlaceholder', 1);
+			it('shows EMTTrackDetailPlaceholder', function () {
+				browser.assert.elements('.EMTTrackDetailPlaceholder', 1);
 			});
 		
 		});
