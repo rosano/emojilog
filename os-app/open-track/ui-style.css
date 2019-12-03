@@ -12,6 +12,6 @@
 	border-top: var(--EMTBorderStyle)
 }
 
-.StorageHidden{
+.EMTTrackStorageWidgetHidden {
 	display: none;
 }

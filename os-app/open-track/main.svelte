@@ -4,32 +4,46 @@ export const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
 };
 
-import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
-
 import { storageClient, isLoading, DocumentsAllStore } from './persistence.js';
-
-let EMTTrackFooterStorageStatus = '';
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
-OLSKRemoteStorage.OLSKRemoteStorageStatus(storageClient.remoteStorage, function (inputData) {
-	EMTTrackFooterStorageStatus = inputData
-}, OLSKLocalized)
+import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 
 const mod = {
 
 	// VALUE
 	
-	_ValueStorageHidden: true,
+	_ValueStorageWidgetHidden: true,
+
+	_ValueFooterStorageStatus: '',
 
 	// MESSAGE
 
 	EMTTrackFootetDispatchStorage () {
-		mod._ValueStorageHidden = !mod._ValueStorageHidden;
+		mod._ValueStorageWidgetHidden = !mod._ValueStorageWidgetHidden;
+	},
+
+	// SETUP
+
+	SetupEverything () {
+		mod.SetupStorageWidget();
+
+		mod.SetupStorageStatus();
+	},
+
+	SetupStorageWidget () {
+		(new window.OLSKStorageWidget(storageClient.remoteStorage)).attach('EMTTrackStorageWidget').backend(document.querySelector('.EMTTrackFooterStorageButton'));
+	},
+
+	SetupStorageStatus () {
+		OLSKRemoteStorage.OLSKRemoteStorageStatus(storageClient.remoteStorage, function (inputData) {
+			mod._ValueFooterStorageStatus = inputData;
+		}, OLSKLocalized)
 	},
 
 	// LIFECYCLE
 
 	LifecycleModuleWillMount() {
-		(new window.OLSKStorageWidget(storageClient.remoteStorage)).attach('EMTTrackStorageWidget').backend(document.querySelector('.EMTTrackFooterStorageButton'));
+		mod.SetupEverything();
 	},
 
 };
@@ -51,9 +65,9 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 	<EMTTrackDetail />
 </OLSKViewportContent>
 
-<div id="EMTTrackStorageWidget" class:StorageHidden={ mod._ValueStorageHidden }></div>
+<div id="EMTTrackStorageWidget" class:EMTTrackStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
 
-<EMTTrackFooter { EMTTrackFooterStorageStatus } on:EMTTrackFootetDispatchStorage={ mod.EMTTrackFootetDispatchStorage } />
+<EMTTrackFooter EMTTrackFooterStorageStatus={ mod._ValueFooterStorageStatus } on:EMTTrackFootetDispatchStorage={ mod.EMTTrackFootetDispatchStorage } />
 
 </div>
 

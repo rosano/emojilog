@@ -19,7 +19,7 @@ describe('EMTTrack_Misc', function () {
 	context('EMTTrackStorageWidget', function () {
 		
 		it('sets class', function () {
-			browser.assert.hasClass(EMTTrackStorageWidget, 'StorageHidden');
+			browser.assert.hasClass(EMTTrackStorageWidget, 'EMTTrackStorageWidgetHidden');
 		});
 	
 	});
