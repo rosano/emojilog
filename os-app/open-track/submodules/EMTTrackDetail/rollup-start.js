@@ -10,6 +10,9 @@ const EMTTrackDetail = new RollupStart({
 			window.TestEMTTrackDetailDispatchDiscard.innerHTML = parseInt(window.TestEMTTrackDetailDispatchDiscard.innerHTML) + 1;
 			window.TestEMTTrackDetailDispatchDiscardData.innerHTML = JSON.stringify(inputData);
 		},
+		EMTTrackDetailDispatchUpdate () {
+			window.TestEMTTrackDetailDispatchUpdate.innerHTML = parseInt(window.TestEMTTrackDetailDispatchUpdate.innerHTML) + 1;
+		},
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
 		if (['EMTTrackDetailItem'].includes(e[0])) {
 			e[1] = JSON.parse(e[1]);

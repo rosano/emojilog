@@ -2,6 +2,7 @@
 export let EMTTrackDetailItem = null;
 export let EMTTrackDetailDispatchBack;
 export let EMTTrackDetailDispatchDiscard;
+export let EMTTrackDetailDispatchUpdate;
 
 import OLSKInternational from 'OLSKInternational';
 export const OLSKLocalized = function(translationConstant) {
@@ -35,7 +36,7 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 
 <div class="EMTTrackDetailForm">
 	<p>
-		<input type="text" class="EMTTrackDetailFormNameField" bind:value={ EMTTrackDetailItem.EMTDocumentName } placeholder="{ OLSKLocalized('EMTTrackDetailFormNameFieldPlaceholderText') }" autofocus />
+		<input type="text" class="EMTTrackDetailFormNameField" bind:value={ EMTTrackDetailItem.EMTDocumentName } on:input={ EMTTrackDetailDispatchUpdate } placeholder="{ OLSKLocalized('EMTTrackDetailFormNameFieldPlaceholderText') }" autofocus />
 	</p>
 </div>
 {/if}

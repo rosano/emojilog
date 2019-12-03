@@ -97,6 +97,18 @@ describe('EMTTrackDetail_Misc', function () {
 			browser.assert.input(EMTTrackDetailFormNameField, uItem().EMTDocumentName);
 		});
 
+		context('input', function () {
+
+			before(function () {
+				browser.fill(EMTTrackDetailFormNameField, 'alfa');
+			});
+
+			it('sends EMTTrackDetailDispatchUpdate', function () {
+				browser.assert.text('#TestEMTTrackDetailDispatchUpdate', '1')
+			});
+		
+		});
+
 	});
 
 });
