@@ -54,7 +54,7 @@ const mod = {
 	},
 	
 	async CommandDocumentDiscard() {
-		if (!window.confirm(OLSKLocalized('EMTTrackListItemDeletePromptText'))) {
+		if (!window.confirm(OLSKLocalized('EMTTrackMasterListItemDeletePromptText'))) {
 			return;
 		}
 
@@ -81,7 +81,7 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 <header id="EMTTrackDetailToolbar">
 	<OLSKToolbar OLSKToolbarJustify={ true }>
 		<OLSKToolbarElementGroup>
-			<button on:click={ mod.CommandDocumentDiscard } class="OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" id="EMTTrackDetailToolbarDiscardButton" title={ OLSKLocalized('EMTTrackListItemToolbarDeleteButtonText') }>{ OLSKLocalized('EMTTrackListItemToolbarDeleteButtonText') }</button>
+			<button on:click={ mod.CommandDocumentDiscard } class="OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" id="EMTTrackDetailToolbarDiscardButton" title={ OLSKLocalized('EMTTrackMasterListItemToolbarDeleteButtonText') }>{ OLSKLocalized('EMTTrackMasterListItemToolbarDeleteButtonText') }</button>
 		</OLSKToolbarElementGroup>
 	</OLSKToolbar>
 </header>

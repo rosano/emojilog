@@ -1,8 +1,8 @@
 exports.OLSKControllerRoutes = function() {
 	return [{
-		OLSKRoutePath: '/stub/EMTTrackList',
+		OLSKRoutePath: '/stub/EMTTrackMaster',
 		OLSKRouteMethod: 'get',
-		OLSKRouteSignature: 'EMTTrackListStubRoute',
+		OLSKRouteSignature: 'EMTTrackMasterStubRoute',
 		OLSKRouteFunction: function (req, res, next) {
 			return res.render(require('path').join(__dirname, 'stub-view'), {});
 		},

@@ -1,6 +1,6 @@
 EMTTrackTitle: Emoji Timer
 EMTTrackCreateButtonText: Create
 EMTTrackDetailPlaceholderText: No Item Selected
-EMTTrackListItemToolbarDeleteButtonText: Delete
-EMTTrackListItemDeletePromptText: Are you sure?
+EMTTrackMasterListItemToolbarDeleteButtonText: Delete
+EMTTrackMasterListItemDeletePromptText: Are you sure?
 EMTTrackFormNameFieldPlaceholderText: Name

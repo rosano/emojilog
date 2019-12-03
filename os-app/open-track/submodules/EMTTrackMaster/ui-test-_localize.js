@@ -8,7 +8,7 @@ const uLocalized = function (inputData) {
 	return OLSKTestingLocalized(inputData, languageCode);
 };
 
-describe(`EMTTrackList_Localize-${ languageCode }`, function () {
+describe(`EMTTrackMaster_Localize-${ languageCode }`, function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
@@ -16,8 +16,8 @@ describe(`EMTTrackList_Localize-${ languageCode }`, function () {
 		});
 	});
 	
-	it('localizes EMTTrackListCreateButton', function () {
-		browser.assert.text(EMTTrackListCreateButton, uLocalized('EMTTrackListCreateButtonText'));
+	it('localizes EMTTrackMasterCreateButton', function () {
+		browser.assert.text(EMTTrackMasterCreateButton, uLocalized('EMTTrackMasterCreateButtonText'));
 	});
 
 });

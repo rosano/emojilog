@@ -1,8 +1,8 @@
 <script>
-export let EMTTrackListItems;
-export let EMTTrackListItemSelected = null;
-export let EMTTrackListDispatchCreate;
-export let EMTTrackListDispatchSelect;
+export let EMTTrackMasterListItems;
+export let EMTTrackMasterListItemSelected = null;
+export let EMTTrackMasterDispatchCreate;
+export let EMTTrackMasterDispatchSelect;
 
 import OLSKInternational from 'OLSKInternational';
 export const OLSKLocalized = function(translationConstant) {
@@ -13,19 +13,19 @@ import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 </script>
 
-<div class="EMTTrackList OLSKViewportMaster">
+<div class="EMTTrackMaster OLSKViewportMaster">
 
 <header>
 	<OLSKToolbar>
 		<OLSKToolbarElementGroup>
-			<button class="EMTTrackListCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackListDispatchCreate } accesskey="n">{ OLSKLocalized('EMTTrackListCreateButtonText') }</button>
+			<button class="EMTTrackMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackMasterDispatchCreate } accesskey="n">{ OLSKLocalized('EMTTrackMasterCreateButtonText') }</button>
 		</OLSKToolbarElementGroup>
 	</OLSKToolbar>
 </header>
 
 <section>
-	{#each EMTTrackListItems as e}
-		<div class="EMTTrackListItem OLSKLayoutElementTappable" class:EMTTrackListItemSelected={ (EMTTrackListItemSelected || {}).EMTDocumentID === e.EMTDocumentID } on:click={ () => EMTTrackListDispatchSelect(e) } >
+	{#each EMTTrackMasterListItems as e}
+		<div class="EMTTrackMasterListItem OLSKLayoutElementTappable" class:EMTTrackMasterListItemSelected={ (EMTTrackMasterListItemSelected || {}).EMTDocumentID === e.EMTDocumentID } on:click={ () => EMTTrackMasterDispatchSelect(e) } >
 			<strong>{ e.EMTDocumentName || e.EMTDocumentID }</strong>
 		</div>
 	{/each}
@@ -34,10 +34,10 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 </div>
 
 <style>
-.EMTTrackList {
+.EMTTrackMaster {
 	border-right: var(--EMTBorderStyle);
 
-	/* EMTTrackListFlexboxParent */
+	/* EMTTrackMasterFlexboxParent */
 	display: flex;
 	flex-direction: column;
 }
@@ -47,12 +47,12 @@ header {
 }
 
 section {
-	/* EMTTrackListFlexboxChild */
+	/* EMTTrackMasterFlexboxChild */
 	flex-grow: 1;
 	overflow: auto;
 }
 
-.EMTTrackListItem {
+.EMTTrackMasterListItem {
 	min-height: 40px;
 	padding: 5px;
 	border-bottom: var(--EMTBorderStyle)

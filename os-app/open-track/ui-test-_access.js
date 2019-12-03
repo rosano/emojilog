@@ -3,7 +3,7 @@ import { deepEqual } from 'assert';
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
-	EMTTrackList: '.EMTTrackList',
+	EMTTrackMaster: '.EMTTrackMaster',
 
 	EMTTrackDetailPlaceholderContainer: '.PlaceholderContainer',
 
@@ -18,8 +18,8 @@ Object.entries({
 	EMTTrackStorageWidget: '#EMTTrackStorageWidget',
 
 	async uCreateItem (browser) {
-		browser.pressButton(EMTTrackListCreateButton);
-		await browser.wait({ element: EMTTrackListItem });
+		browser.pressButton(EMTTrackMasterCreateButton);
+		await browser.wait({ element: EMTTrackMasterListItem });
 	},
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
@@ -31,8 +31,8 @@ describe('EMTTrack_Access', function () {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
 
-	it('shows EMTTrackList', function () {
-		browser.assert.elements(EMTTrackList, 1);
+	it('shows EMTTrackMaster', function () {
+		browser.assert.elements(EMTTrackMaster, 1);
 	});
 
 	it('shows EMTTrackDetailPlaceholderContainer', function () {
@@ -54,7 +54,7 @@ describe('EMTTrack_Access', function () {
 	it('on create', async function() {
 		await uCreateItem(browser);
 
-		browser.assert.elements(EMTTrackListItem, 1);
+		browser.assert.elements(EMTTrackMasterListItem, 1);
 
 		browser.assert.elements(EMTTrackDetailPlaceholderContainer, 0);
 
@@ -68,7 +68,7 @@ describe('EMTTrack_Access', function () {
 	it('on create nth item', async function() {
 		await uCreateItem(browser);
 
-		browser.assert.elements(EMTTrackListItem, 2);
+		browser.assert.elements(EMTTrackMasterListItem, 2);
 
 		browser.assert.elements(EMTTrackDetailToolbar, 1);
 	});
@@ -84,7 +84,7 @@ describe('EMTTrack_Access', function () {
 				return dialog;
 			});
 
-			await browser.wait({ element: EMTTrackListItem });
+			await browser.wait({ element: EMTTrackMasterListItem });
 
 			browser.assert.elements(EMTTrackDetailPlaceholderContainer, 0);
 
@@ -96,7 +96,7 @@ describe('EMTTrack_Access', function () {
 				browser.pressButton(EMTTrackDetailToolbarDiscardButton);
 			});
 
-			await browser.wait({ element: EMTTrackListItem });
+			await browser.wait({ element: EMTTrackMasterListItem });
 
 			browser.assert.elements(EMTTrackDetailPlaceholderContainer, 1);
 

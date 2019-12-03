@@ -26,11 +26,11 @@ const mod = {
 		mod._ValueStorageWidgetHidden = !mod._ValueStorageWidgetHidden;
 	},
 
-	EMTTrackListDispatchCreate () {
+	EMTTrackMasterDispatchCreate () {
 		mod.CommandDocumentCreate();
 	},
 
-	EMTTrackListDispatchSelect (inputData) {
+	EMTTrackMasterDispatchSelect (inputData) {
 		mod.CommandDocumentSelect(inputData);
 	},
 
@@ -91,7 +91,7 @@ import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
 import OLSKViewportContent from 'OLSKViewportContent';
-import EMTTrackList from './submodules/EMTTrackList/main.svelte';
+import EMTTrackMaster from './submodules/EMTTrackMaster/main.svelte';
 import EMTTrackDetail from './submodules/EMTTrackDetail/main.svelte';
 import EMTTrackFooter from './submodules/EMTTrackFooter/main.svelte';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
@@ -100,7 +100,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 <div class="Container OLSKViewport" class:OLSKIsLoading={ $isLoading }>
 
 <OLSKViewportContent>
-	<EMTTrackList EMTTrackListItems={ mod._ValueDocumentsVisible } EMTTrackListItemSelected={ $DocumentSelectedStore } EMTTrackListDispatchCreate={ mod.EMTTrackListDispatchCreate } EMTTrackListDispatchSelect={ mod.EMTTrackListDispatchSelect } />
+	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueDocumentsVisible } EMTTrackMasterListItemSelected={ $DocumentSelectedStore } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } />
 	<EMTTrackDetail />
 </OLSKViewportContent>
 
