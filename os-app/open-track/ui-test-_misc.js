@@ -8,7 +8,7 @@ describe('EMTTrack_Misc', function () {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
 
-	context('EMTTrackStorageWidget', function () {
+	describe('EMTTrackStorageWidget', function () {
 		
 		it('sets class', function () {
 			browser.assert.hasClass(EMTTrackStorageWidget, 'EMTTrackStorageWidgetHidden');
@@ -16,11 +16,13 @@ describe('EMTTrack_Misc', function () {
 	
 	});
 
-	context('on create', async function() {
+	context('on create', function() {
 
-		it('sets document.activeElement', async function() {
-			await uCreateItem(browser);
+		before(function () {
+			return browser.pressButton(EMTTrackMasterCreateButton);
+		});
 
+		it('sets document.activeElement', function() {
 			deepEqual(browser.document.activeElement, browser.query('.EMTTrackDetailFormNameField'));
 		});
 

@@ -4,18 +4,18 @@ export const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
 };
 
-import { storageClient, isLoading, DocumentsAllStore, DocumentSelectedStore } from './persistence.js';
-import { EMTTrackSort } from './ui-logic.js';
-import * as EMTDocumentAction from '../_shared/EMTDocument/action.js';
-import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import OLSKThrottle from 'OLSKThrottle';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
+import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
+import * as EMTDocumentAction from '../_shared/EMTDocument/action.js';
+import EMTTrackLogic from './ui-logic.js';
+import { storageClient, isLoading, DocumentsAllStore, DocumentSelectedStore } from './persistence.js';
 
 const mod = {
 
 	// VALUE
 
-	_ValueDocumentsVisible: [],
+	_ValueDocumentsAll: [],
 	
 	_ValueDocumentSelected: undefined,
 	
@@ -91,7 +91,7 @@ const mod = {
 		});
 
 		DocumentsAllStore.update(function (val) {
-			return val.concat(item).sort(EMTTrackSort);
+			return val.concat(item).sort(EMTTrackLogic.EMTTrackSort);
 		});
 
 		mod.CommandDocumentSelect(item);
@@ -116,7 +116,7 @@ const mod = {
 	// REACT
 
 	ReactDocumentsVisible() {
-		mod._ValueDocumentsVisible = $DocumentsAllStore;
+		mod._ValueDocumentsAll = $DocumentsAllStore;
 	},
 
 	// SETUP
@@ -162,7 +162,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 <div class="Container OLSKViewport" class:OLSKIsLoading={ $isLoading }>
 
 <OLSKViewportContent>
-	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueDocumentsVisible } EMTTrackMasterListItemSelected={ $DocumentSelectedStore } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } />
+	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueDocumentsAll } EMTTrackMasterListItemSelected={ $DocumentSelectedStore } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } />
 	
 	<EMTTrackDetail EMTTrackDetailItem={ $DocumentSelectedStore } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } />
 </OLSKViewportContent>

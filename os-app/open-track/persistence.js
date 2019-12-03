@@ -5,7 +5,7 @@ import { EMTStorageModule } from '../_shared/EMTStorageModule/main.js';
 import { EMTDocumentStorage } from '../_shared/EMTDocument/storage.js';
 import { EMTDocumentActionList } from '../_shared/EMTDocument/action.js';
 
-import { EMTTrackSort } from './ui-logic.js';
+import EMTTrackLogic from './ui-logic.js';
 
 import { writable } from 'svelte/store';
 
@@ -31,7 +31,7 @@ export const storageClient = EMTStorageClient.EMTStorageClient({
 							DocumentsAllStore.update(function (val) {
 								return val.filter(function (e) { // @Hotfix Dropbox sending DelegateAdd
 									return e.EMTDocumentID !== inputData.EMTDocumentID;
-								}).concat(inputData).sort(EMTTrackSort);
+								}).concat(inputData).sort(EMTTrackLogic.EMTTrackSort);
 							});
 						},
 						OLSKChangeDelegateUpdate: function (inputData) {
@@ -82,7 +82,7 @@ remoteStorage.on('ready', async () => {
 
 
 	await remoteStorage.emojitimer.emt_documents.init();
-	DocumentsAllStore.set((await EMTDocumentActionList(storageClient)).sort(EMTTrackSort));
+	DocumentsAllStore.set((await EMTDocumentActionList(storageClient)).sort(EMTTrackLogic.EMTTrackSort));
 
 
 	isLoading.set(false);

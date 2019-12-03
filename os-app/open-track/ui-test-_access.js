@@ -4,11 +4,6 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
 	EMTTrackStorageWidget: '#EMTTrackStorageWidget',
-
-	async uCreateItem (browser) {
-		browser.pressButton(EMTTrackMasterCreateButton);
-		await browser.wait({ element: '.EMTTrackMasterListItem' });
-	},
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
