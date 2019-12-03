@@ -68,6 +68,7 @@ describe('EMTTrackDetail_Misc', function () {
 			
 			before(function () {
 				browser.assert.text('#TestEMTTrackDetailDispatchDiscard', '0')
+				browser.assert.text('#TestEMTTrackDetailDispatchDiscardData', 'undefined')
 			});
 			
 			before(function () {
@@ -76,6 +77,10 @@ describe('EMTTrackDetail_Misc', function () {
 
 			it('sends EMTTrackDetailDispatchDiscard', function () {
 				browser.assert.text('#TestEMTTrackDetailDispatchDiscard', '1')
+			});
+
+			it('sends EMTTrackDetailDispatchDiscardData', function () {
+				browser.assert.text('#TestEMTTrackDetailDispatchDiscardData', JSON.stringify(uItem()))
 			});
 		
 		});

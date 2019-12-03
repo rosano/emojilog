@@ -28,7 +28,7 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 		</OLSKToolbarElementGroup>
 
 		<OLSKToolbarElementGroup>
-			<button class="EMTTrackDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ () => window.confirm(OLSKLocalized('EMTTrackDetailDiscardPromptText')) && EMTTrackDetailDispatchDiscard() }>{ OLSKLocalized('EMTTrackDetailToolbarDiscardButtonText') }</button>
+			<button class="EMTTrackDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ () => window.confirm(OLSKLocalized('EMTTrackDetailDiscardPromptText')) && EMTTrackDetailDispatchDiscard(EMTTrackDetailItem) }>{ OLSKLocalized('EMTTrackDetailToolbarDiscardButtonText') }</button>
 		</OLSKToolbarElementGroup>
 	</OLSKToolbar>
 </header>

@@ -41,8 +41,8 @@ const mod = {
 
 	EMTTrackDetailDispatchBack () {},
 
-	EMTTrackDetailDispatchDiscard () {
-		mod.CommandDocumentDiscard();
+	EMTTrackDetailDispatchDiscard (inputData) {
+		mod.CommandDocumentDiscard(inputData);
 	},
 
 	MessageDocumentSelectedDidChange (inputData) {
@@ -101,16 +101,16 @@ const mod = {
 		return DocumentSelectedStore.set(inputData);
 	},
 	
-	async CommandDocumentDiscard() {
+	async CommandDocumentDiscard (inputData) {
 		DocumentsAllStore.update(function (val) {
 			return val.filter(function(e) {
-				return e !== $DocumentSelectedStore;
+				return e !== inputData;
 			});
 		});
 
-		await EMTDocumentAction.EMTDocumentActionDelete(storageClient, $DocumentSelectedStore.EMTDocumentID);
+		await EMTDocumentAction.EMTDocumentActionDelete(storageClient, inputData.EMTDocumentID);
 
-		return DocumentSelectedStore.set(null);
+		DocumentSelectedStore.set(null);
 	},
 
 	// REACT
