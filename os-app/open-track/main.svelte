@@ -61,6 +61,10 @@ const mod = {
 		mod._ValueDocumentSelected = inputData;
 	},
 
+	MessageDocumentsAllDidChange() {
+		mod._ValueDocumentsAll = $DocumentsAllStore;
+	},
+
 	// COMMAND
 
 	CommandDocumentSave() {
@@ -113,12 +117,6 @@ const mod = {
 		DocumentSelectedStore.set(null);
 	},
 
-	// REACT
-
-	ReactDocumentsVisible() {
-		mod._ValueDocumentsAll = $DocumentsAllStore;
-	},
-
 	// SETUP
 
 	SetupEverything () {
@@ -145,7 +143,7 @@ const mod = {
 
 };
 
-DocumentsAllStore.subscribe(mod.ReactDocumentsVisible);
+DocumentsAllStore.subscribe(mod.MessageDocumentsAllDidChange);
 
 DocumentSelectedStore.subscribe(mod.MessageDocumentSelectedDidChange);
 
