@@ -9,6 +9,7 @@ Object.entries({
 	
 	EMTTrackMasterCreateButton: '.EMTTrackMasterCreateButton',
 
+	EMTTrackMasterBody: '.EMTTrackMasterBody',
 	EMTTrackMasterListItem: '.EMTTrackMasterListItem',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
@@ -34,6 +35,10 @@ describe('EMTTrackMaster_Access', function () {
 
 	it('shows EMTTrackMasterCreateButton', function () {
 		browser.assert.elements(EMTTrackMasterCreateButton, 1);
+	});
+
+	it('shows EMTTrackMasterBody', function () {
+		browser.assert.elements(EMTTrackMasterBody, 1);
 	});
 
 	it('hides EMTTrackMasterListItem', function () {

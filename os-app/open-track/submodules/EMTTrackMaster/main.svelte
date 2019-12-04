@@ -24,7 +24,7 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 	</OLSKToolbar>
 </header>
 
-<section>
+<section class="EMTTrackMasterBody OLSKMobileViewBody">
 	{#each EMTTrackMasterListItems as e}
 		<div class="EMTTrackMasterListItem OLSKLayoutElementTappable" class:EMTTrackMasterListItemSelected={ (EMTTrackMasterListItemSelected || {}).EMTDocumentID === e.EMTDocumentID } on:click={ () => EMTTrackMasterDispatchSelect(e) } >
 			<strong>{ e.EMTDocumentName || e.EMTDocumentID }</strong>
