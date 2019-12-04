@@ -47,10 +47,11 @@ header {
 	border-bottom: var(--EMTBorderStyle);
 }
 
-section {
+.EMTTrackMasterBody {
+	overflow: auto;
+	
 	/* EMTTrackMasterFlexboxChild */
 	flex-grow: 1;
-	overflow: auto;
 }
 
 .EMTTrackMasterListItem {
