@@ -10,4 +10,4 @@ const mod = {
 
 };
 
-module.exports = mod
+Object.assign(exports, mod);
