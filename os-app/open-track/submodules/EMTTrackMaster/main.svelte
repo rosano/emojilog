@@ -3,6 +3,7 @@ export let EMTTrackMasterListItems;
 export let EMTTrackMasterListItemSelected = null;
 export let EMTTrackMasterDispatchCreate;
 export let EMTTrackMasterDispatchSelect;
+export let OLSKMobileViewInactive = false;
 
 import OLSKInternational from 'OLSKInternational';
 export const OLSKLocalized = function(translationConstant) {
@@ -13,7 +14,7 @@ import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 </script>
 
-<div class="EMTTrackMaster OLSKViewportMaster">
+<div class="EMTTrackMaster OLSKViewportMaster" class:OLSKMobileViewInactive={ OLSKMobileViewInactive }>
 
 <header class="EMTTrackMasterToolbar OLSKMobileViewHeader">
 	<OLSKToolbar>
