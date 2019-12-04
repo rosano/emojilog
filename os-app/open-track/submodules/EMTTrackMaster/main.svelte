@@ -55,6 +55,10 @@ section {
 .EMTTrackMasterListItem {
 	min-height: 40px;
 	padding: 5px;
-	border-bottom: var(--EMTBorderStyle)
+	border-bottom: var(--EMTBorderStyle);
+}
+
+.EMTTrackMasterListItem:last-of-type {
+	border-bottom: none;
 }
 </style>
