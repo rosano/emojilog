@@ -16,6 +16,14 @@ describe('EMTTrackMaster_Misc', function () {
 	
 	});
 
+	describe('EMTTrackMasterToolbar', function () {
+		
+		it('sets class', function () {
+			browser.assert.hasClass(EMTTrackMasterToolbar, 'OLSKViewMobileHeader')
+		});
+	
+	});
+
 	describe('EMTTrackMasterCreateButton', function () {
 		
 		it('sets class', function () {
