@@ -10,21 +10,42 @@ describe('EMTTrackDetail_Misc', function () {
 		};
 	};
 
-	before(function() {
-		return browser.OLSKVisit(kDefaultRoute, {
-			EMTTrackDetailItem: JSON.stringify(uItem()),
-		});
-	});
-
 	describe('EMTTrackDetail', function () {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				EMTTrackDetailItem: JSON.stringify(uItem()),
+			});
+		});
 		
 		it('sets class', function () {
 			browser.assert.hasClass(EMTTrackDetail, 'OLSKViewportDetail')
+			browser.assert.hasNoClass(EMTTrackDetail, 'OLSKMobileViewInactive');
 		});
-	
+
+		context('OLSKMobileViewInactive', function () {
+			
+			before(function() {
+				return browser.OLSKVisit(kDefaultRoute, {
+					OLSKMobileViewInactive: true,
+				});
+			});
+
+			it('sets class', function () {
+				browser.assert.hasClass(EMTTrackDetail, 'OLSKMobileViewInactive');
+			});
+		
+		});
+
 	});
 
 	describe('OLSKToolbar', function () {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				EMTTrackDetailItem: JSON.stringify(uItem()),
+			});
+		});
 		
 		it('sets class', function () {
 			browser.assert.hasClass('.OLSKToolbar', 'OLSKToolbarJustify')

@@ -3,6 +3,7 @@ export let EMTTrackDetailItem = null;
 export let EMTTrackDetailDispatchBack;
 export let EMTTrackDetailDispatchDiscard;
 export let EMTTrackDetailDispatchUpdate;
+export let OLSKMobileViewInactive = false;
 
 import OLSKInternational from 'OLSKInternational';
 export const OLSKLocalized = function(translationConstant) {
@@ -13,7 +14,7 @@ import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 </script>
 
-<div class="EMTTrackDetail OLSKViewportDetail">
+<div class="EMTTrackDetail OLSKViewportDetail" class:OLSKMobileViewInactive={ OLSKMobileViewInactive }>
 
 {#if !EMTTrackDetailItem}
 <div class="EMTTrackDetailPlaceholder OLSKLayoutElementTextVisual">{ OLSKLocalized('EMTTrackDetailPlaceholderText') }</div>

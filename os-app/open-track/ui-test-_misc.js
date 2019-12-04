@@ -8,6 +8,26 @@ describe('EMTTrack_Misc', function () {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
 
+	describe('EMTTrackDetail', function () {
+		
+		it('sets class', function () {
+			browser.assert.hasClass('.EMTTrackDetail', 'OLSKMobileViewInactive');
+		});
+
+		context('on create', function() {
+
+			before(function () {
+				return browser.pressButton(EMTTrackMasterCreateButton);
+			});
+
+			it('sets class', function() {
+				browser.assert.hasNoClass('.EMTTrackDetail', 'OLSKMobileViewInactive');
+			});
+
+		});
+	
+	});
+
 	describe('EMTTrackStorageWidget', function () {
 		
 		it('sets class', function () {
