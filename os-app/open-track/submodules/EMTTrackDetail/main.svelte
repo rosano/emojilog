@@ -16,9 +16,7 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 <div class="EMTTrackDetail OLSKViewportDetail">
 
 {#if !EMTTrackDetailItem}
-<div class="EMTTrackDetailPlaceholder">
-	<span>{ OLSKLocalized('EMTTrackDetailPlaceholderText') }</span>
-</div>
+<div class="EMTTrackDetailPlaceholder OLSKLayoutElementTextVisual">{ OLSKLocalized('EMTTrackDetailPlaceholderText') }</div>
 {/if}
 
 {#if EMTTrackDetailItem}
