@@ -4,11 +4,35 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('EMTTrack_Misc', function () {
 
-	before(function() {
-		return browser.OLSKVisit(kDefaultRoute);
+	describe('EMTTrackMaster', function () {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute);
+		});
+		
+		it('sets class', function () {
+			browser.assert.hasNoClass('.EMTTrackMaster', 'OLSKMobileViewInactive');
+		});
+
+		context('on create', function() {
+
+			before(function () {
+				return browser.pressButton(EMTTrackMasterCreateButton);
+			});
+
+			it('sets class', function() {
+				browser.assert.hasClass('.EMTTrackMaster', 'OLSKMobileViewInactive');
+			});
+
+		});
+	
 	});
 
 	describe('EMTTrackDetail', function () {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute);
+		});
 		
 		it('sets class', function () {
 			browser.assert.hasClass('.EMTTrackDetail', 'OLSKMobileViewInactive');

@@ -164,7 +164,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 <div class="Container OLSKViewport" class:OLSKIsLoading={ $EMTPersistenceIsLoading }>
 
 <OLSKViewportContent>
-	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueDocumentsAll } EMTTrackMasterListItemSelected={ $EMTDocumentSelectedStore } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } />
+	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueDocumentsAll } EMTTrackMasterListItemSelected={ $EMTDocumentSelectedStore } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } OLSKMobileViewInactive={ $EMTDocumentSelectedStore } />
 	
 	<EMTTrackDetail EMTTrackDetailItem={ $EMTDocumentSelectedStore } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } EMTTrackDetailDispatchUpdate={ mod.EMTTrackDetailDispatchUpdate } OLSKMobileViewInactive={ !$EMTDocumentSelectedStore } />
 </OLSKViewportContent>
