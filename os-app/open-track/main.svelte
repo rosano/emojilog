@@ -39,7 +39,9 @@ const mod = {
 		mod.CommandDocumentSelect(inputData);
 	},
 
-	EMTTrackDetailDispatchBack () {},
+	EMTTrackDetailDispatchBack () {
+		mod.CommandDocumentSelect(null);
+	},
 
 	EMTTrackDetailDispatchDiscard (inputData) {
 		mod.CommandDocumentDiscard(inputData);
