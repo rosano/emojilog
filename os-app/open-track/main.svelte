@@ -163,7 +163,7 @@ import EMTTrackFooter from './submodules/EMTTrackFooter/main.svelte';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
 
-<div class="Container OLSKViewport" class:OLSKIsLoading={ $EMTPersistenceIsLoading }>
+<div class="EMTTrack OLSKViewport" class:OLSKIsLoading={ $EMTPersistenceIsLoading }>
 
 <OLSKViewportContent>
 	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueDocumentsAll } EMTTrackMasterListItemSelected={ $EMTDocumentSelectedStore } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } OLSKMobileViewInactive={ $EMTDocumentSelectedStore } />
