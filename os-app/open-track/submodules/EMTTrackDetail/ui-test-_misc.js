@@ -20,10 +20,13 @@ describe('EMTTrackDetail_Misc', function () {
 		
 		it('sets class', function () {
 			browser.assert.hasClass(EMTTrackDetail, 'OLSKViewportDetail')
-			browser.assert.hasNoClass(EMTTrackDetail, 'OLSKMobileViewInactive');
 		});
 
 		context('OLSKMobileViewInactive', function () {
+
+			before(function () {
+				browser.assert.hasNoClass(EMTTrackDetail, 'OLSKMobileViewInactive');
+			});
 			
 			before(function() {
 				return browser.OLSKVisit(kDefaultRoute, {
