@@ -4,11 +4,20 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('EMTTrackFooter_Misc', function () {
 
-describe('EMTTrackFooterDonateLink', function testEMTTrackFooterDonateLink () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
+
+	describe('EMTTrackFooter', function testEMTTrackFooter () {
+
+		it('sets class', function () {
+			browser.assert.hasClass(EMTTrackFooter, 'OLSKViewMobileFooter')
+		});
+
+	});
+
+describe('EMTTrackFooterDonateLink', function testEMTTrackFooterDonateLink () {
 
 	it('sets href', function () {
 		browser.assert.attribute(EMTTrackFooterDonateLink, 'href', process.env.EMT_SHARED_DONATE_URL)
