@@ -15,7 +15,7 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 
 <div class="EMTTrackMaster OLSKViewportMaster">
 
-<header class="EMTTrackMasterToolbar OLSKViewMobileHeader">
+<header class="EMTTrackMasterToolbar OLSKMobileViewHeader">
 	<OLSKToolbar>
 		<OLSKToolbarElementGroup>
 			<button class="EMTTrackMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackMasterDispatchCreate } accesskey="n">{ OLSKLocalized('EMTTrackMasterCreateButtonText') }</button>

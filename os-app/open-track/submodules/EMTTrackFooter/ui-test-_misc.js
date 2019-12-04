@@ -12,7 +12,7 @@ describe('EMTTrackFooter_Misc', function () {
 	describe('EMTTrackFooter', function testEMTTrackFooter () {
 
 		it('sets class', function () {
-			browser.assert.hasClass(EMTTrackFooter, 'OLSKViewMobileFooter')
+			browser.assert.hasClass(EMTTrackFooter, 'OLSKMobileViewFooter')
 		});
 
 	});

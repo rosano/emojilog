@@ -13,7 +13,7 @@ import OLSKReloadButton from '../../../_shared/__external/OLSKReloadButton/main.
 import RCSLanguageSwitcher from '../../../_shared/RCSLanguageSwitcher/main.svelte';
 </script>
 
-<footer class="EMTTrackFooter OLSKViewMobileFooter">
+<footer class="EMTTrackFooter OLSKMobileViewFooter">
 
 	<OLSKToolbar OLSKToolbarJustify={ true }>
 		<OLSKToolbarElementGroup>
