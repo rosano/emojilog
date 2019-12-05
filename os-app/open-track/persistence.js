@@ -25,7 +25,7 @@ export const storageClient = EMTStorageClient.EMTStorageClient({
 				return {
 					EMTCollectionStorageGenerator: e,
 					EMTCollectionChangeDelegate: e === EMTDocumentStorage ? {
-						OLSKChangeDelegateCreate: function (inputData) {
+						OLSKChangeDelegateCreate (inputData) {
 							// console.log('OLSKChangeDelegateCreate', inputData);
 
 							EMTDocumentsAllStore.update(function (val) {
@@ -34,7 +34,7 @@ export const storageClient = EMTStorageClient.EMTStorageClient({
 								}).concat(inputData).sort(EMTTrackLogic.EMTTrackSort);
 							});
 						},
-						OLSKChangeDelegateUpdate: function (inputData) {
+						OLSKChangeDelegateUpdate (inputData) {
 							// console.log('OLSKChangeDelegateUpdate', inputData);
 
 							if (_DocumentSelected && (_DocumentSelected.EMTDocumentID === inputData.EMTDocumentID)) {
@@ -49,7 +49,7 @@ export const storageClient = EMTStorageClient.EMTStorageClient({
 								});
 							});
 						},
-						OLSKChangeDelegateDelete: function (inputData) {
+						OLSKChangeDelegateDelete (inputData) {
 							// console.log('OLSKChangeDelegateDelete', inputData);
 
 							if (_DocumentSelected && (_DocumentSelected.EMTDocumentID === inputData.EMTDocumentID)) {
