@@ -19,7 +19,7 @@ describe('EMTTrackDetail_Misc', function () {
 		});
 		
 		it('sets class', function () {
-			browser.assert.hasClass(EMTTrackDetail, 'OLSKViewportDetail')
+			browser.assert.hasClass(EMTTrackDetail, 'OLSKViewportDetail');
 		});
 
 		context('OLSKMobileViewInactive', function () {
@@ -51,7 +51,7 @@ describe('EMTTrackDetail_Misc', function () {
 		});
 		
 		it('sets class', function () {
-			browser.assert.hasClass('.OLSKToolbar', 'OLSKToolbarJustify')
+			browser.assert.hasClass('.OLSKToolbar', 'OLSKToolbarJustify');
 		});
 	
 	});
@@ -59,14 +59,14 @@ describe('EMTTrackDetail_Misc', function () {
 	describe('EMTTrackDetailToolbarBackButton', function () {
 		
 		it('sets class', function () {
-			browser.assert.hasClass(EMTTrackDetailToolbarBackButton, 'OLSKLayoutButtonNoStyle')
-			browser.assert.hasClass(EMTTrackDetailToolbarBackButton, 'OLSKLayoutElementTappable')
+			browser.assert.hasClass(EMTTrackDetailToolbarBackButton, 'OLSKLayoutButtonNoStyle');
+			browser.assert.hasClass(EMTTrackDetailToolbarBackButton, 'OLSKLayoutElementTappable');
 		});
 
 		context('click', function () {
 			
 			before(function () {
-				browser.assert.text('#TestEMTTrackDetailDispatchBack', '0')
+				browser.assert.text('#TestEMTTrackDetailDispatchBack', '0');
 			});
 			
 			before(function () {
@@ -74,7 +74,7 @@ describe('EMTTrackDetail_Misc', function () {
 			});
 
 			it('sends EMTTrackDetailDispatchBack', function () {
-				browser.assert.text('#TestEMTTrackDetailDispatchBack', '1')
+				browser.assert.text('#TestEMTTrackDetailDispatchBack', '1');
 			});
 		
 		});
@@ -84,15 +84,15 @@ describe('EMTTrackDetail_Misc', function () {
 	describe('EMTTrackDetailToolbarDiscardButton', function () {
 		
 		it('sets class', function () {
-			browser.assert.hasClass(EMTTrackDetailToolbarDiscardButton, 'OLSKLayoutButtonNoStyle')
-			browser.assert.hasClass(EMTTrackDetailToolbarDiscardButton, 'OLSKLayoutElementTappable')
+			browser.assert.hasClass(EMTTrackDetailToolbarDiscardButton, 'OLSKLayoutButtonNoStyle');
+			browser.assert.hasClass(EMTTrackDetailToolbarDiscardButton, 'OLSKLayoutElementTappable');
 		});
 
 		context('click', function () {
 			
 			before(function () {
-				browser.assert.text('#TestEMTTrackDetailDispatchDiscard', '0')
-				browser.assert.text('#TestEMTTrackDetailDispatchDiscardData', 'undefined')
+				browser.assert.text('#TestEMTTrackDetailDispatchDiscard', '0');
+				browser.assert.text('#TestEMTTrackDetailDispatchDiscardData', 'undefined');
 			});
 			
 			before(function () {
@@ -100,11 +100,11 @@ describe('EMTTrackDetail_Misc', function () {
 			});
 
 			it('sends EMTTrackDetailDispatchDiscard', function () {
-				browser.assert.text('#TestEMTTrackDetailDispatchDiscard', '1')
+				browser.assert.text('#TestEMTTrackDetailDispatchDiscard', '1');
 			});
 
 			it('sends EMTTrackDetailDispatchDiscardData', function () {
-				browser.assert.text('#TestEMTTrackDetailDispatchDiscardData', JSON.stringify(uItem()))
+				browser.assert.text('#TestEMTTrackDetailDispatchDiscardData', JSON.stringify(uItem()));
 			});
 		
 		});
@@ -114,7 +114,7 @@ describe('EMTTrackDetail_Misc', function () {
 	describe('EMTTrackDetailFormNameField', function() {
 		
 		it('sets autofocus', function () {
-			browser.assert.attribute(EMTTrackDetailFormNameField, 'autofocus', '')
+			browser.assert.attribute(EMTTrackDetailFormNameField, 'autofocus', '');
 		});
 		
 		it('binds EMTDocumentName', function () {
@@ -128,7 +128,7 @@ describe('EMTTrackDetail_Misc', function () {
 			});
 
 			it('sends EMTTrackDetailDispatchUpdate', function () {
-				browser.assert.text('#TestEMTTrackDetailDispatchUpdate', '1')
+				browser.assert.text('#TestEMTTrackDetailDispatchUpdate', '1');
 			});
 		
 		});

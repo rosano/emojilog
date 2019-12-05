@@ -4,22 +4,22 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 
-const uLocalized = function (inputData) {
-	return OLSKTestingLocalized(inputData, languageCode);
-};
+	const uLocalized = function (inputData) {
+		return OLSKTestingLocalized(inputData, languageCode);
+	};
 
-describe(`EMTTrackMaster_Localize-${ languageCode }`, function () {
+	describe(`EMTTrackMaster_Localize-${ languageCode }`, function () {
 
-	before(function() {
-		return browser.OLSKVisit(kDefaultRoute, {
-			OLSKRoutingLanguage: languageCode,
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				OLSKRoutingLanguage: languageCode,
+			});
 		});
-	});
 	
-	it('localizes EMTTrackMasterCreateButton', function () {
-		browser.assert.text(EMTTrackMasterCreateButton, uLocalized('EMTTrackMasterCreateButtonText'));
-	});
+		it('localizes EMTTrackMasterCreateButton', function () {
+			browser.assert.text(EMTTrackMasterCreateButton, uLocalized('EMTTrackMasterCreateButtonText'));
+		});
 
-});
+	});
 
 });

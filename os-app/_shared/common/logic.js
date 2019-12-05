@@ -22,4 +22,4 @@ const mod = {
 
 };
 
-Object.assign(exports, mod)
+Object.assign(exports, mod);

@@ -1,4 +1,4 @@
-import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
+import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
 
 import * as EMTStorageClient from '../_shared/EMTStorageClient/main.js';
 import { EMTStorageModule } from '../_shared/EMTStorageModule/main.js';
@@ -21,50 +21,50 @@ export const storageClient = EMTStorageClient.EMTStorageClient({
 	modules: [
 		EMTStorageModule([
 			EMTDocumentStorage,
-			].map(function (e) {
-				return {
-					EMTCollectionStorageGenerator: e,
-					EMTCollectionChangeDelegate: e === EMTDocumentStorage ? {
-						OLSKChangeDelegateCreate (inputData) {
-							// console.log('OLSKChangeDelegateCreate', inputData);
+		].map(function (e) {
+			return {
+				EMTCollectionStorageGenerator: e,
+				EMTCollectionChangeDelegate: e === EMTDocumentStorage ? {
+					OLSKChangeDelegateCreate (inputData) {
+						// console.log('OLSKChangeDelegateCreate', inputData);
 
-							EMTDocumentsAllStore.update(function (val) {
-								return val.filter(function (e) { // @Hotfix Dropbox sending DelegateAdd
-									return e.EMTDocumentID !== inputData.EMTDocumentID;
-								}).concat(inputData).sort(EMTTrackLogic.EMTTrackSort);
+						EMTDocumentsAllStore.update(function (val) {
+							return val.filter(function (e) { // @Hotfix Dropbox sending DelegateAdd
+								return e.EMTDocumentID !== inputData.EMTDocumentID;
+							}).concat(inputData).sort(EMTTrackLogic.EMTTrackSort);
+						});
+					},
+					OLSKChangeDelegateUpdate (inputData) {
+						// console.log('OLSKChangeDelegateUpdate', inputData);
+
+						if (_DocumentSelected && (_DocumentSelected.EMTDocumentID === inputData.EMTDocumentID)) {
+							EMTDocumentSelectedStore.update(function (val) {
+								return Object.assign(val, inputData);
 							});
-						},
-						OLSKChangeDelegateUpdate (inputData) {
-							// console.log('OLSKChangeDelegateUpdate', inputData);
+						}
 
-							if (_DocumentSelected && (_DocumentSelected.EMTDocumentID === inputData.EMTDocumentID)) {
-								EMTDocumentSelectedStore.update(function (val) {
-									return Object.assign(val, inputData);
-								});
-							}
-
-							EMTDocumentsAllStore.update(function (val) {
-								return val.map(function (e) {
-									return Object.assign(e, e.EMTDocumentID === inputData.EMTDocumentID ? inputData : {});
-								});
+						EMTDocumentsAllStore.update(function (val) {
+							return val.map(function (e) {
+								return Object.assign(e, e.EMTDocumentID === inputData.EMTDocumentID ? inputData : {});
 							});
-						},
-						OLSKChangeDelegateDelete (inputData) {
-							// console.log('OLSKChangeDelegateDelete', inputData);
+						});
+					},
+					OLSKChangeDelegateDelete (inputData) {
+						// console.log('OLSKChangeDelegateDelete', inputData);
 
-							if (_DocumentSelected && (_DocumentSelected.EMTDocumentID === inputData.EMTDocumentID)) {
-								EMTDocumentSelectedStore.set(null);
-							}
+						if (_DocumentSelected && (_DocumentSelected.EMTDocumentID === inputData.EMTDocumentID)) {
+							EMTDocumentSelectedStore.set(null);
+						}
 
-							EMTDocumentsAllStore.update(function (val) {
-								return val.filter(function (e) {
-									return e.EMTDocumentID !== inputData.EMTDocumentID;
-								});
+						EMTDocumentsAllStore.update(function (val) {
+							return val.filter(function (e) {
+								return e.EMTDocumentID !== inputData.EMTDocumentID;
 							});
-						},
-					} : null,
-				}
-			})),
+						});
+					},
+				} : null,
+			};
+		})),
 	],
 	OLSKPatchRemoteStorageAuthRedirectURI: OLSK_TESTING_BEHAVIOUR() ? undefined : window.location.origin + window.OLSKCanonicalFor('EMTTrackRoute'),
 });

@@ -21,31 +21,31 @@ describe('EMTVitrine_Access', function () {
 	});
 	
 	it('shows EMTVitrine', function() {
-		browser.assert.elements(EMTVitrine, 1)
+		browser.assert.elements(EMTVitrine, 1);
 	});
 	
 	it('shows RCSLanguageSwitcher', function() {
-		browser.assert.elements('#RCSLanguageSwitcher', 1)
+		browser.assert.elements('#RCSLanguageSwitcher', 1);
 	});
 	
 	it('shows EMTVitrineIdentity', function() {
-		browser.assert.elements(EMTVitrineIdentity, 1)
+		browser.assert.elements(EMTVitrineIdentity, 1);
 	});
 	
 	it('shows EMTVitrineIdentityLogo', function() {
-		browser.assert.elements(EMTVitrineIdentityLogo, 1)
+		browser.assert.elements(EMTVitrineIdentityLogo, 1);
 	});
 	
 	it('shows EMTVitrineIdentityName', function() {
-		browser.assert.elements(EMTVitrineIdentityName, 1)
+		browser.assert.elements(EMTVitrineIdentityName, 1);
 	});
 	
 	it('shows EMTVitrineContent', function() {
-		browser.assert.elements(EMTVitrineContent, 1)
+		browser.assert.elements(EMTVitrineContent, 1);
 	});
 
 	it('shows ROCORootLink', function() {
-		browser.assert.elements('.ROCORootLink', 1)
+		browser.assert.elements('.ROCORootLink', 1);
 	});
 
 });

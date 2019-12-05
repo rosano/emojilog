@@ -33,19 +33,19 @@ describe('EMTTrackFooter_Access', function () {
 	});
 
 	it('shows EMTTrackFooterDonateLink', function () {
-		browser.assert.elements(EMTTrackFooterDonateLink, 1)
+		browser.assert.elements(EMTTrackFooterDonateLink, 1);
 	});
 
 	it('shows EMTTrackFooterStorageStatus', function () {
-		browser.assert.elements(EMTTrackFooterStorageStatus, 1)
+		browser.assert.elements(EMTTrackFooterStorageStatus, 1);
 	});
 
 	it('shows EMTTrackFooterStorageButton', function () {
-		browser.assert.elements(EMTTrackFooterStorageButton, 1)
+		browser.assert.elements(EMTTrackFooterStorageButton, 1);
 	});
 
 	it('shows EMTTrackFooterStorageButtonImage', function () {
-		browser.assert.elements(EMTTrackFooterStorageButtonImage, 1)
+		browser.assert.elements(EMTTrackFooterStorageButtonImage, 1);
 	});
 
 });

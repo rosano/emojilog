@@ -80,7 +80,7 @@ describe('EMTTrack_Misc', function () {
 		
 		it('sets class', function () {
 			browser.assert.hasClass(EMTTrackStorageWidget, 'EMTTrackStorageWidgetHidden');
-			browser.assert.hasClass(EMTTrackStorageWidget, 'OLSKMobileViewFooter')
+			browser.assert.hasClass(EMTTrackStorageWidget, 'OLSKMobileViewFooter');
 		});
 
 		context('click EMTTrackFooterStorageButton', function () {

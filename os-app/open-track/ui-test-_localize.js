@@ -6,22 +6,22 @@ const uStringWithFormat = OLSKTestingStringWithFormat;
 
 kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 
-const uLocalized = function (inputData) {
-	return OLSKTestingLocalized(inputData, languageCode);
-};
+	const uLocalized = function (inputData) {
+		return OLSKTestingLocalized(inputData, languageCode);
+	};
 
-describe(`EMTTrack_Localize-${ languageCode }`, function () {
+	describe(`EMTTrack_Localize-${ languageCode }`, function () {
 
-	before(function() {
-		return browser.OLSKVisit(kDefaultRoute, {
-			OLSKRoutingLanguage: languageCode,
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				OLSKRoutingLanguage: languageCode,
+			});
 		});
-	});
 
-	it('localizes title', function() {
-		browser.assert.text('title', uLocalized('EMTTrackTitle'))
-	});
+		it('localizes title', function() {
+			browser.assert.text('title', uLocalized('EMTTrackTitle'));
+		});
 
-});
+	});
 
 });
