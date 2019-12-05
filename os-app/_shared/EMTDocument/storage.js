@@ -48,20 +48,20 @@ export const EMTDocumentStorage = function (privateClient, publicClient, changeD
 			return coll;
 		}, {}),
 		EMTStorageExports: {
-			init: function () {
+			EMTStorageCache () {
 				return privateClient.cache(EMTDocumentStoragePath());
 			},
-			listObjects: function () {
+			EMTStorageList: function () {
 				return privateClient.getAll(EMTDocumentStoragePath(), false);
 			},
-			writeObject: async function (param1, param2) {
+			EMTStorageWrite: async function (param1, param2) {
 				await privateClient.storeObject(kType, `${ kCollection }/${ param1 }`, EMTDocumentModel.EMTDocumentModelPreJSONSchemaValidate(param2));
 				return EMTDocumentModel.EMTDocumentModelPostJSONParse(param2);
 			},
-			readObject: function (inputData) {
+			EMTStorageRead: function (inputData) {
 				return privateClient.getObject(`${ kCollection }/${ inputData }`);
 			},
-			deleteObject: function (inputData) {
+			EMTStorageDelete: function (inputData) {
 				return privateClient.remove(`${ kCollection }/${ inputData }`);
 			},
 		},

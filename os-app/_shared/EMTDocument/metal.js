@@ -12,7 +12,7 @@ export const EMTDocumentMetalWrite = async function(storageClient, inputData) {
 		});
 	}
 
-	return await storageClient.emojitimer.emt_documents.writeObject(inputData.EMTDocumentID, inputData);
+	return await storageClient.emojitimer.emt_documents.EMTStorageWrite(inputData.EMTDocumentID, inputData);
 };
 
 export const EMTDocumentMetalRead = async function(storageClient, inputData) {
@@ -20,11 +20,11 @@ export const EMTDocumentMetalRead = async function(storageClient, inputData) {
 		return Promise.reject(new Error('EMTErrorInputNotValid'));
 	}
 
-	return EMTDocumentModelPostJSONParse(await storageClient.emojitimer.emt_documents.readObject(inputData));
+	return EMTDocumentModelPostJSONParse(await storageClient.emojitimer.emt_documents.EMTStorageRead(inputData));
 };
 
 export const EMTDocumentMetalList = async function(storageClient) {
-	let outputData = await storageClient.emojitimer.emt_documents.listObjects();
+	let outputData = await storageClient.emojitimer.emt_documents.EMTStorageList();
 
 	for (let key in outputData) {
 		EMTDocumentModelPostJSONParse(outputData[key]);
@@ -38,5 +38,5 @@ export const EMTDocumentMetalDelete = async function(storageClient, inputData) {
 		return Promise.reject(new Error('EMTErrorInputNotValid'));
 	}
 
-	return await storageClient.emojitimer.emt_documents.deleteObject(inputData);
+	return await storageClient.emojitimer.emt_documents.EMTStorageDelete(inputData);
 };

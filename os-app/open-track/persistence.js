@@ -81,7 +81,7 @@ remoteStorage.on('ready', async () => {
 	}
 
 
-	await remoteStorage.emojitimer.emt_documents.init();
+	await remoteStorage.emojitimer.emt_documents.EMTStorageCache();
 	EMTDocumentsAllStore.set((await EMTDocumentActionList(storageClient)).sort(EMTTrackLogic.EMTTrackSort));
 
 

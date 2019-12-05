@@ -33,7 +33,7 @@ const EMTDocumentStorage = require('./os-app/_shared/EMTDocument/storage.js');
 		await uSerial([
 			'emt_documents',
 		].map(async function (e) {
-			return await Promise.all(Object.keys(await global.EMTTestingStorageClient.emojitimer[e].listObjects()).map(global.EMTTestingStorageClient.emojitimer[e].deleteObject));
+			return await Promise.all(Object.keys(await global.EMTTestingStorageClient.emojitimer[e].EMTStorageList()).map(global.EMTTestingStorageClient.emojitimer[e].EMTStorageDelete));
 		}));
 	});
 })();
