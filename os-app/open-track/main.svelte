@@ -171,7 +171,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 	<EMTTrackDetail EMTTrackDetailItem={ $EMTDocumentSelectedStore } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } EMTTrackDetailDispatchUpdate={ mod.EMTTrackDetailDispatchUpdate } OLSKMobileViewInactive={ !$EMTDocumentSelectedStore } />
 </OLSKViewportContent>
 
-<div id="EMTTrackStorageWidget" class:EMTTrackStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
+<div id="EMTTrackStorageWidget" class="OLSKMobileViewFooter" class:EMTTrackStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
 
 <EMTTrackFooter EMTTrackFooterStorageStatus={ mod._ValueFooterStorageStatus } EMTTrackFooterDispatchStorage={ mod.EMTTrackFooterDispatchStorage } />
 
