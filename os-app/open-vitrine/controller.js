@@ -14,6 +14,7 @@ exports.OLSKControllerRoutes = function() {
 					headerIds: false,
 				})(require('fs').readFileSync(require('path').join(__dirname, `text.${ res.locals.OLSKSharedPageCurrentLanguage }.md`), 'utf-8')), {
 					EMT_SHARED_GITHUB_URL: process.env.EMT_SHARED_GITHUB_URL,
+					EMTVitrineDescription: res.locals.OLSKLocalized('EMTVitrineDescription'),
 				}),
 				OLSKStringReplaceTokens: require('OLSKString').OLSKStringReplaceTokens,
 			});

@@ -1,5 +1,5 @@
-_Develop yourself_
+_EMTVitrineDescription_
 
-Emoji Timer is an app to help you change your habits.
+Emoji Timer is an app to help you track and change your habits.
 
 The code is open-source and available on [GitHub](EMT_SHARED_GITHUB_URL).
