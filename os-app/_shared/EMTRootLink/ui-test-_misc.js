@@ -8,7 +8,7 @@ describe('EMTRootLink_Misc', function () {
 		return browser.visit(kDefaultRoute.OLSKRoutePath);
 	});
 
-	context('EMTRootLinkLogo', function () {
+	describe('EMTRootLinkLogo', function () {
 		
 		it('sets role', function () {
 			browser.assert.attribute(EMTRootLinkLogo, 'role', 'img');
