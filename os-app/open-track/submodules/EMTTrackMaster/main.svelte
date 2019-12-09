@@ -38,19 +38,22 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 .EMTTrackMaster {
 	border-right: var(--EMTBorderStyle);
 
-	/* EMTTrackMasterFlexboxParent */
+	/* EMTTrackMasterFlexbox:Parent */
 	display: flex;
 	flex-direction: column;
 }
 
 .EMTTrackMasterToolbar {
 	border-bottom: var(--EMTBorderStyle);
+	
+	/* EMTTrackMasterFlexbox:Child */
+	flex-shrink: 0;
 }
 
 .EMTTrackMasterBody {
 	overflow: auto;
 	
-	/* EMTTrackMasterFlexboxChild */
+	/* EMTTrackMasterFlexbox:Child */
 	flex-grow: 1;
 }
 
