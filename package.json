@@ -47,6 +47,9 @@
     "// FRONTEND ROUTING": null,
     "OLSKRouting": "olsk/OLSKRouting",
 
+    "// FRONTEND ROCO ROOT LINK": null,
+    "ROCORootLink": "rosano/ROCORootLink",
+
     "// I sacrifice myself for the commas of others": null
   },
   "devDependencies": {
