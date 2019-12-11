@@ -1,3 +1,13 @@
+exports.OLSKControllerRoutes = function() {
+	return {
+		EMTCommonIdentityRedirect: {
+			OLSKRoutePath: '/identity.svg',
+			OLSKRouteMethod: 'get',
+			OLSKRouteRedirect: '/_shared/EMTRootLink/ui-assets/identity.svg',
+		},
+	};
+};
+
 exports.OLSKControllerSharedMiddlewares = function() {
 	return {
 		EMTSharedDonateLinkGuardMiddleware (req, res, next) {
