@@ -79,7 +79,7 @@ describe('EMTTrackFooter_Misc', function () {
 		});
 	
 		it('sets role', function () {
-			browser.assert.attribute(EMTTrackFooterStorageButtonImage, 'role', 'img');
+			browser.assert.attribute(EMTTrackFooterStorageButtonImage, 'role', 'presentation');
 		});
 	
 		it('sets src', function () {

@@ -27,7 +27,7 @@ import RCSLanguageSwitcher from '../../../_shared/RCSLanguageSwitcher/main.svelt
 		<div>
 			<div class="EMTTrackFooterStorageStatus">{ EMTTrackFooterStorageStatus }</div>
 			<button class="EMTTrackFooterStorageButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" title={ OLSKLocalized('EMTTrackFooterStorageButtonText') } on:click={ EMTTrackFooterDispatchStorage } class:OSWIconVisible={ false }>
-				<img class="EMTTrackFooterStorageButtonImage" role="img" src="/open-track/submodules/EMTTrackFooter/ui-images/EMTTrackFooterStorageButton.svg">
+				<img class="EMTTrackFooterStorageButtonImage" role="presentation" src="/open-track/submodules/EMTTrackFooter/ui-images/EMTTrackFooterStorageButton.svg">
 			</button>
 		</div>
 	</OLSKToolbar>

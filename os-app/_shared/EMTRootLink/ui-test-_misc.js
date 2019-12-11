@@ -11,7 +11,7 @@ describe('EMTRootLink_Misc', function () {
 	describe('EMTRootLinkLogo', function () {
 		
 		it('sets role', function () {
-			browser.assert.attribute(EMTRootLinkLogo, 'role', 'img');
+			browser.assert.attribute(EMTRootLinkLogo, 'role', 'presentation');
 		});
 	
 		it('sets src', function () {

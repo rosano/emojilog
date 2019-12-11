@@ -19,7 +19,7 @@ describe('EMTVitrine_Misc', function () {
 	describe('EMTVitrineIdentityLogo', function () {
 		
 		it('sets role', function () {
-			browser.assert.attribute(EMTVitrineIdentityLogo, 'role', 'image');
+			browser.assert.attribute(EMTVitrineIdentityLogo, 'role', 'presentation');
 		});
 		
 		it('sets src', function () {
