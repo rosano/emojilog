@@ -10,7 +10,7 @@ export const OLSKLocalized = function(translationConstant) {
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKReloadButton from '../../../_shared/__external/OLSKReloadButton/main.svelte';
-import RCSLanguageSwitcher from '../../../_shared/RCSLanguageSwitcher/main.svelte';
+import OLSKLanguageSwitcher from '../../../_shared/__external/OLSKLanguageSwitcher/main.svelte';
 </script>
 
 <footer class="EMTTrackFooter OLSKMobileViewFooter">
@@ -19,7 +19,10 @@ import RCSLanguageSwitcher from '../../../_shared/RCSLanguageSwitcher/main.svelt
 		<OLSKToolbarElementGroup>
 			<OLSKReloadButton OLSKLocalized={ OLSKLocalized } />
 			
-			<RCSLanguageSwitcher />
+			<OLSKLanguageSwitcher OLSKSharedActiveRouteConstant={ window.OLSKPublicConstants('OLSKSharedActiveRouteConstant') }
+				OLSKSharedPageLanguagesAvailable={ window.OLSKPublicConstants('OLSKSharedPageLanguagesAvailable') }
+				OLSKSharedPageCurrentLanguage={ window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage') }
+				/>
 
 			<a class="EMTTrackFooterDonateLink" href={ window.OLSKPublicConstants('EMT_SHARED_DONATE_URL') } target="_blank">{ OLSKLocalized('EMTTrackFooterDonateLinkText') }</a>
 		</OLSKToolbarElementGroup>
