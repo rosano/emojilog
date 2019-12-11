@@ -23,7 +23,7 @@ describe('EMTVitrine_Misc', function () {
 		});
 		
 		it('sets src', function () {
-			browser.assert.attribute(EMTVitrineIdentityLogo, 'src', '/_shared/EMTRootLink/ui-assets/logo.svg');
+			browser.assert.attribute(EMTVitrineIdentityLogo, 'src', '/_shared/EMTRootLink/ui-assets/identity.svg');
 		});
 	
 	});

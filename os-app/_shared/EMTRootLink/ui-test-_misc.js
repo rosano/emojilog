@@ -15,7 +15,7 @@ describe('EMTRootLink_Misc', function () {
 		});
 	
 		it('sets src', function () {
-			browser.assert.attribute(EMTRootLinkLogo, 'src', '/_shared/EMTRootLink/ui-assets/logo.svg');
+			browser.assert.attribute(EMTRootLinkLogo, 'src', '/_shared/EMTRootLink/ui-assets/identity.svg');
 		});
 	
 	});
