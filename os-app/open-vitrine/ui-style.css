@@ -26,16 +26,3 @@ body {
 .EMTVitrineIdentityName {
 	margin: 0;
 }
-
-.ROCORootLink {
-	width: 70px;
-	display: block;
-
-	margin: 30px auto;
-	
-	background: #eaeaea;
-}
-
-.ROCORootLinkImage {
-	width: inherit;
-}
