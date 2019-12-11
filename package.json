@@ -47,6 +47,9 @@
     "// FRONTEND ROUTING": null,
     "OLSKRouting": "olsk/OLSKRouting",
 
+    "// FRONTEND LANGUAGE SWITCHER": null,
+    "OLSKLanguageSwitcher": "olsk/OLSKLanguageSwitcher",
+
     "// FRONTEND ROCO ROOT LINK": null,
     "ROCORootLink": "rationalcreative/ROCORootLink",
 
