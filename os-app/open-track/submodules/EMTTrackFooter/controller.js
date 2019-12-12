@@ -3,7 +3,7 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRoutePath: '/stub/EMTTrackFooter',
 		OLSKRouteMethod: 'get',
 		OLSKRouteSignature: 'EMTTrackFooterStubRoute',
-		OLSKRouteFunction: function (req, res, next) {
+		OLSKRouteFunction (req, res, next) {
 			return res.render(require('path').join(__dirname, 'stub-view'));
 		},
 		OLSKRouteLanguages: ['en'],

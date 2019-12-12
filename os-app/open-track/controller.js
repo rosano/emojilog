@@ -3,7 +3,7 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRoutePath: '/track',
 		OLSKRouteMethod: 'get',
 		OLSKRouteSignature: 'EMTTrackRoute',
-		OLSKRouteFunction: function (req, res, next) {
+		OLSKRouteFunction (req, res, next) {
 			return res.render(require('path').join(__dirname, 'ui-view'));
 		},
 		OLSKRouteLanguages: ['en'],
