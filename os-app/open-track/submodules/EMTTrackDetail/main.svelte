@@ -50,9 +50,13 @@ import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
 	flex-direction: column;
 }
 
+@media screen and (min-width: 760px) {
+
 .EMTTrackDetail :global(.OLSKDetailPlaceholder) {
 	/* EMTTrackDetailFlexbox:Child */
 	flex-grow: 1;
+}
+
 }
 
 .EMTTrackDetailToolbar {
