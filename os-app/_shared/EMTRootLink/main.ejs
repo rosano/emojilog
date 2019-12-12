@@ -1,3 +1,8 @@
-<a class="EMTRootLink" href="<%= OLSKCanonicalLocalizedFor('EMTVitrineRoute') %>" title="<%= OLSKFormatted(OLSKLocalized('EMTSharedColonSeparatedFormat'), OLSKLocalized('EMTRootLinkLogoLabel'), OLSKLocalized('EMTRootLinkText')) %>">
-	<img class="EMTRootLinkLogo" role="presentation" src="/_shared/EMTRootLink/ui-assets/identity.svg">
-</a>
+<div class="EMTRootLink">
+
+<%- include('../__external/OLSKRootLink/main.ejs', {
+	OLSKRootLinkURL: OLSKCanonicalLocalizedFor('EMTVitrineRoute'),
+	OLSKRootLinkImageURL: '/_shared/EMTRootLink/ui-assets/identity.svg',
+}) %>
+
+</div>

@@ -1,23 +1,21 @@
 import { deepEqual } from 'assert';
 
-const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
+require('./controller.js').OLSKControllerRoutes().forEach(function (kDefaultRoute) {
 
-describe('EMTRootLink_Misc', function () {
+	describe(`EMTRootLink_Misc--${ kDefaultRoute.OLSKRouteSignature }`, function () {
 
-	before(function () {
-		return browser.visit(kDefaultRoute.OLSKRoutePath);
-	});
+		before(function () {
+			return browser.OLSKVisit(kDefaultRoute);
+		});
 
-	describe('EMTRootLinkLogo', function () {
+		describe('OLSKRootLink', function () {
+			
+			it('sets OLSKRootLinkImageURL', function () {
+				browser.assert.attribute('.OLSKRootLinkImage', 'src', '/_shared/EMTRootLink/ui-assets/identity.svg');
+			});
 		
-		it('sets role', function () {
-			browser.assert.attribute(EMTRootLinkLogo, 'role', 'presentation');
 		});
-	
-		it('sets src', function () {
-			browser.assert.attribute(EMTRootLinkLogo, 'src', '/_shared/EMTRootLink/ui-assets/identity.svg');
-		});
-	
-	});
 
+	});
+	
 });
