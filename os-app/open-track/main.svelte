@@ -32,23 +32,23 @@ const mod = {
 	},
 
 	EMTTrackMasterDispatchCreate () {
-		mod.CommandDocumentCreate();
+		mod.ControlDocumentCreate();
 	},
 
 	EMTTrackMasterDispatchSelect (inputData) {
-		mod.CommandDocumentSelect(inputData);
+		mod.ControlDocumentSelect(inputData);
 	},
 
 	EMTTrackDetailDispatchBack () {
-		mod.CommandDocumentSelect(null);
+		mod.ControlDocumentSelect(null);
 	},
 
 	EMTTrackDetailDispatchDiscard (inputData) {
-		mod.CommandDocumentDiscard(inputData);
+		mod.ControlDocumentDiscard(inputData);
 	},
 
 	EMTTrackDetailDispatchUpdate () {
-		mod.CommandDocumentSave();
+		mod.ControlDocumentSave();
 	},
 
 	MessageDocumentSelectedDidChange (inputData) {
@@ -71,9 +71,9 @@ const mod = {
 		mod._ValueDocumentsAll = $EMTDocumentsAllStore;
 	},
 
-	// COMMAND
+	// CONTROL
 
-	CommandDocumentSave() {
+	ControlDocumentSave() {
 		EMTDocumentsAllStore.update(function (val) {
 			return val;
 		});
@@ -94,7 +94,7 @@ const mod = {
 		};
 	},
 
-	async CommandDocumentCreate() {
+	async ControlDocumentCreate() {
 		let item = await EMTDocumentAction.EMTDocumentActionCreate(storageClient, {
 			EMTDocumentName: '',
 			EMTDocumentModificationDate: new Date(),
@@ -104,14 +104,14 @@ const mod = {
 			return val.concat(item).sort(EMTTrackLogic.EMTTrackSort);
 		});
 
-		mod.CommandDocumentSelect(item);
+		mod.ControlDocumentSelect(item);
 	},
 	
-	CommandDocumentSelect(inputData) {
+	ControlDocumentSelect(inputData) {
 		return EMTDocumentSelectedStore.set(inputData);
 	},
 	
-	async CommandDocumentDiscard (inputData) {
+	async ControlDocumentDiscard (inputData) {
 		EMTDocumentsAllStore.update(function (val) {
 			return val.filter(function(e) {
 				return e !== inputData;
