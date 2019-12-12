@@ -10,16 +10,6 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 
 	describe(`EMTTrackDetail_Localize-${ languageCode }`, function () {
 
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				OLSKRoutingLanguage: languageCode,
-			});
-		});
-	
-		it('localizes EMTTrackDetailPlaceholder', function () {
-			browser.assert.text(EMTTrackDetailPlaceholder, uLocalized('EMTTrackDetailPlaceholderText'));
-		});
-
 		context('EMTTrackDetailItem', function() {
 		
 			before(function() {

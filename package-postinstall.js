@@ -42,6 +42,7 @@
 	OLSKAssets.OLSKAssetsCopyAssetsFromTo([
 		'normalize.css',
 		'OLSKLayout',
+		'OLSKDetailPlaceholder',
 		'OLSKServiceWorker',
 		'OLSKRemoteStorage',
 		'OLSKStorageWidget',

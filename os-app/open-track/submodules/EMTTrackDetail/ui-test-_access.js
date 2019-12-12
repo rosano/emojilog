@@ -4,8 +4,6 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
 	EMTTrackDetail: '.EMTTrackDetail',
-	
-	EMTTrackDetailPlaceholder: '.EMTTrackDetailPlaceholder',
 
 	EMTTrackDetailToolbar: '.EMTTrackDetailToolbar',
 	EMTTrackDetailToolbarBackButton: '.EMTTrackDetailToolbarBackButton',
@@ -27,8 +25,8 @@ describe('EMTTrackDetail_Access', function () {
 		browser.assert.elements(EMTTrackDetail, 1);
 	});
 
-	it('shows EMTTrackDetailPlaceholder', function () {
-		browser.assert.elements(EMTTrackDetailPlaceholder, 1);
+	it('shows OLSKDetailPlaceholder', function () {
+		browser.assert.elements('.OLSKDetailPlaceholder', 1);
 	});
 
 	it('hides EMTTrackDetailToolbar', function () {
@@ -49,8 +47,8 @@ describe('EMTTrackDetail_Access', function () {
 			});
 		});
 
-		it('hides EMTTrackDetailPlaceholder', function () {
-			browser.assert.elements(EMTTrackDetailPlaceholder, 0);
+		it('hides OLSKDetailPlaceholder', function () {
+			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
 
 		it('shows OLSKToolbar', function () {

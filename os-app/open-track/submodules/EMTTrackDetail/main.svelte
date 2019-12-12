@@ -12,12 +12,13 @@ export const OLSKLocalized = function(translationConstant) {
 
 import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
+import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
 </script>
 
 <div class="EMTTrackDetail OLSKViewportDetail" class:OLSKMobileViewInactive={ OLSKMobileViewInactive }>
 
 {#if !EMTTrackDetailItem}
-<div class="EMTTrackDetailPlaceholder OLSKLayoutElementTextVisual">{ OLSKLocalized('EMTTrackDetailPlaceholderText') }</div>
+<OLSKDetailPlaceholder />
 {/if}
 
 {#if EMTTrackDetailItem}
@@ -44,26 +45,14 @@ import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 
 <style>
 .EMTTrackDetail {
-	/* EMTTrackDetailFlexboxParent */
+	/* EMTTrackDetailFlexbox:Parent */
 	display: flex;
 	flex-direction: column;
 }
 
-.EMTTrackDetailPlaceholder {
-	opacity: 0.5;
-	text-align: center;
-
-	/* EMTTrackDetailFlexboxChild */
+.EMTTrackDetail :global(.OLSKDetailPlaceholder) {
+	/* EMTTrackDetailFlexbox:Child */
 	flex-grow: 1;
-
-	/* EMTTrackDetailPlaceholderFlexboxParent */
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-:global(.OLSKIsLoading) .EMTTrackDetailPlaceholder {
-	visibility: hidden;
 }
 
 .EMTTrackDetailToolbar {

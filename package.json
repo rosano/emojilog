@@ -37,6 +37,7 @@
     "OLSKViewportContent": "olsk/OLSKViewportContent",
     "OLSKToolbar": "olsk/OLSKToolbar",
     "OLSKToolbarElementGroup": "olsk/OLSKToolbarElementGroup",
+    "OLSKDetailPlaceholder": "olsk/OLSKDetailPlaceholder",
 
     "// FRONTEND THROTTLE": null,
     "OLSKThrottle": "olsk/OLSKThrottle",

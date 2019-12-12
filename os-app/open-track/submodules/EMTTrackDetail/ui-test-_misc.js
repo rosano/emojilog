@@ -135,16 +135,4 @@ describe('EMTTrackDetail_Misc', function () {
 
 	});
 
-	describe('EMTTrackDetailPlaceholder', function() {
-
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute);
-		});
-
-		it('sets class', function () {
-			browser.assert.hasClass(EMTTrackDetailPlaceholder, 'OLSKLayoutElementTextVisual');
-		});
-		
-	});
-
 });

@@ -26,8 +26,8 @@ describe('EMTTrack_Access', function () {
 		browser.assert.elements('.EMTTrackDetail', 1);
 	});
 
-	it('shows EMTTrackDetailPlaceholder', function () {
-		browser.assert.elements('.EMTTrackDetailPlaceholder', 1);
+	it('shows OLSKDetailPlaceholder', function () {
+		browser.assert.elements('.OLSKDetailPlaceholder', 1);
 	});
 
 	it('shows EMTTrackFooter', function () {
@@ -48,8 +48,8 @@ describe('EMTTrack_Access', function () {
 			browser.assert.elements('.EMTTrackMasterListItem', 1);
 		});
 
-		it('hides EMTTrackDetailPlaceholder', function () {
-			browser.assert.elements('.EMTTrackDetailPlaceholder', 0);
+		it('hides OLSKDetailPlaceholder', function () {
+			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
 	
 	});
@@ -68,8 +68,8 @@ describe('EMTTrack_Access', function () {
 				});
 			});
 
-			it('hides EMTTrackDetailPlaceholder', function () {
-				browser.assert.elements('.EMTTrackDetailPlaceholder', 0);
+			it('hides OLSKDetailPlaceholder', function () {
+				browser.assert.elements('.OLSKDetailPlaceholder', 0);
 			});
 		
 		});
@@ -86,8 +86,8 @@ describe('EMTTrack_Access', function () {
 				browser.assert.elements('.EMTTrackMasterListItem', 0);
 			});
 
-			it('shows EMTTrackDetailPlaceholder', function () {
-				browser.assert.elements('.EMTTrackDetailPlaceholder', 1);
+			it('shows OLSKDetailPlaceholder', function () {
+				browser.assert.elements('.OLSKDetailPlaceholder', 1);
 			});
 		
 		});
