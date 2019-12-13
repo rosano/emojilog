@@ -11,6 +11,7 @@ import OLSKToolbar from 'OLSKToolbar';
 import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKReloadButton from '../../../_shared/__external/OLSKReloadButton/main.svelte';
 import OLSKLanguageSwitcher from '../../../_shared/__external/OLSKLanguageSwitcher/main.svelte';
+import _OLSKSharedCloud from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedCloud.svg';
 </script>
 
 <footer class="EMTTrackFooter OLSKMobileViewFooter">
@@ -29,8 +30,9 @@ import OLSKLanguageSwitcher from '../../../_shared/__external/OLSKLanguageSwitch
 
 		<div>
 			<div class="EMTTrackFooterStorageStatus">{ EMTTrackFooterStorageStatus }</div>
+
 			<button class="EMTTrackFooterStorageButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" title={ OLSKLocalized('EMTTrackFooterStorageButtonText') } on:click={ EMTTrackFooterDispatchStorage } class:OSWIconVisible={ false }>
-				<img class="EMTTrackFooterStorageButtonImage" role="presentation" src="/open-track/submodules/EMTTrackFooter/ui-images/EMTTrackFooterStorageButton.svg">
+				<div class="EMTTrackFooterStorageButtonImage">{@html _OLSKSharedCloud }</div>
 			</button>
 		</div>
 	</OLSKToolbar>

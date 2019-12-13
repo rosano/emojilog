@@ -78,12 +78,8 @@ describe('EMTTrackFooter_Misc', function () {
 			return browser.OLSKVisit(kDefaultRoute);
 		});
 	
-		it('sets role', function () {
-			browser.assert.attribute(EMTTrackFooterStorageButtonImage, 'role', 'presentation');
-		});
-	
 		it('sets src', function () {
-			browser.assert.attribute(EMTTrackFooterStorageButtonImage, 'src', '/open-track/submodules/EMTTrackFooter/ui-images/EMTTrackFooterStorageButton.svg');
+			deepEqual(browser.html(EMTTrackFooterStorageButtonImage).match('_OLSKSharedCloud').length, 1)
 		});
 
 	});

@@ -38,15 +38,11 @@ h1 {
 	padding: 0 5px;
 }
 
-.EMTTrackFooterStorageButton :global(svg,img) {
+.EMTTrackFooterStorageButtonImage :global(svg) {
 	width: 20px;
 	height: 20px;
 }
 
-.EMTTrackFooterStorageButton :global(path) {
-	fill: black;
-}
-
-.EMTTrackFooterStorageButton.OSWIconVisible img {
+.EMTTrackFooterStorageButtonImage.OSWIconVisible :global(svg) {
 	display: none;
 }

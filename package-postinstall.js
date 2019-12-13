@@ -51,5 +51,6 @@
 		'OLSKLanguageSwitcher',
 		'OLSKRootLink',
 		'ROCORootLink',
+		'OLSKUIAssets',
 	], pathPackage.join(__dirname, 'node_modules'), pathPackage.join(__dirname, 'os-app/_shared/__external'));
 })();
