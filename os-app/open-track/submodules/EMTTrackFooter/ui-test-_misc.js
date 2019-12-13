@@ -79,9 +79,9 @@ describe('EMTTrackFooter_Misc', function () {
 		});
 	
 		it('sets src', function () {
-			deepEqual(browser.html(EMTTrackFooterStorageButtonImage).match('_OLSKSharedCloud').length, 1)
+			browser.assert.elements(`${ EMTTrackFooterStorageButtonImage } #_OLSKSharedCloud`, 1);
 		});
-
+	
 	});
 
 });
