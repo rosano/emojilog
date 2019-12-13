@@ -1,4 +1,10 @@
 :root {
 	--EMTCommonBackground: rgba(0, 0, 0, 0);
 	--EMTCommonForeground: rgba(0, 0, 0, 1);
+	--EMTToolbarButtonSize: 20px;
+}
+
+.OLSKToolbarButton, .OLSKToolbarButton > *, .OLSKToolbarButton svg {
+	width: var(--EMTToolbarButtonSize);
+	height: var(--EMTToolbarButtonSize);
 }

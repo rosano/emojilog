@@ -34,17 +34,8 @@ h1 {
 	padding-left: 4px;
 }
 
-.EMTTrackFooterStorageButton {
-	padding: 0 5px;
-}
-
 .EMTTrackFooterStorageButton.OSWIconVisible .EMTTrackFooterStorageButtonImage {
 	display: none;
-}
-
-.EMTTrackFooterStorageButton :global(svg) {
-	width: 20px;
-	height: 20px;
 }
 
 .EMTTrackFooterStorageButton :global(.OSWOptionImage path) {

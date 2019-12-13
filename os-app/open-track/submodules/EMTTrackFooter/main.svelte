@@ -28,13 +28,13 @@ import _OLSKSharedCloud from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 			<a class="EMTTrackFooterDonateLink" href={ window.OLSKPublicConstants('EMT_SHARED_DONATE_URL') } target="_blank">{ OLSKLocalized('EMTTrackFooterDonateLinkText') }</a>
 		</OLSKToolbarElementGroup>
 
-		<div>
+		<OLSKToolbarElementGroup>
 			<div class="EMTTrackFooterStorageStatus">{ EMTTrackFooterStorageStatus }</div>
 
 			<button class="EMTTrackFooterStorageButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" title={ OLSKLocalized('EMTTrackFooterStorageButtonText') } on:click={ EMTTrackFooterDispatchStorage } class:OSWIconVisible={ false }>
 				<div class="EMTTrackFooterStorageButtonImage">{@html _OLSKSharedCloud }</div>
 			</button>
-		</div>
+		</OLSKToolbarElementGroup>
 	</OLSKToolbar>
 	
 </footer>
