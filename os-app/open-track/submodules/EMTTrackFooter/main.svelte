@@ -18,7 +18,7 @@ import _OLSKSharedCloud from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 
 	<OLSKToolbar OLSKToolbarJustify={ true }>
 		<OLSKToolbarElementGroup>
-			<OLSKReloadButton OLSKLocalized={ OLSKLocalized } />
+			<OLSKReloadButton />
 			
 			<OLSKLanguageSwitcher OLSKSharedActiveRouteConstant={ window.OLSKPublicConstants('OLSKSharedActiveRouteConstant') }
 				OLSKSharedPageLanguagesAvailable={ window.OLSKPublicConstants('OLSKSharedPageLanguagesAvailable') }
