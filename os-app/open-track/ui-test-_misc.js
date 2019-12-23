@@ -76,25 +76,40 @@ describe('EMTTrack_Misc', function () {
 	
 	});
 
-	describe('EMTTrackStorageWidget', function () {
+	describe('EMTTrackStorageWidget', function test_EMTTrackStorageWidget () {
 		
-		it('sets class', function () {
+		it('classes EMTTrackStorageWidgetHidden', function () {
 			browser.assert.hasClass(EMTTrackStorageWidget, 'EMTTrackStorageWidgetHidden');
-			browser.assert.hasClass(EMTTrackStorageWidget, 'OLSKMobileViewFooter');
 		});
 
-		context('click EMTTrackFooterStorageButton', function () {
+		context('click OLSKAppToolbarStorageButton', function () {
 			
 			before(function () {
-				return browser.pressButton('.EMTTrackFooterStorageButton');
+				return browser.pressButton('.OLSKAppToolbarStorageButton');
 			});
 			
-			it('sets class', function () {
+			it('classes EMTTrackStorageWidgetHidden', function () {
 				browser.assert.hasNoClass(EMTTrackStorageWidget, 'EMTTrackStorageWidgetHidden');
 			});
 		
 		});
 	
+	});
+
+	describe('EMTTrackViewportFooter', function test_EMTTrackViewportFooter () {
+
+		it('sets class', function () {
+			browser.assert.hasClass(EMTTrackViewportFooter, 'OLSKMobileViewFooter');
+		});
+
+	});
+
+	describe('OLSKAppToolbar', function test_OLSKAppToolbar () {
+
+		it('sets OLSKAppToolbarDonateURL', function () {
+			browser.assert.attribute('.OLSKAppToolbarDonateLink', 'href', process.env.EMT_SHARED_DONATE_URL);
+		});
+
 	});
 
 	context('create', function() {

@@ -27,7 +27,7 @@ const mod = {
 
 	// MESSAGE
 
-	EMTTrackFooterDispatchStorage () {
+	OLSKAppToolbarDispatchStorage () {
 		mod._ValueStorageWidgetHidden = !mod._ValueStorageWidgetHidden;
 	},
 
@@ -132,7 +132,7 @@ const mod = {
 	},
 
 	SetupStorageWidget () {
-		(new window.OLSKStorageWidget(storageClient.remoteStorage)).attach('EMTTrackStorageWidget').backend(document.querySelector('.EMTTrackFooterStorageButton'));
+		(new window.OLSKStorageWidget(storageClient.remoteStorage)).attach('EMTTrackStorageWidget').backend(document.querySelector('.OLSKAppToolbarStorageButton'));
 	},
 
 	SetupStorageStatus () {
@@ -159,7 +159,7 @@ onMount(mod.LifecycleModuleWillMount);
 import OLSKViewportContent from 'OLSKViewportContent';
 import EMTTrackMaster from './submodules/EMTTrackMaster/main.svelte';
 import EMTTrackDetail from './submodules/EMTTrackDetail/main.svelte';
-import EMTTrackFooter from './submodules/EMTTrackFooter/main.svelte';
+import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
 
@@ -171,9 +171,17 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 	<EMTTrackDetail EMTTrackDetailItem={ $EMTDocumentSelectedStore } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } EMTTrackDetailDispatchUpdate={ mod.EMTTrackDetailDispatchUpdate } OLSKMobileViewInactive={ !$EMTDocumentSelectedStore } />
 </OLSKViewportContent>
 
-<div id="EMTTrackStorageWidget" class="OLSKMobileViewFooter" class:EMTTrackStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
+<footer class="EMTTrackViewportFooter OLSKMobileViewFooter">
+	<div id="EMTTrackStorageWidget" class:EMTTrackStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
 
-<EMTTrackFooter EMTTrackFooterStorageStatus={ mod._ValueFooterStorageStatus } EMTTrackFooterDispatchStorage={ mod.EMTTrackFooterDispatchStorage } />
+	<OLSKAppToolbar
+		OLSKAppToolbarDonateURL={ window.OLSKPublicConstants('EMT_SHARED_DONATE_URL') }
+		OLSKAppToolbarStorageStatus={ mod._ValueFooterStorageStatus }
+		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
+		_OLSKAppToolbarDispatchExport={ mod._OLSKAppToolbarDispatchExport }
+		_OLSKAppToolbarDispatchImport={ mod._OLSKAppToolbarDispatchImport }
+		/>
+</footer>
 
 </div>
 

@@ -3,6 +3,8 @@ import { deepEqual } from 'assert';
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
+	EMTTrackViewportFooter: '.EMTTrackViewportFooter',
+
 	EMTTrackStorageWidget: '#EMTTrackStorageWidget',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
@@ -30,12 +32,16 @@ describe('EMTTrack_Access', function () {
 		browser.assert.elements('.OLSKDetailPlaceholder', 1);
 	});
 
-	it('shows EMTTrackFooter', function () {
-		browser.assert.elements('.EMTTrackFooter', 1);
+	it('shows EMTTrackViewportFooter', function () {
+		browser.assert.elements(EMTTrackViewportFooter, 1);
 	});
 
 	it('shows EMTTrackStorageWidget', function () {
 		browser.assert.elements(EMTTrackStorageWidget, 1);
+	});
+
+	it('shows OLSKAppToolbar', function () {
+		browser.assert.elements('.OLSKAppToolbar', 1);
 	});
 
 	context('create', function () {
