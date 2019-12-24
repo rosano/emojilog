@@ -8,22 +8,43 @@ import OLSKThrottle from 'OLSKThrottle';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
 import * as EMTDocumentAction from '../_shared/EMTDocument/action.js';
+import * as EMTStorageClient from '../_shared/EMTStorageClient/main.js';
+import { EMTStorageModule } from '../_shared/EMTStorageModule/main.js';
+import { EMTDocumentStorage } from '../_shared/EMTDocument/storage.js';
 import EMTTrackLogic from './ui-logic.js';
-import { storageClient, EMTPersistenceIsLoading, EMTDocumentsAllStore, EMTDocumentSelectedStore } from './persistence.js';
-
 const mod = {
 
 	// VALUE
 
-	_ValueDocumentsAll: [],
+	_ValueIsLoading: true,
+
+	_ValueTimersAll: [],
+	ValueTimersAll (inputData, shouldSort = true) {
+		mod._ValueTimersAll = shouldSort ? inputData.sort(EMTTrackLogic.EMTTrackSort) : inputData;
+	},
 	
-	_ValueDocumentSelected: undefined,
+	_ValueTimerSelected: undefined,
+	ValueTimerSelected (inputData) {
+		mod._ValueTimerSelected = inputData
+
+		if (!inputData) {
+			mod.OLSKMobileViewInactive = false;	
+		}
+	},
 	
 	_ValueStorageWidgetHidden: true,
 
 	_ValueFooterStorageStatus: '',
 
 	_ValueSaveThrottleMap: {},
+
+	OLSKMobileViewInactive: false,
+
+	// DATA
+
+	DataIsMobile () {
+		return window.innerWidth <= 760;
+	},
 
 	// MESSAGE
 
@@ -32,23 +53,23 @@ const mod = {
 	},
 
 	EMTTrackMasterDispatchCreate () {
-		mod.ControlDocumentCreate();
+		mod.ControlTimerCreate();
 	},
 
 	EMTTrackMasterDispatchSelect (inputData) {
-		mod.ControlDocumentSelect(inputData);
+		mod.ControlTimerSelect(inputData);
 	},
 
 	EMTTrackDetailDispatchBack () {
-		mod.ControlDocumentSelect(null);
+		mod.ControlTimerSelect(null);
 	},
 
 	EMTTrackDetailDispatchDiscard (inputData) {
-		mod.ControlDocumentDiscard(inputData);
+		mod.ControlTimerDiscard(inputData);
 	},
 
 	EMTTrackDetailDispatchUpdate () {
-		mod.ControlDocumentSave();
+		mod.ControlTimerSave(mod._ValueTimerSelected);
 	},
 
 	MessageDocumentSelectedDidChange (inputData) {
@@ -56,7 +77,7 @@ const mod = {
 			return;
 		}
 
-		if (inputData === mod._ValueDocumentSelected) {
+		if (inputData === mod._ValueTimerSelected) {
 			return;
 		};
 
@@ -64,78 +85,199 @@ const mod = {
 			document.querySelector('.EMTTrackDetailFormNameField').focus();
 		});
 
-		mod._ValueDocumentSelected = inputData;
-	},
-
-	MessageDocumentsAllDidChange() {
-		mod._ValueDocumentsAll = $EMTDocumentsAllStore;
+		mod._ValueTimerSelected = inputData;
 	},
 
 	// CONTROL
 
-	ControlDocumentSave() {
-		EMTDocumentsAllStore.update(function (val) {
-			return val;
-		});
+	ControlTimerSave(inputData) {
+		mod._ValueTimerSelected = mod._ValueTimerSelected; // #purge-svelte-force-update
 
-		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveThrottleMap, $EMTDocumentSelectedStore.EMTDocumentID, {
-			OLSKThrottleInput: $EMTDocumentSelectedStore,
+		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveThrottleMap, inputData.EMTDocumentID, {
+			OLSKThrottleInput: inputData,
 			OLSKThrottleDuration: 500,
 			OLSKThrottleCallback: async function () {
-				await EMTDocumentAction.EMTDocumentActionUpdate(storageClient, inputData);
+				await EMTDocumentAction.EMTDocumentActionUpdate(mod._ValueStorageClient, inputData);
 			},
 		});
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
-			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[$EMTDocumentSelectedStore.EMTDocumentID])	
+			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[inputData.EMTDocumentID])	
 		};
 	},
 
-	async ControlDocumentCreate() {
-		let item = await EMTDocumentAction.EMTDocumentActionCreate(storageClient, {
+	async ControlTimerCreate() {
+		const item = await EMTDocumentAction.EMTDocumentActionCreate(mod._ValueStorageClient, {
 			EMTDocumentName: '',
 			EMTDocumentModificationDate: new Date(),
 		});
 
-		EMTDocumentsAllStore.update(function (val) {
-			return val.concat(item).sort(EMTTrackLogic.EMTTrackSort);
-		});
+		mod.ValueTimersAll(mod._ValueTimersAll.concat(item));
 
-		mod.ControlDocumentSelect(item);
+		mod.ControlTimerSelect(item);
 	},
 	
-	ControlDocumentSelect(inputData) {
-		return EMTDocumentSelectedStore.set(inputData);
+	ControlTimerSelect(inputData) {
+		mod.ValueTimerSelected(inputData);
+
+		mod.OLSKMobileViewInactive = true;
 	},
 	
-	async ControlDocumentDiscard (inputData) {
-		EMTDocumentsAllStore.update(function (val) {
-			return val.filter(function(e) {
-				return e !== inputData;
-			});
-		});
+	async ControlTimerDiscard (inputData) {
+		mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
+			return e !== inputData;
+		}))
 
-		await EMTDocumentAction.EMTDocumentActionDelete(storageClient, inputData.EMTDocumentID);
+		await EMTDocumentAction.EMTDocumentActionDelete(mod._ValueStorageClient, inputData.EMTDocumentID);
 
-		EMTDocumentSelectedStore.set(null);
+		mod.ControlTimerSelect(null);
 	},
 
 	// SETUP
 
-	SetupEverything () {
+	async SetupEverything () {
+		mod.SetupStorageClient();
+
 		mod.SetupStorageWidget();
 
 		mod.SetupStorageStatus();
+
+		await mod.SetupStorageNotifications();
+
+		await mod.SetupDataCache();
+
+		await mod.SetupValueTimersAll();
+
+		mod._ValueIsLoading = false;
+	},
+
+	SetupStorageClient() {
+		mod._ValueStorageClient = EMTStorageClient.EMTStorageClient({
+			modules: [
+				EMTStorageModule([
+					EMTDocumentStorage,
+					].map(function (e) {
+						return {
+							EMTCollectionStorageGenerator: e,
+							EMTCollectionChangeDelegate: e === EMTDocumentStorage ? {
+								OLSKChangeDelegateCreate (inputData) {
+									// console.log('OLSKChangeDelegateCreate', inputData);
+
+									mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
+										return e.EMTDocumentID !== inputData.EMTDocumentID; // @Hotfix Dropbox sending DelegateAdd
+									}).concat(inputData));
+								},
+								OLSKChangeDelegateUpdate (inputData) {
+									// console.log('OLSKChangeDelegateUpdate', inputData);
+
+									if (mod._ValueTimerSelected && (mod._ValueTimerSelected.EMTDocumentID === inputData.EMTDocumentID)) {
+										mod.ControlTimerSelect(Object.assign(mod._ValueTimerSelected, inputData));
+									}
+
+									mod.ValueTimersAll(mod._ValueTimersAll.map(function (e) {
+										return Object.assign(e, e.EMTDocumentID === inputData.EMTDocumentID ? inputData : {});
+									}), false);
+								},
+								OLSKChangeDelegateDelete (inputData) {
+									// console.log('OLSKChangeDelegateDelete', inputData);
+
+									if (mod._ValueTimerSelected && (mod._ValueTimerSelected.EMTDocumentID === inputData.EMTDocumentID)) {
+										mod.ControlTimerSelect(null);
+									}
+
+									mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
+										return e.EMTDocumentID !== inputData.EMTDocumentID;
+									}), false);
+								},
+							} : null,
+						}
+					})),
+			],
+		});
 	},
 
 	SetupStorageWidget () {
-		(new window.OLSKStorageWidget(storageClient.remoteStorage)).attach('EMTTrackStorageWidget').backend(document.querySelector('.OLSKAppToolbarStorageButton'));
+		(new window.OLSKStorageWidget(mod._ValueStorageClient.remoteStorage)).attach('EMTTrackStorageWidget').backend(document.querySelector('.OLSKAppToolbarStorageButton'));
 	},
 
 	SetupStorageStatus () {
-		OLSKRemoteStorage.OLSKRemoteStorageStatus(storageClient.remoteStorage, function (inputData) {
+		OLSKRemoteStorage.OLSKRemoteStorageStatus(mod._ValueStorageClient.remoteStorage, function (inputData) {
 			mod._ValueFooterStorageStatus = inputData;
 		}, OLSKLocalized)
+	},
+
+	async SetupStorageNotifications () {
+		mod._ValueStorageClient.remoteStorage.on('not-connected', () => {
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('not-connected', arguments);
+			}
+		});
+
+		mod._ValueStorageClient.remoteStorage.on('disconnected', () => {
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('disconnected', arguments);
+			}
+		});
+
+		mod._ValueStorageClient.remoteStorage.on('connected', () => {
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('connected', arguments);
+			}
+		});
+
+		mod._ValueStorageClient.remoteStorage.on('sync-done', () => {
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('sync-done', arguments);
+			}
+		});
+
+		let isOffline;
+
+		mod._ValueStorageClient.remoteStorage.on('network-offline', () => {
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('network-offline', arguments);
+			}
+
+			isOffline = true;
+		});
+
+		mod._ValueStorageClient.remoteStorage.on('network-online', () => {
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('network-online', arguments);
+			}
+			
+			isOffline = false;
+		});
+
+		mod._ValueStorageClient.remoteStorage.on('error', (error) => {
+			if (isOffline && inputData.message === 'Sync failed: Network request failed.') {
+				return;
+			};
+
+			if (!OLSK_TESTING_BEHAVIOUR()) {
+				console.debug('error', error);
+			}
+		});
+
+		return new Promise(function (res, rej) {
+			mod._ValueStorageClient.remoteStorage.on('ready', () => {
+				if (!OLSK_TESTING_BEHAVIOUR()) {
+					console.debug('ready', arguments);
+				}
+
+				res();
+			});
+		})
+	},
+
+	async SetupDataCache() {
+		await mod._ValueStorageClient.remoteStorage.emojitimer.emt_documents.EMTStorageCache();
+	},
+
+	async SetupValueTimersAll() {
+		mod.ValueTimersAll((await EMTDocumentAction.EMTDocumentActionList(mod._ValueStorageClient)).filter(function (e) {
+			return typeof e === 'object'; // #patch-remotestorage-true
+		}));
 	},
 
 	// LIFECYCLE
@@ -145,10 +287,6 @@ const mod = {
 	},
 
 };
-
-EMTDocumentsAllStore.subscribe(mod.MessageDocumentsAllDidChange);
-
-EMTDocumentSelectedStore.subscribe(mod.MessageDocumentSelectedDidChange);
 
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
@@ -160,12 +298,12 @@ import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 </script>
 
-<div class="EMTTrack OLSKViewport" class:OLSKIsLoading={ $EMTPersistenceIsLoading }>
+<div class="EMTTrack OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading }>
 
 <OLSKViewportContent>
-	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueDocumentsAll } EMTTrackMasterListItemSelected={ $EMTDocumentSelectedStore } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } OLSKMobileViewInactive={ $EMTDocumentSelectedStore } />
+	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueTimersAll } EMTTrackMasterListItemSelected={ mod._ValueTimerSelected } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } OLSKMobileViewInactive={ mod._ValueTimerSelected } />
 	
-	<EMTTrackDetail EMTTrackDetailItem={ $EMTDocumentSelectedStore } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } EMTTrackDetailDispatchUpdate={ mod.EMTTrackDetailDispatchUpdate } OLSKMobileViewInactive={ !$EMTDocumentSelectedStore } />
+	<EMTTrackDetail EMTTrackDetailItem={ mod._ValueTimerSelected } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } EMTTrackDetailDispatchUpdate={ mod.EMTTrackDetailDispatchUpdate } OLSKMobileViewInactive={ !mod._ValueTimerSelected } />
 </OLSKViewportContent>
 
 <footer class="EMTTrackViewportFooter OLSKMobileViewFooter">
