@@ -78,16 +78,13 @@ const mod = {
 			return val;
 		});
 
-		OLSKThrottle.OLSKThrottleMappedTimeoutFor(mod._ValueSaveThrottleMap, $EMTDocumentSelectedStore.EMTDocumentID, function (inputData) {
-			return {
-				OLSKThrottleDuration: 500,
-				OLSKThrottleCallback: async function () {
-					delete mod._ValueSaveThrottleMap[inputData.EMTDocumentID];
-
-					await EMTDocumentAction.EMTDocumentActionUpdate(storageClient, inputData);
-				},
-			};
-		}, $EMTDocumentSelectedStore);
+		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveThrottleMap, $EMTDocumentSelectedStore.EMTDocumentID, {
+			OLSKThrottleInput: $EMTDocumentSelectedStore,
+			OLSKThrottleDuration: 500,
+			OLSKThrottleCallback: async function () {
+				await EMTDocumentAction.EMTDocumentActionUpdate(storageClient, inputData);
+			},
+		});
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
 			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[$EMTDocumentSelectedStore.EMTDocumentID])	
