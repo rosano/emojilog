@@ -69,6 +69,8 @@ const mod = {
 	},
 
 	EMTTrackDetailDispatchUpdate () {
+		mod._ValueTimerSelected = mod._ValueTimerSelected; // #purge-svelte-force-update
+		
 		mod.ControlTimerSave(mod._ValueTimerSelected);
 	},
 
@@ -91,8 +93,6 @@ const mod = {
 	// CONTROL
 
 	ControlTimerSave(inputData) {
-		mod._ValueTimerSelected = mod._ValueTimerSelected; // #purge-svelte-force-update
-
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveThrottleMap, inputData.EMTDocumentID, {
 			OLSKThrottleInput: inputData,
 			OLSKThrottleDuration: 500,
