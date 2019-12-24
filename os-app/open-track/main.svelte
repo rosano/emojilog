@@ -94,9 +94,8 @@ const mod = {
 
 	ControlTimerSave(inputData) {
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveThrottleMap, inputData.EMTDocumentID, {
-			OLSKThrottleInput: inputData,
 			OLSKThrottleDuration: 500,
-			OLSKThrottleCallback: async function () {
+			async OLSKThrottleCallback () {
 				await EMTDocumentAction.EMTDocumentActionUpdate(mod._ValueStorageClient, inputData);
 			},
 		});
