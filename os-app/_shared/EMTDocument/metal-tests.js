@@ -13,7 +13,7 @@ const kTesting = {
 	},
 };
 
-describe('EMTDocumentMetalWrite', function testEMTDocumentMetalWrite() {
+describe('EMTDocumentMetalWrite', function test_EMTDocumentMetalWrite() {
 
 	it('rejects if not object', async function() {
 		await rejects(mainModule.EMTDocumentMetalWrite(EMTTestingStorageClient, null), /EMTErrorInputNotValid/);
@@ -39,7 +39,7 @@ describe('EMTDocumentMetalWrite', function testEMTDocumentMetalWrite() {
 
 });
 
-describe('EMTDocumentMetalRead', function testEMTDocumentMetalRead() {
+describe('EMTDocumentMetalRead', function test_EMTDocumentMetalRead() {
 
 	it('rejects if not string', async function() {
 		await rejects(mainModule.EMTDocumentMetalRead(EMTTestingStorageClient, 1), /EMTErrorInputNotValid/);
@@ -57,7 +57,7 @@ describe('EMTDocumentMetalRead', function testEMTDocumentMetalRead() {
 
 });
 
-describe('EMTDocumentMetalList', function testEMTDocumentMetalList() {
+describe('EMTDocumentMetalList', function test_EMTDocumentMetalList() {
 
 	it('returns empty array if none', async function() {
 		deepEqual(await mainModule.EMTDocumentMetalList(EMTTestingStorageClient), {});
@@ -71,7 +71,7 @@ describe('EMTDocumentMetalList', function testEMTDocumentMetalList() {
 
 });
 
-describe('EMTDocumentMetalDelete', function testEMTDocumentMetalDelete() {
+describe('EMTDocumentMetalDelete', function test_EMTDocumentMetalDelete() {
 
 	it('rejects if not string', async function() {
 		await rejects(mainModule.EMTDocumentMetalDelete(EMTTestingStorageClient, 1), /EMTErrorInputNotValid/);

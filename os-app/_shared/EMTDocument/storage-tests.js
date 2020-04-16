@@ -2,7 +2,7 @@ const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./storage.js');
 
-describe('EMTDocumentStoragePath', function testEMTDocumentStoragePath() {
+describe('EMTDocumentStoragePath', function test_EMTDocumentStoragePath() {
 
 	it('returns string', function() {
 		deepEqual(mainModule.EMTDocumentStoragePath('alfa'), 'emt_documents/alfa');

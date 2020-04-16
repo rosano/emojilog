@@ -2,7 +2,7 @@ const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./logic.js');
 
-describe('EMTSharedDonateLinkGuard', function testEMTSharedDonateLinkGuard() {
+describe('EMTSharedDonateLinkGuard', function test_EMTSharedDonateLinkGuard() {
 
 	const StubEnvValid = function () {
 		return {
@@ -30,7 +30,7 @@ describe('EMTSharedDonateLinkGuard', function testEMTSharedDonateLinkGuard() {
 
 });
 
-describe('EMTSharedGitHubLinkGuard', function testEMTSharedGitHubLinkGuard() {
+describe('EMTSharedGitHubLinkGuard', function test_EMTSharedGitHubLinkGuard() {
 
 	const StubEnvValid = function () {
 		return {

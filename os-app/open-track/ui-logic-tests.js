@@ -2,7 +2,7 @@ const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./ui-logic.js');
 
-describe('EMTTrackSort', function testEMTTrackSort() {
+describe('EMTTrackSort', function test_EMTTrackSort() {
 
 	it('sorts by EMTDocumentModificationDate descending', function() {
 		let item1 = {

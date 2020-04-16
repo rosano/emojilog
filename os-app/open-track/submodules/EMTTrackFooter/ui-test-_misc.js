@@ -9,7 +9,7 @@ describe('EMTTrackFooter_Misc', function () {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
 
-	describe('EMTTrackFooter', function testEMTTrackFooter () {
+	describe('EMTTrackFooter', function test_EMTTrackFooter () {
 
 		it('sets class', function () {
 			browser.assert.hasClass(EMTTrackFooter, 'OLSKMobileViewFooter');
@@ -17,7 +17,7 @@ describe('EMTTrackFooter_Misc', function () {
 
 	});
 
-	describe('EMTTrackFooterDonateLink', function testEMTTrackFooterDonateLink () {
+	describe('EMTTrackFooterDonateLink', function test_EMTTrackFooterDonateLink () {
 
 		it('sets href', function () {
 			browser.assert.attribute(EMTTrackFooterDonateLink, 'href', process.env.EMT_SHARED_DONATE_URL);
@@ -29,7 +29,7 @@ describe('EMTTrackFooter_Misc', function () {
 
 	});
 
-	describe('EMTTrackFooterStorageStatus', function testEMTTrackFooterStorageStatus () {
+	describe('EMTTrackFooterStorageStatus', function test_EMTTrackFooterStorageStatus () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
@@ -43,7 +43,7 @@ describe('EMTTrackFooter_Misc', function () {
 
 	});
 
-	describe('EMTTrackFooterStorageButton', function testEMTTrackFooterStorageButton () {
+	describe('EMTTrackFooterStorageButton', function test_EMTTrackFooterStorageButton () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);
@@ -72,7 +72,7 @@ describe('EMTTrackFooter_Misc', function () {
 
 	});
 
-	describe('EMTTrackFooterStorageButtonImage', function testEMTTrackFooterStorageButtonImage () {
+	describe('EMTTrackFooterStorageButtonImage', function test_EMTTrackFooterStorageButtonImage () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);

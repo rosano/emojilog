@@ -19,7 +19,7 @@ const kTesting = {
 	},
 };
 
-describe('EMTDocumentActionCreate', function testEMTDocumentActionCreate() {
+describe('EMTDocumentActionCreate', function test_EMTDocumentActionCreate() {
 
 	it('rejects if not object', async function() {
 		await rejects(mainModule.EMTDocumentActionCreate(EMTTestingStorageClient, null), /EMTErrorInputNotValid/);
@@ -63,7 +63,7 @@ describe('EMTDocumentActionCreate', function testEMTDocumentActionCreate() {
 
 });
 
-describe('EMTDocumentActionRead', function testEMTDocumentActionRead() {
+describe('EMTDocumentActionRead', function test_EMTDocumentActionRead() {
 
 	it('rejects if not string', async function() {
 		await rejects(mainModule.EMTDocumentActionRead(EMTTestingStorageClient, null), /EMTErrorInputNotValid/);
@@ -81,7 +81,7 @@ describe('EMTDocumentActionRead', function testEMTDocumentActionRead() {
 
 });
 
-describe('EMTDocumentActionUpdate', function testEMTDocumentActionUpdate() {
+describe('EMTDocumentActionUpdate', function test_EMTDocumentActionUpdate() {
 
 	it('rejects if not object', async function() {
 		await rejects(mainModule.EMTDocumentActionUpdate(EMTTestingStorageClient, null), /EMTErrorInputNotValid/);
@@ -126,7 +126,7 @@ describe('EMTDocumentActionUpdate', function testEMTDocumentActionUpdate() {
 
 });
 
-describe('EMTDocumentActionDelete', function testEMTDocumentActionDelete() {
+describe('EMTDocumentActionDelete', function test_EMTDocumentActionDelete() {
 
 	it('rejects if not string', async function() {
 		await rejects(mainModule.EMTDocumentActionDelete(EMTTestingStorageClient, null), /EMTErrorInputNotValid/);
@@ -146,7 +146,7 @@ describe('EMTDocumentActionDelete', function testEMTDocumentActionDelete() {
 
 });
 
-describe('EMTDocumentActionList', function testEMTDocumentActionList() {
+describe('EMTDocumentActionList', function test_EMTDocumentActionList() {
 
 	it('returns array', async function() {
 		deepEqual(await mainModule.EMTDocumentActionList(EMTTestingStorageClient), []);

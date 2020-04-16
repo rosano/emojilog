@@ -13,7 +13,7 @@ const kTesting = {
 	},
 };
 
-describe('EMTDocumentModelErrorsFor', function testEMTDocumentModelErrorsFor() {
+describe('EMTDocumentModelErrorsFor', function test_EMTDocumentModelErrorsFor() {
 
 	it('throws error if not object', function() {
 		throws(function() {
@@ -77,7 +77,7 @@ describe('EMTDocumentModelErrorsFor', function testEMTDocumentModelErrorsFor() {
 
 });
 
-describe('EMTDocumentModelPreJSONSchemaValidate', function testEMTDocumentModelPreJSONSchemaValidate() {
+describe('EMTDocumentModelPreJSONSchemaValidate', function test_EMTDocumentModelPreJSONSchemaValidate() {
 
 	it('returns input', function() {
 		deepEqual(mainModule.EMTDocumentModelPreJSONSchemaValidate({}), {});
@@ -101,7 +101,7 @@ describe('EMTDocumentModelPreJSONSchemaValidate', function testEMTDocumentModelP
 
 });
 
-describe('EMTDocumentModelPostJSONParse', function testEMTDocumentModelPostJSONParse() {
+describe('EMTDocumentModelPostJSONParse', function test_EMTDocumentModelPostJSONParse() {
 
 	it('returns input null', function() {
 		deepEqual(mainModule.EMTDocumentModelPostJSONParse(null), null);
