@@ -10,7 +10,7 @@ describe('EMTTrackMaster_Misc', function () {
 			return browser.OLSKVisit(kDefaultRoute);
 		});
 		
-		it('sets class', function () {
+		it('classes OLSKViewportMaster', function () {
 			browser.assert.hasClass(EMTTrackMaster, 'OLSKViewportMaster');
 		});
 
@@ -26,7 +26,7 @@ describe('EMTTrackMaster_Misc', function () {
 				});
 			});
 
-			it('sets class', function () {
+			it('classes OLSKMobileViewInactive', function () {
 				browser.assert.hasClass(EMTTrackMaster, 'OLSKMobileViewInactive');
 			});
 		
@@ -36,7 +36,7 @@ describe('EMTTrackMaster_Misc', function () {
 
 	describe('EMTTrackMasterToolbar', function () {
 		
-		it('sets class', function () {
+		it('classes OLSKMobileViewHeader', function () {
 			browser.assert.hasClass(EMTTrackMasterToolbar, 'OLSKMobileViewHeader');
 		});
 	
@@ -44,8 +44,11 @@ describe('EMTTrackMaster_Misc', function () {
 
 	describe('EMTTrackMasterCreateButton', function () {
 		
-		it('sets class', function () {
+		it('classes OLSKLayoutButtonNoStyle', function () {
 			browser.assert.hasClass(EMTTrackMasterCreateButton, 'OLSKLayoutButtonNoStyle');
+		});
+		
+		it('classes OLSKLayoutElementTappable', function () {
 			browser.assert.hasClass(EMTTrackMasterCreateButton, 'OLSKLayoutElementTappable');
 		});
 		
@@ -73,7 +76,7 @@ describe('EMTTrackMaster_Misc', function () {
 
 	describe('EMTTrackMasterBody', function () {
 		
-		it('sets class', function () {
+		it('classes OLSKMobileViewBody', function () {
 			browser.assert.hasClass(EMTTrackMasterBody, 'OLSKMobileViewBody');
 		});
 	
@@ -136,7 +139,7 @@ describe('EMTTrackMaster_Misc', function () {
 			});
 		});
 
-		it('sets class', function () {
+		it('classes 1', function () {
 			browser.assert.elements('.EMTTrackMasterListItemSelected', 1);
 			browser.assert.hasClass(`${ EMTTrackMasterListItem }:nth-child(2)`, 'EMTTrackMasterListItemSelected');
 		});

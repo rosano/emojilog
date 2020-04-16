@@ -11,7 +11,7 @@ describe('EMTTrackFooter_Misc', function () {
 
 	describe('EMTTrackFooter', function test_EMTTrackFooter () {
 
-		it('sets class', function () {
+		it('classes OLSKMobileViewFooter', function () {
 			browser.assert.hasClass(EMTTrackFooter, 'OLSKMobileViewFooter');
 		});
 
@@ -49,8 +49,11 @@ describe('EMTTrackFooter_Misc', function () {
 			return browser.OLSKVisit(kDefaultRoute);
 		});
 	
-		it('sets class', function () {
+		it('classes OLSKLayoutButtonNoStyle', function () {
 			browser.assert.hasClass(EMTTrackFooterStorageButton, 'OLSKLayoutButtonNoStyle');
+		});
+	
+		it('classes OLSKLayoutElementTappable', function () {
 			browser.assert.hasClass(EMTTrackFooterStorageButton, 'OLSKLayoutElementTappable');
 		});
 

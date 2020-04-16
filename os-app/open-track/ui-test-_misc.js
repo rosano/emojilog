@@ -10,7 +10,7 @@ describe('EMTTrack_Misc', function () {
 			return browser.OLSKVisit(kDefaultRoute);
 		});
 		
-		it('sets class', function () {
+		it('classes OLSKMobileViewInactive', function () {
 			browser.assert.hasNoClass('.EMTTrackMaster', 'OLSKMobileViewInactive');
 		});
 
@@ -20,7 +20,7 @@ describe('EMTTrack_Misc', function () {
 				return browser.pressButton(EMTTrackMasterCreateButton);
 			});
 
-			it('sets class', function() {
+			it('classes OLSKMobileViewInactive', function() {
 				browser.assert.hasClass('.EMTTrackMaster', 'OLSKMobileViewInactive');
 			});
 
@@ -32,7 +32,7 @@ describe('EMTTrack_Misc', function () {
 				return browser.pressButton(EMTTrackDetailToolbarBackButton);
 			});
 
-			it('sets class', function() {
+			it('classes OLSKMobileViewInactive', function() {
 				browser.assert.hasNoClass('.EMTTrackMaster', 'OLSKMobileViewInactive');
 			});
 
@@ -46,7 +46,7 @@ describe('EMTTrack_Misc', function () {
 			return browser.OLSKVisit(kDefaultRoute);
 		});
 		
-		it('sets class', function () {
+		it('classes OLSKMobileViewInactive', function () {
 			browser.assert.hasClass('.EMTTrackDetail', 'OLSKMobileViewInactive');
 		});
 
@@ -56,7 +56,7 @@ describe('EMTTrack_Misc', function () {
 				return browser.pressButton(EMTTrackMasterCreateButton);
 			});
 
-			it('sets class', function() {
+			it('classes OLSKMobileViewInactive', function() {
 				browser.assert.hasNoClass('.EMTTrackDetail', 'OLSKMobileViewInactive');
 			});
 
@@ -68,7 +68,7 @@ describe('EMTTrack_Misc', function () {
 				return browser.pressButton(EMTTrackDetailToolbarBackButton);
 			});
 
-			it('sets class', function() {
+			it('classes OLSKMobileViewInactive', function() {
 				browser.assert.hasClass('.EMTTrackDetail', 'OLSKMobileViewInactive');
 			});
 
@@ -98,7 +98,7 @@ describe('EMTTrack_Misc', function () {
 
 	describe('EMTTrackViewportFooter', function test_EMTTrackViewportFooter () {
 
-		it('sets class', function () {
+		it('classes OLSKMobileViewFooter', function () {
 			browser.assert.hasClass(EMTTrackViewportFooter, 'OLSKMobileViewFooter');
 		});
 

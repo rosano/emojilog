@@ -18,7 +18,7 @@ describe('EMTTrackDetail_Misc', function () {
 			});
 		});
 		
-		it('sets class', function () {
+		it('classes OLSKViewportDetail', function () {
 			browser.assert.hasClass(EMTTrackDetail, 'OLSKViewportDetail');
 		});
 
@@ -34,7 +34,7 @@ describe('EMTTrackDetail_Misc', function () {
 				});
 			});
 
-			it('sets class', function () {
+			it('classes OLSKMobileViewInactive', function () {
 				browser.assert.hasClass(EMTTrackDetail, 'OLSKMobileViewInactive');
 			});
 		
@@ -50,7 +50,7 @@ describe('EMTTrackDetail_Misc', function () {
 			});
 		});
 		
-		it('sets class', function () {
+		it('classes OLSKToolbarJustify', function () {
 			browser.assert.hasClass('.OLSKToolbar', 'OLSKToolbarJustify');
 		});
 	
@@ -58,8 +58,11 @@ describe('EMTTrackDetail_Misc', function () {
 
 	describe('EMTTrackDetailToolbarBackButton', function () {
 		
-		it('sets class', function () {
+		it('classes OLSKLayoutButtonNoStyle', function () {
 			browser.assert.hasClass(EMTTrackDetailToolbarBackButton, 'OLSKLayoutButtonNoStyle');
+		});
+		
+		it('classes OLSKLayoutElementTappable', function () {
 			browser.assert.hasClass(EMTTrackDetailToolbarBackButton, 'OLSKLayoutElementTappable');
 		});
 
@@ -83,8 +86,11 @@ describe('EMTTrackDetail_Misc', function () {
 
 	describe('EMTTrackDetailToolbarDiscardButton', function () {
 		
-		it('sets class', function () {
-			browser.assert.hasClass(EMTTrackDetailToolbarDiscardButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKLayoutButtonNoStyle', function () {
+			browser.assert.hasClass(EMTTrackDetailToolbarDiscardButton, 'OLSKLayoutElementTappable');
+		});
+		
+		it('classes OLSKLayoutElementTappable', function () {
 			browser.assert.hasClass(EMTTrackDetailToolbarDiscardButton, 'OLSKLayoutElementTappable');
 		});
 

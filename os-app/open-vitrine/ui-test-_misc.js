@@ -10,7 +10,7 @@ describe('EMTVitrine_Misc', function () {
 
 	describe('EMTVitrine', function () {
 		
-		it('sets class', function () {
+		it('classes OLSKCommon', function () {
 			browser.assert.hasClass(EMTVitrine, 'OLSKCommon');
 		});
 	
