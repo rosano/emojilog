@@ -35,31 +35,3 @@ export const EMTDocumentModelErrorsFor = function(inputData, options = {}) {
 
 	return Object.entries(errors).length ? errors : null;
 };
-
-export const EMTDocumentModelPreJSONSchemaValidate = function(inputData) {
-	if (inputData.EMTDocumentCreationDate) {
-		inputData.EMTDocumentCreationDate = inputData.EMTDocumentCreationDate.toISOString();
-	}
-
-	if (inputData.EMTDocumentModificationDate) {
-		inputData.EMTDocumentModificationDate = inputData.EMTDocumentModificationDate.toISOString();
-	}
-
-	return inputData;
-};
-
-export const EMTDocumentModelPostJSONParse = function(inputData) {
-	if (!inputData) {
-		return inputData;
-	}
-
-	if (inputData.EMTDocumentCreationDate) {
-		inputData.EMTDocumentCreationDate = new Date(inputData.EMTDocumentCreationDate);
-	}
-
-	if (inputData.EMTDocumentModificationDate) {
-		inputData.EMTDocumentModificationDate = new Date(inputData.EMTDocumentModificationDate);
-	}
-
-	return inputData;
-};

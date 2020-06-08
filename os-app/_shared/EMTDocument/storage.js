@@ -29,7 +29,7 @@ export const EMTDocumentStorage = function (privateClient, publicClient, changeD
 			return console.warn(`${ delegateMethod } not function`);
 		}
 
-		changeDelegate[delegateMethod](EMTDocumentModel.EMTDocumentModelPostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
+		changeDelegate[delegateMethod](OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
 	});
 
 	return {
@@ -56,8 +56,8 @@ export const EMTDocumentStorage = function (privateClient, publicClient, changeD
 				return privateClient.getAll(EMTDocumentStoragePath(), false);
 			},
 			EMTStorageWrite: async function (param1, param2) {
-				await privateClient.storeObject(kType, `${ kCollection }/${ param1 }`, EMTDocumentModel.EMTDocumentModelPreJSONSchemaValidate(param2));
-				return EMTDocumentModel.EMTDocumentModelPostJSONParse(param2);
+				await privateClient.storeObject(kType, `${ kCollection }/${ param1 }`, OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(param2));
+				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(param2);
 			},
 			EMTStorageRead: function (inputData) {
 				return privateClient.getObject(`${ kCollection }/${ inputData }`);
