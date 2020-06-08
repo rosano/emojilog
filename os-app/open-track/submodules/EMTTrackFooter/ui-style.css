@@ -10,11 +10,11 @@
 	align-items: center;
 }
 
-.EMTTrackFooter :global(.OLSKToolbar) {
+.EMTTrackFooter .OLSKToolbar {
 	flex-grow: 1;
 }
 
-.EMTTrackFooter :global(.OLSKToolbar > div) {
+.EMTTrackFooter .OLSKToolbar > div {
 	display: flex;
 	align-items: center;
 }
@@ -25,7 +25,7 @@ h1 {
 	font-size: 20px;
 }
 
-.EMTTrackFooter :global(.OLSKToolbarElementGroup > *:not(:first-child)) {
+.EMTTrackFooter .OLSKToolbarElementGroup > *:not(:first-child) {
 	margin-left: 10px;
 }
 
