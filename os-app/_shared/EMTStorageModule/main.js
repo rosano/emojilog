@@ -1,4 +1,5 @@
-import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
+import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
+const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
 export const EMTStorageModule = function (inputData) {
 	return {

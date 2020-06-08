@@ -1,5 +1,6 @@
 import * as EMTDocumentModel from './model.js';
-import * as OLSKRemoteStorage from 'OLSKRemoteStorage';
+import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
+const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
 const kType = 'emt_document';
 const kCollection = 'emt_documents';

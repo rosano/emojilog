@@ -6,7 +6,8 @@ const OLSKLocalized = function(translationConstant) {
 
 import OLSKThrottle from 'OLSKThrottle';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
-import * as OLSKRemoteStorage from '../_shared/__external/OLSKRemoteStorage/main.js'
+import * as OLSKRemoteStoragePackage from '../_shared/__external/OLSKRemoteStorage/main.js'
+const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 import * as EMTDocumentAction from '../_shared/EMTDocument/action.js';
 import * as EMTStorageClient from '../_shared/EMTStorageClient/main.js';
 import { EMTStorageModule } from '../_shared/EMTStorageModule/main.js';
@@ -320,7 +321,7 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 </div>
 
 {#if !OLSK_TESTING_BEHAVIOUR()}
-	<OLSKServiceWorker OLSKLocalized={ OLSKLocalized } registrationRoute={ window.OLSKCanonicalFor('EMTServiceWorkerRoute') } />
+	<OLSKServiceWorker OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonicalFor('EMTServiceWorkerRoute') } />
 {/if}
 
 <style src="./ui-style.css"></style>
