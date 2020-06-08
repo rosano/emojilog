@@ -2,7 +2,7 @@ import { deepEqual } from 'assert';
 
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-describe('EMTTrackDetail_Misc', function () {
+describe('EMTTrackDetail_Misc', function  test_EMTTrackDetail_Misc () {
 
 	const uItem = function () {
 		return {
@@ -10,7 +10,7 @@ describe('EMTTrackDetail_Misc', function () {
 		};
 	};
 
-	describe('EMTTrackDetail', function () {
+	describe('EMTTrackDetail', function  test_EMTTrackDetail () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
@@ -42,21 +42,19 @@ describe('EMTTrackDetail_Misc', function () {
 
 	});
 
-	describe('OLSKToolbar', function () {
+	describe('EMTTrackDetailToolbar', function  test_EMTTrackDetailToolbar () {
 
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				EMTTrackDetailItem: JSON.stringify(uItem()),
-			});
+		it('classes OLSKToolbar', function () {
+			browser.assert.hasClass(EMTTrackDetailToolbar, 'OLSKToolbar');
 		});
-		
+
 		it('classes OLSKToolbarJustify', function () {
-			browser.assert.hasClass('.OLSKToolbar', 'OLSKToolbarJustify');
+			browser.assert.hasClass(EMTTrackDetailToolbar, 'OLSKToolbarJustify');
 		});
 	
 	});
 
-	describe('EMTTrackDetailToolbarBackButton', function () {
+	describe('EMTTrackDetailToolbarBackButton', function  test_EMTTrackDetailToolbarBackButton () {
 		
 		it('classes OLSKLayoutButtonNoStyle', function () {
 			browser.assert.hasClass(EMTTrackDetailToolbarBackButton, 'OLSKLayoutButtonNoStyle');
@@ -84,7 +82,7 @@ describe('EMTTrackDetail_Misc', function () {
 	
 	});
 
-	describe('EMTTrackDetailToolbarDiscardButton', function () {
+	describe('EMTTrackDetailToolbarDiscardButton', function  test_EMTTrackDetailToolbarDiscardButton () {
 		
 		it('classes OLSKLayoutButtonNoStyle', function () {
 			browser.assert.hasClass(EMTTrackDetailToolbarDiscardButton, 'OLSKLayoutElementTappable');
@@ -117,7 +115,7 @@ describe('EMTTrackDetail_Misc', function () {
 	
 	});
 	
-	describe('EMTTrackDetailFormNameField', function() {
+	describe('EMTTrackDetailFormNameField', function test_EMTTrackDetailFormNameField () {
 		
 		it('sets autofocus', function () {
 			browser.assert.attribute(EMTTrackDetailFormNameField, 'autofocus', '');

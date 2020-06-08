@@ -29,10 +29,6 @@ describe('EMTTrackMaster_Access', function () {
 		browser.assert.elements(EMTTrackMasterToolbar, 1);
 	});
 
-	it('shows OLSKToolbar', function () {
-		browser.assert.elements('.OLSKToolbar', 1);
-	});
-
 	it('shows EMTTrackMasterCreateButton', function () {
 		browser.assert.elements(EMTTrackMasterCreateButton, 1);
 	});

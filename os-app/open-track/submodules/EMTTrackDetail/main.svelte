@@ -10,8 +10,6 @@ const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
 };
 
-import OLSKToolbar from 'OLSKToolbar';
-import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
 </script>
 
@@ -22,16 +20,14 @@ import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
 {/if}
 
 {#if EMTTrackDetailItem}
-<header class="EMTTrackDetailToolbar">
-	<OLSKToolbar OLSKToolbarJustify={ true }>
-		<OLSKToolbarElementGroup>
-			<button class="EMTTrackDetailToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackDetailDispatchBack }>{ OLSKLocalized('EMTTrackDetailToolbarBackButtonText') }</button>
-		</OLSKToolbarElementGroup>
+<header class="EMTTrackDetailToolbar OLSKToolbar OLSKToolbarJustify">
+	<div class="OLSKToolbarElementGroup">
+		<button class="EMTTrackDetailToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackDetailDispatchBack }>{ OLSKLocalized('EMTTrackDetailToolbarBackButtonText') }</button>
+	</div>
 
-		<OLSKToolbarElementGroup>
-			<button class="EMTTrackDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ () => window.confirm(OLSKLocalized('EMTTrackDetailDiscardPromptText')) && EMTTrackDetailDispatchDiscard(EMTTrackDetailItem) }>{ OLSKLocalized('EMTTrackDetailToolbarDiscardButtonText') }</button>
-		</OLSKToolbarElementGroup>
-	</OLSKToolbar>
+	<div class="OLSKToolbarElementGroup">
+		<button class="EMTTrackDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ () => window.confirm(OLSKLocalized('EMTTrackDetailDiscardPromptText')) && EMTTrackDetailDispatchDiscard(EMTTrackDetailItem) }>{ OLSKLocalized('EMTTrackDetailToolbarDiscardButtonText') }</button>
+	</div>
 </header>
 
 <div class="EMTTrackDetailForm">

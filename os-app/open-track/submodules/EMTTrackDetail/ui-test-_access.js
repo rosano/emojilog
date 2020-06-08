@@ -51,10 +51,6 @@ describe('EMTTrackDetail_Access', function () {
 			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
 
-		it('shows OLSKToolbar', function () {
-			browser.assert.elements('.OLSKToolbar', 1);
-		});
-
 		it('shows EMTTrackDetailToolbar', function () {
 			browser.assert.elements(EMTTrackDetailToolbar, 1);
 		});

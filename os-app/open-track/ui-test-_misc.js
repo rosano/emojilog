@@ -4,7 +4,7 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('EMTTrack_Misc', function () {
 
-	describe('EMTTrackMaster', function () {
+	describe('EMTTrackMaster', function test_EMTTrackMaster () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);
@@ -40,7 +40,15 @@ describe('EMTTrack_Misc', function () {
 	
 	});
 
-	describe('EMTTrackDetail', function () {
+	describe('EMTTrackMasterToolbar', function test_EMTTrackMasterToolbar () {
+
+		it('classes OLSKToolbar', function () {
+			browser.assert.hasNoClass('.EMTTrackMasterToolbar', 'OLSKToolbar');
+		});
+
+	});
+
+	describe('EMTTrackDetail', function test_EMTTrackDetail () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);

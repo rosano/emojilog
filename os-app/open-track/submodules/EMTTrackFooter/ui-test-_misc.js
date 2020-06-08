@@ -15,6 +15,14 @@ describe('EMTTrackFooter_Misc', function () {
 			browser.assert.hasClass(EMTTrackFooter, 'OLSKMobileViewFooter');
 		});
 
+		it('classes OLSKToolbar', function () {
+			browser.assert.hasClass(EMTTrackFooter, 'OLSKToolbar');
+		});
+
+		it('classes OLSKToolbarJustify', function () {
+			browser.assert.hasClass(EMTTrackFooter, 'OLSKToolbarJustify');
+		});
+
 	});
 
 	describe('EMTTrackFooterDonateLink', function test_EMTTrackFooterDonateLink () {

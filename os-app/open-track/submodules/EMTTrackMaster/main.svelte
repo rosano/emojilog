@@ -9,19 +9,14 @@ import OLSKInternational from 'OLSKInternational';
 const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
 };
-
-import OLSKToolbar from 'OLSKToolbar';
-import OLSKToolbarElementGroup from 'OLSKToolbarElementGroup';
 </script>
 
 <div class="EMTTrackMaster OLSKViewportMaster" class:OLSKMobileViewInactive={ OLSKMobileViewInactive }>
 
-<header class="EMTTrackMasterToolbar OLSKMobileViewHeader">
-	<OLSKToolbar>
-		<OLSKToolbarElementGroup>
-			<button class="EMTTrackMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackMasterDispatchCreate } accesskey="n">{ OLSKLocalized('EMTTrackMasterCreateButtonText') }</button>
-		</OLSKToolbarElementGroup>
-	</OLSKToolbar>
+<header class="EMTTrackMasterToolbar OLSKMobileViewHeader OLSKToolbar">
+	<div class="OLSKToolbarElementGroup">
+		<button class="EMTTrackMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackMasterDispatchCreate } accesskey="n">{ OLSKLocalized('EMTTrackMasterCreateButtonText') }</button>
+	</div>
 </header>
 
 <section class="EMTTrackMasterBody OLSKMobileViewBody">
