@@ -1,5 +1,3 @@
-import { deepEqual } from 'assert';
-
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('EMTTrackDetail_Misc', function  test_EMTTrackDetail_Misc () {
@@ -44,6 +42,12 @@ describe('EMTTrackDetail_Misc', function  test_EMTTrackDetail_Misc () {
 
 	describe('EMTTrackDetailToolbar', function  test_EMTTrackDetailToolbar () {
 
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				EMTTrackDetailItem: JSON.stringify(uItem()),
+			});
+		});
+		
 		it('classes OLSKToolbar', function () {
 			browser.assert.hasClass(EMTTrackDetailToolbar, 'OLSKToolbar');
 		});

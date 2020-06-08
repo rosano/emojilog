@@ -40,14 +40,6 @@ describe('EMTTrack_Misc', function () {
 	
 	});
 
-	describe('EMTTrackMasterToolbar', function test_EMTTrackMasterToolbar () {
-
-		it('classes OLSKToolbar', function () {
-			browser.assert.hasNoClass('.EMTTrackMasterToolbar', 'OLSKToolbar');
-		});
-
-	});
-
 	describe('EMTTrackDetail', function test_EMTTrackDetail () {
 
 		before(function() {
