@@ -3,7 +3,7 @@ export const EMTDocumentModelErrorsFor = function(inputData, options = {}) {
 		throw new Error('EMTErrorInputNotValid');
 	}
 
-	var errors = {};
+	const errors = {};
 
 	if (typeof inputData.EMTDocumentID !== 'string') {
 		errors.EMTDocumentID = [
