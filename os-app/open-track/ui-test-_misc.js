@@ -1,5 +1,3 @@
-import { deepEqual } from 'assert';
-
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('EMTTrack_Misc', function () {
@@ -118,8 +116,8 @@ describe('EMTTrack_Misc', function () {
 			return browser.pressButton(EMTTrackMasterCreateButton);
 		});
 
-		it('sets document.activeElement', function() {
-			deepEqual(browser.document.activeElement, browser.query('.EMTTrackDetailFormNameField'));
+		it('focuses EMTTrackDetailFormNameField', function() {
+			browser.assert.hasFocus('.EMTTrackDetailFormNameField');
 		});
 
 	});
