@@ -1,5 +1,3 @@
-import { deepEqual } from 'assert';
-
 Object.entries({
 	EMTRootLink: '.EMTRootLink',
 }).map(function (e) {
