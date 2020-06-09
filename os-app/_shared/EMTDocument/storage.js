@@ -38,7 +38,7 @@ export const EMTDocumentStorage = function (privateClient, publicClient, changeD
 		EMTStorageModelErrors: Object.entries(EMTDocumentModel.EMTDocumentModelErrorsFor({}, {
 			EMTOptionValidateIfNotPresent: true,
 		})).map(function (e) {
-			if (Object.keys(EMTDocumentModel.EMTDocumentModelErrorsFor({})).indexOf(e[0]) === -1) {
+			if (!Object.keys(EMTDocumentModel.EMTDocumentModelErrorsFor({})).includes(e[0])) {
 				e[1].push('__RSOptional');
 			}
 
