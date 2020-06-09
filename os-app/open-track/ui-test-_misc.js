@@ -2,12 +2,28 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('EMTTrack_Misc', function () {
 
+	before(function() {
+		return browser.OLSKVisit(kDefaultRoute);
+	});
+
+	it('assigns link:apple-touch-icon', function () {
+		browser.assert.attribute('link[rel=apple-touch-icon]', 'href', process.env.EMT_TOUCH_ICON_URL);
+	});
+	
+	it('assigns meta:viewport', function () {
+		browser.assert.attribute('meta[name=viewport]', 'content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
+	});
+	
+	it('assigns meta:mobile-web-app-capable', function () {
+		browser.assert.attribute('meta[name=mobile-web-app-capable]', 'content', 'yes');
+	});
+	
+	it('assigns meta:apple-mobile-web-app-capable', function () {
+		browser.assert.attribute('meta[name=apple-mobile-web-app-capable]', 'content', 'yes');
+	});
+
 	describe('EMTTrackMaster', function test_EMTTrackMaster () {
 
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute);
-		});
-		
 		it('classes OLSKMobileViewInactive', function () {
 			browser.assert.hasNoClass('.EMTTrackMaster', 'OLSKMobileViewInactive');
 		});
