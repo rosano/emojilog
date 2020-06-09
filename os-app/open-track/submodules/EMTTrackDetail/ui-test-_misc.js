@@ -109,9 +109,6 @@ describe('EMTTrackDetail_Misc', function  test_EMTTrackDetail_Misc () {
 
 			it('sends EMTTrackDetailDispatchDiscard', function () {
 				browser.assert.text('#TestEMTTrackDetailDispatchDiscard', '1');
-			});
-
-			it('sends EMTTrackDetailDispatchDiscardData', function () {
 				browser.assert.text('#TestEMTTrackDetailDispatchDiscardData', JSON.stringify(uItem()));
 			});
 		
