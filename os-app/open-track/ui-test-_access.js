@@ -3,7 +3,7 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 Object.entries({
 	EMTTrackViewportFooter: '.EMTTrackViewportFooter',
 
-	EMTTrackStorageWidget: '#EMTTrackStorageWidget',
+	EMTTrackStorageToolbar: '.EMTTrackStorageToolbar',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -34,12 +34,28 @@ describe('EMTTrack_Access', function () {
 		browser.assert.elements(EMTTrackViewportFooter, 1);
 	});
 
-	it('shows EMTTrackStorageWidget', function () {
-		browser.assert.elements(EMTTrackStorageWidget, 1);
+	it('hides EMTTrackStorageToolbar', function () {
+		browser.assert.elements(EMTTrackStorageToolbar, 0);
 	});
 
 	it('shows OLSKAppToolbar', function () {
 		browser.assert.elements('.OLSKAppToolbar', 1);
+	});
+
+	context('click OLSKAppToolbarStorageButton', function () {
+		
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarStorageButton');
+		});
+
+		it('shows EMTTrackStorageToolbar', function () {
+			browser.assert.elements(EMTTrackStorageToolbar, 1);
+		});
+
+		it('shows OLSKStorageWidget', function () {
+			browser.assert.elements('.OLSKStorageWidget', 1);
+		});
+	
 	});
 
 	context('create', function () {

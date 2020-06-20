@@ -8,10 +8,6 @@
 	color: var(--EMTCommonForeground);
 }
 
-#EMTTrackStorageWidget {
+.EMTTrackStorageToolbar {
 	border-top: var(--EMTBorderStyle)
-}
-
-.EMTTrackStorageWidgetHidden {
-	display: none;
 }

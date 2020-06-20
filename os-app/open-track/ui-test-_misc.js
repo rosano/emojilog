@@ -90,22 +90,22 @@ describe('EMTTrack_Misc', function () {
 	
 	});
 
-	describe('EMTTrackStorageWidget', function test_EMTTrackStorageWidget () {
+	describe('EMTTrackStorageToolbar', function test_EMTTrackStorageToolbar () {
 		
-		it('classes EMTTrackStorageWidgetHidden', function () {
-			browser.assert.hasClass(EMTTrackStorageWidget, 'EMTTrackStorageWidgetHidden');
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarStorageButton');
+		});
+		
+		it('classes OLSKToolbar', function () {
+			browser.assert.hasClass(EMTTrackStorageToolbar, 'OLSKToolbar');
 		});
 
-		context('click OLSKAppToolbarStorageButton', function () {
-			
-			before(function () {
-				return browser.pressButton('.OLSKAppToolbarStorageButton');
-			});
-			
-			it('classes EMTTrackStorageWidgetHidden', function () {
-				browser.assert.hasNoClass(EMTTrackStorageWidget, 'EMTTrackStorageWidgetHidden');
-			});
+		it('classes OLSKToolbarJustify', function () {
+			browser.assert.hasClass(EMTTrackStorageToolbar, 'OLSKToolbarJustify');
+		});
 		
+		it('classes OLSKStorageToolbar', function () {
+			browser.assert.hasClass(EMTTrackStorageToolbar, 'OLSKStorageToolbar');
 		});
 	
 	});

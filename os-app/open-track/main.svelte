@@ -33,7 +33,7 @@ const mod = {
 		}
 	},
 	
-	_ValueStorageWidgetHidden: true,
+	_ValueStorageToolbarHidden: true,
 
 	_ValueFooterStorageStatus: '',
 
@@ -50,7 +50,7 @@ const mod = {
 	// MESSAGE
 
 	OLSKAppToolbarDispatchStorage () {
-		mod._ValueStorageWidgetHidden = !mod._ValueStorageWidgetHidden;
+		mod._ValueStorageToolbarHidden = !mod._ValueStorageToolbarHidden;
 	},
 
 	EMTTrackMasterDispatchCreate () {
@@ -138,8 +138,6 @@ const mod = {
 	async SetupEverything () {
 		mod.SetupStorageClient();
 
-		mod.SetupStorageWidget();
-
 		mod.SetupStorageStatus();
 
 		await mod.SetupStorageNotifications();
@@ -194,10 +192,6 @@ const mod = {
 					})),
 			],
 		});
-	},
-
-	SetupStorageWidget () {
-		(new window.OLSKStorageWidget(mod._ValueStorageClient.remoteStorage)).attach('EMTTrackStorageWidget').backend(document.querySelector('.OLSKAppToolbarStorageButton'));
 	},
 
 	SetupStorageStatus () {
@@ -296,6 +290,7 @@ import EMTTrackMaster from './submodules/EMTTrackMaster/main.svelte';
 import EMTTrackDetail from './submodules/EMTTrackDetail/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
+import OLSKStorageWidget from 'OLSKStorageWidget';
 </script>
 
 <div class="EMTTrack OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading }>
@@ -307,7 +302,17 @@ import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svel
 </OLSKViewportContent>
 
 <footer class="EMTTrackViewportFooter OLSKMobileViewFooter">
-	<div id="EMTTrackStorageWidget" class:EMTTrackStorageWidgetHidden={ mod._ValueStorageWidgetHidden }></div>
+	{#if !mod._ValueStorageToolbarHidden }
+		<div class="EMTTrackStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKStorageToolbar">
+			<div class="OLSKToolbarElementGroup">
+				<div></div>
+			</div>
+
+			<div class="OLSKToolbarElementGroup">
+				<OLSKStorageWidget StorageClient={ mod._ValueStorageClient.remoteStorage } />
+			</div>
+		</div>
+	{/if}
 
 	<OLSKAppToolbar
 		OLSKAppToolbarDonateURL={ window.OLSKPublicConstants('EMT_SHARED_DONATE_URL') }
