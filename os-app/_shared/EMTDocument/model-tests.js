@@ -1,9 +1,9 @@
 const { throws, deepEqual } = require('assert');
 
-const mainModule = require('./model.js');
+const mainModule = require('./model.js').default;
 
 const kTesting = {
-	StubDocumentObjectValid: function() {
+	StubDocumentObjectValid() {
 		return {
 			EMTDocumentID: 'alfa',
 			EMTDocumentName: '',
@@ -73,6 +73,21 @@ describe('EMTDocumentModelErrorsFor', function test_EMTDocumentModelErrorsFor() 
 
 	it('returns null', function() {
 		deepEqual(mainModule.EMTDocumentModelErrorsFor(kTesting.StubDocumentObjectValid()), null);
+	});
+
+	context('EMTOptionValidateIfNotPresent', function() {
+
+		it('returns object if not valid', function() {
+			deepEqual(Object.keys(mainModule.EMTDocumentModelErrorsFor({}, {
+				EMTOptionValidateIfNotPresent: true,
+			})), [
+				'EMTDocumentID',
+				'EMTDocumentName',
+				'EMTDocumentCreationDate',
+				'EMTDocumentModificationDate',
+			]);
+		});
+
 	});
 
 });

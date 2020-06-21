@@ -1,19 +1,61 @@
 const { throws, deepEqual } = require('assert');
 
-const mainModule = require('./storage.js');
+const mainModule = require('./storage.js').default;
 
-describe('EMTDocumentStoragePath', function test_EMTDocumentStoragePath() {
+describe('EMTDocumentStorageCollectionPath', function test_EMTDocumentStorageCollectionPath() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.EMTDocumentStoragePath('alfa'), 'emt_documents/alfa');
+		deepEqual(mainModule.EMTDocumentStorageCollectionPath(), 'emt_documents/');
 	});
 
-	it('returns string if blank', function() {
-		deepEqual(mainModule.EMTDocumentStoragePath(''), 'emt_documents/');
+});
+
+describe('EMTDocumentStorageFolderPath', function test_EMTDocumentStorageFolderPath() {
+
+	it('throws error if blank', function() {
+		throws(function() {
+			mainModule.EMTDocumentStorageFolderPath('');
+		}, /EMTErrorInputNotValid/);
 	});
 
-	it('returns string if undefined', function() {
-		deepEqual(mainModule.EMTDocumentStoragePath(), 'emt_documents/');
+	it('returns string', function() {
+		deepEqual(mainModule.EMTDocumentStorageFolderPath('alfa'), mainModule.EMTDocumentStorageCollectionPath() + 'alfa/');
+	});
+
+});
+
+describe('EMTDocumentStorageObjectPath', function test_EMTDocumentStorageObjectPath() {
+
+	it('throws error if blank', function() {
+		throws(function() {
+			mainModule.EMTDocumentStorageObjectPath('');
+		}, /EMTErrorInputNotValid/);
+	});
+
+	it('returns string', function() {
+		deepEqual(mainModule.EMTDocumentStorageObjectPath('alfa'), mainModule.EMTDocumentStorageFolderPath('alfa') + 'main');
+	});
+
+});
+
+describe('EMTDocumentStorageMatch', function test_EMTDocumentStorageMatch() {
+
+	it('throws error if not string', function() {
+		throws(function() {
+			mainModule.EMTDocumentStorageMatch(null);
+		}, /EMTErrorInputNotValid/);
+	});
+
+	it('returns false if no EMTDocumentStorageCollectionPath', function() {
+		deepEqual(mainModule.EMTDocumentStorageMatch(mainModule.EMTDocumentStorageObjectPath('alfa').replace(mainModule.EMTDocumentStorageCollectionPath(), mainModule.EMTDocumentStorageCollectionPath().slice(1))), false);
+	});
+
+	it('returns false if no EMTDocumentStorageObjectPath', function() {
+		deepEqual(mainModule.EMTDocumentStorageMatch(mainModule.EMTDocumentStorageObjectPath('alfa').slice(0, -1)), false);
+	});
+
+	it('returns true', function() {
+		deepEqual(mainModule.EMTDocumentStorageMatch(mainModule.EMTDocumentStorageObjectPath('alfa')), true);
 	});
 
 });

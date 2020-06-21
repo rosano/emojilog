@@ -1,39 +1,26 @@
-const EMTStorageModule = require('./os-app/_shared/EMTStorageModule/main.js');
-const EMTDocumentStorage = require('./os-app/_shared/EMTDocument/storage.js');
+const RemoteStorage = require('remotestoragejs');
+
+const EMT_Data = require('./os-app/_shared/EMT_Data/main.js').default;
+const EMTDocumentStorage = require('./os-app/_shared/EMTDocument/storage.js').default;
 
 (function EMTMochaStorage() {
 	if (process.env.OLSK_TESTING_BEHAVIOUR === 'true') {
 		return;
 	}
 
-	const uSerial = function (inputData) {
-		return inputData.reduce(async function (coll, e) {
-			return e.then(Array.prototype.concat.bind(await coll));
-		}, Promise.resolve([]));
-	};
+	const storageModule = EMT_Data.EMT_DataModule([
+		EMTDocumentStorage.EMTDocumentStorageBuild,
+	], {
+		OLSKOptionIncludeDebug: true,
+	});
 
-	before(function(done) {
-		global.EMTTestingStorageClient = require('./os-app/_shared/EMTStorageClient/main.js').EMTStorageClient({
-			modules: [
-				EMTStorageModule.EMTStorageModule([
-					EMTDocumentStorage.EMTDocumentStorage,
-				].map(function (e) {
-					return {
-						EMTCollectionStorageGenerator: e,
-						EMTCollectionChangeDelegate: null,
-					};
-				}))
-			],
-		});
+	before(function() {
+		global.EMTTestingStorageClient = new RemoteStorage({ modules: [ storageModule ] });
 
-		done();
+		global.EMTTestingStorageClient.access.claim(storageModule.name, 'rw');
 	});
 
 	beforeEach(async function() {
-		await uSerial([
-			'emt_documents',
-		].map(async function (e) {
-			return await Promise.all(Object.keys(await global.EMTTestingStorageClient.emojitimer[e].EMTStorageList()).map(global.EMTTestingStorageClient.emojitimer[e].EMTStorageDelete));
-		}));
+		return await global.EMTTestingStorageClient[storageModule.name].__DEBUG._OLSKRemoteStorageReset();
 	});
 })();

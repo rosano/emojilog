@@ -1,9 +1,9 @@
 const { rejects, deepEqual } = require('assert');
 
-const mainModule = require('./metal.js');
+const mainModule = require('./metal.js').default;
 
 const kTesting = {
-	StubDocumentObjectValid: function() {
+	StubDocumentObjectValid() {
 		return {
 			EMTDocumentID: 'alfa',
 			EMTDocumentName: 'bravo',
@@ -37,22 +37,31 @@ describe('EMTDocumentMetalWrite', function test_EMTDocumentMetalWrite() {
 		}));
 	});
 
-});
+	context('relations', function () {
 
-describe('EMTDocumentMetalRead', function test_EMTDocumentMetalRead() {
+		const memory = Object.assign(kTesting.StubDocumentObjectValid(), {
+			$alfa: 'bravo',
+		});
+		let storage = [];
 
-	it('rejects if not string', async function() {
-		await rejects(mainModule.EMTDocumentMetalRead(EMTTestingStorageClient, 1), /EMTErrorInputNotValid/);
-	});
+		before(async function () {
+			await mainModule.EMTDocumentMetalWrite(EMTTestingStorageClient, memory);
+		});
+		
+		before(async function () {
+			storage = Object.values(await mainModule.EMTDocumentMetalList(EMTTestingStorageClient));
+		});
+		
+		it('ignores property', function () {
+			deepEqual(storage, [Object.assign(kTesting.StubDocumentObjectValid(), {
+				'@context': memory['@context'],
+			})]);
+		});
 
-	it('returns null if not found', async function() {
-		deepEqual(await mainModule.EMTDocumentMetalRead(EMTTestingStorageClient, 'alfa'), null);
-	});
-
-	it('returns EMTDocument', async function() {
-		let item = await mainModule.EMTDocumentMetalWrite(EMTTestingStorageClient, kTesting.StubDocumentObjectValid());
-
-		deepEqual(await mainModule.EMTDocumentMetalRead(EMTTestingStorageClient, item.EMTDocumentID), item);
+		it('clones object', function () {
+			deepEqual(memory.$alfa, 'bravo');
+		});
+	
 	});
 
 });
@@ -73,18 +82,18 @@ describe('EMTDocumentMetalList', function test_EMTDocumentMetalList() {
 
 describe('EMTDocumentMetalDelete', function test_EMTDocumentMetalDelete() {
 
-	it('rejects if not string', async function() {
-		await rejects(mainModule.EMTDocumentMetalDelete(EMTTestingStorageClient, 1), /EMTErrorInputNotValid/);
+	it('rejects if not valid', async function() {
+		await rejects(mainModule.EMTDocumentMetalDelete(EMTTestingStorageClient, {}), /EMTErrorInputNotValid/);
 	});
 
 	it('returns statusCode', async function() {
-		deepEqual(await mainModule.EMTDocumentMetalDelete(EMTTestingStorageClient, (await mainModule.EMTDocumentMetalWrite(EMTTestingStorageClient, kTesting.StubDocumentObjectValid())).EMTDocumentID), {
+		deepEqual(await mainModule.EMTDocumentMetalDelete(EMTTestingStorageClient, await mainModule.EMTDocumentMetalWrite(EMTTestingStorageClient, kTesting.StubDocumentObjectValid())), {
 			statusCode: 200,
 		});
 	});
 
 	it('deletes EMTDocument', async function() {
-		await mainModule.EMTDocumentMetalDelete(EMTTestingStorageClient, (await mainModule.EMTDocumentMetalWrite(EMTTestingStorageClient, kTesting.StubDocumentObjectValid())).EMTDocumentID);
+		await mainModule.EMTDocumentMetalDelete(EMTTestingStorageClient, await mainModule.EMTDocumentMetalWrite(EMTTestingStorageClient, kTesting.StubDocumentObjectValid()));
 		deepEqual(await mainModule.EMTDocumentMetalList(EMTTestingStorageClient), {});
 	});
 

@@ -1,37 +1,43 @@
-export const EMTDocumentModelErrorsFor = function(inputData, options = {}) {
-	if (typeof inputData !== 'object' || inputData === null) {
-		throw new Error('EMTErrorInputNotValid');
-	}
+const mod = {
 
-	const errors = {};
+	EMTDocumentModelErrorsFor (inputData, options = {}) {
+		if (typeof inputData !== 'object' || inputData === null) {
+			throw new Error('EMTErrorInputNotValid');
+		}
 
-	if (typeof inputData.EMTDocumentID !== 'string') {
-		errors.EMTDocumentID = [
-			'EMTErrorNotString',
-		];
-	} else if (inputData.EMTDocumentID.trim() === '') {
-		errors.EMTDocumentID = [
-			'EMTErrorNotFilled',
-		];
-	}
+		const errors = {};
 
-	if (typeof inputData.EMTDocumentName !== 'string') {
-		errors.EMTDocumentName = [
-			'EMTErrorNotString',
-		];
-	}
+		if (typeof inputData.EMTDocumentID !== 'string') {
+			errors.EMTDocumentID = [
+				'EMTErrorNotString',
+			];
+		} else if (inputData.EMTDocumentID.trim() === '') {
+			errors.EMTDocumentID = [
+				'EMTErrorNotFilled',
+			];
+		}
 
-	if (!(inputData.EMTDocumentCreationDate instanceof Date) || Number.isNaN(inputData.EMTDocumentCreationDate.getTime())) {
-		errors.EMTDocumentCreationDate = [
-			'EMTErrorNotDate',
-		];
-	}
+		if (typeof inputData.EMTDocumentName !== 'string') {
+			errors.EMTDocumentName = [
+				'EMTErrorNotString',
+			];
+		}
 
-	if (!(inputData.EMTDocumentModificationDate instanceof Date) || Number.isNaN(inputData.EMTDocumentModificationDate.getTime())) {
-		errors.EMTDocumentModificationDate = [
-			'EMTErrorNotDate',
-		];
-	}
+		if (!(inputData.EMTDocumentCreationDate instanceof Date) || Number.isNaN(inputData.EMTDocumentCreationDate.getTime())) {
+			errors.EMTDocumentCreationDate = [
+				'EMTErrorNotDate',
+			];
+		}
 
-	return Object.entries(errors).length ? errors : null;
+		if (!(inputData.EMTDocumentModificationDate instanceof Date) || Number.isNaN(inputData.EMTDocumentModificationDate.getTime())) {
+			errors.EMTDocumentModificationDate = [
+				'EMTErrorNotDate',
+			];
+		}
+
+		return Object.entries(errors).length ? errors : null;
+	},
+
 };
+
+export default mod;

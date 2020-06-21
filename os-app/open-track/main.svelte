@@ -8,10 +8,11 @@ import OLSKThrottle from 'OLSKThrottle';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import * as OLSKRemoteStoragePackage from '../_shared/__external/OLSKRemoteStorage/main.js'
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
-import * as EMTDocumentAction from '../_shared/EMTDocument/action.js';
-import * as EMTStorageClient from '../_shared/EMTStorageClient/main.js';
-import { EMTStorageModule } from '../_shared/EMTStorageModule/main.js';
-import { EMTDocumentStorage } from '../_shared/EMTDocument/storage.js';
+import EMT_Data from '../_shared/EMT_Data/main.js';
+import EMTDocumentStorage from '../_shared/EMTDocument/storage.js';
+import EMTDocumentAction from '../_shared/EMTDocument/action.js';
+import * as RemoteStoragePackage from 'remotestoragejs';
+const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
 import EMTTrackLogic from './ui-logic.js';
 const mod = {
 
@@ -128,7 +129,7 @@ const mod = {
 			return e !== inputData;
 		}))
 
-		await EMTDocumentAction.EMTDocumentActionDelete(mod._ValueStorageClient, inputData.EMTDocumentID);
+		await EMTDocumentAction.EMTDocumentActionDelete(mod._ValueStorageClient, inputData);
 
 		mod.ControlTimerSelect(null);
 	},
@@ -142,84 +143,55 @@ const mod = {
 
 		await mod.SetupStorageNotifications();
 
-		await mod.SetupDataCache();
-
 		await mod.SetupValueTimersAll();
 
 		mod._ValueIsLoading = false;
 	},
 
 	SetupStorageClient() {
-		mod._ValueStorageClient = EMTStorageClient.EMTStorageClient({
-			modules: [
-				EMTStorageModule([
-					EMTDocumentStorage,
-					].map(function (e) {
-						return {
-							EMTCollectionStorageGenerator: e,
-							EMTCollectionChangeDelegate: e === EMTDocumentStorage ? {
-								OLSKChangeDelegateCreate (inputData) {
-									// console.log('OLSKChangeDelegateCreate', inputData);
+		const storageModule = EMT_Data.EMT_DataModule([
+			Object.assign(EMTDocumentStorage.EMTDocumentStorageBuild, {
+				// OLSKChangeDelegate: {
+				// 	OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateDocument,
+				// 	OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateDocument,
+				// 	OLSKChangeDelegateDelete: mod.OLSKChangeDelegateDeleteDocument,
+				// },
+			}),
+			]);
+		
+		mod._ValueStorageClient = new RemoteStorage({ modules: [ storageModule ] });
 
-									mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
-										return e.EMTDocumentID !== inputData.EMTDocumentID; // @Hotfix Dropbox sending DelegateAdd
-									}).concat(inputData));
-								},
-								OLSKChangeDelegateUpdate (inputData) {
-									// console.log('OLSKChangeDelegateUpdate', inputData);
+		mod._ValueStorageClient.access.claim(storageModule.name, 'rw');
 
-									if (mod._ValueTimerSelected && (mod._ValueTimerSelected.EMTDocumentID === inputData.EMTDocumentID)) {
-										mod.ControlTimerSelect(Object.assign(mod._ValueTimerSelected, inputData));
-									}
-
-									mod.ValueTimersAll(mod._ValueTimersAll.map(function (e) {
-										return Object.assign(e, e.EMTDocumentID === inputData.EMTDocumentID ? inputData : {});
-									}), false);
-								},
-								OLSKChangeDelegateDelete (inputData) {
-									// console.log('OLSKChangeDelegateDelete', inputData);
-
-									if (mod._ValueTimerSelected && (mod._ValueTimerSelected.EMTDocumentID === inputData.EMTDocumentID)) {
-										mod.ControlTimerSelect(null);
-									}
-
-									mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
-										return e.EMTDocumentID !== inputData.EMTDocumentID;
-									}), false);
-								},
-							} : null,
-						}
-					})),
-			],
-		});
+		mod._ValueStorageClient.caching.enable(`/${ storageModule.name }/`);
 	},
 
 	SetupStorageStatus () {
-		OLSKRemoteStorage.OLSKRemoteStorageStatus(mod._ValueStorageClient.remoteStorage, function (inputData) {
+		OLSKRemoteStorage.OLSKRemoteStorageStatus(mod._ValueStorageClient, function (inputData) {
 			mod._ValueFooterStorageStatus = inputData;
 		}, OLSKLocalized)
 	},
 
 	async SetupStorageNotifications () {
-		mod._ValueStorageClient.remoteStorage.on('not-connected', () => {
+		mod._ValueStorageClient.on('not-connected', () => {
 			if (!OLSK_TESTING_BEHAVIOUR()) {
 				console.debug('not-connected', arguments);
 			}
 		});
 
-		mod._ValueStorageClient.remoteStorage.on('disconnected', () => {
+		mod._ValueStorageClient.on('disconnected', () => {
 			if (!OLSK_TESTING_BEHAVIOUR()) {
 				console.debug('disconnected', arguments);
 			}
 		});
 
-		mod._ValueStorageClient.remoteStorage.on('connected', () => {
+		mod._ValueStorageClient.on('connected', () => {
 			if (!OLSK_TESTING_BEHAVIOUR()) {
 				console.debug('connected', arguments);
 			}
 		});
 
-		mod._ValueStorageClient.remoteStorage.on('sync-done', () => {
+		mod._ValueStorageClient.on('sync-done', () => {
 			if (!OLSK_TESTING_BEHAVIOUR()) {
 				console.debug('sync-done', arguments);
 			}
@@ -227,7 +199,7 @@ const mod = {
 
 		let isOffline;
 
-		mod._ValueStorageClient.remoteStorage.on('network-offline', () => {
+		mod._ValueStorageClient.on('network-offline', () => {
 			if (!OLSK_TESTING_BEHAVIOUR()) {
 				console.debug('network-offline', arguments);
 			}
@@ -235,7 +207,7 @@ const mod = {
 			isOffline = true;
 		});
 
-		mod._ValueStorageClient.remoteStorage.on('network-online', () => {
+		mod._ValueStorageClient.on('network-online', () => {
 			if (!OLSK_TESTING_BEHAVIOUR()) {
 				console.debug('network-online', arguments);
 			}
@@ -243,7 +215,7 @@ const mod = {
 			isOffline = false;
 		});
 
-		mod._ValueStorageClient.remoteStorage.on('error', (error) => {
+		mod._ValueStorageClient.on('error', (error) => {
 			if (isOffline && inputData.message === 'Sync failed: Network request failed.') {
 				return;
 			};
@@ -254,7 +226,7 @@ const mod = {
 		});
 
 		return new Promise(function (res, rej) {
-			mod._ValueStorageClient.remoteStorage.on('ready', () => {
+			mod._ValueStorageClient.on('ready', () => {
 				if (!OLSK_TESTING_BEHAVIOUR()) {
 					console.debug('ready', arguments);
 				}
@@ -262,10 +234,6 @@ const mod = {
 				res();
 			});
 		})
-	},
-
-	async SetupDataCache() {
-		await mod._ValueStorageClient.remoteStorage.emojitimer.emt_documents.EMTStorageCache();
 	},
 
 	async SetupValueTimersAll() {
@@ -309,7 +277,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 			</div>
 
 			<div class="OLSKToolbarElementGroup">
-				<OLSKStorageWidget StorageClient={ mod._ValueStorageClient.remoteStorage } />
+				<OLSKStorageWidget StorageClient={ mod._ValueStorageClient } />
 			</div>
 		</div>
 	{/if}

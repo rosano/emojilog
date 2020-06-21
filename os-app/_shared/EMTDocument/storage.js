@@ -1,70 +1,108 @@
-import * as EMTDocumentModel from './model.js';
+import EMTDocumentModel from './model.js';
 import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
 const kType = 'emt_document';
 const kCollection = 'emt_documents';
 
-export const EMTDocumentStoragePath = function(inputData) {
-	return `${ kCollection }/${ inputData || '' }`;
-};
+const mod = {
 
-export const EMTDocumentStorage = function (privateClient, publicClient, changeDelegate) {
-	privateClient.on('change', function (event) {
-		if (!changeDelegate) {
-			return;
-		}
-		
-		if (event.relativePath.indexOf(kCollection) !== 0) {
-			return;
+	EMTDocumentStorageCollectionPath () {
+		return kCollection + '/';
+	},
+
+	EMTDocumentStorageFolderPath (inputData) {
+		if (!inputData) {
+			throw new Error('EMTErrorInputNotValid');
 		}
 
-		const delegateMethod = OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateProperty(event);
+		return mod.EMTDocumentStorageCollectionPath() + inputData + '/';
+	},
 
-		if (!delegateMethod) {
-			return;
+	EMTDocumentStorageObjectPath (inputData) {
+		if (!inputData) {
+			throw new Error('EMTErrorInputNotValid');
 		}
 
-		if (typeof changeDelegate[delegateMethod] !== 'function') {
-			return console.warn(`${ delegateMethod } not function`);
+		return mod.EMTDocumentStorageFolderPath(inputData) + 'main';
+	},
+
+	EMTDocumentStorageMatch (inputData) {
+		if (typeof inputData !== 'string') {
+			throw new Error('EMTErrorInputNotValid');
 		}
 
-		changeDelegate[delegateMethod](OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
-	});
+		return inputData === mod.EMTDocumentStorageObjectPath(inputData.split('/')[1]);
+	},
 
-	return {
-		EMTStorageCollection: kCollection,
-		EMTStorageType: kType,
-		EMTStorageModelErrors: Object.entries(EMTDocumentModel.EMTDocumentModelErrorsFor({}, {
-			EMTOptionValidateIfNotPresent: true,
-		})).map(function (e) {
-			if (!Object.keys(EMTDocumentModel.EMTDocumentModelErrorsFor({})).includes(e[0])) {
-				e[1].push('__RSOptional');
+	EMTDocumentStorageBuild (privateClient, publicClient, changeDelegate) {
+		privateClient.on('change', function (event) {
+			if (!changeDelegate) {
+				return;
+			}
+			
+			if (!mod.EMTDocumentStorageMatch(event.relativePath)) {
+				return;
 			}
 
-			return e;
-		}).reduce(function (coll, item) {
-			coll[item[0]] = item[1];
+			const delegateMethod = OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateProperty(event);
 
-			return coll;
-		}, {}),
-		EMTStorageExports: {
-			EMTStorageCache () {
-				return privateClient.cache(EMTDocumentStoragePath());
+			if (!delegateMethod) {
+				return;
+			}
+
+			if (typeof changeDelegate[delegateMethod] !== 'function') {
+				return console.warn(`${ delegateMethod } not function`);
+			}
+
+			changeDelegate[delegateMethod](OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(event[OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateInput(delegateMethod)]));
+		});
+
+		const OLSKRemoteStorageCollectionExports = {
+
+			async EMTStorageList () {
+				return (await Promise.all(Object.keys(await privateClient.getAll(mod.EMTDocumentStorageCollectionPath(), false)).map(function (e) {
+					return privateClient.getObject(mod.EMTDocumentStorageObjectPath(e.slice(0, -1)), false);
+				}))).reduce(function (coll, item) {
+					if (item) {
+						coll[item.EMTDocumentID] = item;
+					}
+
+					return coll;
+				}, {});
 			},
-			EMTStorageList: function () {
-				return privateClient.getAll(EMTDocumentStoragePath(), false);
+
+			async EMTStorageWrite (inputData) {
+				await privateClient.storeObject(kType, mod.EMTDocumentStorageObjectPath(inputData.EMTDocumentID), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
+				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
 			},
-			EMTStorageWrite: async function (param1, param2) {
-				await privateClient.storeObject(kType, `${ kCollection }/${ param1 }`, OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(param2));
-				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(param2);
+			
+			EMTStorageDelete (inputData) {
+				return privateClient.remove(mod.EMTDocumentStorageObjectPath(inputData.EMTDocumentID));
 			},
-			EMTStorageRead: function (inputData) {
-				return privateClient.getObject(`${ kCollection }/${ inputData }`);
-			},
-			EMTStorageDelete: function (inputData) {
-				return privateClient.remove(`${ kCollection }/${ inputData }`);
-			},
-		},
-	};
+			
+		};
+
+		return {
+			OLSKRemoteStorageCollectionName: kCollection,
+			OLSKRemoteStorageCollectionType: kType,
+			OLSKRemoteStorageCollectionModelErrors: Object.entries(EMTDocumentModel.EMTDocumentModelErrorsFor({}, {
+				EMTOptionValidateIfNotPresent: true,
+			})).map(function (e) {
+				if (!Object.keys(EMTDocumentModel.EMTDocumentModelErrorsFor({})).includes(e[0])) {
+					e[1].push('__RSOptional');
+				}
+
+				return e;
+			}).reduce(function (coll, item) {
+				coll[item[0]] = item[1];
+
+				return coll;
+			}, {}),
+			OLSKRemoteStorageCollectionExports,
+		};
+	},
+
 };
+
+export default mod;
