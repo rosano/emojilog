@@ -16,38 +16,6 @@ const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
 import EMTTrackLogic from './ui-logic.js';
 const mod = {
 
-	// VALUE
-
-	_ValueIsLoading: true,
-
-	_ValueTimersAll: [],
-	ValueTimersAll (inputData, shouldSort = true) {
-		mod._ValueTimersAll = shouldSort ? inputData.sort(EMTTrackLogic.EMTTrackSort) : inputData;
-	},
-	
-	_ValueTimerSelected: undefined,
-	ValueTimerSelected (inputData) {
-		mod._ValueTimerSelected = inputData
-
-		if (!inputData) {
-			mod.OLSKMobileViewInactive = false;	
-		}
-	},
-	
-	_ValueStorageToolbarHidden: true,
-
-	_ValueFooterStorageStatus: '',
-
-	_ValueSaveThrottleMap: {},
-
-	OLSKMobileViewInactive: false,
-
-	// DATA
-
-	DataIsMobile () {
-		return window.innerWidth <= 760;
-	},
-
 	// MESSAGE
 
 	OLSKAppToolbarDispatchStorage () {
@@ -90,6 +58,68 @@ const mod = {
 		});
 
 		mod._ValueTimerSelected = inputData;
+	},
+
+	// OLSKChangeDelegateCreate (inputData) {
+	// 	// console.log('OLSKChangeDelegateCreate', inputData);
+
+	// 	mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
+	// 		return e.EMTDocumentID !== inputData.EMTDocumentID; // @Hotfix Dropbox sending DelegateAdd
+	// 	}).concat(inputData));
+	// },
+	// OLSKChangeDelegateUpdate (inputData) {
+	// 	// console.log('OLSKChangeDelegateUpdate', inputData);
+
+	// 	if (mod._ValueTimerSelected && (mod._ValueTimerSelected.EMTDocumentID === inputData.EMTDocumentID)) {
+	// 		mod.ControlTimerSelect(Object.assign(mod._ValueTimerSelected, inputData));
+	// 	}
+
+	// 	mod.ValueTimersAll(mod._ValueTimersAll.map(function (e) {
+	// 		return Object.assign(e, e.EMTDocumentID === inputData.EMTDocumentID ? inputData : {});
+	// 	}), false);
+	// },
+	// OLSKChangeDelegateDelete (inputData) {
+	// 	// console.log('OLSKChangeDelegateDelete', inputData);
+
+	// 	if (mod._ValueTimerSelected && (mod._ValueTimerSelected.EMTDocumentID === inputData.EMTDocumentID)) {
+	// 		mod.ControlTimerSelect(null);
+	// 	}
+
+	// 	mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
+	// 		return e.EMTDocumentID !== inputData.EMTDocumentID;
+	// 	}), false);
+	// },
+
+	// VALUE
+
+	_ValueIsLoading: true,
+
+	_ValueTimersAll: [],
+	ValueTimersAll (inputData, shouldSort = true) {
+		mod._ValueTimersAll = shouldSort ? inputData.sort(EMTTrackLogic.EMTTrackSort) : inputData;
+	},
+	
+	_ValueTimerSelected: undefined,
+	ValueTimerSelected (inputData) {
+		mod._ValueTimerSelected = inputData
+
+		if (!inputData) {
+			mod.OLSKMobileViewInactive = false;	
+		}
+	},
+	
+	_ValueStorageToolbarHidden: true,
+
+	_ValueFooterStorageStatus: '',
+
+	_ValueSaveThrottleMap: {},
+
+	OLSKMobileViewInactive: false,
+
+	// DATA
+
+	DataIsMobile () {
+		return window.innerWidth <= 760;
 	},
 
 	// CONTROL
