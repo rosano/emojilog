@@ -70,8 +70,8 @@ const mod = {
 	// OLSKChangeDelegateUpdate (inputData) {
 	// 	// console.log('OLSKChangeDelegateUpdate', inputData);
 
-	// 	if (mod._ValueTimerSelected && (mod._ValueTimerSelected.EMTDocumentID === inputData.EMTDocumentID)) {
-	// 		mod.ControlTimerSelect(Object.assign(mod._ValueTimerSelected, inputData));
+	// 	if (mod._ValueTimerSelected && mod._ValueTimerSelected.EMTDocumentID === inputData.EMTDocumentID) {
+	// 		mod.ControlTimerSelect(inputData);
 	// 	}
 
 	// 	mod.ValueTimersAll(mod._ValueTimersAll.map(function (e) {
