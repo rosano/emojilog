@@ -16,80 +16,6 @@ const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
 import EMTTrackLogic from './ui-logic.js';
 const mod = {
 
-	// MESSAGE
-
-	OLSKAppToolbarDispatchStorage () {
-		mod._ValueStorageToolbarHidden = !mod._ValueStorageToolbarHidden;
-	},
-
-	EMTTrackMasterDispatchCreate () {
-		mod.ControlTimerCreate();
-	},
-
-	EMTTrackMasterDispatchSelect (inputData) {
-		mod.ControlTimerSelect(inputData);
-	},
-
-	EMTTrackDetailDispatchBack () {
-		mod.ControlTimerSelect(null);
-	},
-
-	EMTTrackDetailDispatchDiscard (inputData) {
-		mod.ControlTimerDiscard(inputData);
-	},
-
-	EMTTrackDetailDispatchUpdate () {
-		mod._ValueTimerSelected = mod._ValueTimerSelected; // #purge-svelte-force-update
-		
-		mod.ControlTimerSave(mod._ValueTimerSelected);
-	},
-
-	MessageDocumentSelectedDidChange (inputData) {
-		if (!inputData) {
-			return;
-		}
-
-		if (inputData === mod._ValueTimerSelected) {
-			return;
-		};
-
-		setTimeout(function () {
-			document.querySelector('.EMTTrackDetailFormNameField').focus();
-		});
-
-		mod._ValueTimerSelected = inputData;
-	},
-
-	// OLSKChangeDelegateCreate (inputData) {
-	// 	// console.log('OLSKChangeDelegateCreate', inputData);
-
-	// 	mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
-	// 		return e.EMTDocumentID !== inputData.EMTDocumentID; // @Hotfix Dropbox sending DelegateAdd
-	// 	}).concat(inputData));
-	// },
-	// OLSKChangeDelegateUpdate (inputData) {
-	// 	// console.log('OLSKChangeDelegateUpdate', inputData);
-
-	// 	if (mod._ValueTimerSelected && mod._ValueTimerSelected.EMTDocumentID === inputData.EMTDocumentID) {
-	// 		mod.ControlTimerSelect(inputData);
-	// 	}
-
-	// 	mod.ValueTimersAll(mod._ValueTimersAll.map(function (e) {
-	// 		return Object.assign(e, e.EMTDocumentID === inputData.EMTDocumentID ? inputData : {});
-	// 	}), false);
-	// },
-	// OLSKChangeDelegateDelete (inputData) {
-	// 	// console.log('OLSKChangeDelegateDelete', inputData);
-
-	// 	if (mod._ValueTimerSelected && (mod._ValueTimerSelected.EMTDocumentID === inputData.EMTDocumentID)) {
-	// 		mod.ControlTimerSelect(null);
-	// 	}
-
-	// 	mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
-	// 		return e.EMTDocumentID !== inputData.EMTDocumentID;
-	// 	}), false);
-	// },
-
 	// VALUE
 
 	_ValueIsLoading: true,
@@ -163,6 +89,80 @@ const mod = {
 
 		mod.ControlTimerSelect(null);
 	},
+
+	// MESSAGE
+
+	OLSKAppToolbarDispatchStorage () {
+		mod._ValueStorageToolbarHidden = !mod._ValueStorageToolbarHidden;
+	},
+
+	EMTTrackMasterDispatchCreate () {
+		mod.ControlTimerCreate();
+	},
+
+	EMTTrackMasterDispatchSelect (inputData) {
+		mod.ControlTimerSelect(inputData);
+	},
+
+	EMTTrackDetailDispatchBack () {
+		mod.ControlTimerSelect(null);
+	},
+
+	EMTTrackDetailDispatchDiscard (inputData) {
+		mod.ControlTimerDiscard(inputData);
+	},
+
+	EMTTrackDetailDispatchUpdate () {
+		mod._ValueTimerSelected = mod._ValueTimerSelected; // #purge-svelte-force-update
+		
+		mod.ControlTimerSave(mod._ValueTimerSelected);
+	},
+
+	MessageDocumentSelectedDidChange (inputData) {
+		if (!inputData) {
+			return;
+		}
+
+		if (inputData === mod._ValueTimerSelected) {
+			return;
+		};
+
+		setTimeout(function () {
+			document.querySelector('.EMTTrackDetailFormNameField').focus();
+		});
+
+		mod._ValueTimerSelected = inputData;
+	},
+
+	// OLSKChangeDelegateCreate (inputData) {
+	// 	// console.log('OLSKChangeDelegateCreate', inputData);
+
+	// 	mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
+	// 		return e.EMTDocumentID !== inputData.EMTDocumentID; // @Hotfix Dropbox sending DelegateAdd
+	// 	}).concat(inputData));
+	// },
+	// OLSKChangeDelegateUpdate (inputData) {
+	// 	// console.log('OLSKChangeDelegateUpdate', inputData);
+
+	// 	if (mod._ValueTimerSelected && mod._ValueTimerSelected.EMTDocumentID === inputData.EMTDocumentID) {
+	// 		mod.ControlTimerSelect(inputData);
+	// 	}
+
+	// 	mod.ValueTimersAll(mod._ValueTimersAll.map(function (e) {
+	// 		return Object.assign(e, e.EMTDocumentID === inputData.EMTDocumentID ? inputData : {});
+	// 	}), false);
+	// },
+	// OLSKChangeDelegateDelete (inputData) {
+	// 	// console.log('OLSKChangeDelegateDelete', inputData);
+
+	// 	if (mod._ValueTimerSelected && (mod._ValueTimerSelected.EMTDocumentID === inputData.EMTDocumentID)) {
+	// 		mod.ControlTimerSelect(null);
+	// 	}
+
+	// 	mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
+	// 		return e.EMTDocumentID !== inputData.EMTDocumentID;
+	// 	}), false);
+	// },
 
 	// SETUP
 
