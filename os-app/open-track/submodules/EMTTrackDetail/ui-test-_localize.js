@@ -32,10 +32,10 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 
 			context('on discard', function () {
 			
-				it('localizes EMTTrackDetailDiscardPrompt', function() {
+				it('localizes EMTTrackDetailDiscardConfirm', function() {
 					browser.assert.OLSKConfirmQuestion(function () {
 						return browser.pressButton(EMTTrackDetailToolbarDiscardButton);
-					}, uLocalized('EMTTrackDetailDiscardPromptText'));
+					}, uLocalized('EMTTrackDetailDiscardConfirmText'));
 				});
 		
 			});
