@@ -77,13 +77,7 @@ const mod = {
 					});
 				}
 
-				const inputCopy = OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(Object.keys(inputData).reduce(function (coll, item) {
-					if (item[0] !== '$') {
-						coll[item] = inputData[item];
-					}
-
-					return coll
-				}, {}));
+				const inputCopy = OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(OLSKRemoteStorage.OLSKRemoteStorageSafeCopy(inputData));
 
 				await privateClient.storeObject(mod.EMTDocumentStorageCollectionType(), mod.EMTDocumentStorageObjectPath(inputCopy.EMTDocumentID), inputCopy);
 
