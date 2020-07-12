@@ -91,8 +91,8 @@ const mod = {
 			},
 
 			async _EMTDocumentStorageList () {
-				return (await Promise.all(Object.keys(await privateClient.getAll(mod.EMTDocumentStorageCollectionPath(), false)).map(function (e) {
-					return privateClient.getObject(mod.EMTDocumentStorageObjectPath(e.slice(0, -1)), false);
+				return (await Promise.all((await OLSKRemoteStorage.OLSKRemoteStorageListObjectsRecursive(privateClient, mod.EMTDocumentStorageCollectionPath())).filter(mod.EMTDocumentStorageMatch).map(function (e) {
+					return privateClient.getObject(e, false);
 				}))).reduce(function (coll, item) {
 					if (item) {
 						coll[item.EMTDocumentID] = OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(item);
