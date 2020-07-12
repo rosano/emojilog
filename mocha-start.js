@@ -20,8 +20,8 @@ const EMTDocumentStorage = require('./os-app/_shared/EMTDocument/storage.js').de
 		global.EMTTestingStorageClient.access.claim(storageModule.name, 'rw');
 	});
 
-	beforeEach(async function() {
-		return await global.EMTTestingStorageClient[storageModule.name].__DEBUG._OLSKRemoteStorageReset();
+	beforeEach(function() {
+		return global.EMTTestingStorageClient[storageModule.name].__DEBUG.__OLSKRemoteStorageReset();
 	});
 })();
 
