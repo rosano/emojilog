@@ -24,3 +24,18 @@ const EMTDocumentStorage = require('./os-app/_shared/EMTDocument/storage.js').de
 		return await global.EMTTestingStorageClient[storageModule.name].__DEBUG._OLSKRemoteStorageReset();
 	});
 })();
+
+(function EMTMochaStubs() {
+	Object.entries({
+		StubDocumentObjectValid() {
+			return {
+				EMTDocumentID: 'alfa',
+				EMTDocumentName: 'bravo',
+				EMTDocumentCreationDate: new Date('2019-02-23T13:56:36Z'),
+				EMTDocumentModificationDate: new Date('2019-02-23T13:56:36Z'),
+			};
+		},
+	}).map(function (e) {
+		return global[e.shift()]  = e.pop();
+	});
+})();

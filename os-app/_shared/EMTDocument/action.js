@@ -1,7 +1,7 @@
 import { factory, detectPrng } from 'ulid';
 const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie' ? factory(detectPrng(true)) : factory();
 
-import EMTDocumentMetal from './metal.js';
+import EMTDocumentStorage from './storage.js';
 
 const mod = {
 
@@ -12,7 +12,7 @@ const mod = {
 
 		const creationDate = new Date();
 
-		return await EMTDocumentMetal.EMTDocumentMetalWrite(storageClient, Object.assign({
+		return await EMTDocumentStorage.EMTDocumentStorageWrite(storageClient, Object.assign({
 			EMTDocumentID: uniqueID(),
 			EMTDocumentCreationDate: creationDate,
 			EMTDocumentModificationDate: creationDate,
@@ -24,17 +24,17 @@ const mod = {
 			return Promise.reject(new Error('EMTErrorInputNotValid'));
 		}
 
-		return await EMTDocumentMetal.EMTDocumentMetalWrite(storageClient, Object.assign(inputData, {
+		return await EMTDocumentStorage.EMTDocumentStorageWrite(storageClient, Object.assign(inputData, {
 			EMTDocumentModificationDate: new Date(),
 		}));
 	},
 
 	async EMTDocumentActionDelete (storageClient, inputData) {
-		return await EMTDocumentMetal.EMTDocumentMetalDelete(storageClient, inputData);
+		return await EMTDocumentStorage.EMTDocumentStorageDelete(storageClient, inputData);
 	},
 
 	async EMTDocumentActionList (storageClient) {
-		return Object.values(await EMTDocumentMetal.EMTDocumentMetalList(storageClient));
+		return Object.values(await EMTDocumentStorage.EMTDocumentStorageList(storageClient));
 	},
 	
 };

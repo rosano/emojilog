@@ -65,24 +65,44 @@ const mod = {
 
 		const OLSKRemoteStorageCollectionExports = {
 
-			async EMTStorageList () {
+			async _EMTDocumentStorageWrite (inputData) {
+				if (typeof inputData !== 'object' || inputData === null) {
+					return Promise.reject(new Error('EMTErrorInputNotValid'));
+				}
+
+				let errors = EMTDocumentModel.EMTDocumentModelErrorsFor(inputData);
+				if (errors) {
+					return Promise.resolve({
+						EMTErrors: errors,
+					});
+				}
+
+				const inputCopy = OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(Object.keys(inputData).reduce(function (coll, item) {
+					if (item[0] !== '$') {
+						coll[item] = inputData[item];
+					}
+
+					return coll
+				}, {}));
+
+				await privateClient.storeObject(mod.EMTDocumentStorageCollectionType(), mod.EMTDocumentStorageObjectPath(inputCopy.EMTDocumentID), inputCopy);
+
+				return Object.assign(inputData, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputCopy));
+			},
+
+			async _EMTDocumentStorageList () {
 				return (await Promise.all(Object.keys(await privateClient.getAll(mod.EMTDocumentStorageCollectionPath(), false)).map(function (e) {
 					return privateClient.getObject(mod.EMTDocumentStorageObjectPath(e.slice(0, -1)), false);
 				}))).reduce(function (coll, item) {
 					if (item) {
-						coll[item.EMTDocumentID] = item;
+						coll[item.EMTDocumentID] = OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(item);
 					}
 
 					return coll;
 				}, {});
 			},
-
-			async EMTStorageWrite (inputData) {
-				await privateClient.storeObject(mod.EMTDocumentStorageCollectionType(), mod.EMTDocumentStorageObjectPath(inputData.EMTDocumentID), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
-				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
-			},
 			
-			EMTStorageDelete (inputData) {
+			_EMTDocumentStorageDelete (inputData) {
 				return privateClient.remove(mod.EMTDocumentStorageObjectPath(inputData.EMTDocumentID));
 			},
 			
@@ -106,6 +126,18 @@ const mod = {
 			}, {}),
 			OLSKRemoteStorageCollectionExports,
 		};
+	},
+
+	EMTDocumentStorageWrite (storageClient, inputData) {
+		return storageClient.emojitimer[mod.EMTDocumentStorageCollectionName()]._EMTDocumentStorageWrite(inputData);
+	},
+
+	EMTDocumentStorageList (storageClient) {
+		return storageClient.emojitimer[mod.EMTDocumentStorageCollectionName()]._EMTDocumentStorageList();
+	},
+
+	EMTDocumentStorageDelete (storageClient, inputData) {
+		return storageClient.emojitimer[mod.EMTDocumentStorageCollectionName()]._EMTDocumentStorageDelete(inputData);
 	},
 
 };
