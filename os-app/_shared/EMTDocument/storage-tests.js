@@ -102,27 +102,31 @@ describe('EMTDocumentStorageWrite', function test_EMTDocumentStorageWrite() {
 
 	context('relations', function () {
 
-		const memory = Object.assign(StubDocumentObjectValid(), {
+		const item = Object.assign(StubDocumentObjectValid(), {
 			$alfa: 'bravo',
 		});
-		let storage = [];
+		let outputData, storage;
 
 		before(async function () {
-			await mainModule.EMTDocumentStorageWrite(EMTTestingStorageClient, memory);
+			outputData = await mainModule.EMTDocumentStorageWrite(EMTTestingStorageClient, item);
 		});
 		
 		before(async function () {
 			storage = Object.values(await mainModule.EMTDocumentStorageList(EMTTestingStorageClient));
 		});
 		
-		it('ignores property', function () {
+		it('excludes from storage', function () {
 			deepEqual(storage, [Object.assign(StubDocumentObjectValid(), {
-				'@context': memory['@context'],
+				'@context': item['@context'],
 			})]);
 		});
+		
+		it('includes in outputData', function () {
+			deepEqual(outputData, item);
+		});
 
-		it('clones object', function () {
-			deepEqual(memory.$alfa, 'bravo');
+		it('updates inputData', function () {
+			deepEqual(outputData === item, true);
 		});
 	
 	});
