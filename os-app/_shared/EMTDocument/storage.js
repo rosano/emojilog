@@ -97,6 +97,10 @@ const mod = {
 			},
 			
 			_EMTDocumentStorageDelete (inputData) {
+				if (EMTDocumentModel.EMTDocumentModelErrorsFor(inputData)) {
+					throw new Error('EMTErrorInputNotValid');
+				}
+
 				return privateClient.remove(mod.EMTDocumentStorageObjectPath(inputData.EMTDocumentID));
 			},
 			
