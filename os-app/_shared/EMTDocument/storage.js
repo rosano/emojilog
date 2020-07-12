@@ -2,13 +2,18 @@ import EMTDocumentModel from './model.js';
 import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 
-const kType = 'emt_document';
-const kCollection = 'emt_documents';
-
 const mod = {
 
+	EMTDocumentStorageCollectionName () {
+		return 'emt_documents';
+	},
+
+	EMTDocumentStorageCollectionType () {
+		return 'emt_document';
+	},
+
 	EMTDocumentStorageCollectionPath () {
-		return kCollection + '/';
+		return mod.EMTDocumentStorageCollectionName() + '/';
 	},
 
 	EMTDocumentStorageFolderPath (inputData) {
@@ -73,7 +78,7 @@ const mod = {
 			},
 
 			async EMTStorageWrite (inputData) {
-				await privateClient.storeObject(kType, mod.EMTDocumentStorageObjectPath(inputData.EMTDocumentID), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
+				await privateClient.storeObject(mod.EMTDocumentStorageCollectionType(), mod.EMTDocumentStorageObjectPath(inputData.EMTDocumentID), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputData));
 				return OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
 			},
 			
@@ -84,8 +89,8 @@ const mod = {
 		};
 
 		return {
-			OLSKRemoteStorageCollectionName: kCollection,
-			OLSKRemoteStorageCollectionType: kType,
+			OLSKRemoteStorageCollectionName: mod.EMTDocumentStorageCollectionName(),
+			OLSKRemoteStorageCollectionType: mod.EMTDocumentStorageCollectionType(),
 			OLSKRemoteStorageCollectionModelErrors: Object.entries(EMTDocumentModel.EMTDocumentModelErrorsFor({}, {
 				EMTOptionValidateIfNotPresent: true,
 			})).map(function (e) {

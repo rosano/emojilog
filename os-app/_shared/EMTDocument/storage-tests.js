@@ -2,10 +2,26 @@ const { throws, deepEqual } = require('assert');
 
 const mainModule = require('./storage.js').default;
 
+describe('EMTDocumentStorageCollectionName', function test_EMTDocumentStorageCollectionName() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.EMTDocumentStorageCollectionName(), 'emt_documents');
+	});
+
+});
+
+describe('EMTDocumentStorageCollectionType', function test_EMTDocumentStorageCollectionType() {
+
+	it('returns string', function() {
+		deepEqual(mainModule.EMTDocumentStorageCollectionType(), 'emt_document');
+	});
+
+});
+
 describe('EMTDocumentStorageCollectionPath', function test_EMTDocumentStorageCollectionPath() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.EMTDocumentStorageCollectionPath(), 'emt_documents/');
+		deepEqual(mainModule.EMTDocumentStorageCollectionPath(), mainModule.EMTDocumentStorageCollectionName() + '/');
 	});
 
 });
