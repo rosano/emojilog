@@ -77,9 +77,9 @@ const mod = {
 					});
 				}
 
-				const inputCopy = OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(OLSKRemoteStorage.OLSKRemoteStorageSafeCopy(inputData));
+				const inputCopy = OLSKRemoteStorage.OLSKRemoteStorageSafeCopy(inputData);
 
-				await privateClient.storeObject(mod.EMTDocumentStorageCollectionType(), mod.EMTDocumentStorageObjectPath(inputCopy.EMTDocumentID), inputCopy);
+				await privateClient.storeObject(mod.EMTDocumentStorageCollectionType(), mod.EMTDocumentStorageObjectPath(inputCopy.EMTDocumentID), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputCopy));
 
 				return Object.assign(inputData, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputCopy));
 			},
