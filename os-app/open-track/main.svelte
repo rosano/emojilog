@@ -259,7 +259,6 @@ const mod = {
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
-import OLSKViewportContent from 'OLSKViewportContent';
 import EMTTrackMaster from './submodules/EMTTrackMaster/main.svelte';
 import EMTTrackDetail from './submodules/EMTTrackDetail/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
@@ -269,11 +268,11 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 
 <div class="EMTTrack OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading }>
 
-<OLSKViewportContent>
+<div class="OLSKViewportContent">
 	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueTimersAll } EMTTrackMasterListItemSelected={ mod._ValueTimerSelected } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } OLSKMobileViewInactive={ mod._ValueTimerSelected } />
 	
 	<EMTTrackDetail EMTTrackDetailItem={ mod._ValueTimerSelected } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } EMTTrackDetailDispatchUpdate={ mod.EMTTrackDetailDispatchUpdate } OLSKMobileViewInactive={ !mod._ValueTimerSelected } />
-</OLSKViewportContent>
+</div>
 
 <footer class="EMTTrackViewportFooter OLSKMobileViewFooter">
 	{#if !mod._ValueStorageToolbarHidden }
