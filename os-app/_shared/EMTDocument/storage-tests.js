@@ -10,14 +10,6 @@ describe('EMTDocumentStorageCollectionName', function test_EMTDocumentStorageCol
 
 });
 
-describe('EMTDocumentStorageCollectionType', function test_EMTDocumentStorageCollectionType() {
-
-	it('returns string', function() {
-		deepEqual(mainModule.EMTDocumentStorageCollectionType(), 'emt_document');
-	});
-
-});
-
 describe('EMTDocumentStorageCollectionPath', function test_EMTDocumentStorageCollectionPath() {
 
 	it('returns string', function() {

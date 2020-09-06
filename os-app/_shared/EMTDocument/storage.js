@@ -8,10 +8,6 @@ const mod = {
 		return 'emt_documents';
 	},
 
-	EMTDocumentStorageCollectionType () {
-		return 'emt_document';
-	},
-
 	EMTDocumentStorageCollectionPath () {
 		return mod.EMTDocumentStorageCollectionName() + '/';
 	},
