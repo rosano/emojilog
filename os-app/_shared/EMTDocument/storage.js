@@ -108,7 +108,6 @@ const mod = {
 
 		return {
 			OLSKRemoteStorageCollectionName: mod.EMTDocumentStorageCollectionName(),
-			OLSKRemoteStorageCollectionType: mod.EMTDocumentStorageCollectionType(),
 			OLSKRemoteStorageCollectionModelErrors: Object.entries(EMTDocumentModel.EMTDocumentModelErrorsFor({}, {
 				EMTOptionValidateIfNotPresent: true,
 			})).map(function (e) {
