@@ -92,12 +92,14 @@ describe('EMTDocumentStorageWrite', function test_EMTDocumentStorageWrite() {
 		});
 	});
 
-	it('returns EMTDocument', async function() {
-		let item = await mainModule.EMTDocumentStorageWrite(EMTTestingStorageClient, StubDocumentObjectValid());
+	it('returns input', async function () {
+		const item = StubDocumentObjectValid();
 
-		deepEqual(item, Object.assign(StubDocumentObjectValid(), {
-			'@context': item['@context'],
-		}));
+		deepEqual(await mainModule.EMTDocumentStorageWrite(EMTTestingStorageClient, item) === item, true);
+	});
+
+	it('leaves input unmodified', async function () {
+		deepEqual(await mainModule.EMTDocumentStorageWrite(EMTTestingStorageClient, StubDocumentObjectValid()), StubDocumentObjectValid());
 	});
 
 	context('relations', function () {
@@ -116,9 +118,7 @@ describe('EMTDocumentStorageWrite', function test_EMTDocumentStorageWrite() {
 		});
 		
 		it('excludes from storage', function () {
-			deepEqual(storage, [Object.assign(StubDocumentObjectValid(), {
-				'@context': item['@context'],
-			})]);
+			deepEqual(storage, [StubDocumentObjectValid()]);
 		});
 		
 		it('includes in outputData', function () {

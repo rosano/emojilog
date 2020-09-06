@@ -77,11 +77,11 @@ const mod = {
 					});
 				}
 
-				const inputCopy = OLSKRemoteStorage.OLSKRemoteStorageSafeCopy(inputData);
-
-				await privateClient.storeObject(mod.EMTDocumentStorageCollectionType(), mod.EMTDocumentStorageObjectPath(inputCopy.EMTDocumentID), OLSKRemoteStorage.OLSKRemoteStoragePreJSONSchemaValidate(inputCopy));
-
-				return Object.assign(inputData, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputCopy));
+				try {
+					return OLSKRemoteStorage.OLSKRemoteStorageWriteObject(privateClient, mod.EMTDocumentStorageObjectPath(inputData.EMTDocumentID), inputData);
+				} catch (e) {
+					return Promise.reject(e);
+				}
 			},
 
 			async _EMTDocumentStorageList () {

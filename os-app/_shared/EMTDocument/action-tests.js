@@ -42,7 +42,6 @@ describe('EMTDocumentActionCreate', function test_EMTDocumentActionCreate() {
 			EMTDocumentID: item.EMTDocumentID,
 			EMTDocumentCreationDate: item.EMTDocumentCreationDate,
 			EMTDocumentModificationDate: item.EMTDocumentModificationDate,
-			'@context': item['@context'],
 		}));
 	});
 
@@ -102,7 +101,6 @@ describe('EMTDocumentActionUpdate', function test_EMTDocumentActionUpdate() {
 			EMTDocumentID: item.EMTDocumentID,
 			EMTDocumentCreationDate: item.EMTDocumentCreationDate,
 			EMTDocumentModificationDate: item.EMTDocumentModificationDate,
-			'@context': item['@context'],
 		}));
 	});
 
