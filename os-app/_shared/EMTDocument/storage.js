@@ -108,19 +108,6 @@ const mod = {
 
 		return {
 			OLSKRemoteStorageCollectionName: mod.EMTDocumentStorageCollectionName(),
-			OLSKRemoteStorageCollectionModelErrors: Object.entries(EMTDocumentModel.EMTDocumentModelErrorsFor({}, {
-				EMTOptionValidateIfNotPresent: true,
-			})).map(function (e) {
-				if (!Object.keys(EMTDocumentModel.EMTDocumentModelErrorsFor({})).includes(e[0])) {
-					e[1].push('__RSOptional');
-				}
-
-				return e;
-			}).reduce(function (coll, item) {
-				coll[item[0]] = item[1];
-
-				return coll;
-			}, {}),
 			OLSKRemoteStorageCollectionExports,
 		};
 	},
