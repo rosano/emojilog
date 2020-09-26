@@ -27,14 +27,22 @@ const EMTJournalStorage = require('./os-app/_shared/EMTJournal/storage.js').defa
 
 (function EMTMochaStubs() {
 	Object.entries({
-		StubDocumentObjectValid() {
-			return {
+
+		StubDocumentObjectValid(inputData) {
+			return Object.assign({
 				EMTJournalID: 'alfa',
 				EMTJournalName: 'bravo',
 				EMTJournalCreationDate: new Date('2019-02-23T13:56:36Z'),
 				EMTJournalModificationDate: new Date('2019-02-23T13:56:36Z'),
-			};
+			}, inputData);
 		},
+
+		uSerial (inputData) {
+			return inputData.reduce(async function (coll, e) {
+				return e.then(Array.prototype.concat.bind(await coll));
+			}, Promise.resolve([]));
+		},
+
 	}).map(function (e) {
 		return global[e.shift()]  = e.pop();
 	});
