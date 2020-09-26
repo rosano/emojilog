@@ -13,7 +13,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			before(function() {
 				return browser.OLSKVisit(kDefaultRoute, {
 					EMTTrackDetailItem: JSON.stringify({
-						EMTDocumentName: 'alfa',
+						EMTJournalName: 'alfa',
 					}),
 				});
 			});

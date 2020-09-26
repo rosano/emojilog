@@ -40,7 +40,7 @@ describe('EMTTrackDetail_Access', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				EMTTrackDetailItem: JSON.stringify({
-					EMTDocumentName: 'alfa',
+					EMTJournalName: 'alfa',
 				}),
 			});
 		});

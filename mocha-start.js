@@ -1,7 +1,7 @@
 const RemoteStorage = require('remotestoragejs');
 
 const EMT_Data = require('./os-app/_shared/EMT_Data/main.js').default;
-const EMTDocumentStorage = require('./os-app/_shared/EMTDocument/storage.js').default;
+const EMTJournalStorage = require('./os-app/_shared/EMTJournal/storage.js').default;
 
 (function EMTMochaStorage() {
 	if (process.env.OLSK_TESTING_BEHAVIOUR === 'true') {
@@ -9,7 +9,7 @@ const EMTDocumentStorage = require('./os-app/_shared/EMTDocument/storage.js').de
 	}
 
 	const storageModule = EMT_Data.EMT_DataModule([
-		EMTDocumentStorage.EMTDocumentStorageBuild,
+		EMTJournalStorage.EMTJournalStorageBuild,
 	], {
 		OLSKOptionIncludeDebug: true,
 	});
@@ -29,10 +29,10 @@ const EMTDocumentStorage = require('./os-app/_shared/EMTDocument/storage.js').de
 	Object.entries({
 		StubDocumentObjectValid() {
 			return {
-				EMTDocumentID: 'alfa',
-				EMTDocumentName: 'bravo',
-				EMTDocumentCreationDate: new Date('2019-02-23T13:56:36Z'),
-				EMTDocumentModificationDate: new Date('2019-02-23T13:56:36Z'),
+				EMTJournalID: 'alfa',
+				EMTJournalName: 'bravo',
+				EMTJournalCreationDate: new Date('2019-02-23T13:56:36Z'),
+				EMTJournalModificationDate: new Date('2019-02-23T13:56:36Z'),
 			};
 		},
 	}).map(function (e) {

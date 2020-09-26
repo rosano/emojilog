@@ -44,7 +44,7 @@ describe('EMTTrackMaster_Access', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				EMTTrackMasterListItems: JSON.stringify([{
-					EMTDocumentName: 'alfa',
+					EMTJournalName: 'alfa',
 				}]),
 			});
 		});

@@ -4,7 +4,7 @@ describe('EMTTrackDetail_Misc', function  test_EMTTrackDetail_Misc () {
 
 	const uItem = function () {
 		return {
-			EMTDocumentName: 'alfa',
+			EMTJournalName: 'alfa',
 		};
 	};
 
@@ -122,8 +122,8 @@ describe('EMTTrackDetail_Misc', function  test_EMTTrackDetail_Misc () {
 			browser.assert.attribute(EMTTrackDetailFormNameField, 'autofocus', '');
 		});
 		
-		it('binds EMTDocumentName', function () {
-			browser.assert.input(EMTTrackDetailFormNameField, uItem().EMTDocumentName);
+		it('binds EMTJournalName', function () {
+			browser.assert.input(EMTTrackDetailFormNameField, uItem().EMTJournalName);
 		});
 
 		context('input', function () {

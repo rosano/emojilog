@@ -9,8 +9,8 @@ import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import * as OLSKRemoteStoragePackage from '../_shared/__external/OLSKRemoteStorage/main.js'
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
 import EMT_Data from '../_shared/EMT_Data/main.js';
-import EMTDocumentStorage from '../_shared/EMTDocument/storage.js';
-import EMTDocumentAction from '../_shared/EMTDocument/action.js';
+import EMTJournalStorage from '../_shared/EMTJournal/storage.js';
+import EMTJournalAction from '../_shared/EMTJournal/action.js';
 import * as RemoteStoragePackage from 'remotestoragejs';
 const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
 import EMTTrackLogic from './ui-logic.js';
@@ -51,22 +51,22 @@ const mod = {
 	// CONTROL
 
 	ControlTimerSave(inputData) {
-		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveThrottleMap, inputData.EMTDocumentID, {
+		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveThrottleMap, inputData.EMTJournalID, {
 			OLSKThrottleDuration: 500,
 			async OLSKThrottleCallback () {
-				await EMTDocumentAction.EMTDocumentActionUpdate(mod._ValueStorageClient, inputData);
+				await EMTJournalAction.EMTJournalActionUpdate(mod._ValueStorageClient, inputData);
 			},
 		});
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
-			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[inputData.EMTDocumentID])	
+			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[inputData.EMTJournalID])	
 		};
 	},
 
 	async ControlTimerCreate() {
-		const item = await EMTDocumentAction.EMTDocumentActionCreate(mod._ValueStorageClient, {
-			EMTDocumentName: '',
-			EMTDocumentModificationDate: new Date(),
+		const item = await EMTJournalAction.EMTJournalActionCreate(mod._ValueStorageClient, {
+			EMTJournalName: '',
+			EMTJournalModificationDate: new Date(),
 		});
 
 		mod.ValueTimersAll(mod._ValueTimersAll.concat(item));
@@ -85,7 +85,7 @@ const mod = {
 			return e !== inputData;
 		}))
 
-		await EMTDocumentAction.EMTDocumentActionDelete(mod._ValueStorageClient, inputData);
+		await EMTJournalAction.EMTJournalActionDelete(mod._ValueStorageClient, inputData);
 
 		mod.ControlTimerSelect(null);
 	},
@@ -138,29 +138,29 @@ const mod = {
 	// 	// console.log('OLSKChangeDelegateCreate', inputData);
 
 	// 	mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
-	// 		return e.EMTDocumentID !== inputData.EMTDocumentID; // @Hotfix Dropbox sending DelegateAdd
+	// 		return e.EMTJournalID !== inputData.EMTJournalID; // @Hotfix Dropbox sending DelegateAdd
 	// 	}).concat(inputData));
 	// },
 	// OLSKChangeDelegateUpdate (inputData) {
 	// 	// console.log('OLSKChangeDelegateUpdate', inputData);
 
-	// 	if (mod._ValueTimerSelected && mod._ValueTimerSelected.EMTDocumentID === inputData.EMTDocumentID) {
+	// 	if (mod._ValueTimerSelected && mod._ValueTimerSelected.EMTJournalID === inputData.EMTJournalID) {
 	// 		mod.ControlTimerSelect(inputData);
 	// 	}
 
 	// 	mod.ValueTimersAll(mod._ValueTimersAll.map(function (e) {
-	// 		return Object.assign(e, e.EMTDocumentID === inputData.EMTDocumentID ? inputData : {});
+	// 		return Object.assign(e, e.EMTJournalID === inputData.EMTJournalID ? inputData : {});
 	// 	}), false);
 	// },
 	// OLSKChangeDelegateDelete (inputData) {
 	// 	// console.log('OLSKChangeDelegateDelete', inputData);
 
-	// 	if (mod._ValueTimerSelected && (mod._ValueTimerSelected.EMTDocumentID === inputData.EMTDocumentID)) {
+	// 	if (mod._ValueTimerSelected && (mod._ValueTimerSelected.EMTJournalID === inputData.EMTJournalID)) {
 	// 		mod.ControlTimerSelect(null);
 	// 	}
 
 	// 	mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
-	// 		return e.EMTDocumentID !== inputData.EMTDocumentID;
+	// 		return e.EMTJournalID !== inputData.EMTJournalID;
 	// 	}), false);
 	// },
 
@@ -180,7 +180,7 @@ const mod = {
 
 	SetupStorageClient() {
 		const storageModule = EMT_Data.EMT_DataModule([
-			Object.assign(EMTDocumentStorage.EMTDocumentStorageBuild, {
+			Object.assign(EMTJournalStorage.EMTJournalStorageBuild, {
 				// OLSKChangeDelegate: {
 				// 	OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateDocument,
 				// 	OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateDocument,
@@ -243,7 +243,7 @@ const mod = {
 	},
 
 	async SetupValueTimersAll() {
-		mod.ValueTimersAll((await EMTDocumentAction.EMTDocumentActionList(mod._ValueStorageClient)).filter(function (e) {
+		mod.ValueTimersAll((await EMTJournalAction.EMTJournalActionList(mod._ValueStorageClient)).filter(function (e) {
 			return typeof e === 'object'; // #patch-remotestorage-true
 		}));
 	},

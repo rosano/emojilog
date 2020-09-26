@@ -89,8 +89,8 @@ describe('EMTTrackMaster_Misc', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				EMTTrackMasterListItems: JSON.stringify([{
-					EMTDocumentID: 'alfa',
-					EMTDocumentName: 'bravo',
+					EMTJournalID: 'alfa',
+					EMTJournalName: 'bravo',
 				}]),
 			});
 		});
@@ -114,8 +114,8 @@ describe('EMTTrackMaster_Misc', function () {
 			it('sends EMTTrackMasterDispatchSelect', function () {
 				browser.assert.text('#TestEMTTrackMasterDispatchSelect', '1');
 				browser.assert.text('#TestEMTTrackMasterDispatchSelectData', JSON.stringify({
-					EMTDocumentID: 'alfa',
-					EMTDocumentName: 'bravo',
+					EMTJournalID: 'alfa',
+					EMTJournalName: 'bravo',
 				}));
 			});
 		
@@ -128,15 +128,15 @@ describe('EMTTrackMaster_Misc', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				EMTTrackMasterListItems: JSON.stringify([{
-					EMTDocumentID: 'alfa',
-					EMTDocumentName: 'bravo',
+					EMTJournalID: 'alfa',
+					EMTJournalName: 'bravo',
 				}, {
-					EMTDocumentID: 'charlie',
-					EMTDocumentName: 'delta',
+					EMTJournalID: 'charlie',
+					EMTJournalName: 'delta',
 				}]),
 				EMTTrackMasterListItemSelected: JSON.stringify({
-					EMTDocumentID: 'charlie',
-					EMTDocumentName: 'delta',
+					EMTJournalID: 'charlie',
+					EMTJournalName: 'delta',
 				}),
 			});
 		});

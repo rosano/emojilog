@@ -1,11 +1,11 @@
 const mod = {
 
 	EMTTrackSort (a, b) {
-		if (a.EMTDocumentModificationDate && b.EMTDocumentModificationDate) {
-			return b.EMTDocumentModificationDate - a.EMTDocumentModificationDate;
+		if (a.EMTJournalModificationDate && b.EMTJournalModificationDate) {
+			return b.EMTJournalModificationDate - a.EMTJournalModificationDate;
 		}
 
-		return b.EMTDocumentCreationDate - a.EMTDocumentCreationDate;
+		return b.EMTJournalCreationDate - a.EMTJournalCreationDate;
 	},
 
 };
