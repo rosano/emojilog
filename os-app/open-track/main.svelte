@@ -14,6 +14,7 @@ import EMTJournalAction from '../_shared/EMTJournal/action.js';
 import * as RemoteStoragePackage from 'remotestoragejs';
 const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
 import EMTTrackLogic from './ui-logic.js';
+import EMTMemoStorage from '../_shared/EMTMemo/storage.js';
 const mod = {
 
 	// VALUE
@@ -185,6 +186,13 @@ const mod = {
 				// 	OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateJournal,
 				// 	OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateJournal,
 				// 	OLSKChangeDelegateDelete: mod.OLSKChangeDelegateDeleteJournal,
+				// },
+			}),
+			Object.assign(EMTMemoStorage.EMTMemoStorageBuild, {
+				// OLSKChangeDelegate: {
+				// 	OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateMemo,
+				// 	OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateMemo,
+				// 	OLSKChangeDelegateDelete: mod.OLSKChangeDelegateDeleteMemo,
 				// },
 			}),
 			]);
