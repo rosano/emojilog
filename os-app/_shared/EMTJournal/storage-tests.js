@@ -75,7 +75,7 @@ describe('EMTJournalStorageWrite', function test_EMTJournalStorageWrite() {
 	});
 
 	it('returns object with EMTErrors if not valid', async function() {
-		deepEqual((await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, Object.assign(StubDocumentObjectValid(), {
+		deepEqual((await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, Object.assign(StubJournalObjectValid(), {
 			EMTJournalID: null,
 		}))).EMTErrors, {
 			EMTJournalID: [
@@ -85,18 +85,18 @@ describe('EMTJournalStorageWrite', function test_EMTJournalStorageWrite() {
 	});
 
 	it('returns input', async function () {
-		const item = StubDocumentObjectValid();
+		const item = StubJournalObjectValid();
 
 		deepEqual(await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, item) === item, true);
 	});
 
 	it('leaves input unmodified', async function () {
-		deepEqual(await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, StubDocumentObjectValid()), StubDocumentObjectValid());
+		deepEqual(await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, StubJournalObjectValid()), StubJournalObjectValid());
 	});
 
 	context('relations', function () {
 
-		const item = Object.assign(StubDocumentObjectValid(), {
+		const item = Object.assign(StubJournalObjectValid(), {
 			$alfa: 'bravo',
 		});
 		let outputData, storage;
@@ -110,7 +110,7 @@ describe('EMTJournalStorageWrite', function test_EMTJournalStorageWrite() {
 		});
 		
 		it('excludes from storage', function () {
-			deepEqual(storage, [StubDocumentObjectValid()]);
+			deepEqual(storage, [StubJournalObjectValid()]);
 		});
 		
 		it('includes in outputData', function () {
@@ -132,7 +132,7 @@ describe('EMTJournalStorageList', function test_EMTJournalStorageList() {
 	});
 
 	it('returns existing EMTJournals', async function() {
-		let item = await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, StubDocumentObjectValid());
+		let item = await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, StubJournalObjectValid());
 		deepEqual(Object.values(await mainModule.EMTJournalStorageList(EMTTestingStorageClient)), [item]);
 		deepEqual(Object.keys(await mainModule.EMTJournalStorageList(EMTTestingStorageClient)), [item.EMTJournalID]);
 	});
@@ -148,13 +148,13 @@ describe('EMTJournalStorageDelete', function test_EMTJournalStorageDelete() {
 	});
 
 	it('returns statusCode', async function() {
-		deepEqual(await mainModule.EMTJournalStorageDelete(EMTTestingStorageClient, await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, StubDocumentObjectValid())), {
+		deepEqual(await mainModule.EMTJournalStorageDelete(EMTTestingStorageClient, await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, StubJournalObjectValid())), {
 			statusCode: 200,
 		});
 	});
 
 	it('deletes EMTJournal', async function() {
-		await mainModule.EMTJournalStorageDelete(EMTTestingStorageClient, await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, StubDocumentObjectValid()));
+		await mainModule.EMTJournalStorageDelete(EMTTestingStorageClient, await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, StubJournalObjectValid()));
 		deepEqual(await mainModule.EMTJournalStorageList(EMTTestingStorageClient), {});
 	});
 

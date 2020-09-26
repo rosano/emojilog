@@ -118,7 +118,7 @@ const mod = {
 		mod.ControlTimerSave(mod._ValueTimerSelected);
 	},
 
-	MessageDocumentSelectedDidChange (inputData) {
+	MessageJournalSelectedDidChange (inputData) {
 		if (!inputData) {
 			return;
 		}
@@ -182,9 +182,9 @@ const mod = {
 		const storageModule = EMT_Data.EMT_DataModule([
 			Object.assign(EMTJournalStorage.EMTJournalStorageBuild, {
 				// OLSKChangeDelegate: {
-				// 	OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateDocument,
-				// 	OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateDocument,
-				// 	OLSKChangeDelegateDelete: mod.OLSKChangeDelegateDeleteDocument,
+				// 	OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateJournal,
+				// 	OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateJournal,
+				// 	OLSKChangeDelegateDelete: mod.OLSKChangeDelegateDeleteJournal,
 				// },
 			}),
 			]);

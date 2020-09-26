@@ -11,7 +11,7 @@ describe('EMTJournalModelErrorsFor', function test_EMTJournalModelErrorsFor() {
 	});
 
 	it('returns object if EMTJournalID not string', function() {
-		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubDocumentObjectValid(), {
+		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
 			EMTJournalID: null,
 		})), {
 			EMTJournalID: [
@@ -21,7 +21,7 @@ describe('EMTJournalModelErrorsFor', function test_EMTJournalModelErrorsFor() {
 	});
 
 	it('returns object if EMTJournalID not filled', function() {
-		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubDocumentObjectValid(), {
+		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
 			EMTJournalID: ' ',
 		})), {
 			EMTJournalID: [
@@ -31,7 +31,7 @@ describe('EMTJournalModelErrorsFor', function test_EMTJournalModelErrorsFor() {
 	});
 
 	it('returns object if EMTJournalName not string', function() {
-		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubDocumentObjectValid(), {
+		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
 			EMTJournalName: null,
 		})), {
 			EMTJournalName: [
@@ -41,7 +41,7 @@ describe('EMTJournalModelErrorsFor', function test_EMTJournalModelErrorsFor() {
 	});
 
 	it('returns object if EMTJournalCreationDate not date', function() {
-		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubDocumentObjectValid(), {
+		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
 			EMTJournalCreationDate: new Date('alfa'),
 		})), {
 			EMTJournalCreationDate: [
@@ -51,7 +51,7 @@ describe('EMTJournalModelErrorsFor', function test_EMTJournalModelErrorsFor() {
 	});
 
 	it('returns object if EMTJournalModificationDate not date', function() {
-		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubDocumentObjectValid(), {
+		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
 			EMTJournalModificationDate: new Date('alfa'),
 		})), {
 			EMTJournalModificationDate: [
@@ -61,7 +61,7 @@ describe('EMTJournalModelErrorsFor', function test_EMTJournalModelErrorsFor() {
 	});
 
 	it('returns null', function() {
-		deepEqual(mainModule.EMTJournalModelErrorsFor(StubDocumentObjectValid()), null);
+		deepEqual(mainModule.EMTJournalModelErrorsFor(StubJournalObjectValid()), null);
 	});
 
 	context('EMTOptionValidateIfNotPresent', function() {

@@ -28,7 +28,7 @@ const EMTJournalStorage = require('./os-app/_shared/EMTJournal/storage.js').defa
 (function EMTMochaStubs() {
 	Object.entries({
 
-		StubDocumentObjectValid(inputData) {
+		StubJournalObjectValid(inputData) {
 			return Object.assign({
 				EMTJournalID: 'alfa',
 				EMTJournalName: 'bravo',

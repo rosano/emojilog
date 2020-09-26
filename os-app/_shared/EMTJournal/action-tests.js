@@ -2,7 +2,7 @@ const { rejects, deepEqual } = require('assert');
 
 const mainModule = require('./action.js').default;
 
-const uDocument = function (inputData) {
+const uJournal = function (inputData) {
 	return Object.assign({
 		EMTJournalName: 'alfa',
 	}, inputData);
@@ -15,7 +15,7 @@ describe('EMTJournalActionCreate', function test_EMTJournalActionCreate() {
 	});
 
 	it('returns object with EMTErrors if not valid', async function() {
-		deepEqual((await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, uDocument({
+		deepEqual((await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, uJournal({
 			EMTJournalName: null,
 		}))).EMTErrors, {
 			EMTJournalName: [
@@ -25,9 +25,9 @@ describe('EMTJournalActionCreate', function test_EMTJournalActionCreate() {
 	});
 
 	it('returns EMTJournal', async function() {
-		let item = await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, uDocument());
+		let item = await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, uJournal());
 
-		deepEqual(item, uDocument({
+		deepEqual(item, uJournal({
 			EMTJournalID: item.EMTJournalID,
 			EMTJournalCreationDate: item.EMTJournalCreationDate,
 			EMTJournalModificationDate: item.EMTJournalModificationDate,
@@ -36,21 +36,21 @@ describe('EMTJournalActionCreate', function test_EMTJournalActionCreate() {
 
 	it('sets EMTJournalID to unique value', async function() {
 		let items = await uSerial(Array.from(Array(10)).map(async function (e) {
-			return (await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, uDocument())).EMTJournalID;
+			return (await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, uJournal())).EMTJournalID;
 		}));
 		deepEqual([...(new Set(items))], items);
 	});
 
 	it('sets EMTJournalCreationDate to now', async function() {
-		deepEqual(new Date() - (await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, uDocument())).EMTJournalCreationDate < 100, true);
+		deepEqual(new Date() - (await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, uJournal())).EMTJournalCreationDate < 100, true);
 	});
 
 	it('sets EMTJournalModificationDate to now', async function() {
-		deepEqual(new Date() - (await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, uDocument())).EMTJournalModificationDate < 100, true);
+		deepEqual(new Date() - (await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, uJournal())).EMTJournalModificationDate < 100, true);
 	});
 
 	it('allows overwrite by input', async function() {
-		deepEqual(await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubDocumentObjectValid()), StubDocumentObjectValid());
+		deepEqual(await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubJournalObjectValid()), StubJournalObjectValid());
 	});
 
 });
@@ -62,7 +62,7 @@ describe('EMTJournalActionUpdate', function test_EMTJournalActionUpdate() {
 	});
 
 	it('returns object with EMTErrors if not valid', async function() {
-		deepEqual((await mainModule.EMTJournalActionUpdate(EMTTestingStorageClient, Object.assign(await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubDocumentObjectValid()), {
+		deepEqual((await mainModule.EMTJournalActionUpdate(EMTTestingStorageClient, Object.assign(await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubJournalObjectValid()), {
 			EMTJournalID: null,
 		}))).EMTErrors, {
 			EMTJournalID: [
@@ -72,7 +72,7 @@ describe('EMTJournalActionUpdate', function test_EMTJournalActionUpdate() {
 	});
 
 	it('returns EMTJournal', async function() {
-		let itemCreated = await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubDocumentObjectValid());
+		let itemCreated = await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubJournalObjectValid());
 
 		let item = await mainModule.EMTJournalActionUpdate(EMTTestingStorageClient, itemCreated);
 
@@ -82,15 +82,15 @@ describe('EMTJournalActionUpdate', function test_EMTJournalActionUpdate() {
 	});
 
 	it('sets EMTJournalModificationDate to now', async function() {
-		deepEqual(new Date() - (await mainModule.EMTJournalActionUpdate(EMTTestingStorageClient, await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubDocumentObjectValid()))).EMTJournalModificationDate < 100, true);
+		deepEqual(new Date() - (await mainModule.EMTJournalActionUpdate(EMTTestingStorageClient, await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubJournalObjectValid()))).EMTJournalModificationDate < 100, true);
 	});
 
 	it('writes inputData if not found', async function() {
-		let item = await mainModule.EMTJournalActionUpdate(EMTTestingStorageClient, Object.assign(StubDocumentObjectValid(), {
+		let item = await mainModule.EMTJournalActionUpdate(EMTTestingStorageClient, Object.assign(StubJournalObjectValid(), {
 			EMTJournalID: 'alfa',
 			EMTJournalCreationDate: new Date(),
 		}));
-		deepEqual(item, Object.assign(StubDocumentObjectValid(), {
+		deepEqual(item, Object.assign(StubJournalObjectValid(), {
 			EMTJournalID: item.EMTJournalID,
 			EMTJournalCreationDate: item.EMTJournalCreationDate,
 			EMTJournalModificationDate: item.EMTJournalModificationDate,
@@ -106,13 +106,13 @@ describe('EMTJournalActionDelete', function test_EMTJournalActionDelete() {
 	});
 
 	it('returns statusCode', async function() {
-		deepEqual(await mainModule.EMTJournalActionDelete(EMTTestingStorageClient, await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubDocumentObjectValid())), {
+		deepEqual(await mainModule.EMTJournalActionDelete(EMTTestingStorageClient, await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubJournalObjectValid())), {
 			statusCode: 200,
 		});
 	});
 
 	it('deletes EMTJournal', async function() {
-		await mainModule.EMTJournalActionDelete(EMTTestingStorageClient, await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubDocumentObjectValid()));
+		await mainModule.EMTJournalActionDelete(EMTTestingStorageClient, await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubJournalObjectValid()));
 		deepEqual(await mainModule.EMTJournalActionList(EMTTestingStorageClient), []);
 	});
 
@@ -125,7 +125,7 @@ describe('EMTJournalActionList', function test_EMTJournalActionList() {
 	});
 
 	it('returns array with existing EMTJournals', async function() {
-		let item = await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubDocumentObjectValid());
+		let item = await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubJournalObjectValid());
 
 		deepEqual(await mainModule.EMTJournalActionList(EMTTestingStorageClient), [item]);
 	});
