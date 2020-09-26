@@ -1,6 +1,7 @@
 const { rejects, deepEqual } = require('assert');
 
 const mainModule = require('./action.js').default;
+const EMTMemoAction = require('../EMTMemo/action.js').default;
 
 const uJournal = function (inputData) {
 	return Object.assign({
@@ -114,6 +115,18 @@ describe('EMTJournalActionDelete', function test_EMTJournalActionDelete() {
 	it('deletes EMTJournal', async function() {
 		await mainModule.EMTJournalActionDelete(EMTTestingStorageClient, await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, StubJournalObjectValid()));
 		deepEqual(await mainModule.EMTJournalActionList(EMTTestingStorageClient), []);
+	});
+
+	it('deletes EMTMemos', async function () {
+		const item = await mainModule.EMTJournalActionCreate(EMTTestingStorageClient, uJournal());
+
+		await EMTMemoAction.EMTMemoActionCreate(EMTTestingStorageClient, {
+			EMTMemoEventDate: new Date(),
+			EMTMemoNotes: '',
+		}, item);
+
+		await mainModule.EMTJournalActionDelete(EMTTestingStorageClient, item);
+		deepEqual(await EMTMemoAction.EMTMemoActionList(EMTTestingStorageClient, item), []);
 	});
 
 });

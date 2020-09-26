@@ -2,6 +2,7 @@ import { factory, detectPrng } from 'ulid';
 const uniqueID = typeof require === 'undefined' && navigator.appName === 'Zombie' ? factory(detectPrng(true)) : factory();
 
 import EMTJournalStorage from './storage.js';
+import EMTMemoAction from '../EMTMemo/action.js';
 
 const mod = {
 
@@ -30,6 +31,10 @@ const mod = {
 	},
 
 	async EMTJournalActionDelete (storageClient, inputData) {
+		await Promise.all((await EMTMemoAction.EMTMemoActionList(storageClient, inputData)).map(function (e) {
+			return EMTMemoAction.EMTMemoActionDelete(storageClient, e, inputData);
+		}));
+		
 		return await EMTJournalStorage.EMTJournalStorageDelete(storageClient, inputData);
 	},
 
