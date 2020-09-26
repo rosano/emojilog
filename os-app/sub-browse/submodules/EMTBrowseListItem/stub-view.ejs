@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/_shared/__external/normalize.css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-style.css">
+
+	<script type="text/javascript">
+		window.OLSKPublicConstants = function (inputData) {
+			return <%- JSON.stringify({
+				OLSKSharedPageCurrentLanguage,
+			}) %>[inputData];
+		};
+	</script>
+</head>
+<body>
+
+<script src="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-behaviour.js"></script>
+
+<p>
+	<strong>TestEMTBrowseListItemDispatchCreate</strong>
+	<span id="TestEMTBrowseListItemDispatchCreate">0</span>
+	<span id="TestEMTBrowseListItemDispatchCreateData">undefined</span>
+</p>
+
+<p>
+	<strong>TestEMTBrowseListItemDispatchClick</strong>
+	<span id="TestEMTBrowseListItemDispatchClick">0</span>
+	<span id="TestEMTBrowseListItemDispatchClickData">undefined</span>
+</p>
+
+<p>
+	<strong>TestEMTBrowseListItemDispatchArrow</strong>
+	<span id="TestEMTBrowseListItemDispatchArrow">0</span>
+	<span id="TestEMTBrowseListItemDispatchArrowData">undefined</span>
+</p>
+
+<p>
+	<strong>TestEMTBrowseListItemDispatchFilter</strong>
+	<span id="TestEMTBrowseListItemDispatchFilter">0</span>
+	<span id="TestEMTBrowseListItemDispatchFilterData">undefined</span>
+</p>
+
+</body>
+</html>
