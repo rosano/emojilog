@@ -5,7 +5,7 @@ const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStorageP
 const mod = {
 
 	EMTJournalStorageCollectionName () {
-		return 'emt_documents';
+		return 'emt_journals';
 	},
 
 	EMTJournalStorageCollectionPath () {

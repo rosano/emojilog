@@ -5,7 +5,7 @@ const mainModule = require('./storage.js').default;
 describe('EMTJournalStorageCollectionName', function test_EMTJournalStorageCollectionName() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.EMTJournalStorageCollectionName(), 'emt_documents');
+		deepEqual(mainModule.EMTJournalStorageCollectionName(), 'emt_journals');
 	});
 
 });
