@@ -161,14 +161,6 @@ describe('EMTBrowseInfo_Misc', function () {
 			});
 		});
 
-		it('classes OLSKMobileSafariRemoveDefaultInputStyle', function () {
-			browser.assert.hasClass(EMTBrowseInfoFormNotesField, 'OLSKMobileSafariRemoveDefaultInputStyle');
-		});
-
-		it('sets type', function () {
-			browser.assert.attribute(EMTBrowseInfoFormNotesField, 'type', 'text');
-		});
-
 		it('binds EMTMemoNotes', function () {
 			browser.assert.input(EMTBrowseInfoFormNotesField, 'alfa');
 		});

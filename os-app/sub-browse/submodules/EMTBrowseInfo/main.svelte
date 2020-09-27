@@ -91,7 +91,7 @@ import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 <div class="EMTBrowseInfoForm">
 
 <p>
-	<input class="EMTBrowseInfoFormNotesField OLSKMobileSafariRemoveDefaultInputStyle" placeholder="{ OLSKLocalized('EMTBrowseInfoFormNotesFieldText') }" type="text" bind:value={ EMTBrowseInfoItem.EMTMemoNotes } on:input={ EMTBrowseInfoDispatchUpdate } />
+	<textarea class="EMTBrowseInfoFormNotesField" placeholder="{ OLSKLocalized('EMTBrowseInfoFormNotesFieldText') }" bind:value={ EMTBrowseInfoItem.EMTMemoNotes } on:input={ EMTBrowseInfoDispatchUpdate }></textarea>
 </p>
 
 <hr />
