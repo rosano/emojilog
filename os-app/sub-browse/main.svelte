@@ -337,7 +337,6 @@ import EMTBrowseInfo from './submodules/EMTBrowseInfo/main.svelte';
 
 <EMTBrowseInfo
 	EMTBrowseInfoItem={ mod._ValueMemoSelected }
-	EMTBrowseInfoJournal={ EMTBrowseJournalSelected }
 	EMTBrowseInfoDispatchBack={ mod.EMTBrowseInfoDispatchBack }
 	EMTBrowseInfoDispatchDiscard={ mod.EMTBrowseInfoDispatchDiscard }
 	EMTBrowseInfoDispatchUpdate={ mod.EMTBrowseInfoDispatchUpdate }

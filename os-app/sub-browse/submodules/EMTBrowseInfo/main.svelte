@@ -1,6 +1,5 @@
 <script>
 export let EMTBrowseInfoItem;
-export let EMTBrowseInfoJournal;
 export let EMTBrowseInfoDispatchBack;
 export let EMTBrowseInfoDispatchUpdate;
 export let EMTBrowseInfoDispatchDiscard;
