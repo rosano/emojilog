@@ -2,16 +2,8 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('EMTTrackMaster_Misc', function () {
 
-	describe('EMTTrackMaster', function () {
-
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute);
-		});
-		
-		it('classes OLSKViewportMaster', function () {
-			browser.assert.hasClass(EMTTrackMaster, 'OLSKViewportMaster');
-		});
-	
+	before(function() {
+		return browser.OLSKVisit(kDefaultRoute);
 	});
 
 	describe('EMTTrackMasterToolbar', function () {

@@ -10,7 +10,7 @@ const OLSKLocalized = function(translationConstant) {
 };
 </script>
 
-<div class="EMTTrackMaster OLSKViewportMaster">
+<div class="EMTTrackMaster">
 
 <header class="EMTTrackMasterToolbar OLSKMobileViewHeader OLSKToolbar">
 	<div class="OLSKToolbarElementGroup">
@@ -30,7 +30,7 @@ const OLSKLocalized = function(translationConstant) {
 
 <style>
 .EMTTrackMaster {
-	border-right: var(--EMTBorderStyle);
+	width: 100%;
 
 	/* EMTTrackMasterFlexbox:Parent */
 	display: flex;
@@ -52,15 +52,12 @@ const OLSKLocalized = function(translationConstant) {
 }
 
 .EMTTrackMasterListItem {
-	min-height: 40px;
+	min-height: 80px;
 	width: 100%;
 	padding: 5px;
+	
 	border-bottom: var(--EMTBorderStyle);
 
 	text-align: left;
-}
-
-.EMTTrackMasterListItem:last-of-type {
-	border-bottom: none;
 }
 </style>
