@@ -1,6 +1,6 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-describe('EMTTrackForm_Misc', function  test_EMTTrackForm_Misc () {
+describe('EMTTemplate_Misc', function  test_EMTTemplate_Misc () {
 
 	const uItem = function () {
 		return {
@@ -8,114 +8,114 @@ describe('EMTTrackForm_Misc', function  test_EMTTrackForm_Misc () {
 		};
 	};
 
-	describe('EMTTrackForm', function  test_EMTTrackForm () {
+	describe('EMTTemplate', function  test_EMTTemplate () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				EMTTrackFormItem: JSON.stringify(uItem()),
+				EMTTemplateItem: JSON.stringify(uItem()),
 			});
 		});
 		
 		it('classes OLSKViewportDetail', function () {
-			browser.assert.hasClass(EMTTrackForm, 'OLSKViewportDetail');
+			browser.assert.hasClass(EMTTemplate, 'OLSKViewportDetail');
 		});
 
 	});
 
-	describe('EMTTrackFormToolbar', function  test_EMTTrackFormToolbar () {
+	describe('EMTTemplateToolbar', function  test_EMTTemplateToolbar () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				EMTTrackFormItem: JSON.stringify(uItem()),
+				EMTTemplateItem: JSON.stringify(uItem()),
 			});
 		});
 		
 		it('classes OLSKToolbar', function () {
-			browser.assert.hasClass(EMTTrackFormToolbar, 'OLSKToolbar');
+			browser.assert.hasClass(EMTTemplateToolbar, 'OLSKToolbar');
 		});
 
 		it('classes OLSKToolbarJustify', function () {
-			browser.assert.hasClass(EMTTrackFormToolbar, 'OLSKToolbarJustify');
+			browser.assert.hasClass(EMTTemplateToolbar, 'OLSKToolbarJustify');
 		});
 	
 	});
 
-	describe('EMTTrackFormToolbarBackButton', function  test_EMTTrackFormToolbarBackButton () {
+	describe('EMTTemplateToolbarBackButton', function  test_EMTTemplateToolbarBackButton () {
 		
 		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(EMTTrackFormToolbarBackButton, 'OLSKLayoutButtonNoStyle');
+			browser.assert.hasClass(EMTTemplateToolbarBackButton, 'OLSKLayoutButtonNoStyle');
 		});
 		
 		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(EMTTrackFormToolbarBackButton, 'OLSKLayoutElementTappable');
+			browser.assert.hasClass(EMTTemplateToolbarBackButton, 'OLSKLayoutElementTappable');
 		});
 
 		context('click', function () {
 			
 			before(function () {
-				browser.assert.text('#TestEMTTrackFormDispatchBack', '0');
+				browser.assert.text('#TestEMTTemplateDispatchBack', '0');
 			});
 			
 			before(function () {
-				return browser.pressButton(EMTTrackFormToolbarBackButton);
+				return browser.pressButton(EMTTemplateToolbarBackButton);
 			});
 
-			it('sends EMTTrackFormDispatchBack', function () {
-				browser.assert.text('#TestEMTTrackFormDispatchBack', '1');
+			it('sends EMTTemplateDispatchBack', function () {
+				browser.assert.text('#TestEMTTemplateDispatchBack', '1');
 			});
 		
 		});
 	
 	});
 
-	describe('EMTTrackFormToolbarDiscardButton', function  test_EMTTrackFormToolbarDiscardButton () {
+	describe('EMTTemplateToolbarDiscardButton', function  test_EMTTemplateToolbarDiscardButton () {
 		
 		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(EMTTrackFormToolbarDiscardButton, 'OLSKLayoutElementTappable');
+			browser.assert.hasClass(EMTTemplateToolbarDiscardButton, 'OLSKLayoutElementTappable');
 		});
 		
 		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(EMTTrackFormToolbarDiscardButton, 'OLSKLayoutElementTappable');
+			browser.assert.hasClass(EMTTemplateToolbarDiscardButton, 'OLSKLayoutElementTappable');
 		});
 
 		context('click', function () {
 			
 			before(function () {
-				browser.assert.text('#TestEMTTrackFormDispatchDiscard', '0');
-				browser.assert.text('#TestEMTTrackFormDispatchDiscardData', 'undefined');
+				browser.assert.text('#TestEMTTemplateDispatchDiscard', '0');
+				browser.assert.text('#TestEMTTemplateDispatchDiscardData', 'undefined');
 			});
 			
 			before(function () {
-				return browser.pressButton(EMTTrackFormToolbarDiscardButton);
+				return browser.pressButton(EMTTemplateToolbarDiscardButton);
 			});
 
-			it('sends EMTTrackFormDispatchDiscard', function () {
-				browser.assert.text('#TestEMTTrackFormDispatchDiscard', '1');
-				browser.assert.text('#TestEMTTrackFormDispatchDiscardData', JSON.stringify(uItem()));
+			it('sends EMTTemplateDispatchDiscard', function () {
+				browser.assert.text('#TestEMTTemplateDispatchDiscard', '1');
+				browser.assert.text('#TestEMTTemplateDispatchDiscardData', JSON.stringify(uItem()));
 			});
 		
 		});
 	
 	});
 	
-	describe('EMTTrackFormBodyNameField', function test_EMTTrackFormBodyNameField () {
+	describe('EMTTemplateFormNameField', function test_EMTTemplateFormNameField () {
 		
 		it('sets autofocus', function () {
-			browser.assert.attribute(EMTTrackFormBodyNameField, 'autofocus', '');
+			browser.assert.attribute(EMTTemplateFormNameField, 'autofocus', '');
 		});
 		
 		it('binds EMTJournalName', function () {
-			browser.assert.input(EMTTrackFormBodyNameField, uItem().EMTJournalName);
+			browser.assert.input(EMTTemplateFormNameField, uItem().EMTJournalName);
 		});
 
 		context('input', function () {
 
 			before(function () {
-				browser.fill(EMTTrackFormBodyNameField, 'alfa');
+				browser.fill(EMTTemplateFormNameField, 'alfa');
 			});
 
-			it('sends EMTTrackFormDispatchUpdate', function () {
-				browser.assert.text('#TestEMTTrackFormDispatchUpdate', '1');
+			it('sends EMTTemplateDispatchUpdate', function () {
+				browser.assert.text('#TestEMTTemplateDispatchUpdate', '1');
 			});
 		
 		});

@@ -6,34 +6,34 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		return OLSKTestingLocalized(inputData, languageCode);
 	};
 
-	describe(`EMTTrackForm_Localize-${ languageCode }`, function () {
+	describe(`EMTTemplate_Localize-${ languageCode }`, function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				EMTTrackFormItem: JSON.stringify({
+				EMTTemplateItem: JSON.stringify({
 					EMTJournalName: 'alfa',
 				}),
 			});
 		});
 
-		it('localizes EMTTrackFormToolbarBackButton', function () {
-			browser.assert.text(EMTTrackFormToolbarBackButton, uLocalized('EMTTrackFormToolbarBackButtonText'));
+		it('localizes EMTTemplateToolbarBackButton', function () {
+			browser.assert.text(EMTTemplateToolbarBackButton, uLocalized('EMTTemplateToolbarBackButtonText'));
 		});
 
-		it('localizes EMTTrackFormToolbarDiscardButton', function () {
-			browser.assert.text(EMTTrackFormToolbarDiscardButton, uLocalized('EMTTrackFormToolbarDiscardButtonText'));
+		it('localizes EMTTemplateToolbarDiscardButton', function () {
+			browser.assert.text(EMTTemplateToolbarDiscardButton, uLocalized('EMTTemplateToolbarDiscardButtonText'));
 		});
 		
-		it('localizes EMTTrackFormBodyNameField', function () {
-			browser.assert.attribute(EMTTrackFormBodyNameField, 'placeholder', uLocalized('EMTTrackFormBodyNameFieldPlaceholderText'));
+		it('localizes EMTTemplateFormNameField', function () {
+			browser.assert.attribute(EMTTemplateFormNameField, 'placeholder', uLocalized('EMTTemplateFormNameFieldPlaceholderText'));
 		});
 
 		context('on discard', function () {
 		
-			it('localizes EMTTrackFormDiscardConfirm', function() {
+			it('localizes EMTTemplateDiscardConfirm', function() {
 				browser.assert.OLSKConfirmQuestion(function () {
-					return browser.pressButton(EMTTrackFormToolbarDiscardButton);
-				}, uLocalized('EMTTrackFormDiscardConfirmText'));
+					return browser.pressButton(EMTTemplateToolbarDiscardButton);
+				}, uLocalized('EMTTemplateDiscardConfirmText'));
 			});
 		
 		});

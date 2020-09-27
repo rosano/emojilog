@@ -22,8 +22,8 @@ describe('EMTTrack_Access', function () {
 		browser.assert.elements('.EMTTrackMasterListItem', 0);
 	});
 
-	it('hides EMTTrackForm', function () {
-		browser.assert.elements('.EMTTrackForm', 0);
+	it('hides EMTTemplate', function () {
+		browser.assert.elements('.EMTTemplate', 0);
 	});
 
 	it('hides EMTBrowseList', function () {
@@ -72,8 +72,8 @@ describe('EMTTrack_Access', function () {
 			browser.assert.elements('.EMTBrowseList', 0);
 		});
 
-		it('shows EMTTrackForm', function () {
-			browser.assert.elements('.EMTTrackForm', 1);
+		it('shows EMTTemplate', function () {
+			browser.assert.elements('.EMTTemplate', 1);
 		});
 	
 	});
@@ -81,11 +81,11 @@ describe('EMTTrack_Access', function () {
 	context('done', function () {
 		
 		before(function () {
-			return browser.pressButton('.EMTTrackFormToolbarBackButton');
+			return browser.pressButton('.EMTTemplateToolbarBackButton');
 		});
 
-		it('hides EMTTrackForm', function () {
-			browser.assert.elements('.EMTTrackForm', 0);
+		it('hides EMTTemplate', function () {
+			browser.assert.elements('.EMTTemplate', 0);
 		});
 
 		it('shows EMTBrowseList', function () {
@@ -128,7 +128,7 @@ describe('EMTTrack_Access', function () {
 			
 			before(async function () {
 				return browser.OLSKConfirm(function () {
-					browser.pressButton('.EMTTrackFormToolbarDiscardButton');
+					browser.pressButton('.EMTTemplateToolbarDiscardButton');
 				}, function (dialog) {
 					dialog.response = false;
 
@@ -136,8 +136,8 @@ describe('EMTTrack_Access', function () {
 				});
 			});
 
-			it('shows EMTTrackForm', function () {
-				browser.assert.elements('.EMTTrackForm', 1);
+			it('shows EMTTemplate', function () {
+				browser.assert.elements('.EMTTemplate', 1);
 			});
 		
 		});
@@ -146,7 +146,7 @@ describe('EMTTrack_Access', function () {
 			
 			before(async function () {
 				return browser.OLSKConfirm(function () {
-					return browser.pressButton('.EMTTrackFormToolbarDiscardButton');
+					return browser.pressButton('.EMTTemplateToolbarDiscardButton');
 				});
 			});
 
@@ -158,8 +158,8 @@ describe('EMTTrack_Access', function () {
 				browser.assert.elements('.EMTBrowseList', 0);
 			});
 
-			it('hides EMTTrackForm', function () {
-				browser.assert.elements('.EMTTrackForm', 0);
+			it('hides EMTTemplate', function () {
+				browser.assert.elements('.EMTTemplate', 0);
 			});
 
 			it('shows EMTTrackMaster', function () {
@@ -177,15 +177,15 @@ describe('EMTTrack_Access', function () {
 		});
 
 		before(function () {
-			return browser.pressButton('.EMTTrackFormToolbarBackButton');
+			return browser.pressButton('.EMTTemplateToolbarBackButton');
 		});
 
 		it('hides EMTTrackMaster', function () {
 			browser.assert.elements('.EMTTrackMaster', 0);
 		});
 
-		it('hides EMTTrackForm', function () {
-			browser.assert.elements('.EMTTrackForm', 0);
+		it('hides EMTTemplate', function () {
+			browser.assert.elements('.EMTTemplate', 0);
 		});
 
 		it('shows EMTBrowseList', function () {
@@ -202,8 +202,8 @@ describe('EMTTrack_Access', function () {
 				browser.assert.elements('.EMTBrowseList', 0);
 			});
 
-			it('shows EMTTrackForm', function () {
-				browser.assert.elements('.EMTTrackForm', 1);
+			it('shows EMTTemplate', function () {
+				browser.assert.elements('.EMTTemplate', 1);
 			});
 		
 		});
@@ -211,7 +211,7 @@ describe('EMTTrack_Access', function () {
 		context('close', function () {
 
 			before(function () {
-				return browser.pressButton('.EMTTrackFormToolbarBackButton');
+				return browser.pressButton('.EMTTemplateToolbarBackButton');
 			});
 
 			before(function () {
@@ -222,8 +222,8 @@ describe('EMTTrack_Access', function () {
 				browser.assert.elements('.EMTTrackMaster', 1);
 			});
 
-			it('hides EMTTrackForm', function () {
-				browser.assert.elements('.EMTTrackForm', 0);
+			it('hides EMTTemplate', function () {
+				browser.assert.elements('.EMTTemplate', 0);
 			});
 
 			it('hides EMTBrowseList', function () {

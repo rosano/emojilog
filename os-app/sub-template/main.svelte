@@ -1,8 +1,8 @@
 <script>
-export let EMTTrackFormItem;
-export let EMTTrackFormDispatchBack;
-export let EMTTrackFormDispatchDiscard;
-export let EMTTrackFormDispatchUpdate;
+export let EMTTemplateItem;
+export let EMTTemplateDispatchBack;
+export let EMTTemplateDispatchDiscard;
+export let EMTTemplateDispatchUpdate;
 
 import OLSKInternational from 'OLSKInternational';
 const OLSKLocalized = function(translationConstant) {
@@ -11,44 +11,44 @@ const OLSKLocalized = function(translationConstant) {
 
 </script>
 
-<div class="EMTTrackForm OLSKViewportDetail">
+<div class="EMTTemplate OLSKViewportDetail">
 
-<header class="EMTTrackFormToolbar OLSKToolbar OLSKToolbarJustify">
+<header class="EMTTemplateToolbar OLSKToolbar OLSKToolbarJustify">
 	<div class="OLSKToolbarElementGroup">
-		<button class="EMTTrackFormToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackFormDispatchBack }>{ OLSKLocalized('EMTTrackFormToolbarBackButtonText') }</button>
+		<button class="EMTTemplateToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTemplateDispatchBack }>{ OLSKLocalized('EMTTemplateToolbarBackButtonText') }</button>
 	</div>
 
 	<div class="OLSKToolbarElementGroup">
-		<button class="EMTTrackFormToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ () => window.confirm(OLSKLocalized('EMTTrackFormDiscardConfirmText')) && EMTTrackFormDispatchDiscard(EMTTrackFormItem) }>{ OLSKLocalized('EMTTrackFormToolbarDiscardButtonText') }</button>
+		<button class="EMTTemplateToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ () => window.confirm(OLSKLocalized('EMTTemplateDiscardConfirmText')) && EMTTemplateDispatchDiscard(EMTTemplateItem) }>{ OLSKLocalized('EMTTemplateToolbarDiscardButtonText') }</button>
 	</div>
 </header>
 
-<div class="EMTTrackFormBody">
+<div class="EMTTemplateForm">
 	<p>
-		<input type="text" class="EMTTrackFormBodyNameField" bind:value={ EMTTrackFormItem.EMTJournalName } on:input={ EMTTrackFormDispatchUpdate } placeholder="{ OLSKLocalized('EMTTrackFormBodyNameFieldPlaceholderText') }" autofocus />
+		<input type="text" class="EMTTemplateFormNameField" bind:value={ EMTTemplateItem.EMTJournalName } on:input={ EMTTemplateDispatchUpdate } placeholder="{ OLSKLocalized('EMTTemplateFormNameFieldPlaceholderText') }" autofocus />
 	</p>
 </div>
 
 </div>
 
 <style>
-.EMTTrackForm {
-	/* EMTTrackFormFlexbox:Parent */
+.EMTTemplate {
+	/* EMTTemplateFlexbox:Parent */
 	display: flex;
 	flex-direction: column;
 }
 
-.EMTTrackFormToolbar {
+.EMTTemplateToolbar {
 	border-bottom: var(--EMTBorderStyle);
 }
 
-.EMTTrackFormBody {
+.EMTTemplateForm {
 	padding: 5px;
 
 	overflow-y: scroll;
 }
 
-.EMTTrackFormBody input[type=text] {
+.EMTTemplateForm input[type=text] {
 	width: 50%;
 	border: var(--EMTBorderStyle);
 	border-radius: 5px;

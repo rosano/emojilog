@@ -109,15 +109,15 @@ const mod = {
 		mod.ControlJournalSelect(inputData);
 	},
 
-	EMTTrackFormDispatchBack () {
+	EMTTemplateDispatchBack () {
 		mod._ValueFormVisible = false;
 	},
 
-	EMTTrackFormDispatchDiscard (inputData) {
+	EMTTemplateDispatchDiscard (inputData) {
 		mod.ControlJournalDiscard(inputData);
 	},
 
-	EMTTrackFormDispatchUpdate () {
+	EMTTemplateDispatchUpdate () {
 		mod._ValueJournalSelected = mod._ValueJournalSelected; // #purge-svelte-force-update
 		
 		mod.ControlJournalSave(mod._ValueJournalSelected);
@@ -143,7 +143,7 @@ const mod = {
 		};
 
 		setTimeout(function () {
-			document.querySelector('.EMTTrackFormBodyNameField').focus();
+			document.querySelector('.EMTTemplateFormNameField').focus();
 		});
 
 		mod._ValueJournalSelected = inputData;
@@ -282,7 +282,7 @@ import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
 import EMTTrackMaster from './submodules/EMTTrackMaster/main.svelte';
-import EMTTrackForm from '../sub-template/main.svelte';
+import EMTTemplate from '../sub-template/main.svelte';
 import EMTBrowse from '../sub-browse/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
@@ -310,11 +310,11 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 	{/if}
 
 	{#if mod._ValueJournalSelected && mod._ValueFormVisible }
-		<EMTTrackForm
-			EMTTrackFormItem={ mod._ValueJournalSelected }
-			EMTTrackFormDispatchBack={ mod.EMTTrackFormDispatchBack }
-			EMTTrackFormDispatchDiscard={ mod.EMTTrackFormDispatchDiscard }
-			EMTTrackFormDispatchUpdate={ mod.EMTTrackFormDispatchUpdate }
+		<EMTTemplate
+			EMTTemplateItem={ mod._ValueJournalSelected }
+			EMTTemplateDispatchBack={ mod.EMTTemplateDispatchBack }
+			EMTTemplateDispatchDiscard={ mod.EMTTemplateDispatchDiscard }
+			EMTTemplateDispatchUpdate={ mod.EMTTemplateDispatchUpdate }
 			/>
 	{/if}
 </div>

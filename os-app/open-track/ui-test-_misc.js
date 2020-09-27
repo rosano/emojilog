@@ -64,14 +64,14 @@ describe('EMTTrack_Misc', function () {
 			return browser.pressButton(EMTTrackMasterCreateButton);
 		});
 
-		it('focuses EMTTrackFormBodyNameField', function() {
-			browser.assert.hasFocus('.EMTTrackFormBodyNameField');
+		it('focuses EMTTemplateFormNameField', function() {
+			browser.assert.hasFocus('.EMTTemplateFormNameField');
 		});
 
 		describe('EMTTrackMasterListItem', function test_EMTTrackMasterListItem () {
 
 			before(function () {
-				return browser.pressButton('.EMTTrackFormToolbarBackButton');
+				return browser.pressButton('.EMTTemplateToolbarBackButton');
 			});
 
 			before(function () {

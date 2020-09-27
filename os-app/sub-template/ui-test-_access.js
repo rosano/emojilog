@@ -1,50 +1,50 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
-	EMTTrackForm: '.EMTTrackForm',
+	EMTTemplate: '.EMTTemplate',
 
-	EMTTrackFormToolbar: '.EMTTrackFormToolbar',
-	EMTTrackFormToolbarBackButton: '.EMTTrackFormToolbarBackButton',
-	EMTTrackFormToolbarDiscardButton: '.EMTTrackFormToolbarDiscardButton',
+	EMTTemplateToolbar: '.EMTTemplateToolbar',
+	EMTTemplateToolbarBackButton: '.EMTTemplateToolbarBackButton',
+	EMTTemplateToolbarDiscardButton: '.EMTTemplateToolbarDiscardButton',
 	
-	EMTTrackFormBody: '.EMTTrackFormBody',
-	EMTTrackFormBodyNameField: '.EMTTrackFormBodyNameField',
+	EMTTemplateForm: '.EMTTemplateForm',
+	EMTTemplateFormNameField: '.EMTTemplateFormNameField',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
 
-describe('EMTTrackForm_Access', function () {
+describe('EMTTemplate_Access', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
-			EMTTrackFormItem: JSON.stringify({
+			EMTTemplateItem: JSON.stringify({
 				EMTJournalName: 'alfa',
 			}),
 		});
 	});
 
-	it('shows EMTTrackForm', function () {
-		browser.assert.elements(EMTTrackForm, 1);
+	it('shows EMTTemplate', function () {
+		browser.assert.elements(EMTTemplate, 1);
 	});
 
-	it('shows EMTTrackFormToolbar', function () {
-		browser.assert.elements(EMTTrackFormToolbar, 1);
+	it('shows EMTTemplateToolbar', function () {
+		browser.assert.elements(EMTTemplateToolbar, 1);
 	});
 
-	it('shows EMTTrackFormToolbarBackButton', function () {
-		browser.assert.elements(EMTTrackFormToolbarBackButton, 1);
+	it('shows EMTTemplateToolbarBackButton', function () {
+		browser.assert.elements(EMTTemplateToolbarBackButton, 1);
 	});
 
-	it('shows EMTTrackFormToolbarDiscardButton', function () {
-		browser.assert.elements(EMTTrackFormToolbarDiscardButton, 1);
+	it('shows EMTTemplateToolbarDiscardButton', function () {
+		browser.assert.elements(EMTTemplateToolbarDiscardButton, 1);
 	});
 
-	it('shows EMTTrackFormBody', function () {
-		browser.assert.elements(EMTTrackFormBody, 1);
+	it('shows EMTTemplateForm', function () {
+		browser.assert.elements(EMTTemplateForm, 1);
 	});
 
-	it('shows EMTTrackFormBodyNameField', function () {
-		browser.assert.elements(EMTTrackFormBodyNameField, 1);
+	it('shows EMTTemplateFormNameField', function () {
+		browser.assert.elements(EMTTemplateFormNameField, 1);
 	});
 
 });
