@@ -71,6 +71,10 @@ describe('EMTTrack_Access', function () {
 		it('hides OLSKDetailPlaceholder', function () {
 			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
+
+		it('shows EMTTrackDetailForm', function () {
+			browser.assert.elements('.EMTTrackDetailForm', 1);
+		});
 	
 	});
 
@@ -91,6 +95,10 @@ describe('EMTTrack_Access', function () {
 			it('hides OLSKDetailPlaceholder', function () {
 				browser.assert.elements('.OLSKDetailPlaceholder', 0);
 			});
+
+			it('shows EMTTrackDetailForm', function () {
+				browser.assert.elements('.EMTTrackDetailForm', 1);
+			});
 		
 		});
 
@@ -106,12 +114,68 @@ describe('EMTTrack_Access', function () {
 				browser.assert.elements('.EMTTrackMasterListItem', 0);
 			});
 
+			it('hides EMTTrackDetailForm', function () {
+				browser.assert.elements('.EMTTrackDetailForm', 0);
+			});
+
 			it('shows OLSKDetailPlaceholder', function () {
 				browser.assert.elements('.OLSKDetailPlaceholder', 1);
 			});
 		
 		});
 		
+	});
+
+	context('browse', function test_browse () {
+		
+		before(function () {
+			return browser.pressButton('.EMTTrackMasterCreateButton');
+		});
+
+		before(function () {
+			return browser.pressButton('.EMTTrackMasterListItem');
+		});
+
+		it('hides EMTTrackMaster', function () {
+			browser.assert.elements('.EMTTrackMaster', 0);
+		});
+
+		it('hides EMTTrackDetail', function () {
+			browser.assert.elements('.EMTTrackDetail', 0);
+		});
+
+		it('shows EMTBrowseList', function () {
+			browser.assert.elements('.EMTBrowseList', 1);
+		});
+	
+	});
+
+	context('close', function test_close() {
+
+		before(function () {
+			return browser.pressButton('.EMTBrowseListToolbarCloseButton');
+		});
+
+		it('shows EMTTrackMaster', function () {
+			browser.assert.elements('.EMTTrackMaster', 1);
+		});
+
+		it('shows EMTTrackDetail', function () {
+			browser.assert.elements('.EMTTrackDetail', 1);
+		});
+
+		it('hides EMTTrackDetailForm', function () {
+			browser.assert.elements('.EMTTrackDetailForm', 0);
+		});
+
+		it('shows OLSKDetailPlaceholder', function () {
+			browser.assert.elements('.OLSKDetailPlaceholder', 1);
+		});
+
+		it('hides EMTBrowseList', function () {
+			browser.assert.elements('.EMTBrowseList', 0);
+		});
+
 	});
 
 });

@@ -15,6 +15,7 @@ import * as RemoteStoragePackage from 'remotestoragejs';
 const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
 import EMTTrackLogic from './ui-logic.js';
 import EMTMemoStorage from '../_shared/EMTMemo/storage.js';
+import EMTMemoAction from '../_shared/EMTMemo/action.js';
 const mod = {
 
 	// VALUE
@@ -35,6 +36,14 @@ const mod = {
 		}
 	},
 	
+	_ValueFormVisible: false,
+	_ValueBrowseVisible: false,
+	
+	_ValueBrowseMemos: [],
+	ValueBrowseMemos (inputData) {
+		mod._ValueBrowseMemos = inputData;
+	},
+
 	_ValueStorageToolbarHidden: true,
 
 	_ValueFooterStorageStatus: '',
@@ -72,6 +81,8 @@ const mod = {
 
 		mod.ValueTimersAll(mod._ValueTimersAll.concat(item));
 
+		mod._ValueFormVisible = true;
+
 		mod.ControlTimerSelect(item);
 	},
 	
@@ -101,7 +112,11 @@ const mod = {
 		mod.ControlTimerCreate();
 	},
 
-	EMTTrackMasterDispatchSelect (inputData) {
+	async EMTTrackMasterDispatchSelect (inputData) {
+		mod.ValueBrowseMemos(await EMTMemoAction.EMTMemoActionList(mod._ValueStorageClient, inputData));
+
+		mod._ValueBrowseVisible = true;
+		
 		mod.ControlTimerSelect(inputData);
 	},
 
@@ -117,6 +132,14 @@ const mod = {
 		mod._ValueTimerSelected = mod._ValueTimerSelected; // #purge-svelte-force-update
 		
 		mod.ControlTimerSave(mod._ValueTimerSelected);
+	},
+
+	EMTBrowseDispatchCreate () {},
+
+	EMTBrowseListDispatchClose () {
+		mod._ValueBrowseVisible = false;
+
+		mod.ControlTimerSelect(null);
 	},
 
 	MessageJournalSelectedDidChange (inputData) {
@@ -269,6 +292,7 @@ onMount(mod.LifecycleModuleWillMount);
 
 import EMTTrackMaster from './submodules/EMTTrackMaster/main.svelte';
 import EMTTrackDetail from './submodules/EMTTrackDetail/main.svelte';
+import EMTBrowse from '../sub-browse/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
 import OLSKStorageWidget from 'OLSKStorageWidget';
@@ -277,9 +301,22 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 <div class="EMTTrack OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading }>
 
 <div class="OLSKViewportContent">
-	<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueTimersAll } EMTTrackMasterListItemSelected={ mod._ValueTimerSelected } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } OLSKMobileViewInactive={ mod._ValueTimerSelected } />
-	
-	<EMTTrackDetail EMTTrackDetailItem={ mod._ValueTimerSelected } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } EMTTrackDetailDispatchUpdate={ mod.EMTTrackDetailDispatchUpdate } OLSKMobileViewInactive={ !mod._ValueTimerSelected } />
+	{#if !mod._ValueBrowseVisible }
+		<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueTimersAll } EMTTrackMasterListItemSelected={ mod._ValueTimerSelected } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } OLSKMobileViewInactive={ mod._ValueTimerSelected } />
+
+		<EMTTrackDetail EMTTrackDetailItem={ mod._ValueTimerSelected } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } EMTTrackDetailDispatchUpdate={ mod.EMTTrackDetailDispatchUpdate } OLSKMobileViewInactive={ !mod._ValueTimerSelected } />
+	{/if}
+
+	{#if mod._ValueTimerSelected && mod._ValueBrowseVisible }
+		<EMTBrowse
+			EMTBrowseStorageClient={ mod._ValueStorageClient }
+			EMTBrowseJournalSelected={ mod._ValueTimerSelected }
+			EMTBrowseJournalMemos={ mod._ValueBrowseMemos }
+			EMTBrowseDispatchCreate={ mod.EMTBrowseDispatchCreate }
+			EMTBrowseListDispatchClose={ mod.EMTBrowseListDispatchClose }
+			bind:this={ mod._EMTBrowse }
+			/>
+	{/if}
 </div>
 
 <footer class="EMTTrackViewportFooter OLSKMobileViewFooter">
