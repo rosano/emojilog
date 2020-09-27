@@ -74,7 +74,7 @@ const mod = {
 		return window.innerWidth <= 760;
 	},
 
-	DataMemoObjectTemplate (inputData) {
+	DataMemoObjectTemplate (inputData = {}) {
 		return Object.assign({
 			EMTMemoEventDate: new Date(),
 			EMTMemoNotes: '',
@@ -141,8 +141,8 @@ const mod = {
 
 	// CONTROL
 
-	async ControlMemoCreate(param1, param2 = {}) {
-		const item = await EMTMemoAction.EMTMemoActionCreate(EMTBrowseStorageClient, mod.DataMemoObjectTemplate(param2), param1);
+	async ControlMemoCreate(inputData) {
+		const item = await EMTMemoAction.EMTMemoActionCreate(EMTBrowseStorageClient, mod.DataMemoObjectTemplate(), inputData);
 
 		mod.ValueMemosAll(mod._ValueMemosAll.concat(item));
 
