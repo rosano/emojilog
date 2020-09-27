@@ -6,6 +6,9 @@ Object.entries({
 	EMTBrowseListToolbarCloseButton: '.EMTBrowseListToolbarCloseButton',
 	EMTBrowseListToolbarCloseButtonImage: '.EMTBrowseListToolbarCloseButtonImage',
 
+	EMTBrowseListToolbarFormButton: '.EMTBrowseListToolbarFormButton',
+	EMTBrowseListToolbarFormButtonImage: '.EMTBrowseListToolbarFormButtonImage',
+
 	EMTBrowseListToolbarCreateButton: '.EMTBrowseListToolbarCreateButton',
 	EMTBrowseListToolbarCreateButtonImage: '.EMTBrowseListToolbarCreateButtonImage',
 }).map(function (e) {
@@ -32,6 +35,14 @@ describe('EMTBrowseList_Access', function () {
 
 	it('shows EMTBrowseListToolbarCloseButtonImage', function () {
 		browser.assert.elements(EMTBrowseListToolbarCloseButtonImage, 1);
+	});
+
+	it('shows EMTBrowseListToolbarFormButton', function () {
+		browser.assert.elements(EMTBrowseListToolbarFormButton, 1);
+	});
+
+	it('shows EMTBrowseListToolbarFormButtonImage', function () {
+		browser.assert.elements(EMTBrowseListToolbarFormButtonImage, 1);
 	});
 
 	it('shows EMTBrowseListToolbarCreateButton', function () {

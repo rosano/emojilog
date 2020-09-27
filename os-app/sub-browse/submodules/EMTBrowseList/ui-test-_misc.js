@@ -110,6 +110,50 @@ describe('EMTBrowseList_Misc', function () {
 
 	});
 
+	describe('EMTBrowseListToolbarFormButton', function test_EMTBrowseListToolbarFormButton() {
+
+		it('classes OLSKLayoutButtonNoStyle', function () {
+			browser.assert.hasClass(EMTBrowseListToolbarFormButton, 'OLSKLayoutButtonNoStyle');
+		});
+
+		it('classes OLSKLayoutElementTappable', function () {
+			browser.assert.hasClass(EMTBrowseListToolbarFormButton, 'OLSKLayoutElementTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(EMTBrowseListToolbarFormButton, 'OLSKToolbarButton');
+		});
+
+		it('sets accesskey', function () {
+			browser.assert.attribute(EMTBrowseListToolbarFormButton, 'accesskey', 'f');
+		});
+
+		context('click', function () {
+
+			before(function () {
+				browser.assert.text('#TestEMTBrowseListDispatchForm', '0');
+			});
+
+			before(function () {
+				return browser.pressButton(EMTBrowseListToolbarFormButton);
+			});
+
+			it('sends EMTBrowseListDispatchForm', function () {
+				browser.assert.text('#TestEMTBrowseListDispatchForm', '1');
+			});
+
+		});
+
+	});
+
+	describe('EMTBrowseListToolbarFormButtonImage', function test_EMTBrowseListToolbarFormButtonImage() {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ EMTBrowseListToolbarFormButtonImage } #_OLSKSharedCreate`, 1);
+		});
+
+	});
+
 	describe('EMTBrowseListToolbarCreateButton', function test_EMTBrowseListToolbarCreateButton() {
 
 		it('classes OLSKLayoutButtonNoStyle', function () {

@@ -3,6 +3,7 @@ export let EMTBrowseListFilterText;
 export let EMTBrowseListItems;
 export let EMTBrowseListItemSelected = null;
 export let EMTBrowseListDispatchClose;
+export let EMTBrowseListDispatchForm;
 export let EMTBrowseListDispatchCreate;
 export let EMTBrowseListDispatchClick;
 export let EMTBrowseListDispatchArrow;
@@ -17,16 +18,6 @@ const OLSKLocalized = function(translationConstant) {
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 
 import EMTBrowseListLogic from './ui-logic.js';
-
-const mod = {
-
-	// INTERFACE
-
-	InterfaceCreateButtonDidClick () {
-		EMTBrowseListDispatchCreate();
-	},
-
-};
 
 import OLSKMasterList from 'OLSKMasterList';
 import _OLSKSharedBack from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedBack.svg';
@@ -56,7 +47,11 @@ import EMTBrowseListItem from '../EMTBrowseListItem/main.svelte';
 
 	<div slot="OLSKMasterListToolbarTail">
 		<div class="OLSKToolbarElementGroup">
-			<button class="EMTBrowseListToolbarCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('EMTBrowseListToolbarCreateButtonText') } on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n">
+			<button class="EMTBrowseListToolbarFormButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('EMTBrowseListToolbarFormButtonText') } on:click={ () => EMTBrowseListDispatchForm() } accesskey="f">
+				<div class="EMTBrowseListToolbarFormButtonImage">{@html _OLSKSharedCreate }</div>
+			</button>
+
+			<button class="EMTBrowseListToolbarCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('EMTBrowseListToolbarCreateButtonText') } on:click={ () => EMTBrowseListDispatchCreate() } accesskey="n">
 				<div class="EMTBrowseListToolbarCreateButtonImage">{@html _OLSKSharedCreate }</div>
 			</button>
 		</div>

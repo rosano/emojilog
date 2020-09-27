@@ -8,6 +8,9 @@ const EMTBrowseList = new RollupStart({
 		EMTBrowseListDispatchClose: (function _EMTBrowseListDispatchClose() {
 			window.TestEMTBrowseListDispatchClose.innerHTML = parseInt(window.TestEMTBrowseListDispatchCreate.innerHTML) + 1;
 		}),
+		EMTBrowseListDispatchForm: (function _EMTBrowseListDispatchForm() {
+			window.TestEMTBrowseListDispatchForm.innerHTML = parseInt(window.TestEMTBrowseListDispatchForm.innerHTML) + 1;
+		}),
 		EMTBrowseListDispatchCreate: (function _EMTBrowseListDispatchCreate() {
 			window.TestEMTBrowseListDispatchCreate.innerHTML = parseInt(window.TestEMTBrowseListDispatchCreate.innerHTML) + 1;
 		}),

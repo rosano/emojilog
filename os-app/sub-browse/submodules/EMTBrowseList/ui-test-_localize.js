@@ -18,6 +18,10 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			browser.assert.attribute(EMTBrowseListToolbarCloseButton, 'title', uLocalized('EMTBrowseListToolbarCloseButtonText'));
 		});
 
+		it('localizes EMTBrowseListToolbarFormButton', function () {
+			browser.assert.attribute(EMTBrowseListToolbarFormButton, 'title', uLocalized('EMTBrowseListToolbarFormButtonText'));
+		});
+
 		it('localizes EMTBrowseListToolbarCreateButton', function () {
 			browser.assert.attribute(EMTBrowseListToolbarCreateButton, 'title', uLocalized('EMTBrowseListToolbarCreateButtonText'));
 		});
