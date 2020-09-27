@@ -6,38 +6,34 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 		return OLSKTestingLocalized(inputData, languageCode);
 	};
 
-	describe(`EMTTrackDetail_Localize-${ languageCode }`, function () {
+	describe(`EMTTrackForm_Localize-${ languageCode }`, function () {
 
-		context('EMTTrackDetailItem', function() {
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute, {
+				EMTTrackFormItem: JSON.stringify({
+					EMTJournalName: 'alfa',
+				}),
+			});
+		});
+
+		it('localizes EMTTrackFormToolbarBackButton', function () {
+			browser.assert.text(EMTTrackFormToolbarBackButton, uLocalized('EMTTrackFormToolbarBackButtonText'));
+		});
+
+		it('localizes EMTTrackFormToolbarDiscardButton', function () {
+			browser.assert.text(EMTTrackFormToolbarDiscardButton, uLocalized('EMTTrackFormToolbarDiscardButtonText'));
+		});
 		
-			before(function() {
-				return browser.OLSKVisit(kDefaultRoute, {
-					EMTTrackDetailItem: JSON.stringify({
-						EMTJournalName: 'alfa',
-					}),
-				});
-			});
+		it('localizes EMTTrackFormBodyNameField', function () {
+			browser.assert.attribute(EMTTrackFormBodyNameField, 'placeholder', uLocalized('EMTTrackFormBodyNameFieldPlaceholderText'));
+		});
 
-			it('localizes EMTTrackDetailToolbarBackButton', function () {
-				browser.assert.text(EMTTrackDetailToolbarBackButton, uLocalized('EMTTrackDetailToolbarBackButtonText'));
-			});
-
-			it('localizes EMTTrackDetailToolbarDiscardButton', function () {
-				browser.assert.text(EMTTrackDetailToolbarDiscardButton, uLocalized('EMTTrackDetailToolbarDiscardButtonText'));
-			});
+		context('on discard', function () {
 		
-			it('localizes EMTTrackDetailFormNameField', function () {
-				browser.assert.attribute(EMTTrackDetailFormNameField, 'placeholder', uLocalized('EMTTrackDetailFormNameFieldPlaceholderText'));
-			});
-
-			context('on discard', function () {
-			
-				it('localizes EMTTrackDetailDiscardConfirm', function() {
-					browser.assert.OLSKConfirmQuestion(function () {
-						return browser.pressButton(EMTTrackDetailToolbarDiscardButton);
-					}, uLocalized('EMTTrackDetailDiscardConfirmText'));
-				});
-		
+			it('localizes EMTTrackFormDiscardConfirm', function() {
+				browser.assert.OLSKConfirmQuestion(function () {
+					return browser.pressButton(EMTTrackFormToolbarDiscardButton);
+				}, uLocalized('EMTTrackFormDiscardConfirmText'));
 			});
 		
 		});

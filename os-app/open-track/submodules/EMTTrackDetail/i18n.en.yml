@@ -1,4 +1,4 @@
-EMTTrackDetailToolbarBackButtonText: Back
-EMTTrackDetailToolbarDiscardButtonText: Discard
-EMTTrackDetailDiscardConfirmText: Are you sure?
-EMTTrackDetailFormNameFieldPlaceholderText: Name
+EMTTrackFormToolbarBackButtonText: Back
+EMTTrackFormToolbarDiscardButtonText: Discard
+EMTTrackFormDiscardConfirmText: Are you sure?
+EMTTrackFormBodyNameFieldPlaceholderText: Name

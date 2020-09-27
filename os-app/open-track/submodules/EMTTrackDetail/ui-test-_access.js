@@ -1,74 +1,50 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
-	EMTTrackDetail: '.EMTTrackDetail',
+	EMTTrackForm: '.EMTTrackForm',
 
-	EMTTrackDetailToolbar: '.EMTTrackDetailToolbar',
-	EMTTrackDetailToolbarBackButton: '.EMTTrackDetailToolbarBackButton',
-	EMTTrackDetailToolbarDiscardButton: '.EMTTrackDetailToolbarDiscardButton',
+	EMTTrackFormToolbar: '.EMTTrackFormToolbar',
+	EMTTrackFormToolbarBackButton: '.EMTTrackFormToolbarBackButton',
+	EMTTrackFormToolbarDiscardButton: '.EMTTrackFormToolbarDiscardButton',
 	
-	EMTTrackDetailForm: '.EMTTrackDetailForm',
-	EMTTrackDetailFormNameField: '.EMTTrackDetailFormNameField',
+	EMTTrackFormBody: '.EMTTrackFormBody',
+	EMTTrackFormBodyNameField: '.EMTTrackFormBodyNameField',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
 
-describe('EMTTrackDetail_Access', function () {
+describe('EMTTrackForm_Access', function () {
 
 	before(function() {
-		return browser.OLSKVisit(kDefaultRoute);
+		return browser.OLSKVisit(kDefaultRoute, {
+			EMTTrackFormItem: JSON.stringify({
+				EMTJournalName: 'alfa',
+			}),
+		});
 	});
 
-	it('shows EMTTrackDetail', function () {
-		browser.assert.elements(EMTTrackDetail, 1);
+	it('shows EMTTrackForm', function () {
+		browser.assert.elements(EMTTrackForm, 1);
 	});
 
-	it('shows OLSKDetailPlaceholder', function () {
-		browser.assert.elements('.OLSKDetailPlaceholder', 1);
+	it('shows EMTTrackFormToolbar', function () {
+		browser.assert.elements(EMTTrackFormToolbar, 1);
 	});
 
-	it('hides EMTTrackDetailToolbar', function () {
-		browser.assert.elements(EMTTrackDetailToolbar, 0);
+	it('shows EMTTrackFormToolbarBackButton', function () {
+		browser.assert.elements(EMTTrackFormToolbarBackButton, 1);
 	});
 
-	it('hides EMTTrackDetailForm', function () {
-		browser.assert.elements(EMTTrackDetailForm, 0);
+	it('shows EMTTrackFormToolbarDiscardButton', function () {
+		browser.assert.elements(EMTTrackFormToolbarDiscardButton, 1);
 	});
 
-	context('EMTTrackDetailItem', function() {
-		
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				EMTTrackDetailItem: JSON.stringify({
-					EMTJournalName: 'alfa',
-				}),
-			});
-		});
+	it('shows EMTTrackFormBody', function () {
+		browser.assert.elements(EMTTrackFormBody, 1);
+	});
 
-		it('hides OLSKDetailPlaceholder', function () {
-			browser.assert.elements('.OLSKDetailPlaceholder', 0);
-		});
-
-		it('shows EMTTrackDetailToolbar', function () {
-			browser.assert.elements(EMTTrackDetailToolbar, 1);
-		});
-
-		it('shows EMTTrackDetailToolbarBackButton', function () {
-			browser.assert.elements(EMTTrackDetailToolbarBackButton, 1);
-		});
-
-		it('shows EMTTrackDetailToolbarDiscardButton', function () {
-			browser.assert.elements(EMTTrackDetailToolbarDiscardButton, 1);
-		});
-
-		it('shows EMTTrackDetailForm', function () {
-			browser.assert.elements(EMTTrackDetailForm, 1);
-		});
-
-		it('shows EMTTrackDetailFormNameField', function () {
-			browser.assert.elements(EMTTrackDetailFormNameField, 1);
-		});
-		
+	it('shows EMTTrackFormBodyNameField', function () {
+		browser.assert.elements(EMTTrackFormBodyNameField, 1);
 	});
 
 });

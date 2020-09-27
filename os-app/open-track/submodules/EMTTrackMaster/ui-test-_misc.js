@@ -11,24 +11,6 @@ describe('EMTTrackMaster_Misc', function () {
 		it('classes OLSKViewportMaster', function () {
 			browser.assert.hasClass(EMTTrackMaster, 'OLSKViewportMaster');
 		});
-
-		context('OLSKMobileViewInactive', function () {
-
-			before(function () {
-				browser.assert.hasNoClass(EMTTrackMaster, 'OLSKMobileViewInactive');
-			});
-			
-			before(function() {
-				return browser.OLSKVisit(kDefaultRoute, {
-					OLSKMobileViewInactive: true,
-				});
-			});
-
-			it('classes OLSKMobileViewInactive', function () {
-				browser.assert.hasClass(EMTTrackMaster, 'OLSKMobileViewInactive');
-			});
-		
-		});
 	
 	});
 

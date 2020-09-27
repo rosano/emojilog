@@ -22,86 +22,6 @@ describe('EMTTrack_Misc', function () {
 		browser.assert.attribute('meta[name=apple-mobile-web-app-capable]', 'content', 'yes');
 	});
 
-	describe('EMTTrackMaster', function test_EMTTrackMaster () {
-
-		it('classes OLSKMobileViewInactive', function () {
-			browser.assert.hasNoClass('.EMTTrackMaster', 'OLSKMobileViewInactive');
-		});
-
-		context('create', function() {
-
-			before(function () {
-				return browser.pressButton(EMTTrackMasterCreateButton);
-			});
-
-			it('classes OLSKMobileViewInactive', function() {
-				browser.assert.hasClass('.EMTTrackMaster', 'OLSKMobileViewInactive');
-			});
-
-		});
-
-		context('back', function() {
-
-			before(function () {
-				return browser.pressButton(EMTTrackDetailToolbarBackButton);
-			});
-
-			it('classes OLSKMobileViewInactive', function() {
-				browser.assert.hasNoClass('.EMTTrackMaster', 'OLSKMobileViewInactive');
-			});
-
-		});
-	
-	});
-
-	describe('EMTTrackMasterListItem', function test_EMTTrackMasterListItem () {
-
-		it('classes OLSKLayoutButtonNoStyle', function() {
-			browser.assert.hasClass('.EMTTrackMasterListItem', 'OLSKLayoutButtonNoStyle');
-		});
-
-		it('classes OLSKLayoutElementTappable', function() {
-			browser.assert.hasClass('.EMTTrackMasterListItem', 'OLSKLayoutElementTappable');
-		});
-	
-	});
-
-	describe('EMTTrackDetail', function test_EMTTrackDetail () {
-
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute);
-		});
-		
-		it('classes OLSKMobileViewInactive', function () {
-			browser.assert.hasClass('.EMTTrackDetail', 'OLSKMobileViewInactive');
-		});
-
-		context('create', function() {
-
-			before(function () {
-				return browser.pressButton(EMTTrackMasterCreateButton);
-			});
-
-			it('classes OLSKMobileViewInactive', function() {
-				browser.assert.hasNoClass('.EMTTrackDetail', 'OLSKMobileViewInactive');
-			});
-
-		});
-
-		context('back', function() {
-
-			before(function () {
-				return browser.pressButton(EMTTrackDetailToolbarBackButton);
-			});
-
-			it('classes OLSKMobileViewInactive', function() {
-				browser.assert.hasClass('.EMTTrackDetail', 'OLSKMobileViewInactive');
-			});
-
-		});
-	
-	});
-
 	describe('EMTTrackStorageToolbar', function test_EMTTrackStorageToolbar () {
 		
 		before(function () {
@@ -144,8 +64,28 @@ describe('EMTTrack_Misc', function () {
 			return browser.pressButton(EMTTrackMasterCreateButton);
 		});
 
-		it('focuses EMTTrackDetailFormNameField', function() {
-			browser.assert.hasFocus('.EMTTrackDetailFormNameField');
+		it('focuses EMTTrackFormBodyNameField', function() {
+			browser.assert.hasFocus('.EMTTrackFormBodyNameField');
+		});
+
+		describe('EMTTrackMasterListItem', function test_EMTTrackMasterListItem () {
+
+			before(function () {
+				return browser.pressButton('.EMTTrackFormToolbarBackButton');
+			});
+
+			before(function () {
+				return browser.pressButton('.EMTBrowseListToolbarCloseButton');
+			});
+
+			it('classes OLSKLayoutButtonNoStyle', function() {
+				browser.assert.hasClass('.EMTTrackMasterListItem', 'OLSKLayoutButtonNoStyle');
+			});
+
+			it('classes OLSKLayoutElementTappable', function() {
+				browser.assert.hasClass('.EMTTrackMasterListItem', 'OLSKLayoutElementTappable');
+			});
+		
 		});
 
 	});

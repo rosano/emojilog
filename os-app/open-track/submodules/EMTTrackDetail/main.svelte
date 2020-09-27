@@ -1,71 +1,54 @@
 <script>
-export let EMTTrackDetailItem = null;
-export let EMTTrackDetailDispatchBack;
-export let EMTTrackDetailDispatchDiscard;
-export let EMTTrackDetailDispatchUpdate;
-export let OLSKMobileViewInactive = false;
+export let EMTTrackFormItem;
+export let EMTTrackFormDispatchBack;
+export let EMTTrackFormDispatchDiscard;
+export let EMTTrackFormDispatchUpdate;
 
 import OLSKInternational from 'OLSKInternational';
 const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
 };
 
-import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
 </script>
 
-<div class="EMTTrackDetail OLSKViewportDetail" class:OLSKMobileViewInactive={ OLSKMobileViewInactive }>
+<div class="EMTTrackForm OLSKViewportDetail">
 
-{#if !EMTTrackDetailItem}
-<OLSKDetailPlaceholder />
-{/if}
-
-{#if EMTTrackDetailItem}
-<header class="EMTTrackDetailToolbar OLSKToolbar OLSKToolbarJustify">
+<header class="EMTTrackFormToolbar OLSKToolbar OLSKToolbarJustify">
 	<div class="OLSKToolbarElementGroup">
-		<button class="EMTTrackDetailToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackDetailDispatchBack }>{ OLSKLocalized('EMTTrackDetailToolbarBackButtonText') }</button>
+		<button class="EMTTrackFormToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackFormDispatchBack }>{ OLSKLocalized('EMTTrackFormToolbarBackButtonText') }</button>
 	</div>
 
 	<div class="OLSKToolbarElementGroup">
-		<button class="EMTTrackDetailToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ () => window.confirm(OLSKLocalized('EMTTrackDetailDiscardConfirmText')) && EMTTrackDetailDispatchDiscard(EMTTrackDetailItem) }>{ OLSKLocalized('EMTTrackDetailToolbarDiscardButtonText') }</button>
+		<button class="EMTTrackFormToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ () => window.confirm(OLSKLocalized('EMTTrackFormDiscardConfirmText')) && EMTTrackFormDispatchDiscard(EMTTrackFormItem) }>{ OLSKLocalized('EMTTrackFormToolbarDiscardButtonText') }</button>
 	</div>
 </header>
 
-<div class="EMTTrackDetailForm">
+<div class="EMTTrackFormBody">
 	<p>
-		<input type="text" class="EMTTrackDetailFormNameField" bind:value={ EMTTrackDetailItem.EMTJournalName } on:input={ EMTTrackDetailDispatchUpdate } placeholder="{ OLSKLocalized('EMTTrackDetailFormNameFieldPlaceholderText') }" autofocus />
+		<input type="text" class="EMTTrackFormBodyNameField" bind:value={ EMTTrackFormItem.EMTJournalName } on:input={ EMTTrackFormDispatchUpdate } placeholder="{ OLSKLocalized('EMTTrackFormBodyNameFieldPlaceholderText') }" autofocus />
 	</p>
 </div>
-{/if}
 
 </div>
 
 <style>
-.EMTTrackDetail {
-	/* EMTTrackDetailFlexbox:Parent */
+.EMTTrackForm {
+	/* EMTTrackFormFlexbox:Parent */
 	display: flex;
 	flex-direction: column;
 }
 
-@media screen and (min-width: 760px) {
-
-.EMTTrackDetail :global(.OLSKDetailPlaceholder) {
-	/* EMTTrackDetailFlexbox:Child */
-	flex-grow: 1;
-}
-
-}
-
-.EMTTrackDetailToolbar {
+.EMTTrackFormToolbar {
 	border-bottom: var(--EMTBorderStyle);
 }
 
-.EMTTrackDetailForm {
+.EMTTrackFormBody {
 	padding: 5px;
 
 	overflow-y: scroll;
 }
 
-.EMTTrackDetailForm input[type=text] {
+.EMTTrackFormBody input[type=text] {
 	width: 50%;
 	border: var(--EMTBorderStyle);
 	border-radius: 5px;

@@ -30,14 +30,9 @@ const mod = {
 	_ValueJournalSelected: undefined,
 	ValueJournalSelected (inputData) {
 		mod._ValueJournalSelected = inputData
-
-		if (!inputData) {
-			mod.OLSKMobileViewInactive = false;	
-		}
 	},
 	
 	_ValueFormVisible: false,
-	_ValueBrowseVisible: false,
 	
 	_ValueBrowseMemos: [],
 	ValueBrowseMemos (inputData) {
@@ -49,8 +44,6 @@ const mod = {
 	_ValueFooterStorageStatus: '',
 
 	_ValueSaveThrottleMap: {},
-
-	OLSKMobileViewInactive: false,
 
 	// DATA
 
@@ -88,8 +81,6 @@ const mod = {
 	
 	ControlJournalSelect(inputData) {
 		mod.ValueJournalSelected(inputData);
-
-		mod.OLSKMobileViewInactive = true;
 	},
 	
 	async ControlJournalDiscard (inputData) {
@@ -114,21 +105,19 @@ const mod = {
 
 	async EMTTrackMasterDispatchSelect (inputData) {
 		mod.ValueBrowseMemos(await EMTMemoAction.EMTMemoActionList(mod._ValueStorageClient, inputData));
-
-		mod._ValueBrowseVisible = true;
 		
 		mod.ControlJournalSelect(inputData);
 	},
 
-	EMTTrackDetailDispatchBack () {
-		mod.ControlJournalSelect(null);
+	EMTTrackFormDispatchBack () {
+		mod._ValueFormVisible = false;
 	},
 
-	EMTTrackDetailDispatchDiscard (inputData) {
+	EMTTrackFormDispatchDiscard (inputData) {
 		mod.ControlJournalDiscard(inputData);
 	},
 
-	EMTTrackDetailDispatchUpdate () {
+	EMTTrackFormDispatchUpdate () {
 		mod._ValueJournalSelected = mod._ValueJournalSelected; // #purge-svelte-force-update
 		
 		mod.ControlJournalSave(mod._ValueJournalSelected);
@@ -141,8 +130,6 @@ const mod = {
 	},
 
 	EMTBrowseListDispatchClose () {
-		mod._ValueBrowseVisible = false;
-
 		mod.ControlJournalSelect(null);
 	},
 
@@ -156,7 +143,7 @@ const mod = {
 		};
 
 		setTimeout(function () {
-			document.querySelector('.EMTTrackDetailFormNameField').focus();
+			document.querySelector('.EMTTrackFormBodyNameField').focus();
 		});
 
 		mod._ValueJournalSelected = inputData;
@@ -295,7 +282,7 @@ import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
 import EMTTrackMaster from './submodules/EMTTrackMaster/main.svelte';
-import EMTTrackDetail from './submodules/EMTTrackDetail/main.svelte';
+import EMTTrackForm from './submodules/EMTTrackDetail/main.svelte';
 import EMTBrowse from '../sub-browse/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
@@ -305,13 +292,12 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 <div class="EMTTrack OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading }>
 
 <div class="OLSKViewportContent">
-	{#if !mod._ValueBrowseVisible }
-		<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueJournalsAll } EMTTrackMasterListItemSelected={ mod._ValueJournalSelected } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } OLSKMobileViewInactive={ mod._ValueJournalSelected } />
-
-		<EMTTrackDetail EMTTrackDetailItem={ mod._ValueJournalSelected } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } EMTTrackDetailDispatchUpdate={ mod.EMTTrackDetailDispatchUpdate } OLSKMobileViewInactive={ !mod._ValueJournalSelected } />
+	{#if !mod._ValueJournalSelected }
+		<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueJournalsAll } EMTTrackMasterListItemSelected={ mod._ValueJournalSelected } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect }
+			 />
 	{/if}
 
-	{#if mod._ValueJournalSelected && mod._ValueBrowseVisible }
+	{#if mod._ValueJournalSelected && !mod._ValueFormVisible }
 		<EMTBrowse
 			EMTBrowseStorageClient={ mod._ValueStorageClient }
 			EMTBrowseJournalSelected={ mod._ValueJournalSelected }
@@ -320,6 +306,15 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 			EMTBrowseListDispatchForm={ mod.EMTBrowseListDispatchForm }
 			EMTBrowseListDispatchClose={ mod.EMTBrowseListDispatchClose }
 			bind:this={ mod._EMTBrowse }
+			/>
+	{/if}
+
+	{#if mod._ValueJournalSelected && mod._ValueFormVisible }
+		<EMTTrackForm
+			EMTTrackFormItem={ mod._ValueJournalSelected }
+			EMTTrackFormDispatchBack={ mod.EMTTrackFormDispatchBack }
+			EMTTrackFormDispatchDiscard={ mod.EMTTrackFormDispatchDiscard }
+			EMTTrackFormDispatchUpdate={ mod.EMTTrackFormDispatchUpdate }
 			/>
 	{/if}
 </div>

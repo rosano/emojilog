@@ -1,20 +1,20 @@
 import RollupStart from './main.svelte';
 
-const EMTTrackDetail = new RollupStart({
+const EMTTrackForm = new RollupStart({
 	target: document.body,
 	props: Object.assign({
-		EMTTrackDetailDispatchBack: (function () {
-			window.TestEMTTrackDetailDispatchBack.innerHTML = parseInt(window.TestEMTTrackDetailDispatchBack.innerHTML) + 1;
+		EMTTrackFormDispatchBack: (function () {
+			window.TestEMTTrackFormDispatchBack.innerHTML = parseInt(window.TestEMTTrackFormDispatchBack.innerHTML) + 1;
 		}),
-		EMTTrackDetailDispatchDiscard: (function (inputData) {
-			window.TestEMTTrackDetailDispatchDiscard.innerHTML = parseInt(window.TestEMTTrackDetailDispatchDiscard.innerHTML) + 1;
-			window.TestEMTTrackDetailDispatchDiscardData.innerHTML = JSON.stringify(inputData);
+		EMTTrackFormDispatchDiscard: (function (inputData) {
+			window.TestEMTTrackFormDispatchDiscard.innerHTML = parseInt(window.TestEMTTrackFormDispatchDiscard.innerHTML) + 1;
+			window.TestEMTTrackFormDispatchDiscardData.innerHTML = JSON.stringify(inputData);
 		}),
-		EMTTrackDetailDispatchUpdate: (function () {
-			window.TestEMTTrackDetailDispatchUpdate.innerHTML = parseInt(window.TestEMTTrackDetailDispatchUpdate.innerHTML) + 1;
+		EMTTrackFormDispatchUpdate: (function () {
+			window.TestEMTTrackFormDispatchUpdate.innerHTML = parseInt(window.TestEMTTrackFormDispatchUpdate.innerHTML) + 1;
 		}),
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
-		if (['EMTTrackDetailItem'].includes(e[0])) {
+		if (['EMTTrackFormItem'].includes(e[0])) {
 			e[1] = JSON.parse(e[1]);
 		}
 
@@ -22,4 +22,4 @@ const EMTTrackDetail = new RollupStart({
 	}))),
 });
 
-export default EMTTrackDetail;
+export default EMTTrackForm;
