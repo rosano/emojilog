@@ -282,7 +282,7 @@ import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
 import EMTTrackMaster from './submodules/EMTTrackMaster/main.svelte';
-import EMTTrackForm from './submodules/EMTTrackDetail/main.svelte';
+import EMTTrackForm from '../sub-template/main.svelte';
 import EMTBrowse from '../sub-browse/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
