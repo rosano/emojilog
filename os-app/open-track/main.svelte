@@ -22,14 +22,14 @@ const mod = {
 
 	_ValueIsLoading: true,
 
-	_ValueTimersAll: [],
-	ValueTimersAll (inputData, shouldSort = true) {
-		mod._ValueTimersAll = shouldSort ? inputData.sort(EMTTrackLogic.EMTTrackSort) : inputData;
+	_ValueJournalsAll: [],
+	ValueJournalsAll (inputData, shouldSort = true) {
+		mod._ValueJournalsAll = shouldSort ? inputData.sort(EMTTrackLogic.EMTTrackSort) : inputData;
 	},
 	
-	_ValueTimerSelected: undefined,
-	ValueTimerSelected (inputData) {
-		mod._ValueTimerSelected = inputData
+	_ValueJournalSelected: undefined,
+	ValueJournalSelected (inputData) {
+		mod._ValueJournalSelected = inputData
 
 		if (!inputData) {
 			mod.OLSKMobileViewInactive = false;	
@@ -60,7 +60,7 @@ const mod = {
 
 	// CONTROL
 
-	ControlTimerSave(inputData) {
+	ControlJournalSave(inputData) {
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveThrottleMap, inputData.EMTJournalID, {
 			OLSKThrottleDuration: 500,
 			async OLSKThrottleCallback () {
@@ -73,33 +73,33 @@ const mod = {
 		};
 	},
 
-	async ControlTimerCreate() {
+	async ControlJournalCreate() {
 		const item = await EMTJournalAction.EMTJournalActionCreate(mod._ValueStorageClient, {
 			EMTJournalName: '',
 			EMTJournalModificationDate: new Date(),
 		});
 
-		mod.ValueTimersAll(mod._ValueTimersAll.concat(item));
+		mod.ValueJournalsAll(mod._ValueJournalsAll.concat(item));
 
 		mod._ValueFormVisible = true;
 
-		mod.ControlTimerSelect(item);
+		mod.ControlJournalSelect(item);
 	},
 	
-	ControlTimerSelect(inputData) {
-		mod.ValueTimerSelected(inputData);
+	ControlJournalSelect(inputData) {
+		mod.ValueJournalSelected(inputData);
 
 		mod.OLSKMobileViewInactive = true;
 	},
 	
-	async ControlTimerDiscard (inputData) {
-		mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
+	async ControlJournalDiscard (inputData) {
+		mod.ValueJournalsAll(mod._ValueJournalsAll.filter(function (e) {
 			return e !== inputData;
 		}))
 
 		await EMTJournalAction.EMTJournalActionDelete(mod._ValueStorageClient, inputData);
 
-		mod.ControlTimerSelect(null);
+		mod.ControlJournalSelect(null);
 	},
 
 	// MESSAGE
@@ -109,7 +109,7 @@ const mod = {
 	},
 
 	EMTTrackMasterDispatchCreate () {
-		mod.ControlTimerCreate();
+		mod.ControlJournalCreate();
 	},
 
 	async EMTTrackMasterDispatchSelect (inputData) {
@@ -117,21 +117,21 @@ const mod = {
 
 		mod._ValueBrowseVisible = true;
 		
-		mod.ControlTimerSelect(inputData);
+		mod.ControlJournalSelect(inputData);
 	},
 
 	EMTTrackDetailDispatchBack () {
-		mod.ControlTimerSelect(null);
+		mod.ControlJournalSelect(null);
 	},
 
 	EMTTrackDetailDispatchDiscard (inputData) {
-		mod.ControlTimerDiscard(inputData);
+		mod.ControlJournalDiscard(inputData);
 	},
 
 	EMTTrackDetailDispatchUpdate () {
-		mod._ValueTimerSelected = mod._ValueTimerSelected; // #purge-svelte-force-update
+		mod._ValueJournalSelected = mod._ValueJournalSelected; // #purge-svelte-force-update
 		
-		mod.ControlTimerSave(mod._ValueTimerSelected);
+		mod.ControlJournalSave(mod._ValueJournalSelected);
 	},
 
 	EMTBrowseDispatchCreate () {},
@@ -139,7 +139,7 @@ const mod = {
 	EMTBrowseListDispatchClose () {
 		mod._ValueBrowseVisible = false;
 
-		mod.ControlTimerSelect(null);
+		mod.ControlJournalSelect(null);
 	},
 
 	MessageJournalSelectedDidChange (inputData) {
@@ -147,7 +147,7 @@ const mod = {
 			return;
 		}
 
-		if (inputData === mod._ValueTimerSelected) {
+		if (inputData === mod._ValueJournalSelected) {
 			return;
 		};
 
@@ -155,35 +155,35 @@ const mod = {
 			document.querySelector('.EMTTrackDetailFormNameField').focus();
 		});
 
-		mod._ValueTimerSelected = inputData;
+		mod._ValueJournalSelected = inputData;
 	},
 
 	// OLSKChangeDelegateCreate (inputData) {
 	// 	// console.log('OLSKChangeDelegateCreate', inputData);
 
-	// 	mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
+	// 	mod.ValueJournalsAll(mod._ValueJournalsAll.filter(function (e) {
 	// 		return e.EMTJournalID !== inputData.EMTJournalID; // @Hotfix Dropbox sending DelegateAdd
 	// 	}).concat(inputData));
 	// },
 	// OLSKChangeDelegateUpdate (inputData) {
 	// 	// console.log('OLSKChangeDelegateUpdate', inputData);
 
-	// 	if (mod._ValueTimerSelected && mod._ValueTimerSelected.EMTJournalID === inputData.EMTJournalID) {
-	// 		mod.ControlTimerSelect(inputData);
+	// 	if (mod._ValueJournalSelected && mod._ValueJournalSelected.EMTJournalID === inputData.EMTJournalID) {
+	// 		mod.ControlJournalSelect(inputData);
 	// 	}
 
-	// 	mod.ValueTimersAll(mod._ValueTimersAll.map(function (e) {
+	// 	mod.ValueJournalsAll(mod._ValueJournalsAll.map(function (e) {
 	// 		return Object.assign(e, e.EMTJournalID === inputData.EMTJournalID ? inputData : {});
 	// 	}), false);
 	// },
 	// OLSKChangeDelegateDelete (inputData) {
 	// 	// console.log('OLSKChangeDelegateDelete', inputData);
 
-	// 	if (mod._ValueTimerSelected && (mod._ValueTimerSelected.EMTJournalID === inputData.EMTJournalID)) {
-	// 		mod.ControlTimerSelect(null);
+	// 	if (mod._ValueJournalSelected && (mod._ValueJournalSelected.EMTJournalID === inputData.EMTJournalID)) {
+	// 		mod.ControlJournalSelect(null);
 	// 	}
 
-	// 	mod.ValueTimersAll(mod._ValueTimersAll.filter(function (e) {
+	// 	mod.ValueJournalsAll(mod._ValueJournalsAll.filter(function (e) {
 	// 		return e.EMTJournalID !== inputData.EMTJournalID;
 	// 	}), false);
 	// },
@@ -197,7 +197,7 @@ const mod = {
 
 		await mod.SetupStorageNotifications();
 
-		await mod.SetupValueTimersAll();
+		await mod.SetupValueJournalsAll();
 
 		mod._ValueIsLoading = false;
 	},
@@ -273,8 +273,8 @@ const mod = {
 		});
 	},
 
-	async SetupValueTimersAll() {
-		mod.ValueTimersAll((await EMTJournalAction.EMTJournalActionList(mod._ValueStorageClient)).filter(function (e) {
+	async SetupValueJournalsAll() {
+		mod.ValueJournalsAll((await EMTJournalAction.EMTJournalActionList(mod._ValueStorageClient)).filter(function (e) {
 			return typeof e === 'object'; // #patch-remotestorage-true
 		}));
 	},
@@ -302,15 +302,15 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 
 <div class="OLSKViewportContent">
 	{#if !mod._ValueBrowseVisible }
-		<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueTimersAll } EMTTrackMasterListItemSelected={ mod._ValueTimerSelected } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } OLSKMobileViewInactive={ mod._ValueTimerSelected } />
+		<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueJournalsAll } EMTTrackMasterListItemSelected={ mod._ValueJournalSelected } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect } OLSKMobileViewInactive={ mod._ValueJournalSelected } />
 
-		<EMTTrackDetail EMTTrackDetailItem={ mod._ValueTimerSelected } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } EMTTrackDetailDispatchUpdate={ mod.EMTTrackDetailDispatchUpdate } OLSKMobileViewInactive={ !mod._ValueTimerSelected } />
+		<EMTTrackDetail EMTTrackDetailItem={ mod._ValueJournalSelected } EMTTrackDetailDispatchBack={ mod.EMTTrackDetailDispatchBack } EMTTrackDetailDispatchDiscard={ mod.EMTTrackDetailDispatchDiscard } EMTTrackDetailDispatchUpdate={ mod.EMTTrackDetailDispatchUpdate } OLSKMobileViewInactive={ !mod._ValueJournalSelected } />
 	{/if}
 
-	{#if mod._ValueTimerSelected && mod._ValueBrowseVisible }
+	{#if mod._ValueJournalSelected && mod._ValueBrowseVisible }
 		<EMTBrowse
 			EMTBrowseStorageClient={ mod._ValueStorageClient }
-			EMTBrowseJournalSelected={ mod._ValueTimerSelected }
+			EMTBrowseJournalSelected={ mod._ValueJournalSelected }
 			EMTBrowseJournalMemos={ mod._ValueBrowseMemos }
 			EMTBrowseDispatchCreate={ mod.EMTBrowseDispatchCreate }
 			EMTBrowseListDispatchClose={ mod.EMTBrowseListDispatchClose }
