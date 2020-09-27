@@ -466,6 +466,22 @@ describe('EMTBrowse_Misc', function () {
 
 	});
 
+	context('form', function test_form() {
+
+		before(function () {
+			browser.assert.text('#TestEMTBrowseListDispatchForm', '0');
+		});
+
+		before(function () {
+			return browser.pressButton('.EMTBrowseListToolbarFormButton');
+		});
+
+		it('sends EMTBrowseListDispatchForm', function () {
+			browser.assert.text('#TestEMTBrowseListDispatchForm', '1');
+		});
+
+	});
+
 	context('close', function test_close() {
 
 		before(function () {

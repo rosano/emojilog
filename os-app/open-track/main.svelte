@@ -136,6 +136,10 @@ const mod = {
 
 	EMTBrowseDispatchCreate () {},
 
+	EMTBrowseListDispatchForm () {
+		mod._ValueFormVisible = true;
+	},
+
 	EMTBrowseListDispatchClose () {
 		mod._ValueBrowseVisible = false;
 
@@ -313,6 +317,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 			EMTBrowseJournalSelected={ mod._ValueJournalSelected }
 			EMTBrowseJournalMemos={ mod._ValueBrowseMemos }
 			EMTBrowseDispatchCreate={ mod.EMTBrowseDispatchCreate }
+			EMTBrowseListDispatchForm={ mod.EMTBrowseListDispatchForm }
 			EMTBrowseListDispatchClose={ mod.EMTBrowseListDispatchClose }
 			bind:this={ mod._EMTBrowse }
 			/>

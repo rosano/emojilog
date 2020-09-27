@@ -4,6 +4,7 @@ export let EMTBrowseStorageClient;
 export let EMTBrowseJournalSelected;
 export let EMTBrowseJournalMemos;
 export let EMTBrowseDispatchCreate;
+export let EMTBrowseListDispatchForm;
 export let EMTBrowseListDispatchClose;
 
 export const modPublic = {
@@ -327,6 +328,7 @@ import EMTBrowseInfo from './submodules/EMTBrowseInfo/main.svelte';
 	EMTBrowseListItems={ mod._ValueMemosVisible }
 	EMTBrowseListItemSelected={ mod._ValueMemoSelected }
 	EMTBrowseListFilterText={ mod._ValueFilterText }
+	EMTBrowseListDispatchForm={ EMTBrowseListDispatchForm }
 	EMTBrowseListDispatchClose={ EMTBrowseListDispatchClose }
 	EMTBrowseListDispatchCreate={ mod.EMTBrowseListDispatchCreate }
 	EMTBrowseListDispatchClick={ mod.EMTBrowseListDispatchClick }

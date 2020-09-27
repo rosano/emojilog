@@ -47,6 +47,9 @@ const EMTBrowse = new RollupStart({
 			window.TestEMTBrowseDispatchCreate.innerHTML = parseInt(window.TestEMTBrowseDispatchCreate.innerHTML) + 1;
 			window.TestEMTBrowseDispatchCreateData.innerHTML = JSON.stringify(Object.keys(inputData));
 		}),
+		EMTBrowseListDispatchForm: (function _EMTBrowseListDispatchForm() {
+			window.TestEMTBrowseListDispatchForm.innerHTML = parseInt(window.TestEMTBrowseListDispatchForm.innerHTML) + 1;
+		}),
 		EMTBrowseListDispatchClose: (function _EMTBrowseListDispatchClose() {
 			window.TestEMTBrowseListDispatchClose.innerHTML = parseInt(window.TestEMTBrowseListDispatchClose.innerHTML) + 1;
 		}),
