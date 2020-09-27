@@ -9,6 +9,9 @@ const OLSKLocalized = function(translationConstant) {
 
 <div class="EMTBrowseListItem">
 
+<div class="EMTBrowseListItemEventDate">{ EMTBrowseListItemObject.EMTMemoEventDate.valueOf() }</div>
+<div class="EMTBrowseListItemNotesSnippet">{ EMTBrowseListItemObject.EMTMemoNotes }</div>
+
 </div>
 
 <style>	

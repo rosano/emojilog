@@ -3,6 +3,8 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 const uItem = function (inputData = 'alfa') {
 	return {
 		EMTMemoID: inputData,
+		EMTMemoEventDate: new Date('2019-02-23T13:56:36Z'),
+		EMTMemoNotes: 'alfa',
 	};
 };
 

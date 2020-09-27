@@ -51,6 +51,8 @@ describe('EMTBrowseList_Access', function () {
 		before(function () {
 			return browser.OLSKVisit(kDefaultRoute, {
 				EMTBrowseListItems: JSON.stringify([{
+					EMTMemoEventDate: new Date('2019-02-23T13:56:36Z'),
+					EMTMemoNotes: 'alfa',
 				}]),
 			});
 		});
