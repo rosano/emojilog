@@ -52,7 +52,7 @@
 	background: #e6e6e6;
 }
 
-.EMTBrowseInfoForm :global(input[type=text]) {
+.EMTBrowseInfoForm :global(input[type=text]), .EMTBrowseInfoForm :global(textarea) {
 	width: 50%;
 	border: var(--EMTBorderStyle);
 	border-radius: 5px;
@@ -61,9 +61,13 @@
 	line-height: 1.7;
 }
 
+.EMTBrowseInfoForm :global(textarea) {
+	min-height: 200px;
+}
+
 @media screen and (max-width: 760px) {
 
-	.EMTBrowseInfoForm :global(input[type=text]) {
+	.EMTBrowseInfoForm :global(input[type=text]), .EMTBrowseInfoForm :global(textarea) {
 		width: 90%;
 		padding: 10px;
 	}
