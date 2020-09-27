@@ -21,9 +21,9 @@ const OLSKLocalized = function(translationConstant) {
 
 <section class="EMTTrackMasterBody OLSKMobileViewBody">
 	{#each EMTTrackMasterListItems as e}
-		<div class="EMTTrackMasterListItem OLSKLayoutElementTappable" class:EMTTrackMasterListItemSelected={ (EMTTrackMasterListItemSelected || {}).EMTJournalID === e.EMTJournalID } on:click={ () => EMTTrackMasterDispatchSelect(e) } >
+		<button class="EMTTrackMasterListItem OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" class:EMTTrackMasterListItemSelected={ (EMTTrackMasterListItemSelected || {}).EMTJournalID === e.EMTJournalID } on:click={ () => EMTTrackMasterDispatchSelect(e) } >
 			<strong>{ e.EMTJournalName || e.EMTJournalID }</strong>
-		</div>
+		</button>
 	{/each}
 </section>
 
@@ -54,8 +54,11 @@ const OLSKLocalized = function(translationConstant) {
 
 .EMTTrackMasterListItem {
 	min-height: 40px;
+	width: 100%;
 	padding: 5px;
 	border-bottom: var(--EMTBorderStyle);
+
+	text-align: left;
 }
 
 .EMTTrackMasterListItem:last-of-type {

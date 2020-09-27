@@ -54,6 +54,18 @@ describe('EMTTrack_Misc', function () {
 	
 	});
 
+	describe('EMTTrackMasterListItem', function test_EMTTrackMasterListItem () {
+
+		it('classes OLSKLayoutButtonNoStyle', function() {
+			browser.assert.hasClass('.EMTTrackMasterListItem', 'OLSKLayoutButtonNoStyle');
+		});
+
+		it('classes OLSKLayoutElementTappable', function() {
+			browser.assert.hasClass('.EMTTrackMasterListItem', 'OLSKLayoutElementTappable');
+		});
+	
+	});
+
 	describe('EMTTrackDetail', function test_EMTTrackDetail () {
 
 		before(function() {
