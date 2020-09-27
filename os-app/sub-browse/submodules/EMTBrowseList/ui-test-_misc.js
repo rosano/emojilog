@@ -156,8 +156,8 @@ describe('EMTBrowseList_Misc', function () {
 
 	describe('EMTBrowseListItem', function test_EMTBrowseListItem() {
 
-		it.skip('sets EMTBrowseListItemFront', function () {
-			browser.assert.text('.OLSKResultsListItem:nth-child(1) .EMTBrowseListItemFront', 'alfa');
+		it('sets EMTBrowseListItemNotesSnippet', function () {
+			browser.assert.text('.OLSKResultsListItem:nth-child(1) .EMTBrowseListItemNotesSnippet', 'alfa');
 		});
 
 	});

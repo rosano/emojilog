@@ -49,7 +49,7 @@ const mod = {
 
 	_ValueMemosVisible: [],
 	ValueMemosVisible (inputData, shouldSort = true) {
-		const items = inputData;
+		const items = !mod._ValueFilterText ? inputData : inputData.filter(EMTBrowseLogic.EMTBrowseFilterFunction(mod._ValueFilterText));
 		mod._ValueMemosVisible = shouldSort ? items.sort(EMTBrowseLogic.EMTBrowseSort) : items;
 	},
 	
@@ -203,7 +203,7 @@ const mod = {
 			return mod.ControlMemoSelect(null);
 		}
 
-		// mod.ValueMemoSelected(EMTBrowseLogic.EMTBrowseExactMatchFirst(inputData, mod._ValueMemosVisible).shift());
+		mod.ValueMemoSelected(EMTBrowseLogic.EMTBrowseExactMatchFirst(inputData, mod._ValueMemosVisible).shift());
 	},
 
 	// MESSAGE

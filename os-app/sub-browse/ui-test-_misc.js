@@ -169,7 +169,7 @@ describe('EMTBrowse_Misc', function () {
 			});
 
 			it.skip('focuses other field', function () {
-				browser.assert.hasFocus('.EMTBrowseInfoFormRearTextField');
+				browser.assert.hasFocus('.EMTBrowseInfoFormNotesField');
 			});
 
 		});
@@ -179,7 +179,7 @@ describe('EMTBrowse_Misc', function () {
 			context.skip('other field focused', function () {
 
 				before(function () {
-					browser.assert.hasFocus('.EMTBrowseInfoFormRearTextField');
+					browser.assert.hasFocus('.EMTBrowseInfoFormNotesField');
 				});
 
 				before(function () {
@@ -334,7 +334,7 @@ describe('EMTBrowse_Misc', function () {
 
 	});
 
-	context.skip('filter', function test_filter() {
+	context('filter', function test_filter() {
 
 		before(function () {
 			return browser.pressButton('.EMTBrowseListToolbarCreateButton');
@@ -419,7 +419,7 @@ describe('EMTBrowse_Misc', function () {
 			});
 
 			it('sorts EMTBrowseListItem', function () {
-				browser.assert.text('.EMTBrowseListItemFront', 'bravoalfa');
+				browser.assert.text('.EMTBrowseListItemNotesSnippet', 'bravoalfa');
 			});
 
 		});
@@ -456,10 +456,10 @@ describe('EMTBrowse_Misc', function () {
 
 	context('edit', function test_edit() {
 
-		context.skip('title', function () {
+		context('title', function () {
 
-			it('sets EMTBrowseListItemFront', function () {
-				browser.assert.text('.OLSKResultsListItemSelected .EMTBrowseListItemFront', 'bravo');
+			it('sets EMTBrowseListItemNotesSnippet', function () {
+				browser.assert.text('.OLSKResultsListItemSelected .EMTBrowseListItemNotesSnippet', 'bravo');
 			});
 
 		});
