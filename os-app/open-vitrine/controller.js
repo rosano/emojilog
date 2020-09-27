@@ -15,6 +15,7 @@ exports.OLSKControllerRoutes = function() {
 				})(require('fs').readFileSync(require('path').join(__dirname, `text.${ res.locals.OLSKSharedPageCurrentLanguage }.md`), 'utf-8')), {
 					EMTVitrineTokenTrackURL: res.locals.OLSKCanonicalLocalizedFor('EMTTrackRoute'),
 					EMT_SHARED_GITHUB_URL: process.env.EMT_SHARED_GITHUB_URL,
+					EMT_SHARED_DONATE_URL: process.env.EMT_SHARED_DONATE_URL,
 					EMTVitrineDescription: res.locals.OLSKLocalized('EMTVitrineDescription'),
 				}),
 				OLSKStringReplaceTokens: require('OLSKString').OLSKStringReplaceTokens,
@@ -23,6 +24,7 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRouteLanguages: ['en'],
 		OLSKRouteMiddlewares: [
 			'EMTSharedGitHubLinkGuardMiddleware',
+			'EMTSharedDonateLinkGuardMiddleware',
 		],
 	}];
 };

@@ -6,6 +6,8 @@ Check out the features below or [try it](EMTVitrineTokenTrackURL).
 
 The code is open-source and available on [GitHub](EMT_SHARED_GITHUB_URL).
 
+The project is freely accessible but if you are in a position to give, please [donate](EMT_SHARED_DONATE_URL) to support future development.
+
 * * *
 
 ## Features
