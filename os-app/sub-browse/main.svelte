@@ -5,7 +5,6 @@ export let EMTBrowseJournalSelected;
 export let EMTBrowseJournalMemos;
 export let EMTBrowseDispatchCreate;
 export let EMTBrowseListDispatchClose;
-export let EMTBrowseInfoSpeechAvailable;
 
 export const modPublic = {
 
@@ -339,7 +338,6 @@ import EMTBrowseInfo from './submodules/EMTBrowseInfo/main.svelte';
 <EMTBrowseInfo
 	EMTBrowseInfoItem={ mod._ValueMemoSelected }
 	EMTBrowseInfoJournal={ EMTBrowseJournalSelected }
-	EMTBrowseInfoSpeechAvailable={ EMTBrowseInfoSpeechAvailable }
 	EMTBrowseInfoDispatchBack={ mod.EMTBrowseInfoDispatchBack }
 	EMTBrowseInfoDispatchDiscard={ mod.EMTBrowseInfoDispatchDiscard }
 	EMTBrowseInfoDispatchUpdate={ mod.EMTBrowseInfoDispatchUpdate }

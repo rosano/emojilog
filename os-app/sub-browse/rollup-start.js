@@ -50,7 +50,6 @@ const EMTBrowse = new RollupStart({
 		EMTBrowseListDispatchClose: (function _EMTBrowseListDispatchClose() {
 			window.TestEMTBrowseListDispatchClose.innerHTML = parseInt(window.TestEMTBrowseListDispatchClose.innerHTML) + 1;
 		}),
-		EMTBrowseInfoSpeechAvailable: false,
 		EMTBrowseJournalMemos: [],
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e, index, coll) {
 		if (['EMTBrowseJournalSelected', 'EMTBrowseItemSelected'].includes(e[0])) {

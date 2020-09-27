@@ -1,7 +1,7 @@
 import RollupStart from './main.svelte';
 
 const params = Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
-	if (['EMTBrowseInfoItem', 'EMTBrowseInfoJournal', 'EMTBrowseInfoSpeechAvailable'].includes(e[0])) {
+	if (['EMTBrowseInfoItem', 'EMTBrowseInfoJournal'].includes(e[0])) {
 		e[1] = JSON.parse(e[1]);
 	}
 
@@ -52,7 +52,6 @@ const EMTBrowseInfo = new RollupStart({
 			window.TestEMTBrowseInfoDispatchDebug.innerHTML = parseInt(window.TestEMTBrowseInfoDispatchDebug.innerHTML) + 1;
 			window.TestEMTBrowseInfoDispatchDebugData.innerHTML = JSON.stringify(inputData);
 		}),
-		EMTBrowseInfoSpeechAvailable: false,
 		EMTBrowseInfo_DebugShowLauncherButton: true,
 	}, params),
 });
