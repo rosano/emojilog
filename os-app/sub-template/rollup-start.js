@@ -3,8 +3,8 @@ import RollupStart from './main.svelte';
 const EMTTemplate = new RollupStart({
 	target: document.body,
 	props: Object.assign({
-		EMTTemplateDispatchBack: (function () {
-			window.TestEMTTemplateDispatchBack.innerHTML = parseInt(window.TestEMTTemplateDispatchBack.innerHTML) + 1;
+		EMTTemplateDispatchDone: (function () {
+			window.TestEMTTemplateDispatchDone.innerHTML = parseInt(window.TestEMTTemplateDispatchDone.innerHTML) + 1;
 		}),
 		EMTTemplateDispatchDiscard: (function (inputData) {
 			window.TestEMTTemplateDispatchDiscard.innerHTML = parseInt(window.TestEMTTemplateDispatchDiscard.innerHTML) + 1;

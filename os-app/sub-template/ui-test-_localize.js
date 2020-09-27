@@ -16,8 +16,8 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			});
 		});
 
-		it('localizes EMTTemplateToolbarBackButton', function () {
-			browser.assert.text(EMTTemplateToolbarBackButton, uLocalized('EMTTemplateToolbarBackButtonText'));
+		it('localizes EMTTemplateToolbarDoneButton', function () {
+			browser.assert.text(EMTTemplateToolbarDoneButton, uLocalized('EMTTemplateToolbarDoneButtonText'));
 		});
 
 		it('localizes EMTTemplateToolbarDiscardButton', function () {

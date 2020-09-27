@@ -109,7 +109,7 @@ const mod = {
 		mod.ControlJournalSelect(inputData);
 	},
 
-	EMTTemplateDispatchBack () {
+	EMTTemplateDispatchDone () {
 		mod._ValueFormVisible = false;
 	},
 
@@ -312,7 +312,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 	{#if mod._ValueJournalSelected && mod._ValueFormVisible }
 		<EMTTemplate
 			EMTTemplateItem={ mod._ValueJournalSelected }
-			EMTTemplateDispatchBack={ mod.EMTTemplateDispatchBack }
+			EMTTemplateDispatchDone={ mod.EMTTemplateDispatchDone }
 			EMTTemplateDispatchDiscard={ mod.EMTTemplateDispatchDiscard }
 			EMTTemplateDispatchUpdate={ mod.EMTTemplateDispatchUpdate }
 			/>

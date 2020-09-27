@@ -81,7 +81,7 @@ describe('EMTTrack_Access', function () {
 	context('done', function () {
 		
 		before(function () {
-			return browser.pressButton('.EMTTemplateToolbarBackButton');
+			return browser.pressButton('.EMTTemplateToolbarDoneButton');
 		});
 
 		it('hides EMTTemplate', function () {
@@ -177,7 +177,7 @@ describe('EMTTrack_Access', function () {
 		});
 
 		before(function () {
-			return browser.pressButton('.EMTTemplateToolbarBackButton');
+			return browser.pressButton('.EMTTemplateToolbarDoneButton');
 		});
 
 		it('hides EMTTrackMaster', function () {
@@ -211,7 +211,7 @@ describe('EMTTrack_Access', function () {
 		context('close', function () {
 
 			before(function () {
-				return browser.pressButton('.EMTTemplateToolbarBackButton');
+				return browser.pressButton('.EMTTemplateToolbarDoneButton');
 			});
 
 			before(function () {

@@ -40,28 +40,28 @@ describe('EMTTemplate_Misc', function  test_EMTTemplate_Misc () {
 	
 	});
 
-	describe('EMTTemplateToolbarBackButton', function  test_EMTTemplateToolbarBackButton () {
+	describe('EMTTemplateToolbarDoneButton', function  test_EMTTemplateToolbarDoneButton () {
 		
 		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(EMTTemplateToolbarBackButton, 'OLSKLayoutButtonNoStyle');
+			browser.assert.hasClass(EMTTemplateToolbarDoneButton, 'OLSKLayoutButtonNoStyle');
 		});
 		
 		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(EMTTemplateToolbarBackButton, 'OLSKLayoutElementTappable');
+			browser.assert.hasClass(EMTTemplateToolbarDoneButton, 'OLSKLayoutElementTappable');
 		});
 
 		context('click', function () {
 			
 			before(function () {
-				browser.assert.text('#TestEMTTemplateDispatchBack', '0');
+				browser.assert.text('#TestEMTTemplateDispatchDone', '0');
 			});
 			
 			before(function () {
-				return browser.pressButton(EMTTemplateToolbarBackButton);
+				return browser.pressButton(EMTTemplateToolbarDoneButton);
 			});
 
-			it('sends EMTTemplateDispatchBack', function () {
-				browser.assert.text('#TestEMTTemplateDispatchBack', '1');
+			it('sends EMTTemplateDispatchDone', function () {
+				browser.assert.text('#TestEMTTemplateDispatchDone', '1');
 			});
 		
 		});

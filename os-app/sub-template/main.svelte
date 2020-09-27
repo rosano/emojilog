@@ -1,6 +1,6 @@
 <script>
 export let EMTTemplateItem;
-export let EMTTemplateDispatchBack;
+export let EMTTemplateDispatchDone;
 export let EMTTemplateDispatchDiscard;
 export let EMTTemplateDispatchUpdate;
 
@@ -15,7 +15,7 @@ const OLSKLocalized = function(translationConstant) {
 
 <header class="EMTTemplateToolbar OLSKToolbar OLSKToolbarJustify">
 	<div class="OLSKToolbarElementGroup">
-		<button class="EMTTemplateToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTemplateDispatchBack }>{ OLSKLocalized('EMTTemplateToolbarBackButtonText') }</button>
+		<button class="EMTTemplateToolbarDoneButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTemplateDispatchDone }>{ OLSKLocalized('EMTTemplateToolbarDoneButtonText') }</button>
 	</div>
 
 	<div class="OLSKToolbarElementGroup">

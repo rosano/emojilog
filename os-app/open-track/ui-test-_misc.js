@@ -71,7 +71,7 @@ describe('EMTTrack_Misc', function () {
 		describe('EMTTrackMasterListItem', function test_EMTTrackMasterListItem () {
 
 			before(function () {
-				return browser.pressButton('.EMTTemplateToolbarBackButton');
+				return browser.pressButton('.EMTTemplateToolbarDoneButton');
 			});
 
 			before(function () {

@@ -4,7 +4,7 @@ Object.entries({
 	EMTTemplate: '.EMTTemplate',
 
 	EMTTemplateToolbar: '.EMTTemplateToolbar',
-	EMTTemplateToolbarBackButton: '.EMTTemplateToolbarBackButton',
+	EMTTemplateToolbarDoneButton: '.EMTTemplateToolbarDoneButton',
 	EMTTemplateToolbarDiscardButton: '.EMTTemplateToolbarDiscardButton',
 	
 	EMTTemplateForm: '.EMTTemplateForm',
@@ -31,8 +31,8 @@ describe('EMTTemplate_Access', function () {
 		browser.assert.elements(EMTTemplateToolbar, 1);
 	});
 
-	it('shows EMTTemplateToolbarBackButton', function () {
-		browser.assert.elements(EMTTemplateToolbarBackButton, 1);
+	it('shows EMTTemplateToolbarDoneButton', function () {
+		browser.assert.elements(EMTTemplateToolbarDoneButton, 1);
 	});
 
 	it('shows EMTTemplateToolbarDiscardButton', function () {
