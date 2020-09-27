@@ -5,12 +5,11 @@ const EMTBrowseList = new RollupStart({
 	props: Object.assign({
 		EMTBrowseListItems: [],
 		EMTBrowseListFilterText: '',
-		EMTBrowseListDispatchClose: (function _EMTBrowseListDispatchClose(inputData) {
+		EMTBrowseListDispatchClose: (function _EMTBrowseListDispatchClose() {
 			window.TestEMTBrowseListDispatchClose.innerHTML = parseInt(window.TestEMTBrowseListDispatchCreate.innerHTML) + 1;
 		}),
-		EMTBrowseListDispatchCreate: (function _EMTBrowseListDispatchCreate(inputData) {
+		EMTBrowseListDispatchCreate: (function _EMTBrowseListDispatchCreate() {
 			window.TestEMTBrowseListDispatchCreate.innerHTML = parseInt(window.TestEMTBrowseListDispatchCreate.innerHTML) + 1;
-			window.TestEMTBrowseListDispatchCreateData.innerHTML = inputData;
 		}),
 		EMTBrowseListDispatchClick: (function _EMTBrowseListDispatchClick(inputData) {
 			window.TestEMTBrowseListDispatchClick.innerHTML = parseInt(window.TestEMTBrowseListDispatchClick.innerHTML) + 1;
