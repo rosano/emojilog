@@ -91,6 +91,8 @@ const mod = {
 		await EMTJournalAction.EMTJournalActionDelete(mod._ValueStorageClient, inputData);
 
 		mod.ControlJournalSelect(null);
+
+		mod._ValueFormVisible = false;
 	},
 
 	// MESSAGE
