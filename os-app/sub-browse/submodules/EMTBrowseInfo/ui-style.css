@@ -57,8 +57,6 @@
 	border: var(--EMTBorderStyle);
 	border-radius: 5px;
 	padding: 5px 7px;
-
-	line-height: 1.7;
 }
 
 .EMTBrowseInfoForm :global(textarea) {
