@@ -52,7 +52,46 @@ const mod = {
 	},
 
 	DataRecipes () {
-		return [];
+		const outputData = [];
+
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			outputData.push(...[{
+				LCHRecipeName: 'EMTTrackLauncherItemDebug_ImportFileData',
+				LCHRecipeCallback: function EMTTrackLauncherItemDebug_ImportFileData () {
+					mod.InterfaceStorageInputFieldDidRead(window.prompt());
+				},
+			}])
+		}
+
+		return outputData;
+	},
+
+	// INTERFACE
+
+	InterfaceStorageInputFieldDidInput (event) {
+		const inputElement = event.target;
+		const fileReader = new FileReader();
+		
+		fileReader.onload = function (event) {
+			mod.InterfaceStorageInputFieldDidRead(event.target.result);
+			
+			inputElement.value = null;
+		};
+
+		fileReader.readAsText(inputElement.files[0]);
+	},
+
+	async InterfaceStorageInputFieldDidRead (inputData) {
+		if (!inputData.trim()) {
+			return window.alert(OLSKLocalized('EMTTrackStorageImportErrorNotFilledAlertText'))
+		}
+
+		try {
+			await EMT_Data.EMT_DataImport(mod._ValueStorageClient, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
+			await mod.SetupValueJournalsAll();
+		} catch (e) {
+			window.alert(OLSKLocalized('EMTTrackStorageImportErrorNotValidAlertText'));
+		}
 	},
 
 	// CONTROL
@@ -339,7 +378,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 	{#if !mod._ValueStorageToolbarHidden }
 		<div class="EMTTrackStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKStorageToolbar">
 			<div class="OLSKToolbarElementGroup">
-				<div></div>
+				<input class="EMTTrackStorageImportField" type="file" on:change={ mod.InterfaceStorageInputFieldDidInput } />
 			</div>
 
 			<div class="OLSKToolbarElementGroup">

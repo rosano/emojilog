@@ -58,7 +58,64 @@ describe('EMTTrack_Misc', function () {
 
 	});
 
+	describe('EMTTrackStorageImportField', function test_EMTTrackStorageImportField() {
+
+		it('sets type', function () {
+			browser.assert.attribute(EMTTrackStorageImportField, 'type', 'file');
+		});
+
+		context('valid', function () {
+			
+			before(function () {
+				return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			});
+
+			before(function () {
+				return browser.fill('.LCHLauncherFilterInput', 'EMTTrackLauncherItemDebug_ImportFileData');
+			});
+
+			before(function () {
+				return browser.OLSKPrompt(function () {
+					return browser.click('.LCHLauncherPipeItem');
+				}, function (dialog) {
+					dialog.response = JSON.stringify([StubJournalObjectValid({
+						EMTJournalName: 'zulu',
+						$EMTJournalMemos: [StubMemoObjectValid({
+							EMTMemoID: 'alfa',
+						}), StubMemoObjectValid({
+							EMTMemoID: 'bravo',
+						})],
+					})]);
+
+					return dialog;
+				});
+			});
+
+			it('creates journal', function () {
+				browser.assert.text('.EMTTrackMasterListItemName', 'zulu');
+			});
+
+			context('click', function () {
+
+				before(function () {
+					return browser.pressButton('.EMTTrackMasterListItem');
+				});
+				
+				it('creates memo', function () {
+					browser.assert.elements('.EMTBrowseListItem', 2);
+				});
+			
+			});
+
+		});
+		
+	});
+
 	context('create', function() {
+
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute);
+		});
 
 		before(function () {
 			return browser.pressButton(EMTTrackMasterCreateButton);
