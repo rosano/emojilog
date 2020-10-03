@@ -1,5 +1,7 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
+const OLSKString = require('OLSKString');
+
 describe('EMTBrowseListItem_Misc', function () {
 
 	const item = {
@@ -18,9 +20,13 @@ describe('EMTBrowseListItem_Misc', function () {
 		it('binds EMTMemoEventDate', function () {
 			browser.assert.text(EMTBrowseListItemEventDate, item.EMTMemoEventDate.valueOf().toString());
 		});
+
+	});
+
+	describe('EMTBrowseListItemNotesSnippet', function test_EMTBrowseListItemNotesSnippet () {
 		
-		it('binds EMTMemoNotes', function () {
-			browser.assert.text(EMTBrowseListItemNotesSnippet, 'alfa');
+		it('binds and snips EMTMemoNotes', function () {
+			browser.assert.text(EMTBrowseListItemNotesSnippet, OLSKString.OLSKStringSnippet(item.EMTMemoNotes));
 		});
 
 	});
