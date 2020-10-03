@@ -8,7 +8,9 @@ Object.entries({
 	EMTTrackMasterCreateButton: '.EMTTrackMasterCreateButton',
 
 	EMTTrackMasterBody: '.EMTTrackMasterBody',
+
 	EMTTrackMasterListItem: '.EMTTrackMasterListItem',
+	EMTTrackMasterListItemName: '.EMTTrackMasterListItemName',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });

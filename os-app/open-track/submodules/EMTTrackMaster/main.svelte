@@ -21,7 +21,7 @@ const OLSKLocalized = function(translationConstant) {
 <section class="EMTTrackMasterBody OLSKMobileViewBody">
 	{#each EMTTrackMasterListItems as e}
 		<button class="EMTTrackMasterListItem OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" class:EMTTrackMasterListItemSelected={ (EMTTrackMasterListItemSelected || {}).EMTJournalID === e.EMTJournalID } on:click={ () => EMTTrackMasterDispatchSelect(e) } >
-			<strong>{ e.EMTJournalName || e.EMTJournalID }</strong>
+			<strong class="EMTTrackMasterListItemName">{ e.EMTJournalName || e.EMTJournalID }</strong>
 		</button>
 	{/each}
 </section>

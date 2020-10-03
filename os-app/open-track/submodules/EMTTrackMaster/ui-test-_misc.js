@@ -69,8 +69,8 @@ describe('EMTTrackMaster_Misc', function () {
 			});
 		});
 
-		it('sets text', function () {
-			browser.assert.text(EMTTrackMasterListItem, 'bravo');
+		it('sets binds EMTJournalName', function () {
+			browser.assert.text(EMTTrackMasterListItemName, 'bravo');
 		});
 
 
