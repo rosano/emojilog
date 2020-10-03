@@ -42,6 +42,10 @@ describe('EMTTrack_Access', function () {
 		browser.assert.elements('.OLSKAppToolbar', 1);
 	});
 
+	it('shows OLSKAppToolbarLauncherButton', function () {
+		browser.assert.elements('.OLSKAppToolbarLauncherButton', 1);
+	});
+
 	context('click OLSKAppToolbarStorageButton', function () {
 		
 		before(function () {
@@ -56,6 +60,32 @@ describe('EMTTrack_Access', function () {
 			browser.assert.elements('.OLSKStorageWidget', 1);
 		});
 	
+	});
+
+	describe('OLSKAppToolbarLauncherButton', function test_OLSKAppToolbarLauncherButton() {
+
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+		});
+
+		it('shows LCHLauncher', function () {
+			browser.assert.elements('.LCHLauncher', 1);
+		});
+
+		context('AltSpace', function () {
+			
+			before(function () {
+				return browser.OLSKFireKeyboardEvent(browser.window, 'Space', {
+					altKey: true,
+				});
+			});
+			
+			it('hides LCHLauncher', function () {
+				browser.assert.elements('.LCHLauncher', 0);
+			});
+
+		});
+
 	});
 
 	context('create', function () {

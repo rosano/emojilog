@@ -51,6 +51,10 @@ const mod = {
 		return window.innerWidth <= 760;
 	},
 
+	DataRecipes () {
+		return [];
+	},
+
 	// CONTROL
 
 	ControlJournalSave(inputData) {
@@ -99,6 +103,16 @@ const mod = {
 
 	OLSKAppToolbarDispatchStorage () {
 		mod._ValueStorageToolbarHidden = !mod._ValueStorageToolbarHidden;
+	},
+
+	OLSKAppToolbarDispatchLauncher () {
+		if (window.Launchlet.LCHSingletonExists()) {
+			return window.Launchlet.LCHSingletonDestroy();
+		}
+
+		window.Launchlet.LCHSingletonCreate({
+			LCHOptionRecipes: mod.DataRecipes(),
+		});
 	},
 
 	EMTTrackMasterDispatchCreate () {
@@ -340,6 +354,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
 		_OLSKAppToolbarDispatchExport={ mod._OLSKAppToolbarDispatchExport }
 		_OLSKAppToolbarDispatchImport={ mod._OLSKAppToolbarDispatchImport }
+		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
 		/>
 </footer>
 
