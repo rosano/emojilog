@@ -8,6 +8,8 @@ import OLSKThrottle from 'OLSKThrottle';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import * as OLSKRemoteStoragePackage from '../_shared/__external/OLSKRemoteStorage/main.js'
 const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
+import * as OLSKServiceWorkerPackage from '../_shared/__external/OLSKServiceWorker/main.js'
+const OLSKServiceWorker = OLSKServiceWorkerPackage.default || OLSKServiceWorkerPackage;
 import EMT_Data from '../_shared/EMT_Data/main.js';
 import EMTJournalStorage from '../_shared/EMTJournal/storage.js';
 import EMTJournalAction from '../_shared/EMTJournal/action.js';
@@ -51,6 +53,12 @@ const mod = {
 		return window.innerWidth <= 760;
 	},
 
+	DataNavigator () {
+		return navigator.serviceWorker ? navigator : {
+			serviceWorker: {},
+		};
+	},
+
 	DataRecipes () {
 		const outputData = [];
 
@@ -64,6 +72,8 @@ const mod = {
 		}
 
 		outputData.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes(window, mod._ValueStorageClient, OLSKLocalized, OLSK_TESTING_BEHAVIOUR()));
+		outputData.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_TESTING_BEHAVIOUR()));
+
 		return outputData;
 	},
 
@@ -341,7 +351,7 @@ import EMTTrackMaster from './submodules/EMTTrackMaster/main.svelte';
 import EMTTemplate from '../sub-template/main.svelte';
 import EMTBrowse from '../sub-browse/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
-import OLSKServiceWorker from '../_shared/__external/OLSKServiceWorker/main.svelte';
+import OLSKServiceWorkerView from '../_shared/__external/OLSKServiceWorker/main.svelte';
 import OLSKStorageWidget from 'OLSKStorageWidget';
 </script>
 
@@ -401,7 +411,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 </div>
 
 {#if !OLSK_TESTING_BEHAVIOUR()}
-	<OLSKServiceWorker OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonicalFor('EMTServiceWorkerRoute') } />
+	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonicalFor('EMTServiceWorkerRoute') } />
 {/if}
 
 <style src="./ui-style.css"></style>
