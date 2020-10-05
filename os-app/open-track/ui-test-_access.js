@@ -48,6 +48,10 @@ describe('EMTTrack_Access', function () {
 		browser.assert.elements('.OLSKAppToolbarLauncherButton', 1);
 	});
 
+	it('shows OLSKRemoteStorageLauncherFakeItemProxy', function () {
+		return browser.assert.OLSKLauncherItems('OLSKRemoteStorageLauncherFakeItemProxy', 1);
+	});
+
 	context('click OLSKAppToolbarStorageButton', function () {
 		
 		before(function () {

@@ -63,6 +63,7 @@ const mod = {
 			}])
 		}
 
+		outputData.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes(window, mod._ValueStorageClient, OLSKLocalized, OLSK_TESTING_BEHAVIOUR()));
 		return outputData;
 	},
 
