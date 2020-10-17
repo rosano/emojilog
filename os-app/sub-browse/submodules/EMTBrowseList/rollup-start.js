@@ -5,24 +5,24 @@ const EMTBrowseList = new RollupStart({
 	props: Object.assign({
 		EMTBrowseListItems: [],
 		EMTBrowseListFilterText: '',
-		EMTBrowseListDispatchClose: (function _EMTBrowseListDispatchClose() {
+		EMTBrowseListDispatchClose: (function () {
 			window.TestEMTBrowseListDispatchClose.innerHTML = parseInt(window.TestEMTBrowseListDispatchCreate.innerHTML) + 1;
 		}),
-		EMTBrowseListDispatchForm: (function _EMTBrowseListDispatchForm() {
+		EMTBrowseListDispatchForm: (function () {
 			window.TestEMTBrowseListDispatchForm.innerHTML = parseInt(window.TestEMTBrowseListDispatchForm.innerHTML) + 1;
 		}),
-		EMTBrowseListDispatchCreate: (function _EMTBrowseListDispatchCreate() {
+		EMTBrowseListDispatchCreate: (function () {
 			window.TestEMTBrowseListDispatchCreate.innerHTML = parseInt(window.TestEMTBrowseListDispatchCreate.innerHTML) + 1;
 		}),
-		EMTBrowseListDispatchClick: (function _EMTBrowseListDispatchClick(inputData) {
+		EMTBrowseListDispatchClick: (function (inputData) {
 			window.TestEMTBrowseListDispatchClick.innerHTML = parseInt(window.TestEMTBrowseListDispatchClick.innerHTML) + 1;
 			window.TestEMTBrowseListDispatchClickData.innerHTML = JSON.stringify(inputData);
 		}),
-		EMTBrowseListDispatchArrow: (function _EMTBrowseListDispatchArrow(inputData) {
+		EMTBrowseListDispatchArrow: (function (inputData) {
 			window.TestEMTBrowseListDispatchArrow.innerHTML = parseInt(window.TestEMTBrowseListDispatchArrow.innerHTML) + 1;
 			window.TestEMTBrowseListDispatchArrowData.innerHTML = JSON.stringify(inputData);
 		}),
-		EMTBrowseListDispatchFilter: (function _EMTBrowseListDispatchFilter(inputData) {
+		EMTBrowseListDispatchFilter: (function (inputData) {
 			window.TestEMTBrowseListDispatchFilter.innerHTML = parseInt(window.TestEMTBrowseListDispatchFilter.innerHTML) + 1;
 			window.TestEMTBrowseListDispatchFilterData.innerHTML = inputData;
 		}),

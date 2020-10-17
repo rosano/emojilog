@@ -43,14 +43,14 @@ const EMTBrowse = new RollupStart({
 	target: document.body,
 	props: Object.assign({
 		EMTBrowseStorageClient: mod._ValueStorageClient,
-		EMTBrowseDispatchCreate: (function _EMTBrowseDispatchCreate(inputData) {
+		EMTBrowseDispatchCreate: (function (inputData) {
 			window.TestEMTBrowseDispatchCreate.innerHTML = parseInt(window.TestEMTBrowseDispatchCreate.innerHTML) + 1;
 			window.TestEMTBrowseDispatchCreateData.innerHTML = JSON.stringify(Object.keys(inputData));
 		}),
-		EMTBrowseListDispatchForm: (function _EMTBrowseListDispatchForm() {
+		EMTBrowseListDispatchForm: (function () {
 			window.TestEMTBrowseListDispatchForm.innerHTML = parseInt(window.TestEMTBrowseListDispatchForm.innerHTML) + 1;
 		}),
-		EMTBrowseListDispatchClose: (function _EMTBrowseListDispatchClose() {
+		EMTBrowseListDispatchClose: (function () {
 			window.TestEMTBrowseListDispatchClose.innerHTML = parseInt(window.TestEMTBrowseListDispatchClose.innerHTML) + 1;
 		}),
 		EMTBrowseJournalMemos: [],

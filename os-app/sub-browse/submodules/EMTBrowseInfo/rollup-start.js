@@ -35,19 +35,19 @@ mod.LifecycleModuleDidLoad();
 const EMTBrowseInfo = new RollupStart({
 	target: document.body,
 	props: Object.assign({
-		EMTBrowseInfoDispatchBack: (function _EMTBrowseInfoDispatchBack() {
+		EMTBrowseInfoDispatchBack: (function () {
 			window.TestEMTBrowseInfoDispatchBack.innerHTML = parseInt(window.TestEMTBrowseInfoDispatchBack.innerHTML) + 1;
 		}),
-		EMTBrowseInfoDispatchDiscard: (function _EMTBrowseInfoDispatchDiscard(inputData) {
+		EMTBrowseInfoDispatchDiscard: (function (inputData) {
 			window.TestEMTBrowseInfoDispatchDiscard.innerHTML = parseInt(window.TestEMTBrowseInfoDispatchDiscard.innerHTML) + 1;
 			window.TestEMTBrowseInfoDispatchDiscardData.innerHTML = JSON.stringify(inputData);
 		}),
-		EMTBrowseInfoDispatchUpdate: (function _EMTBrowseInfoDispatchUpdate() {
+		EMTBrowseInfoDispatchUpdate: (function () {
 			window.TestEMTBrowseInfoDispatchUpdate.innerHTML = parseInt(window.TestEMTBrowseInfoDispatchUpdate.innerHTML) + 1;
 
 			mod.ReactDetailItem(params.EMTBrowseInfoItem);
 		}),
-		EMTBrowseInfoDispatchDebug: (function _EMTBrowseInfoDispatchDebug(inputData) {
+		EMTBrowseInfoDispatchDebug: (function (inputData) {
 			window.TestEMTBrowseInfoDispatchDebug.innerHTML = parseInt(window.TestEMTBrowseInfoDispatchDebug.innerHTML) + 1;
 			window.TestEMTBrowseInfoDispatchDebugData.innerHTML = JSON.stringify(inputData);
 		}),
