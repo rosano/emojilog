@@ -6,10 +6,8 @@ const OLSKLocalized = function(translationConstant) {
 
 import OLSKThrottle from 'OLSKThrottle';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
-import * as OLSKRemoteStoragePackage from '../_shared/__external/OLSKRemoteStorage/main.js'
-const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
-import * as OLSKServiceWorkerPackage from '../_shared/__external/OLSKServiceWorker/main.js'
-const OLSKServiceWorker = OLSKServiceWorkerPackage.default || OLSKServiceWorkerPackage;
+import OLSKRemoteStorage from 'OLSKRemoteStorage';
+import OLSKServiceWorker from 'OLSKServiceWorker';
 import EMT_Data from '../_shared/EMT_Data/main.js';
 import EMTJournalStorage from '../_shared/EMTJournal/storage.js';
 import EMTJournalAction from '../_shared/EMTJournal/action.js';
