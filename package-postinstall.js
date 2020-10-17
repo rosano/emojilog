@@ -40,22 +40,15 @@
 	const pathPackage = require('path');
 
 	OLSKAssets.OLSKAssetsCopyAssetsFromTo([
-		'normalize.css',
-		'OLSKLayout',
-		'OLSKServiceWorker',
-		'OLSKRemoteStorage',
-		'OLSKStorageWidget',
-		'OLSKRouting',
-		'OLSKRootLink',
-		'ROCORootLink',
-		'OLSKUIAssets',
 		'launchlet',
-
-		// pass tests
-		'OLSKDetailPlaceholder',
-		'OLSKInputWrapper',
-		'OLSKAppToolbar',
-		'OLSKReloadButton',
+		'normalize.css',
 		'OLSKLanguageSwitcher',
+		'OLSKLayout',
+		'OLSKRootLink',
+		'OLSKRouting',
+		'OLSKServiceWorker',
+		'OLSKStorageWidget',
+		'OLSKUIAssets',
+		'ROCORootLink',
 	], pathPackage.join(__dirname, 'node_modules'), pathPackage.join(__dirname, 'os-app/_shared/__external'));
 })();
