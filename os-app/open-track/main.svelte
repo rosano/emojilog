@@ -59,7 +59,7 @@ const mod = {
 		};
 	},
 
-	DataRecipes () {
+	DataTrackRecipes () {
 		const outputData = [];
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
@@ -161,7 +161,7 @@ const mod = {
 		}
 
 		window.Launchlet.LCHSingletonCreate({
-			LCHOptionRecipes: mod.DataRecipes(),
+			LCHOptionRecipes: mod.DataTrackRecipes(),
 		});
 	},
 

@@ -22,7 +22,7 @@ export const modPublic = {
 	},
 
 	EMTBrowseRecipes () {
-		return mod.DataRecipes();
+		return mod.DataBrowseRecipes();
 	},
 
 };
@@ -81,7 +81,7 @@ const mod = {
 		}, inputData);
 	},
 
-	DataRecipes () {
+	DataBrowseRecipes () {
 		const items = [];
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
@@ -251,7 +251,7 @@ const mod = {
 
 	_OLSKAppToolbarDispatchLauncher () {
 		window.Launchlet.LCHSingletonCreate({
-			LCHOptionRecipes: mod.DataRecipes(),
+			LCHOptionRecipes: mod.DataBrowseRecipes(),
 		});
 	},
 

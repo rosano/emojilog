@@ -10,7 +10,7 @@ export let EMTBrowseInfo_DebugShowLauncherButton = false;
 export const modPublic = {
 
 	EMTBrowseInfoRecipes () {
-		return mod.DataRecipes();
+		return mod.DataBrowseInfoRecipes();
 	},
 
 };
@@ -26,7 +26,7 @@ const mod = {
 
 	// DATA
 
-	DataRecipes () {
+	DataBrowseInfoRecipes () {
 		if (!EMTBrowseInfoItem) {
 			return [];
 		}
@@ -53,7 +53,7 @@ const mod = {
 
 	_OLSKAppToolbarDispatchLauncher () {
 		window.Launchlet.LCHSingletonCreate({
-			LCHOptionRecipes: mod.DataRecipes(),
+			LCHOptionRecipes: mod.DataBrowseInfoRecipes(),
 		});
 	},
 
