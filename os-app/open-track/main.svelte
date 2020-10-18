@@ -400,7 +400,6 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 		OLSKAppToolbarDonateURL={ window.OLSKPublicConstants('EMT_SHARED_DONATE_URL') }
 		OLSKAppToolbarStorageStatus={ mod._ValueFooterStorageStatus }
 		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
-		_OLSKAppToolbarDispatchExport={ mod._OLSKAppToolbarDispatchExport }
 		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
 		/>
 </footer>
