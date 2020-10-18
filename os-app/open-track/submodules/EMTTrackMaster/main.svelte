@@ -30,7 +30,9 @@ const mod = {
 			LCHRecipeSignature: 'EMTTrackMasterLauncherItemImportData',
 			LCHRecipeName: OLSKLocalized('EMTTrackMasterLauncherItemImportDataText'),
 			LCHRecipeCallback: function EMTTrackMasterLauncherItemImportData () {
-				return this.api.LCHReadTextFile().then(EMTTrackMasterDispatchImportData);
+				return this.api.LCHReadTextFile({
+					accept: '.json',
+				}).then(EMTTrackMasterDispatchImportData);
 			},
 		}];
 
