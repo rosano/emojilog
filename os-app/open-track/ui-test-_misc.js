@@ -58,55 +58,47 @@ describe('EMTTrack_Misc', function () {
 
 	});
 
-	describe('EMTTrackStorageImportField', function test_EMTTrackStorageImportField() {
+	describe('ImportData', function test_ImportData() {
 
-		it('sets type', function () {
-			browser.assert.attribute(EMTTrackStorageImportField, 'type', 'file');
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLauncherButton');
 		});
 
-		context('valid', function () {
+		before(function () {
+			return browser.fill('.LCHLauncherFilterInput', 'EMTTrackLauncherItemDebug_ImportFileData');
+		});
+
+		before(function () {
+			return browser.OLSKPrompt(function () {
+				return browser.click('.LCHLauncherPipeItem');
+			}, function (dialog) {
+				dialog.response = JSON.stringify([StubJournalObjectValid({
+					EMTJournalName: 'zulu',
+					$EMTJournalMemos: [StubMemoObjectValid({
+						EMTMemoID: 'alfa',
+					}), StubMemoObjectValid({
+						EMTMemoID: 'bravo',
+					})],
+				})]);
+
+				return dialog;
+			});
+		});
+
+		it('creates journal', function () {
+			browser.assert.text('.EMTTrackMasterListItemName', 'zulu');
+		});
+
+		context('click', function () {
+
+			before(function () {
+				return browser.pressButton('.EMTTrackMasterListItem');
+			});
 			
-			before(function () {
-				return browser.pressButton('.OLSKAppToolbarLauncherButton');
+			it('creates memo', function () {
+				browser.assert.elements('.EMTBrowseListItem', 2);
 			});
-
-			before(function () {
-				return browser.fill('.LCHLauncherFilterInput', 'EMTTrackLauncherItemDebug_ImportFileData');
-			});
-
-			before(function () {
-				return browser.OLSKPrompt(function () {
-					return browser.click('.LCHLauncherPipeItem');
-				}, function (dialog) {
-					dialog.response = JSON.stringify([StubJournalObjectValid({
-						EMTJournalName: 'zulu',
-						$EMTJournalMemos: [StubMemoObjectValid({
-							EMTMemoID: 'alfa',
-						}), StubMemoObjectValid({
-							EMTMemoID: 'bravo',
-						})],
-					})]);
-
-					return dialog;
-				});
-			});
-
-			it('creates journal', function () {
-				browser.assert.text('.EMTTrackMasterListItemName', 'zulu');
-			});
-
-			context('click', function () {
-
-				before(function () {
-					return browser.pressButton('.EMTTrackMasterListItem');
-				});
-				
-				it('creates memo', function () {
-					browser.assert.elements('.EMTBrowseListItem', 2);
-				});
-			
-			});
-
+		
 		});
 		
 	});

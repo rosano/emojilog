@@ -4,8 +4,6 @@ Object.entries({
 	EMTTrackViewportFooter: '.EMTTrackViewportFooter',
 
 	EMTTrackStorageToolbar: '.EMTTrackStorageToolbar',
-	
-	EMTTrackStorageImportField: '.EMTTrackStorageImportField',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -68,10 +66,6 @@ describe('EMTTrack_Access', function () {
 
 		it('shows EMTTrackStorageToolbar', function () {
 			browser.assert.elements(EMTTrackStorageToolbar, 1);
-		});
-
-		it('shows EMTTrackStorageImportField', function () {
-			browser.assert.elements(EMTTrackStorageImportField, 1);
 		});
 
 		it('shows OLSKStorageWidget', function () {

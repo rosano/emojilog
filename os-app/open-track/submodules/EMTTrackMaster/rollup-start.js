@@ -11,6 +11,11 @@ const EMTTrackMaster = new RollupStart({
 			window.TestEMTTrackMasterDispatchSelect.innerHTML = parseInt(window.TestEMTTrackMasterDispatchSelect.innerHTML) + 1;
 			window.TestEMTTrackMasterDispatchSelectData.innerHTML = JSON.stringify(inputData);
 		}),
+		EMTTrackMasterDispatchImportData: (function (inputData) {
+			window.TestEMTTrackMasterDispatchImportData.innerHTML = parseInt(window.TestEMTTrackMasterDispatchImportData.innerHTML) + 1;
+			window.TestEMTTrackMasterDispatchImportDataData.innerHTML = inputData;
+		}),
+		EMTTrackMaster_DebugShowLauncherButton: true,
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
 		if (['EMTTrackMasterListItems', 'EMTTrackMasterListItemSelected'].includes(e[0])) {
 			e[1] = JSON.parse(e[1]);

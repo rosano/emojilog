@@ -81,19 +81,6 @@ const mod = {
 
 	// INTERFACE
 
-	InterfaceStorageInputFieldDidInput (event) {
-		const inputElement = event.target;
-		const fileReader = new FileReader();
-		
-		fileReader.onload = function (event) {
-			mod.InterfaceStorageInputFieldDidRead(event.target.result);
-			
-			inputElement.value = null;
-		};
-
-		fileReader.readAsText(inputElement.files[0]);
-	},
-
 	async InterfaceStorageInputFieldDidRead (inputData) {
 		if (!inputData.trim()) {
 			return window.alert(OLSKLocalized('EMTTrackStorageImportErrorNotFilledAlertText'))
@@ -175,6 +162,10 @@ const mod = {
 		mod.ValueBrowseMemos(await EMTMemoAction.EMTMemoActionList(mod._ValueStorageClient, inputData));
 		
 		mod.ControlJournalSelect(inputData);
+	},
+
+	EMTTrackMasterDispatchImportData (inputData) {
+		mod.InterfaceStorageInputFieldDidRead(inputData);
 	},
 
 	EMTTemplateDispatchDone () {
@@ -366,6 +357,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 			EMTTrackMasterListItemSelected={ mod._ValueJournalSelected }
 			EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate }
 			EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect }
+			EMTTrackMasterDispatchImportData={ mod.EMTTrackMasterDispatchImportData }
 			bind:this={ mod._EMTTrackMaster }
 			/>
 	{/if}
@@ -396,7 +388,6 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 	{#if !mod._ValueStorageToolbarHidden }
 		<div class="EMTTrackStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKStorageToolbar">
 			<div class="OLSKToolbarElementGroup">
-				<input class="EMTTrackStorageImportField" type="file" on:change={ mod.InterfaceStorageInputFieldDidInput } />
 			</div>
 
 			<div class="OLSKToolbarElementGroup">

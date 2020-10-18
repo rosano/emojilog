@@ -3,6 +3,8 @@ export let EMTTrackMasterListItems;
 export let EMTTrackMasterListItemSelected = null;
 export let EMTTrackMasterDispatchCreate;
 export let EMTTrackMasterDispatchSelect;
+export let EMTTrackMasterDispatchImportData;
+export let EMTTrackMaster_DebugShowLauncherButton = false;
 
 export const modPublic = {
 
@@ -24,7 +26,14 @@ const mod = {
 	// DATA
 
 	DataTrackMasterRecipes () {
-		const items = [];
+		const items = [{
+			LCHRecipeSignature: 'EMTTrackMasterLauncherItemImportData',
+			LCHRecipeName: OLSKLocalized('EMTTrackMasterLauncherItemImportDataText'),
+			LCHRecipeCallback: function EMTTrackMasterLauncherItemImportData () {
+				return this.api.LCHReadTextFile().then(EMTTrackMasterDispatchImportData);
+			},
+		}];
+
 		if (OLSK_TESTING_BEHAVIOUR()) {
 			items.push({
 				LCHRecipeName: 'EMTTrackMasterLauncherFakeItemProxy',
@@ -34,6 +43,15 @@ const mod = {
 		
 		return items;
 	},
+
+	// MESSAGES
+
+	_OLSKAppToolbarDispatchLauncher () {
+		window.Launchlet.LCHSingletonCreate({
+			LCHOptionRecipes: mod.DataTrackMasterRecipes(),
+		});
+	},
+
 };
 </script>
 
@@ -54,6 +72,10 @@ const mod = {
 </section>
 
 </div>
+
+{#if OLSK_TESTING_BEHAVIOUR() && EMTTrackMaster_DebugShowLauncherButton }
+	<button class="OLSKAppToolbarLauncherButton" on:click={ mod._OLSKAppToolbarDispatchLauncher }></button>
+{/if}
 
 <style>
 .EMTTrackMaster {

@@ -20,7 +20,7 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			browser.assert.text('title', uLocalized('EMTTrackTitle'));
 		});
 
-		describe('EMTTrackStorageImportField', function test_EMTTrackStorageImportField() {
+		describe('ImportData', function test_ImportData() {
 
 			context('not filled', function () {
 				
