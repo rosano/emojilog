@@ -56,6 +56,10 @@ describe('EMTTrack_Access', function () {
 		return browser.assert.OLSKLauncherItems('OLSKServiceWorkerLauncherFakeItemProxy', 1);
 	});
 
+	it('shows EMTTrackMasterLauncherFakeItemProxy', function () {
+		return browser.assert.OLSKLauncherItems('EMTTrackMasterLauncherFakeItemProxy', 1);
+	});
+
 	context('click OLSKAppToolbarStorageButton', function () {
 		
 		before(function () {

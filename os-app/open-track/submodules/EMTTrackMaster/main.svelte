@@ -4,9 +4,36 @@ export let EMTTrackMasterListItemSelected = null;
 export let EMTTrackMasterDispatchCreate;
 export let EMTTrackMasterDispatchSelect;
 
+export const modPublic = {
+
+	EMTTrackMasterRecipes () {
+		return mod.DataTrackMasterRecipes();
+	},
+
+};
+
 import OLSKInternational from 'OLSKInternational';
 const OLSKLocalized = function(translationConstant) {
 	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
+};
+
+import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
+
+const mod = {
+
+	// DATA
+
+	DataTrackMasterRecipes () {
+		const items = [];
+		if (OLSK_TESTING_BEHAVIOUR()) {
+			items.push({
+				LCHRecipeName: 'EMTTrackMasterLauncherFakeItemProxy',
+				LCHRecipeCallback: function EMTTrackMasterLauncherFakeItemProxy () {},
+			});
+		}
+		
+		return items;
+	},
 };
 </script>
 

@@ -58,10 +58,10 @@ const mod = {
 	},
 
 	DataTrackRecipes () {
-		const outputData = [];
+		const items = [];
 
 		if (OLSK_TESTING_BEHAVIOUR()) {
-			outputData.push(...[{
+			items.push(...[{
 				LCHRecipeName: 'EMTTrackLauncherItemDebug_ImportFileData',
 				LCHRecipeCallback: function EMTTrackLauncherItemDebug_ImportFileData () {
 					mod.InterfaceStorageInputFieldDidRead(window.prompt());
@@ -69,10 +69,14 @@ const mod = {
 			}])
 		}
 
-		outputData.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes(window, mod._ValueStorageClient, OLSKLocalized, OLSK_TESTING_BEHAVIOUR()));
-		outputData.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_TESTING_BEHAVIOUR()));
+		items.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes(window, mod._ValueStorageClient, OLSKLocalized, OLSK_TESTING_BEHAVIOUR()));
+		items.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_TESTING_BEHAVIOUR()));
 
-		return outputData;
+		if (mod._EMTTrackMaster) {
+			items.push(...mod._EMTTrackMaster.modPublic.EMTTrackMasterRecipes());
+		}
+
+		return items;
 	},
 
 	// INTERFACE
@@ -357,8 +361,13 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 
 <div class="OLSKViewportContent">
 	{#if !mod._ValueJournalSelected }
-		<EMTTrackMaster EMTTrackMasterListItems={ mod._ValueJournalsAll } EMTTrackMasterListItemSelected={ mod._ValueJournalSelected } EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate } EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect }
-			 />
+		<EMTTrackMaster
+			EMTTrackMasterListItems={ mod._ValueJournalsAll }
+			EMTTrackMasterListItemSelected={ mod._ValueJournalSelected }
+			EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate }
+			EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect }
+			bind:this={ mod._EMTTrackMaster }
+			/>
 	{/if}
 
 	{#if mod._ValueJournalSelected && !mod._ValueFormVisible }
