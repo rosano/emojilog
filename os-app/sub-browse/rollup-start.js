@@ -2,10 +2,8 @@ import RollupStart from './main.svelte';
 
 import EMT_Data from '../_shared/EMT_Data/main.js';
 import EMTMemoStorage from '../_shared/EMTMemo/storage.js';
-import * as RemoteStoragePackage from 'remotestoragejs';
-const RemoteStorage = RemoteStoragePackage.default || RemoteStoragePackage;
-import * as OLSKRemoteStoragePackage from 'OLSKRemoteStorage';
-const OLSKRemoteStorage = OLSKRemoteStoragePackage.default || OLSKRemoteStoragePackage;
+import RemoteStorage from 'remotestoragejs';
+import OLSKRemoteStorage from 'OLSKRemoteStorage';
 
 const mod = {
 
