@@ -26,3 +26,8 @@ body {
 .EMTVitrineIdentityName {
 	margin: 0;
 }
+
+.EMTVitrineContentAppButton {
+	padding: 8px 16px;
+	font-size: 110%;
+}

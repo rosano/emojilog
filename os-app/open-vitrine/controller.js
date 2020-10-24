@@ -13,6 +13,7 @@ exports.OLSKControllerRoutes = function() {
 					gfm: true,
 					headerIds: false,
 				})(require('fs').readFileSync(require('path').join(__dirname, `text.${ res.locals.OLSKSharedPageCurrentLanguage }.md`), 'utf-8')), {
+					EMTVitrineContentAppButtonText: res.locals.OLSKLocalized('EMTVitrineContentAppButtonText'),
 					EMTVitrineTokenTrackURL: res.locals.OLSKCanonicalLocalizedFor('EMTTrackRoute'),
 					EMT_SHARED_GITHUB_URL: process.env.EMT_SHARED_GITHUB_URL,
 					EMT_SHARED_DONATE_URL: process.env.EMT_SHARED_DONATE_URL,

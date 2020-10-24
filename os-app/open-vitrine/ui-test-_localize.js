@@ -41,6 +41,20 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 			browser.assert.element(`a[href="${ process.env.EMT_SHARED_GITHUB_URL }"]`);
 		});
 
+		context('EMTVitrineContentAppButton', function test_EMTVitrineContentAppButton () {
+
+			it('classes OLSKCommonButton', function () {
+				browser.assert.hasClass(EMTVitrineContentAppButton, 'OLSKCommonButton');
+			});
+			
+			it('sets href', function () {
+				browser.assert.attribute(EMTVitrineContentAppButton, 'href', OLSKTestingCanonical(require('../open-track/controller.js').OLSKControllerRoutes().shift(), {
+					OLSKRoutingLanguage: languageCode,
+				}));
+			});
+		
+		});
+
 	});
 
 });

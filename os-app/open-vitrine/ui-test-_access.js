@@ -8,6 +8,7 @@ Object.entries({
 	EMTVitrineIdentityName: '.EMTVitrineIdentityName',
 
 	EMTVitrineContent: '.EMTVitrineContent',
+	EMTVitrineContentAppButton: '.EMTVitrineContentAppButton',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -40,6 +41,10 @@ describe('EMTVitrine_Access', function () {
 	
 	it('shows EMTVitrineContent', function() {
 		browser.assert.elements(EMTVitrineContent, 1);
+	});
+
+	it('shows EMTVitrineContentAppButton', function() {
+		browser.assert.elements(EMTVitrineContentAppButton, 1);
 	});
 
 	it('shows ROCORootLink', function() {
