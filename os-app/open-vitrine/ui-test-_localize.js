@@ -47,6 +47,10 @@ kDefaultRoute.OLSKRouteLanguages.forEach(function (languageCode) {
 				browser.assert.hasClass(EMTVitrineContentAppButton, 'OLSKCommonButton');
 			});
 			
+			it('classes OLSKCommonButtonPrimary', function () {
+				browser.assert.hasClass(EMTVitrineContentAppButton, 'OLSKCommonButtonPrimary');
+			});
+			
 			it('sets href', function () {
 				browser.assert.attribute(EMTVitrineContentAppButton, 'href', OLSKTestingCanonical(require('../open-track/controller.js').OLSKControllerRoutes().shift(), {
 					OLSKRoutingLanguage: languageCode,
