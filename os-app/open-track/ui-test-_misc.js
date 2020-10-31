@@ -50,14 +50,6 @@ describe('EMTTrack_Misc', function () {
 
 	});
 
-	describe('OLSKAppToolbar', function test_OLSKAppToolbar () {
-
-		it('sets OLSKAppToolbarDonateURL', function () {
-			browser.assert.attribute('.OLSKAppToolbarDonateLink', 'href', process.env.EMT_SHARED_DONATE_URL);
-		});
-
-	});
-
 	describe('ImportData', function test_ImportData() {
 
 		before(function () {
