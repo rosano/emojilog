@@ -191,22 +191,6 @@ const mod = {
 		mod.ControlJournalSelect(null);
 	},
 
-	MessageJournalSelectedDidChange (inputData) {
-		if (!inputData) {
-			return;
-		}
-
-		if (inputData === mod._ValueJournalSelected) {
-			return;
-		};
-
-		setTimeout(function () {
-			document.querySelector('.EMTTemplateFormNameField').focus();
-		});
-
-		mod._ValueJournalSelected = inputData;
-	},
-
 	// OLSKChangeDelegateCreate (inputData) {
 	// 	// console.log('OLSKChangeDelegateCreate', inputData);
 
