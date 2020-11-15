@@ -9,15 +9,11 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRouteSignature: 'EMTVitrineRoute',
 		OLSKRouteFunction (req, res, next) {
 			return res.OLSKLayoutRender(require('path').join(__dirname, 'ui-view'), {
-				EMTVitrineContent: require('OLSKString').OLSKStringReplaceTokens(require('marked').setOptions({
-					gfm: true,
-					headerIds: false,
-				})(require('fs').readFileSync(require('path').join(__dirname, `text.${ res.locals.OLSKSharedPageCurrentLanguage }.md`), 'utf-8')), {
-					EMTVitrineContentAppButtonText: res.locals.OLSKLocalized('EMTVitrineContentAppButtonText'),
+				EMTVitrineContent: res.OLSKMarkdownContent(require('path').join(__dirname, `text.${ res.locals.OLSKSharedPageCurrentLanguage }.md`), {
 					EMTVitrineTokenTrackURL: res.locals.OLSKCanonicalLocalizedFor('EMTTrackRoute'),
+
 					EMT_SHARED_GITHUB_URL: process.env.EMT_SHARED_GITHUB_URL,
 					EMT_SHARED_DONATE_URL: process.env.EMT_SHARED_DONATE_URL,
-					EMTVitrineDescription: res.locals.OLSKLocalized('EMTVitrineDescription'),
 				}),
 				OLSKStringReplaceTokens: require('OLSKString').OLSKStringReplaceTokens,
 			});
