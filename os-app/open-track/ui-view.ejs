@@ -27,10 +27,7 @@ locals.OLSKPageMetaTags = {
 	'mobile-web-app-capable': 'yes',
 	'apple-mobile-web-app-capable': 'yes',
 };
+locals.OLSKPageTouchIconURL = process.env.EMT_TOUCH_ICON_URL;
 %>
 
-<%- include('../_shared/common/layout-header.ejs') %>
-
 <script src="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-behaviour.js"></script>
-
-<%- include('../_shared/common/layout-footer.ejs') %>

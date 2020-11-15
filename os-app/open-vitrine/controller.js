@@ -8,7 +8,7 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRouteMethod: 'get',
 		OLSKRouteSignature: 'EMTVitrineRoute',
 		OLSKRouteFunction (req, res, next) {
-			return res.render(require('path').join(__dirname, 'ui-view'), {
+			return res.OLSKLayoutRender(require('path').join(__dirname, 'ui-view'), {
 				EMTVitrineContent: require('OLSKString').OLSKStringReplaceTokens(require('marked').setOptions({
 					gfm: true,
 					headerIds: false,
