@@ -19,9 +19,5 @@ exports.OLSKControllerRoutes = function() {
 			});
 		},
 		OLSKRouteLanguages: ['en'],
-		OLSKRouteMiddlewares: [
-			'EMTSharedGitHubLinkGuardMiddleware',
-			'EMTSharedDonateLinkGuardMiddleware',
-		],
 	}];
 };

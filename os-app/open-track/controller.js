@@ -7,8 +7,5 @@ exports.OLSKControllerRoutes = function() {
 			return res.OLSKLayoutRender(require('path').join(__dirname, 'ui-view'));
 		},
 		OLSKRouteLanguages: ['en'],
-		OLSKRouteMiddlewares: [
-			'EMTSharedDonateLinkGuardMiddleware',
-		],
 	}];
 };
