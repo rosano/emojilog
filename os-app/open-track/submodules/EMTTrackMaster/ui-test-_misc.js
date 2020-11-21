@@ -50,14 +50,6 @@ describe('EMTTrackMaster_Misc', function () {
 	
 	});
 
-	describe('EMTTrackMasterBody', function () {
-		
-		it('classes OLSKMobileViewBody', function () {
-			browser.assert.hasClass(EMTTrackMasterBody, 'OLSKMobileViewBody');
-		});
-	
-	});
-
 	describe('EMTTrackMasterListItem', function() {
 		
 		before(function() {

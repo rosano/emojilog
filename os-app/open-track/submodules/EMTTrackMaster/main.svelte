@@ -65,7 +65,7 @@ const mod = {
 	</div>
 </header>
 
-<section class="EMTTrackMasterBody OLSKMobileViewBody">
+<section class="EMTTrackMasterBody">
 	{#each EMTTrackMasterListItems as e}
 		<button class="EMTTrackMasterListItem OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" class:EMTTrackMasterListItemSelected={ (EMTTrackMasterListItemSelected || {}).EMTJournalID === e.EMTJournalID } on:click={ () => EMTTrackMasterDispatchSelect(e) } >
 			<strong class="EMTTrackMasterListItemName">{ e.EMTJournalName || e.EMTJournalID }</strong>
