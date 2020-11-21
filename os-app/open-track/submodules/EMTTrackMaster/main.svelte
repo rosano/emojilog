@@ -55,23 +55,29 @@ const mod = {
 	},
 
 };
+
+import OLSKStandardView from 'OLSKStandardView';
 </script>
 
 <div class="EMTTrackMaster">
 
-<header class="EMTTrackMasterToolbar OLSKMobileViewHeader OLSKToolbar">
+<OLSKStandardView>
+
+<header slot="OLSKStandardViewToolbarHead">
 	<div class="OLSKToolbarElementGroup">
 		<button class="EMTTrackMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackMasterDispatchCreate } accesskey="n">{ OLSKLocalized('EMTTrackMasterCreateButtonText') }</button>
 	</div>
 </header>
 
-<section class="EMTTrackMasterBody">
+<section slot="OLSKStandardViewBody">
 	{#each EMTTrackMasterListItems as e}
 		<button class="EMTTrackMasterListItem OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" class:EMTTrackMasterListItemSelected={ (EMTTrackMasterListItemSelected || {}).EMTJournalID === e.EMTJournalID } on:click={ () => EMTTrackMasterDispatchSelect(e) } >
 			<strong class="EMTTrackMasterListItemName">{ e.EMTJournalName || e.EMTJournalID }</strong>
 		</button>
 	{/each}
 </section>
+
+</OLSKStandardView>
 
 </div>
 
@@ -88,18 +94,8 @@ const mod = {
 	flex-direction: column;
 }
 
-.EMTTrackMasterToolbar {
+:global(.OLSKStandardViewToolbarHead) {
 	border-bottom: var(--EMTBorderStyle);
-	
-	/* EMTTrackMasterFlexbox:Child */
-	flex-shrink: 0;
-}
-
-.EMTTrackMasterBody {
-	overflow: auto;
-	
-	/* EMTTrackMasterFlexbox:Child */
-	flex-grow: 1;
 }
 
 .EMTTrackMasterListItem {

@@ -33,6 +33,7 @@
     "OLSKResults": "olsk/OLSKResults",
     "OLSKDetailPlaceholder": "olsk/OLSKDetailPlaceholder",
     "OLSKUIAssets": "olsk/OLSKUIAssets",
+    "OLSKStandardView": "olsk/OLSKStandardView",
 
     "// FRONTEND APP TOOLBAR": null,
     "OLSKAppToolbar": "olsk/OLSKAppToolbar",
