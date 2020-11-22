@@ -1,9 +1,5 @@
 <script>
-import OLSKInternational from 'OLSKInternational';
-const OLSKLocalized = function(translationConstant) {
-	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
-};
-
+import { OLSKLocalized } from 'OLSKInternational';
 import OLSKThrottle from 'OLSKThrottle';
 import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
 import OLSKRemoteStorage from 'OLSKRemoteStorage';
@@ -15,6 +11,7 @@ import RemoteStorage from 'remotestoragejs';
 import EMTTrackLogic from './ui-logic.js';
 import EMTMemoStorage from '../_shared/EMTMemo/storage.js';
 import EMTMemoAction from '../_shared/EMTMemo/action.js';
+
 const mod = {
 
 	// VALUE

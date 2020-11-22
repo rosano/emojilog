@@ -4,13 +4,8 @@ export let EMTTemplateDispatchDone;
 export let EMTTemplateDispatchDiscard;
 export let EMTTemplateDispatchUpdate;
 
-import OLSKInternational from 'OLSKInternational';
-const OLSKLocalized = function(translationConstant) {
-	return OLSKInternational.OLSKInternationalLocalizedString(translationConstant, JSON.parse(`{"OLSK_I18N_SEARCH_REPLACE":"OLSK_I18N_SEARCH_REPLACE"}`)[window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage')]);
-};
-
+import { OLSKLocalized } from 'OLSKInternational';
 </script>
-
 <div class="EMTTemplate OLSKViewportDetail">
 
 <header class="EMTTemplateToolbar OLSKToolbar OLSKToolbarJustify">
