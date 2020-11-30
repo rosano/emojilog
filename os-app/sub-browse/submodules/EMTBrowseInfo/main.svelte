@@ -88,7 +88,7 @@ import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 	<textarea class="EMTBrowseInfoFormNotesField" placeholder="{ OLSKLocalized('EMTBrowseInfoFormNotesFieldText') }" bind:value={ EMTBrowseInfoItem.EMTMemoNotes } on:input={ EMTBrowseInfoDispatchUpdate }></textarea>
 </p>
 
-<hr />
+<hr role="presentation" />
 
 </div>
 {/if}
