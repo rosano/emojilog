@@ -18,6 +18,6 @@ exports.OLSKControllerRoutes = function() {
 				OLSKStringReplaceTokens: require('OLSKString').OLSKStringReplaceTokens,
 			});
 		},
-		OLSKRouteLanguages: ['en'],
+		OLSKRouteLanguageCodes: ['en'],
 	}];
 };
