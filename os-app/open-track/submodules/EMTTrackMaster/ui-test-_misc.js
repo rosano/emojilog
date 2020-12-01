@@ -53,7 +53,6 @@ describe('EMTTrackMaster_Misc', function () {
 			browser.assert.text(EMTTrackMasterListItemName, 'bravo');
 		});
 
-
 		context('click', function () {
 			
 			before(function () {
