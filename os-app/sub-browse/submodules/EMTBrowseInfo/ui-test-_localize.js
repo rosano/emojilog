@@ -1,18 +1,18 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (languageCode) {
+kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 	const uLocalized = function (inputData) {
-		return OLSKTestingLocalized(inputData, languageCode);
+		return OLSKTestingLocalized(inputData, OLSKRoutingLanguage);
 	};
 
-	describe(`EMTBrowseInfo_Localize-${ languageCode }`, function () {
+	describe(`EMTBrowseInfo_Localize-${ OLSKRoutingLanguage }`, function () {
 
 		context('EMTBrowseInfoItem', function () {
 
 			before(function () {
 				return browser.OLSKVisit(kDefaultRoute, {
-					OLSKRoutingLanguage: languageCode,
+					OLSKRoutingLanguage,
 					EMTBrowseInfoItem: JSON.stringify({}),
 				});
 			});
