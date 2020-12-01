@@ -15,7 +15,7 @@ export const modPublic = {
 };
 
 import { OLSKLocalized } from 'OLSKInternational';
-import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
+import { OLSK_SPEC_UI } from 'OLSKSpec';
 
 const mod = {
 
@@ -32,7 +32,7 @@ const mod = {
 			},
 		}];
 
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			items.push({
 				LCHRecipeName: 'EMTTrackMasterLauncherFakeItemProxy',
 				LCHRecipeCallback: function EMTTrackMasterLauncherFakeItemProxy () {},
@@ -77,7 +77,7 @@ import OLSKStandardView from 'OLSKStandardView';
 
 </div>
 
-{#if OLSK_TESTING_BEHAVIOUR() && EMTTrackMaster_DebugShowLauncherButton }
+{#if OLSK_SPEC_UI() && EMTTrackMaster_DebugShowLauncherButton }
 	<button class="OLSKAppToolbarLauncherButton" on:click={ mod._OLSKAppToolbarDispatchLauncher }></button>
 {/if}
 

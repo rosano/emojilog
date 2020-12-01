@@ -16,7 +16,7 @@ export const modPublic = {
 };
 
 import { OLSKLocalized } from 'OLSKInternational';
-import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
+import { OLSK_SPEC_UI } from 'OLSKSpec';
 
 const mod = {
 
@@ -35,7 +35,7 @@ const mod = {
 			},
 		}];
 
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			items.push({
 				LCHRecipeName: 'EMTBrowseInfoLauncherFakeItemProxy',
 				LCHRecipeCallback: function EMTBrowseInfoLauncherFakeItemProxy () {},
@@ -95,7 +95,7 @@ import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 
 </div>
 
-{#if OLSK_TESTING_BEHAVIOUR() && EMTBrowseInfo_DebugShowLauncherButton }
+{#if OLSK_SPEC_UI() && EMTBrowseInfo_DebugShowLauncherButton }
 	<button class="OLSKAppToolbarLauncherButton" on:click={ mod._OLSKAppToolbarDispatchLauncher }></button>
 {/if}
 

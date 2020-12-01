@@ -1,7 +1,7 @@
 <script>
 import { OLSKLocalized } from 'OLSKInternational';
 import OLSKThrottle from 'OLSKThrottle';
-import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting'
+import { OLSK_SPEC_UI } from 'OLSKSpec'
 import OLSKRemoteStorage from 'OLSKRemoteStorage';
 import OLSKServiceWorker from 'OLSKServiceWorker';
 import EMT_Data from '../_shared/EMT_Data/main.js';
@@ -56,7 +56,7 @@ const mod = {
 	DataTrackRecipes () {
 		const items = [];
 
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			items.push(...[{
 				LCHRecipeName: 'EMTTrackLauncherItemDebug_ImportFileData',
 				LCHRecipeCallback: function EMTTrackLauncherItemDebug_ImportFileData () {
@@ -65,8 +65,8 @@ const mod = {
 			}])
 		}
 
-		items.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes(window, mod._ValueStorageClient, OLSKLocalized, OLSK_TESTING_BEHAVIOUR()));
-		items.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_TESTING_BEHAVIOUR()));
+		items.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes(window, mod._ValueStorageClient, OLSKLocalized, OLSK_SPEC_UI()));
+		items.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_SPEC_UI()));
 
 		if (mod._EMTTrackMaster) {
 			items.push(...mod._EMTTrackMaster.modPublic.EMTTrackMasterRecipes());
@@ -100,7 +100,7 @@ const mod = {
 			},
 		});
 
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[inputData.EMTJournalID])	
 		};
 	},
@@ -265,7 +265,7 @@ const mod = {
 
 	async SetupStorageNotifications () {
 		mod._ValueStorageClient.on('sync-done', () => {
-			if (!OLSK_TESTING_BEHAVIOUR()) {
+			if (!OLSK_SPEC_UI()) {
 				console.debug('sync-done', arguments);
 			}
 		});
@@ -273,7 +273,7 @@ const mod = {
 		let isOffline;
 
 		mod._ValueStorageClient.on('network-offline', () => {
-			if (!OLSK_TESTING_BEHAVIOUR()) {
+			if (!OLSK_SPEC_UI()) {
 				console.debug('network-offline', arguments);
 			}
 
@@ -281,7 +281,7 @@ const mod = {
 		});
 
 		mod._ValueStorageClient.on('network-online', () => {
-			if (!OLSK_TESTING_BEHAVIOUR()) {
+			if (!OLSK_SPEC_UI()) {
 				console.debug('network-online', arguments);
 			}
 			
@@ -293,7 +293,7 @@ const mod = {
 				return;
 			};
 
-			if (!OLSK_TESTING_BEHAVIOUR()) {
+			if (!OLSK_SPEC_UI()) {
 				console.debug('error', error);
 			}
 		});
@@ -385,7 +385,7 @@ import OLSKStorageWidget from 'OLSKStorageWidget';
 
 </div>
 
-{#if !OLSK_TESTING_BEHAVIOUR()}
+{#if !OLSK_SPEC_UI()}
 	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonicalFor('EMTServiceWorkerRoute') } />
 {/if}
 

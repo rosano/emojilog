@@ -28,7 +28,7 @@ export const modPublic = {
 };
 
 import { OLSKLocalized } from 'OLSKInternational';
-import { OLSK_TESTING_BEHAVIOUR } from 'OLSKTesting';
+import { OLSK_SPEC_UI } from 'OLSKSpec';
 import OLSKThrottle from 'OLSKThrottle';
 import EMTBrowseLogic from './ui-logic.js';
 import EMTMemoAction from '../_shared/EMTMemo/action.js';
@@ -80,7 +80,7 @@ const mod = {
 	DataBrowseRecipes () {
 		const items = [];
 
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			items.push(...[
 				{
 					LCHRecipeName: 'FakeEscapeWithoutSort',
@@ -113,7 +113,7 @@ const mod = {
 
 				mod.ControlFilter('');
 
-				if (!OLSK_TESTING_BEHAVIOUR()) {
+				if (!OLSK_SPEC_UI()) {
 					document.querySelector('.OLSKMasterListBody').scrollTo(0, 0);
 				}
 			},
@@ -149,7 +149,7 @@ const mod = {
 
 	ControlMemoUpdate(param1, param2) {
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueMemoUpdateThrottleMap, param1.EMTMemoID, {
-			OLSKThrottleDuration: OLSK_TESTING_BEHAVIOUR () ? 0 : 500,
+			OLSKThrottleDuration: OLSK_SPEC_UI() ? 0 : 500,
 			OLSKThrottleCallback () {
 				return EMTMemoAction.EMTMemoActionUpdate(EMTBrowseStorageClient, param1, param2);
 			},
@@ -237,7 +237,7 @@ const mod = {
 	EMTBrowseInfoDispatchDebug (inputData) {
 		const url = `https://inspektor.5apps.com/?path=emojitimer%2F${ encodeURIComponent(EMTMemoStorage.EMTMemoStorageFolderPath(inputData, EMTBrowseJournalSelected)) }`;
 
-		if (OLSK_TESTING_BEHAVIOUR()) {
+		if (OLSK_SPEC_UI()) {
 			window.FakeWindowOpen = url;
 			return;
 		}
@@ -343,6 +343,6 @@ import EMTBrowseInfo from './submodules/EMTBrowseInfo/main.svelte';
 	bind:this={ mod._EMTBrowseInfo }
 	/>
 
-{#if OLSK_TESTING_BEHAVIOUR() && EMTBrowseStorageClient.FakeStorageClient }
+{#if OLSK_SPEC_UI() && EMTBrowseStorageClient.FakeStorageClient }
 	 <button class="OLSKAppToolbarLauncherButton" on:click={ mod._OLSKAppToolbarDispatchLauncher }></button>
 {/if}
