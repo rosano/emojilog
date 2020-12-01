@@ -5,7 +5,7 @@ const EMTJournalStorage = require('./os-app/_shared/EMTJournal/storage.js').defa
 const EMTMemoStorage = require('./os-app/_shared/EMTMemo/storage.js').default;
 
 (function EMTMochaStorage() {
-	if (process.env.OLSK_TESTING_BEHAVIOUR === 'true') {
+	if (process.env.OLSK_SPEC_MOCHA_INTERFACE === 'true') {
 		return;
 	}
 
