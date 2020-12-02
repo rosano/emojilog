@@ -18,16 +18,28 @@ describe('EMTVitrine_Misc', function () {
 	
 	});
 
-	describe('EMTVitrineIdentityLogo', function () {
+	describe('EMTVitrineIdentity', function test_EMTVitrineIdentity() {
+
+		it('classes OLSKCommonCard', function () {
+			browser.assert.hasClass(EMTVitrineIdentity, 'OLSKCommonCard');
+		});
+
+		it('classes OLSKCommonIdentityCard', function () {
+			browser.assert.hasClass(EMTVitrineIdentity, 'OLSKCommonIdentityCard');
+		});
 		
+	});
+
+	describe('EMTVitrineIdentityLogo', function () {
+
 		it('sets role', function () {
 			browser.assert.attribute(EMTVitrineIdentityLogo, 'role', 'presentation');
 		});
-		
+
 		it('sets src', function () {
 			browser.assert.attribute(EMTVitrineIdentityLogo, 'src', '/_shared/EMTRootLink/ui-assets/identity.svg');
 		});
-	
+
 	});
 
 });
