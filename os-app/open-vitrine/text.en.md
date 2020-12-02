@@ -6,9 +6,7 @@ The project is freely accessible but if you are in a position to give, please [d
 
 <a class="EMTVitrineContentAppButton OLSKCommonButton OLSKCommonButtonPrimary" href="EMTVitrineTokenTrackURL">EMTVitrineContentAppButtonText</a>
 
-* * *
-
-## Features
+# Features
 - Sync with multiple devices via remoteStorage
 - Works offline without internet access
 - Simple interface
