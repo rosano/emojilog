@@ -18,6 +18,30 @@ describe('EMTTrack_Misc', function () {
 		browser.assert.attribute('meta[name=apple-mobile-web-app-capable]', 'content', 'yes');
 	});
 
+	describe('EMTTrackViewportFooter', function test_EMTTrackViewportFooter () {
+
+		it('classes OLSKMobileViewFooter', function () {
+			browser.assert.hasClass(EMTTrackViewportFooter, 'OLSKMobileViewFooter');
+		});
+
+	});
+
+	describe('OLSKApropos', function test_OLSKApropos() {
+
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarAproposButton');
+		});
+
+		it('sets OLSKAproposFeedbackValue', function () {
+			browser.assert.attribute('.OLSKAproposFeedbackButton', 'href', `javascript:window.location.href = window.atob('${ browser.window.btoa('mailto:' + OLSKTestingFormatted(process.env.OLSK_APROPOS_FEEDBACK_EMAIL, 'RP_X')) }')`);
+		});
+
+		after(function () {
+			browser.pressButton('.OLSKModalViewCloseButton');
+		});
+
+	});
+
 	describe('EMTTrackStorageToolbar', function test_EMTTrackStorageToolbar () {
 		
 		before(function () {
@@ -36,14 +60,6 @@ describe('EMTTrack_Misc', function () {
 			browser.assert.hasClass(EMTTrackStorageToolbar, 'OLSKStorageToolbar');
 		});
 	
-	});
-
-	describe('EMTTrackViewportFooter', function test_EMTTrackViewportFooter () {
-
-		it('classes OLSKMobileViewFooter', function () {
-			browser.assert.hasClass(EMTTrackViewportFooter, 'OLSKMobileViewFooter');
-		});
-
 	});
 
 	describe('ImportData', function test_ImportData() {
