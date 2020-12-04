@@ -58,7 +58,7 @@ describe('EMTTrack_Access', function () {
 		return browser.assert.OLSKLauncherItems('EMTTrackMasterLauncherFakeItemProxy', 1);
 	});
 
-	describe('OLSKLanguageSwitcherLauncher', function test_OLSKLanguageSwitcherLauncher() {
+	describe('tongue', function test_tongue() {
 
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarLanguageButton');
