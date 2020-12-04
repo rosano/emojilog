@@ -59,7 +59,7 @@ import OLSKStandardView from 'OLSKStandardView';
 
 <OLSKStandardView>
 
-<div class="EMTTrackMasterHead OLSKToolbar OLSKToolbar OLSKToolbarBorderBottom" slot="OLSKStandardViewHead">
+<div class="EMTTrackMasterHead OLSKToolbar OLSKToolbarBorderBottom" slot="OLSKStandardViewHead">
 	<div class="OLSKToolbarElementGroup">
 		<button class="EMTTrackMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackMasterDispatchCreate } accesskey="n">{ OLSKLocalized('EMTTrackMasterCreateButtonText') }</button>
 	</div>
