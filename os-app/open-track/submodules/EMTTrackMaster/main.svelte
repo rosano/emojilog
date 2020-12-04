@@ -59,19 +59,19 @@ import OLSKStandardView from 'OLSKStandardView';
 
 <OLSKStandardView>
 
-<header slot="OLSKStandardViewToolbarHead">
+<div class="EMTTrackMasterHead OLSKToolbar OLSKToolbar OLSKToolbarBorderBottom" slot="OLSKStandardViewHead">
 	<div class="OLSKToolbarElementGroup">
 		<button class="EMTTrackMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackMasterDispatchCreate } accesskey="n">{ OLSKLocalized('EMTTrackMasterCreateButtonText') }</button>
 	</div>
-</header>
+</div>
 
-<section slot="OLSKStandardViewBody">
+<div>
 	{#each EMTTrackMasterListItems as e}
 		<button class="EMTTrackMasterListItem OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" class:EMTTrackMasterListItemSelected={ (EMTTrackMasterListItemSelected || {}).EMTJournalID === e.EMTJournalID } on:click={ () => EMTTrackMasterDispatchSelect(e) } >
 			<strong class="EMTTrackMasterListItemName">{ e.EMTJournalName || e.EMTJournalID }</strong>
 		</button>
 	{/each}
-</section>
+</div>
 
 </OLSKStandardView>
 

@@ -6,6 +6,18 @@ describe('EMTTrackMaster_Misc', function () {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
 
+	describe('EMTTrackMasterHead', function () {
+		
+		it('classes OLSKToolbar', function () {
+			browser.assert.hasClass(EMTTrackMasterHead, 'OLSKToolbar');
+		});
+
+		it('classes OLSKToolbarBorderBottom', function () {
+			browser.assert.hasClass(EMTTrackMasterHead, 'OLSKToolbarBorderBottom');
+		});
+		
+	});
+
 	describe('EMTTrackMasterCreateButton', function () {
 		
 		it('classes OLSKLayoutButtonNoStyle', function () {

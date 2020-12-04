@@ -3,6 +3,7 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 Object.entries({
 	EMTTrackMaster: '.EMTTrackMaster',
 	
+	EMTTrackMasterHead: '.EMTTrackMasterHead',
 	EMTTrackMasterCreateButton: '.EMTTrackMasterCreateButton',
 
 	EMTTrackMasterListItem: '.EMTTrackMasterListItem',
@@ -19,6 +20,10 @@ describe('EMTTrackMaster_Access', function () {
 
 	it('shows EMTTrackMaster', function () {
 		browser.assert.elements(EMTTrackMaster, 1);
+	});
+
+	it('shows EMTTrackMasterHead', function () {
+		browser.assert.elements(EMTTrackMasterHead, 1);
 	});
 
 	it('shows EMTTrackMasterCreateButton', function () {
