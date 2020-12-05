@@ -264,6 +264,10 @@ const mod = {
 	// 	}), false);
 	// },
 
+	OLSKRemoteStorageLauncherItemFakeFlipConnectedDidFinish () {
+		mod._ValueOLSKRemoteStorage = mod._ValueOLSKRemoteStorage; // #purge-svelte-force-update
+	},
+
 	// SETUP
 
 	async SetupEverything () {
