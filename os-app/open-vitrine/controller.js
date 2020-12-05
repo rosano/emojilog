@@ -13,7 +13,6 @@ exports.OLSKControllerRoutes = function() {
 					EMTVitrineTokenTrackURL: res.locals.OLSKCanonicalLocalizedFor('EMTTrackRoute'),
 
 					EMT_SHARED_GITHUB_URL: process.env.EMT_SHARED_GITHUB_URL,
-					EMT_SHARED_DONATE_URL: process.env.EMT_SHARED_DONATE_URL,
 				}),
 				OLSKStringReplaceTokens: require('OLSKString').OLSKStringReplaceTokens,
 			});
