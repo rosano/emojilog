@@ -7,7 +7,7 @@ import OLSKRemoteStorage from 'OLSKRemoteStorage';
 
 const mod = {
 
-	_ValueStorageClient: undefined,
+	_ValueOLSKRemoteStorage: undefined,
 
 	// SETUP
 
@@ -20,11 +20,11 @@ const mod = {
 			EMTMemoStorage.EMTMemoStorageBuild,
 		]);
 		
-		mod._ValueStorageClient = new RemoteStorage({ modules: [ storageModule ] });
+		mod._ValueOLSKRemoteStorage = new RemoteStorage({ modules: [ storageModule ] });
 
-		mod._ValueStorageClient.access.claim(storageModule.name, 'rw');
+		mod._ValueOLSKRemoteStorage.access.claim(storageModule.name, 'rw');
 
-		mod._ValueStorageClient.FakeStorageClient = true;
+		mod._ValueOLSKRemoteStorage.FakeStorageClient = true;
 	},
 
 	// LIFECYCLE
@@ -40,7 +40,7 @@ mod.LifecycleModuleDidLoad();
 const EMTBrowse = new RollupStart({
 	target: document.body,
 	props: Object.assign({
-		EMTBrowseStorageClient: mod._ValueStorageClient,
+		EMTBrowseStorageClient: mod._ValueOLSKRemoteStorage,
 		EMTBrowseDispatchCreate: (function (inputData) {
 			window.TestEMTBrowseDispatchCreate.innerHTML = parseInt(window.TestEMTBrowseDispatchCreate.innerHTML) + 1;
 			window.TestEMTBrowseDispatchCreateData.innerHTML = JSON.stringify(Object.keys(inputData));

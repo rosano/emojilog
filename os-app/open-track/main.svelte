@@ -67,7 +67,7 @@ const mod = {
 			}])
 		}
 
-		items.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes(window, mod._ValueStorageClient, OLSKLocalized, OLSK_SPEC_UI()));
+		items.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes(window, mod._ValueOLSKRemoteStorage, OLSKLocalized, OLSK_SPEC_UI()));
 		items.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_SPEC_UI()));
 
 		if (mod._EMTTrackMaster) {
@@ -85,7 +85,7 @@ const mod = {
 		}
 
 		try {
-			await EMT_Data.EMT_DataImport(mod._ValueStorageClient, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
+			await EMT_Data.EMT_DataImport(mod._ValueOLSKRemoteStorage, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
 			await mod.SetupValueJournalsAll();
 		} catch (e) {
 			window.alert(OLSKLocalized('EMTTrackStorageImportErrorNotValidAlertText'));
@@ -98,7 +98,7 @@ const mod = {
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveThrottleMap, inputData.EMTJournalID, {
 			OLSKThrottleDuration: 500,
 			async OLSKThrottleCallback () {
-				await EMTJournalAction.EMTJournalActionUpdate(mod._ValueStorageClient, inputData);
+				await EMTJournalAction.EMTJournalActionUpdate(mod._ValueOLSKRemoteStorage, inputData);
 			},
 		});
 
@@ -108,7 +108,7 @@ const mod = {
 	},
 
 	async ControlJournalCreate() {
-		const item = await EMTJournalAction.EMTJournalActionCreate(mod._ValueStorageClient, {
+		const item = await EMTJournalAction.EMTJournalActionCreate(mod._ValueOLSKRemoteStorage, {
 			EMTJournalName: '',
 			EMTJournalModificationDate: new Date(),
 		});
@@ -129,7 +129,7 @@ const mod = {
 			return e !== inputData;
 		}))
 
-		await EMTJournalAction.EMTJournalActionDelete(mod._ValueStorageClient, inputData);
+		await EMTJournalAction.EMTJournalActionDelete(mod._ValueOLSKRemoteStorage, inputData);
 
 		mod.ControlJournalSelect(null);
 
@@ -195,7 +195,7 @@ const mod = {
 	},
 
 	async EMTTrackMasterDispatchSelect (inputData) {
-		mod.ValueBrowseMemos(await EMTMemoAction.EMTMemoActionList(mod._ValueStorageClient, inputData));
+		mod.ValueBrowseMemos(await EMTMemoAction.EMTMemoActionList(mod._ValueOLSKRemoteStorage, inputData));
 		
 		mod.ControlJournalSelect(inputData);
 	},
@@ -290,21 +290,21 @@ const mod = {
 			}),
 			]);
 		
-		mod._ValueStorageClient = new RemoteStorage({ modules: [ storageModule ] });
+		mod._ValueOLSKRemoteStorage = new RemoteStorage({ modules: [ storageModule ] });
 
-		mod._ValueStorageClient.access.claim(storageModule.name, 'rw');
+		mod._ValueOLSKRemoteStorage.access.claim(storageModule.name, 'rw');
 
-		mod._ValueStorageClient.caching.enable(`/${ storageModule.name }/`);
+		mod._ValueOLSKRemoteStorage.caching.enable(`/${ storageModule.name }/`);
 	},
 
 	SetupStorageStatus () {
-		OLSKRemoteStorage.OLSKRemoteStorageStatus(mod._ValueStorageClient, function (inputData) {
+		OLSKRemoteStorage.OLSKRemoteStorageStatus(mod._ValueOLSKRemoteStorage, function (inputData) {
 			mod._ValueFooterStorageStatus = inputData;
 		}, OLSKLocalized)
 	},
 
 	async SetupStorageNotifications () {
-		mod._ValueStorageClient.on('sync-done', () => {
+		mod._ValueOLSKRemoteStorage.on('sync-done', () => {
 			if (!OLSK_SPEC_UI()) {
 				console.debug('sync-done', arguments);
 			}
@@ -312,7 +312,7 @@ const mod = {
 
 		let isOffline;
 
-		mod._ValueStorageClient.on('network-offline', () => {
+		mod._ValueOLSKRemoteStorage.on('network-offline', () => {
 			if (!OLSK_SPEC_UI()) {
 				console.debug('network-offline', arguments);
 			}
@@ -320,7 +320,7 @@ const mod = {
 			isOffline = true;
 		});
 
-		mod._ValueStorageClient.on('network-online', () => {
+		mod._ValueOLSKRemoteStorage.on('network-online', () => {
 			if (!OLSK_SPEC_UI()) {
 				console.debug('network-online', arguments);
 			}
@@ -328,7 +328,7 @@ const mod = {
 			isOffline = false;
 		});
 
-		mod._ValueStorageClient.on('error', (error) => {
+		mod._ValueOLSKRemoteStorage.on('error', (error) => {
 			if (isOffline && inputData.message === 'Sync failed: Network request failed.') {
 				return;
 			};
@@ -339,12 +339,12 @@ const mod = {
 		});
 
 		return new Promise(function (res, rej) {
-			return mod._ValueStorageClient.on('ready', res);
+			return mod._ValueOLSKRemoteStorage.on('ready', res);
 		});
 	},
 
 	async SetupValueJournalsAll() {
-		mod.ValueJournalsAll((await EMTJournalAction.EMTJournalActionList(mod._ValueStorageClient)).filter(function (e) {
+		mod.ValueJournalsAll((await EMTJournalAction.EMTJournalActionList(mod._ValueOLSKRemoteStorage)).filter(function (e) {
 			return typeof e === 'object'; // #patch-remotestorage-true
 		}));
 	},
@@ -386,7 +386,7 @@ import OLSKApropos from 'OLSKApropos';
 
 	{#if mod._ValueJournalSelected && !mod._ValueFormVisible }
 		<EMTBrowse
-			EMTBrowseStorageClient={ mod._ValueStorageClient }
+			EMTBrowseStorageClient={ mod._ValueOLSKRemoteStorage }
 			EMTBrowseJournalSelected={ mod._ValueJournalSelected }
 			EMTBrowseJournalMemos={ mod._ValueBrowseMemos }
 			EMTBrowseDispatchCreate={ mod.EMTBrowseDispatchCreate }
@@ -413,7 +413,7 @@ import OLSKApropos from 'OLSKApropos';
 			</div>
 
 			<div class="OLSKToolbarElementGroup">
-				<OLSKStorageWidget StorageClient={ mod._ValueStorageClient } />
+				<OLSKStorageWidget StorageClient={ mod._ValueOLSKRemoteStorage } />
 			</div>
 		</div>
 	{/if}
