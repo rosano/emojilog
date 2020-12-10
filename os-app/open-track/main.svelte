@@ -165,7 +165,7 @@ const mod = {
 				OLSKLocalized,
 				ParamRouteConstant: window.OLSKPublicConstants('OLSKSharedActiveRouteConstant'),
 				OLSKFormatted: OLSKString.OLSKStringFormatted,
-				OLSKCanonicalFor: window.OLSKCanonicalFor,
+				OLSKCanonical: window.OLSKCanonical,
 			}).map(function (e) {
 				const item = e.LCHRecipeCallback;
 
@@ -446,7 +446,7 @@ import OLSKApropos from 'OLSKApropos';
 </div>
 
 {#if !OLSK_SPEC_UI()}
-	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonicalFor('EMTServiceWorkerRoute') } />
+	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonical('EMTServiceWorkerRoute') } />
 {/if}
 
 <style src="./ui-style.css"></style>

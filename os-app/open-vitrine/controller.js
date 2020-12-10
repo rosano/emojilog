@@ -10,7 +10,7 @@ exports.OLSKControllerRoutes = function() {
 		OLSKRouteFunction (req, res, next) {
 			return res.OLSKLayoutRender(require('path').join(__dirname, 'ui-view'), {
 				EMTVitrineContent: res.OLSKMarkdownContent(require('path').join(__dirname, `text.${ res.locals.OLSKSharedPageCurrentLanguage }.md`), {
-					EMTVitrineTokenTrackURL: res.locals.OLSKCanonicalFor('EMTTrackRoute'),
+					EMTVitrineTokenTrackURL: res.locals.OLSKCanonical('EMTTrackRoute'),
 
 					EMT_SHARED_GITHUB_URL: process.env.EMT_SHARED_GITHUB_URL,
 				}),

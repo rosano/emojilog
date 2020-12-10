@@ -4,7 +4,7 @@ import OLSKRootLink from 'OLSKRootLink';
 
 <div class="EMTRootLink">
 
-<OLSKRootLink OLSKRootLinkURL={ window.OLSKCanonicalFor('EMTVitrineRoute', {
+<OLSKRootLink OLSKRootLinkURL={ window.OLSKCanonical('EMTVitrineRoute', {
 	OLSKRoutingLanguage: window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage'),
 }) }
 	OLSKRootLinkImageURL={ '/_shared/EMTRootLink/ui-assets/identity.svg' } />
