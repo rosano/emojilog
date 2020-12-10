@@ -12,8 +12,8 @@ describe('EMTTrackMaster_Misc', function () {
 			browser.assert.hasClass(EMTTrackMasterHead, 'OLSKToolbar');
 		});
 
-		it('classes OLSKToolbarBorderBottom', function () {
-			browser.assert.hasClass(EMTTrackMasterHead, 'OLSKToolbarBorderBottom');
+		it('classes OLSKCommonEdgeBottom', function () {
+			browser.assert.hasClass(EMTTrackMasterHead, 'OLSKCommonEdgeBottom');
 		});
 		
 	});
@@ -59,6 +59,10 @@ describe('EMTTrackMaster_Misc', function () {
 					EMTJournalName: 'bravo',
 				}]),
 			});
+		});
+
+		it('classes OLSKCommonEdgeBottom', function () {
+			browser.assert.hasClass(EMTTrackMasterListItem, 'OLSKCommonEdgeBottom');
 		});
 
 		it('sets binds EMTJournalName', function () {

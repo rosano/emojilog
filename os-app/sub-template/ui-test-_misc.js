@@ -37,6 +37,10 @@ describe('EMTTemplate_Misc', function  test_EMTTemplate_Misc () {
 		it('classes OLSKToolbarJustify', function () {
 			browser.assert.hasClass(EMTTemplateToolbar, 'OLSKToolbarJustify');
 		});
+
+		it('classes OLSKCommonEdgeBottom', function () {
+			browser.assert.hasClass(EMTTemplateToolbar, 'OLSKCommonEdgeBottom');
+		});
 	
 	});
 

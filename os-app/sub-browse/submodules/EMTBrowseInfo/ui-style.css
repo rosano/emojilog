@@ -22,8 +22,6 @@
 }
 
 .EMTBrowseInfoToolbar {
-	border-bottom: var(--EMTBorderStyle);
-
 	/* EMTBrowseInfoFlexbox:Child */
 	flex-shrink: 0;
 }
@@ -54,7 +52,7 @@
 
 .EMTBrowseInfoForm :global(input[type=text]), .EMTBrowseInfoForm :global(textarea) {
 	width: 50%;
-	border: var(--EMTBorderStyle);
+	border: var(--OLSKCommonEdgeBorder);
 	border-radius: 5px;
 	padding: 5px 7px;
 }

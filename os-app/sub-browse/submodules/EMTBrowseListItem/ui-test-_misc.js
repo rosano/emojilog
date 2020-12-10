@@ -15,6 +15,14 @@ describe('EMTBrowseListItem_Misc', function () {
 		});
 	});
 
+	describe('EMTBrowseListItem', function test_EMTBrowseListItem () {
+
+		it('classes OLSKCommonEdgeBottom', function () {
+			browser.assert.hasClass(EMTBrowseListItem, 'OLSKCommonEdgeBottom');
+		});
+
+	});
+
 	describe('EMTBrowseListItemEventDate', function test_EMTBrowseListItemEventDate () {
 		
 		it('binds EMTMemoEventDate', function () {

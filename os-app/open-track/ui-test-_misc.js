@@ -55,6 +55,10 @@ describe('EMTTrack_Misc', function () {
 		it('classes OLSKToolbarJustify', function () {
 			browser.assert.hasClass(EMTTrackStorageToolbar, 'OLSKToolbarJustify');
 		});
+
+		it('classes OLSKCommonEdgeTop', function () {
+			browser.assert.hasClass(EMTTrackStorageToolbar, 'OLSKCommonEdgeTop');
+		});
 		
 		it('classes OLSKStorageToolbar', function () {
 			browser.assert.hasClass(EMTTrackStorageToolbar, 'OLSKStorageToolbar');

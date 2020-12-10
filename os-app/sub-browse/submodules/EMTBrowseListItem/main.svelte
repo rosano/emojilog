@@ -5,7 +5,7 @@ import { OLSKLocalized } from 'OLSKInternational';
 import OLSKString from 'OLSKString';
 </script>
 
-<div class="EMTBrowseListItem">
+<div class="EMTBrowseListItem OLSKCommonEdgeBottom">
 
 <div class="EMTBrowseListItemEventDate">{ EMTBrowseListItemObject.EMTMemoEventDate.valueOf() }</div>
 <div class="EMTBrowseListItemNotesSnippet">{ OLSKString.OLSKStringSnippet(EMTBrowseListItemObject.EMTMemoNotes) }</div>
@@ -16,7 +16,6 @@ import OLSKString from 'OLSKString';
 .EMTBrowseListItem {
 	min-height: 46px;
 	padding: 10px;
-	border-bottom: var(--EMTBorderStyle);
 
 	overflow: hidden;
 	text-overflow: ellipsis;

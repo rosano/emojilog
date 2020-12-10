@@ -418,7 +418,7 @@ import OLSKApropos from 'OLSKApropos';
 
 <footer class="EMTTrackViewportFooter OLSKMobileViewFooter">
 	{#if !mod._ValueStorageToolbarHidden }
-		<div class="EMTTrackStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKStorageToolbar">
+		<div class="EMTTrackStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeTop OLSKStorageToolbar">
 			<div class="OLSKToolbarElementGroup">
 			</div>
 

@@ -68,7 +68,7 @@ import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 {/if}
 
 {#if EMTBrowseInfoItem}
-<header class="EMTBrowseInfoToolbar OLSKMobileViewHeader OLSKToolbar OLSKToolbarJustify">
+<header class="EMTBrowseInfoToolbar OLSKMobileViewHeader OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeBottom">
 	<div class="OLSKToolbarElementGroup">
 		<button class="EMTBrowseInfoToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton OLSKVisibilityMobile" title={ OLSKLocalized('EMTBrowseInfoToolbarBackButtonText') } on:click={ EMTBrowseInfoDispatchBack }>
 			<div class="EMTBrowseInfoToolbarBackButtonImage">{@html _OLSKSharedBack }</div>

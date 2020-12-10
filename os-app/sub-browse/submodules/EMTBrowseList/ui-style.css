@@ -1,13 +1,3 @@
-:global(.EMTBrowseList) {
-	border-right: var(--EMTBorderStyle);
-
-	/*--OLSKViewportMasterWidth: 60%;*/
-}
-
-:global(.EMTBrowseList .OLSKMasterListToolbar) {
-	border-bottom: var(--EMTBorderStyle);
-}
-
 .EMTBrowseListToolbarCreateButton {
 	margin-left: 4px !important;
 }

@@ -8,7 +8,7 @@ import { OLSKLocalized } from 'OLSKInternational';
 </script>
 <div class="EMTTemplate OLSKViewportDetail">
 
-<header class="EMTTemplateToolbar OLSKToolbar OLSKToolbarJustify">
+<header class="EMTTemplateToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeBottom">
 	<div class="OLSKToolbarElementGroup">
 		<button class="EMTTemplateToolbarDoneButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTemplateDispatchDone }>{ OLSKLocalized('EMTTemplateToolbarDoneButtonText') }</button>
 	</div>
@@ -33,10 +33,6 @@ import { OLSKLocalized } from 'OLSKInternational';
 	flex-direction: column;
 }
 
-.EMTTemplateToolbar {
-	border-bottom: var(--EMTBorderStyle);
-}
-
 .EMTTemplateForm {
 	padding: 5px;
 
@@ -45,7 +41,7 @@ import { OLSKLocalized } from 'OLSKInternational';
 
 .EMTTemplateForm input[type=text] {
 	width: 50%;
-	border: var(--EMTBorderStyle);
+	border: var(--OLSKCommonEdgeBorder);
 	border-radius: 5px;
 	padding: 5px;
 }

@@ -63,6 +63,10 @@ describe('EMTBrowseInfo_Misc', function () {
 			browser.assert.hasClass(EMTBrowseInfoToolbar, 'OLSKToolbarJustify');
 		});
 
+		it('classes OLSKCommonEdgeBottom', function () {
+			browser.assert.hasClass(EMTBrowseInfoToolbar, 'OLSKCommonEdgeBottom');
+		});
+
 	});
 
 	describe('EMTBrowseInfoToolbarBackButton', function test_EMTBrowseInfoToolbarBackButton() {

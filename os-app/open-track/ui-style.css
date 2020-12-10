@@ -1,13 +1,7 @@
 .EMTTrack {
-	--EMTBorderStyle: 1px solid #ddd;
-	
 	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 	font-size: 9pt;
 
 	background: var(--EMTCommonBackground);
 	color: var(--EMTCommonForeground);
-}
-
-.EMTTrackStorageToolbar {
-	border-top: var(--EMTBorderStyle)
 }

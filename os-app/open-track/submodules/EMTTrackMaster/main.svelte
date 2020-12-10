@@ -59,7 +59,7 @@ import OLSKStandardView from 'OLSKStandardView';
 
 <OLSKStandardView>
 
-<div class="EMTTrackMasterHead OLSKToolbar OLSKToolbarBorderBottom" slot="OLSKStandardViewHead">
+<div class="EMTTrackMasterHead OLSKToolbar OLSKCommonEdgeBottom" slot="OLSKStandardViewHead">
 	<div class="OLSKToolbarElementGroup">
 		<button class="EMTTrackMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackMasterDispatchCreate } accesskey="n">{ OLSKLocalized('EMTTrackMasterCreateButtonText') }</button>
 	</div>
@@ -67,7 +67,7 @@ import OLSKStandardView from 'OLSKStandardView';
 
 <div>
 	{#each EMTTrackMasterListItems as e}
-		<button class="EMTTrackMasterListItem OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" class:EMTTrackMasterListItemSelected={ (EMTTrackMasterListItemSelected || {}).EMTJournalID === e.EMTJournalID } on:click={ () => EMTTrackMasterDispatchSelect(e) } >
+		<button class="EMTTrackMasterListItem OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKCommonEdgeBottom" class:EMTTrackMasterListItemSelected={ (EMTTrackMasterListItemSelected || {}).EMTJournalID === e.EMTJournalID } on:click={ () => EMTTrackMasterDispatchSelect(e) } >
 			<strong class="EMTTrackMasterListItemName">{ e.EMTJournalName || e.EMTJournalID }</strong>
 		</button>
 	{/each}
@@ -90,16 +90,10 @@ import OLSKStandardView from 'OLSKStandardView';
 	flex-direction: column;
 }
 
-:global(.OLSKStandardViewToolbarHead) {
-	border-bottom: var(--EMTBorderStyle);
-}
-
 .EMTTrackMasterListItem {
 	min-height: 80px;
 	width: 100%;
 	padding: 5px;
-	
-	border-bottom: var(--EMTBorderStyle);
 
 	text-align: left;
 }
