@@ -1,11 +1,11 @@
 const { rejects, throws, deepEqual } = require('assert');
 
-const mainModule = require('./storage.js').default;
+const mod = require('./storage.js').default;
 
 describe('EMTJournalStorageCollectionName', function test_EMTJournalStorageCollectionName() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.EMTJournalStorageCollectionName(), 'emt_journals');
+		deepEqual(mod.EMTJournalStorageCollectionName(), 'emt_journals');
 	});
 
 });
@@ -13,7 +13,7 @@ describe('EMTJournalStorageCollectionName', function test_EMTJournalStorageColle
 describe('EMTJournalStorageCollectionPath', function test_EMTJournalStorageCollectionPath() {
 
 	it('returns string', function() {
-		deepEqual(mainModule.EMTJournalStorageCollectionPath(), mainModule.EMTJournalStorageCollectionName() + '/');
+		deepEqual(mod.EMTJournalStorageCollectionPath(), mod.EMTJournalStorageCollectionName() + '/');
 	});
 
 });
@@ -22,12 +22,12 @@ describe('EMTJournalStorageFolderPath', function test_EMTJournalStorageFolderPat
 
 	it('throws error if blank', function() {
 		throws(function() {
-			mainModule.EMTJournalStorageFolderPath('');
+			mod.EMTJournalStorageFolderPath('');
 		}, /EMTErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
-		deepEqual(mainModule.EMTJournalStorageFolderPath('alfa'), mainModule.EMTJournalStorageCollectionPath() + 'alfa/');
+		deepEqual(mod.EMTJournalStorageFolderPath('alfa'), mod.EMTJournalStorageCollectionPath() + 'alfa/');
 	});
 
 });
@@ -36,12 +36,12 @@ describe('EMTJournalStorageObjectPath', function test_EMTJournalStorageObjectPat
 
 	it('throws error if blank', function() {
 		throws(function() {
-			mainModule.EMTJournalStorageObjectPath('');
+			mod.EMTJournalStorageObjectPath('');
 		}, /EMTErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
-		deepEqual(mainModule.EMTJournalStorageObjectPath('alfa'), mainModule.EMTJournalStorageFolderPath('alfa') + 'main');
+		deepEqual(mod.EMTJournalStorageObjectPath('alfa'), mod.EMTJournalStorageFolderPath('alfa') + 'main');
 	});
 
 });
@@ -50,20 +50,20 @@ describe('EMTJournalStorageMatch', function test_EMTJournalStorageMatch() {
 
 	it('throws error if not string', function() {
 		throws(function() {
-			mainModule.EMTJournalStorageMatch(null);
+			mod.EMTJournalStorageMatch(null);
 		}, /EMTErrorInputNotValid/);
 	});
 
 	it('returns false if no EMTJournalStorageCollectionPath', function() {
-		deepEqual(mainModule.EMTJournalStorageMatch(mainModule.EMTJournalStorageObjectPath('alfa').replace(mainModule.EMTJournalStorageCollectionPath(), mainModule.EMTJournalStorageCollectionPath().slice(1))), false);
+		deepEqual(mod.EMTJournalStorageMatch(mod.EMTJournalStorageObjectPath('alfa').replace(mod.EMTJournalStorageCollectionPath(), mod.EMTJournalStorageCollectionPath().slice(1))), false);
 	});
 
 	it('returns false if no EMTJournalStorageObjectPath', function() {
-		deepEqual(mainModule.EMTJournalStorageMatch(mainModule.EMTJournalStorageObjectPath('alfa').slice(0, -1)), false);
+		deepEqual(mod.EMTJournalStorageMatch(mod.EMTJournalStorageObjectPath('alfa').slice(0, -1)), false);
 	});
 
 	it('returns true', function() {
-		deepEqual(mainModule.EMTJournalStorageMatch(mainModule.EMTJournalStorageObjectPath('alfa')), true);
+		deepEqual(mod.EMTJournalStorageMatch(mod.EMTJournalStorageObjectPath('alfa')), true);
 	});
 
 });
@@ -71,11 +71,11 @@ describe('EMTJournalStorageMatch', function test_EMTJournalStorageMatch() {
 describe('EMTJournalStorageWrite', function test_EMTJournalStorageWrite() {
 
 	it('rejects if not object', async function() {
-		await rejects(mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, null), /EMTErrorInputNotValid/);
+		await rejects(mod.EMTJournalStorageWrite(EMTTestingStorageClient, null), /EMTErrorInputNotValid/);
 	});
 
 	it('returns object with EMTErrors if not valid', async function() {
-		deepEqual((await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, Object.assign(StubJournalObjectValid(), {
+		deepEqual((await mod.EMTJournalStorageWrite(EMTTestingStorageClient, Object.assign(StubJournalObjectValid(), {
 			EMTJournalID: null,
 		}))).EMTErrors, {
 			EMTJournalID: [
@@ -87,11 +87,11 @@ describe('EMTJournalStorageWrite', function test_EMTJournalStorageWrite() {
 	it('returns input', async function () {
 		const item = StubJournalObjectValid();
 
-		deepEqual(await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, item) === item, true);
+		deepEqual(await mod.EMTJournalStorageWrite(EMTTestingStorageClient, item) === item, true);
 	});
 
 	it('leaves input unmodified', async function () {
-		deepEqual(await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, StubJournalObjectValid()), StubJournalObjectValid());
+		deepEqual(await mod.EMTJournalStorageWrite(EMTTestingStorageClient, StubJournalObjectValid()), StubJournalObjectValid());
 	});
 
 	context('relations', function () {
@@ -102,11 +102,11 @@ describe('EMTJournalStorageWrite', function test_EMTJournalStorageWrite() {
 		let outputData, storage;
 
 		before(async function () {
-			outputData = await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, item);
+			outputData = await mod.EMTJournalStorageWrite(EMTTestingStorageClient, item);
 		});
 		
 		before(async function () {
-			storage = Object.values(await mainModule.EMTJournalStorageList(EMTTestingStorageClient));
+			storage = Object.values(await mod.EMTJournalStorageList(EMTTestingStorageClient));
 		});
 		
 		it('excludes from storage', function () {
@@ -128,13 +128,13 @@ describe('EMTJournalStorageWrite', function test_EMTJournalStorageWrite() {
 describe('EMTJournalStorageList', function test_EMTJournalStorageList() {
 
 	it('returns empty array if none', async function() {
-		deepEqual(await mainModule.EMTJournalStorageList(EMTTestingStorageClient), {});
+		deepEqual(await mod.EMTJournalStorageList(EMTTestingStorageClient), {});
 	});
 
 	it('returns existing EMTJournals', async function() {
-		let item = await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, StubJournalObjectValid());
-		deepEqual(Object.values(await mainModule.EMTJournalStorageList(EMTTestingStorageClient)), [item]);
-		deepEqual(Object.keys(await mainModule.EMTJournalStorageList(EMTTestingStorageClient)), [item.EMTJournalID]);
+		let item = await mod.EMTJournalStorageWrite(EMTTestingStorageClient, StubJournalObjectValid());
+		deepEqual(Object.values(await mod.EMTJournalStorageList(EMTTestingStorageClient)), [item]);
+		deepEqual(Object.keys(await mod.EMTJournalStorageList(EMTTestingStorageClient)), [item.EMTJournalID]);
 	});
 
 });
@@ -143,19 +143,19 @@ describe('EMTJournalStorageDelete', function test_EMTJournalStorageDelete() {
 
 	it('throws if not valid', function () {
 		throws(function () {
-			mainModule.EMTJournalStorageDelete(EMTTestingStorageClient, {})
+			mod.EMTJournalStorageDelete(EMTTestingStorageClient, {})
 		}, /EMTErrorInputNotValid/);
 	});
 
 	it('returns statusCode', async function() {
-		deepEqual(await mainModule.EMTJournalStorageDelete(EMTTestingStorageClient, await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, StubJournalObjectValid())), {
+		deepEqual(await mod.EMTJournalStorageDelete(EMTTestingStorageClient, await mod.EMTJournalStorageWrite(EMTTestingStorageClient, StubJournalObjectValid())), {
 			statusCode: 200,
 		});
 	});
 
 	it('deletes EMTJournal', async function() {
-		await mainModule.EMTJournalStorageDelete(EMTTestingStorageClient, await mainModule.EMTJournalStorageWrite(EMTTestingStorageClient, StubJournalObjectValid()));
-		deepEqual(await mainModule.EMTJournalStorageList(EMTTestingStorageClient), {});
+		await mod.EMTJournalStorageDelete(EMTTestingStorageClient, await mod.EMTJournalStorageWrite(EMTTestingStorageClient, StubJournalObjectValid()));
+		deepEqual(await mod.EMTJournalStorageList(EMTTestingStorageClient), {});
 	});
 
 });

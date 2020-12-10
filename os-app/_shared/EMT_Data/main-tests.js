@@ -1,6 +1,6 @@
 const { throws, rejects, deepEqual } = require('assert');
 
-const mainModule = require('./main.js').default;
+const mod = require('./main.js').default;
 const EMTJournalAction = require('../EMTJournal/action.js').default;
 const EMTMemoAction = require('../EMTMemo/action.js').default;
 
@@ -8,13 +8,13 @@ describe('EMT_DataImport', function test_EMT_DataImport() {
 
 	it('throws if not array', function () {
 		throws(function () {
-			mainModule.EMT_DataImport(EMTTestingStorageClient, null);
+			mod.EMT_DataImport(EMTTestingStorageClient, null);
 		}, /EMTErrorInputNotValid/);
 	});
 
 	it('throws if not filled', function () {
 		throws(function () {
-			mainModule.EMT_DataImport(EMTTestingStorageClient, []);
+			mod.EMT_DataImport(EMTTestingStorageClient, []);
 		}, /EMTErrorInputNotValid/);
 	});
 
@@ -27,13 +27,13 @@ describe('EMT_DataImport', function test_EMT_DataImport() {
 	context('EMTJournal', function () {
 		
 		it('rejects if not valid', async function () {
-			await rejects(mainModule.EMT_DataImport(EMTTestingStorageClient, [uJournal({
+			await rejects(mod.EMT_DataImport(EMTTestingStorageClient, [uJournal({
 				EMTJournalName: null,
 			})]), /EMTErrorInputNotValid/);
 		});
 
 		it('returns array', async function () {
-			const item = await mainModule.EMT_DataImport(EMTTestingStorageClient, [uJournal()]);
+			const item = await mod.EMT_DataImport(EMTTestingStorageClient, [uJournal()]);
 
 			deepEqual(item, [StubJournalObjectValid({
 				EMTJournalID: item[0].EMTJournalID,
@@ -43,13 +43,13 @@ describe('EMT_DataImport', function test_EMT_DataImport() {
 		});
 
 		it('removes $EMTJournalMemos', async function () {
-			const item = await mainModule.EMT_DataImport(EMTTestingStorageClient, [uJournal()]);
+			const item = await mod.EMT_DataImport(EMTTestingStorageClient, [uJournal()]);
 
 			deepEqual(item[0].$EMTJournalMemos, undefined);
 		});
 
 		it('creates EMTJournal objects', async function () {
-			const item = await mainModule.EMT_DataImport(EMTTestingStorageClient, [uJournal()]);
+			const item = await mod.EMT_DataImport(EMTTestingStorageClient, [uJournal()]);
 
 			deepEqual(await EMTJournalAction.EMTJournalActionList(EMTTestingStorageClient), item);
 		});
@@ -59,13 +59,13 @@ describe('EMT_DataImport', function test_EMT_DataImport() {
 	context('$EMTJournalMemos', function () {
 		
 		it('rejects if not array', async function () {
-			await rejects(mainModule.EMT_DataImport(EMTTestingStorageClient, [uJournal({
+			await rejects(mod.EMT_DataImport(EMTTestingStorageClient, [uJournal({
 				$EMTJournalMemos: null,
 			})]), /EMTErrorInputNotValid/);
 		});
 
 		it('rejects if not valid', async function () {
-			await rejects(mainModule.EMT_DataImport(EMTTestingStorageClient, [uJournal({
+			await rejects(mod.EMT_DataImport(EMTTestingStorageClient, [uJournal({
 				$EMTJournalMemos: [StubMemoObjectValid({
 					EMTMemoNotes: null,
 				})],
@@ -78,7 +78,7 @@ describe('EMT_DataImport', function test_EMT_DataImport() {
 			delete item.EMTMemoID;
 			delete item.EMTMemoJournalID;
 
-			const list = await EMTMemoAction.EMTMemoActionList(EMTTestingStorageClient, (await mainModule.EMT_DataImport(EMTTestingStorageClient, [uJournal({
+			const list = await EMTMemoAction.EMTMemoActionList(EMTTestingStorageClient, (await mod.EMT_DataImport(EMTTestingStorageClient, [uJournal({
 				$EMTJournalMemos: [item],
 			})]))[0]);
 

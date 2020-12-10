@@ -1,6 +1,6 @@
 const { throws, deepEqual } = require('assert');
 
-const mainModule = require('./ui-logic.js');
+const mod = require('./ui-logic.js');
 
 describe('EMTBrowseListItemAccessibilitySummary', function test_EMTBrowseListItemAccessibilitySummary() {
 
@@ -10,12 +10,12 @@ describe('EMTBrowseListItemAccessibilitySummary', function test_EMTBrowseListIte
 
 	it('throws if not object', function () {
 		throws(function () {
-			mainModule.EMTBrowseListItemAccessibilitySummary(null);
+			mod.EMTBrowseListItemAccessibilitySummary(null);
 		}, /EMTErrorInputNotValid/);
 	});
 
 	it('returns EMTBrowseListItemUntitledText', function () {
-		deepEqual(mainModule.EMTBrowseListItemAccessibilitySummary(Object.assign(item), function (inputData) {
+		deepEqual(mod.EMTBrowseListItemAccessibilitySummary(Object.assign(item), function (inputData) {
 			return inputData;
 		}), 'EMTBrowseListItemUntitledText');
 	});

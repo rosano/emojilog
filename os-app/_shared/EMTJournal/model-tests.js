@@ -1,17 +1,17 @@
 const { throws, deepEqual } = require('assert');
 
-const mainModule = require('./model.js').default;
+const mod = require('./model.js').default;
 
 describe('EMTJournalModelErrorsFor', function test_EMTJournalModelErrorsFor() {
 
 	it('throws error if not object', function() {
 		throws(function() {
-			mainModule.EMTJournalModelErrorsFor(null);
+			mod.EMTJournalModelErrorsFor(null);
 		}, /EMTErrorInputNotValid/);
 	});
 
 	it('returns object if EMTJournalID not string', function() {
-		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
+		deepEqual(mod.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
 			EMTJournalID: null,
 		})), {
 			EMTJournalID: [
@@ -21,7 +21,7 @@ describe('EMTJournalModelErrorsFor', function test_EMTJournalModelErrorsFor() {
 	});
 
 	it('returns object if EMTJournalID not filled', function() {
-		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
+		deepEqual(mod.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
 			EMTJournalID: ' ',
 		})), {
 			EMTJournalID: [
@@ -31,7 +31,7 @@ describe('EMTJournalModelErrorsFor', function test_EMTJournalModelErrorsFor() {
 	});
 
 	it('returns object if EMTJournalName not string', function() {
-		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
+		deepEqual(mod.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
 			EMTJournalName: null,
 		})), {
 			EMTJournalName: [
@@ -41,7 +41,7 @@ describe('EMTJournalModelErrorsFor', function test_EMTJournalModelErrorsFor() {
 	});
 
 	it('returns object if EMTJournalCreationDate not date', function() {
-		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
+		deepEqual(mod.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
 			EMTJournalCreationDate: new Date('alfa'),
 		})), {
 			EMTJournalCreationDate: [
@@ -51,7 +51,7 @@ describe('EMTJournalModelErrorsFor', function test_EMTJournalModelErrorsFor() {
 	});
 
 	it('returns object if EMTJournalModificationDate not date', function() {
-		deepEqual(mainModule.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
+		deepEqual(mod.EMTJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
 			EMTJournalModificationDate: new Date('alfa'),
 		})), {
 			EMTJournalModificationDate: [
@@ -61,13 +61,13 @@ describe('EMTJournalModelErrorsFor', function test_EMTJournalModelErrorsFor() {
 	});
 
 	it('returns null', function() {
-		deepEqual(mainModule.EMTJournalModelErrorsFor(StubJournalObjectValid()), null);
+		deepEqual(mod.EMTJournalModelErrorsFor(StubJournalObjectValid()), null);
 	});
 
 	context('EMTOptionValidateIfNotPresent', function() {
 
 		it('returns object if not valid', function() {
-			deepEqual(Object.keys(mainModule.EMTJournalModelErrorsFor({}, {
+			deepEqual(Object.keys(mod.EMTJournalModelErrorsFor({}, {
 				EMTOptionValidateIfNotPresent: true,
 			})), [
 				'EMTJournalID',

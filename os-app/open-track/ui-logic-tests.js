@@ -1,6 +1,6 @@
 const { throws, deepEqual } = require('assert');
 
-const mainModule = require('./ui-logic.js');
+const mod = require('./ui-logic.js');
 
 describe('EMTTrackSort', function test_EMTTrackSort() {
 
@@ -12,7 +12,7 @@ describe('EMTTrackSort', function test_EMTTrackSort() {
 			EMTJournalModificationDate: new Date(1),
 		};
 
-		deepEqual([item1, item2].sort(mainModule.EMTTrackSort), [item2, item1]);
+		deepEqual([item1, item2].sort(mod.EMTTrackSort), [item2, item1]);
 	});
 
 	it('sorts by EMTJournalCreationDate descending if no EMTJournalModificationDate', function() {
@@ -23,7 +23,7 @@ describe('EMTTrackSort', function test_EMTTrackSort() {
 			EMTJournalCreationDate: new Date(1),
 		};
 
-		deepEqual([item1, item2].sort(mainModule.EMTTrackSort), [item2, item1]);
+		deepEqual([item1, item2].sort(mod.EMTTrackSort), [item2, item1]);
 	});
 
 });
