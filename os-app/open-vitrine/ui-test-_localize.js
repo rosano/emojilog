@@ -32,7 +32,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 		it('localizes EMTVitrineContent', function() {
 			const item = require('OLSKString').OLSKStringReplaceTokens(require('fs').readFileSync(require('path').join(__dirname, `text.${ OLSKRoutingLanguage }.md`), 'utf-8'), {
-				'_': '',
+				'\\*': '',
 				'\n\n': '\n',
 				'EMTVitrineDescription': uLocalized('EMTVitrineDescription'),
 			});
