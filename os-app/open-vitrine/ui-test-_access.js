@@ -44,6 +44,10 @@ describe('EMTVitrine_Access', function () {
 		browser.assert.elements(EMTVitrineIdentityBlurb, 1);
 	});
 	
+	it('shows OLSKCommonWhatIsIt', function() {
+		browser.assert.elements('.OLSKCommonWhatIsIt', 1);
+	});
+
 	it('shows EMTVitrineContent', function() {
 		browser.assert.elements(EMTVitrineContent, 1);
 	});
