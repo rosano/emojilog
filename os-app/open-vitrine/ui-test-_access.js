@@ -3,10 +3,10 @@ const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().shif
 Object.entries({
 	EMTVitrine: '.EMTVitrine',
 	
-	EMTVitrineIdentity: '.EMTVitrineIdentity',
-	EMTVitrineIdentityLogo: '.EMTVitrineIdentityLogo',
-	EMTVitrineIdentityName: '.EMTVitrineIdentityName',
-	EMTVitrineIdentityBlurb: '.EMTVitrineIdentityBlurb',
+	EMTVitrineCrown: '.EMTVitrineCrown',
+	EMTVitrineCrownIcon: '.EMTVitrineCrownIcon',
+	EMTVitrineCrownName: '.EMTVitrineCrownName',
+	EMTVitrineCrownBlurb: '.EMTVitrineCrownBlurb',
 
 	EMTVitrineContent: '.EMTVitrineContent',
 	EMTVitrineContentAppButton: '.EMTVitrineContentAppButton',
@@ -28,20 +28,20 @@ describe('EMTVitrine_Access', function () {
 		browser.assert.elements('.OLSKLanguageSwitcher', 1);
 	});
 	
-	it('shows EMTVitrineIdentity', function() {
-		browser.assert.elements(EMTVitrineIdentity, 1);
+	it('shows EMTVitrineCrown', function() {
+		browser.assert.elements(EMTVitrineCrown, 1);
 	});
 	
-	it('shows EMTVitrineIdentityLogo', function() {
-		browser.assert.elements(EMTVitrineIdentityLogo, 1);
+	it('shows EMTVitrineCrownIcon', function() {
+		browser.assert.elements(EMTVitrineCrownIcon, 1);
 	});
 	
-	it('shows EMTVitrineIdentityName', function() {
-		browser.assert.elements(EMTVitrineIdentityName, 1);
+	it('shows EMTVitrineCrownName', function() {
+		browser.assert.elements(EMTVitrineCrownName, 1);
 	});
 
-	it('shows EMTVitrineIdentityBlurb', function () {
-		browser.assert.elements(EMTVitrineIdentityBlurb, 1);
+	it('shows EMTVitrineCrownBlurb', function () {
+		browser.assert.elements(EMTVitrineCrownBlurb, 1);
 	});
 	
 	it('shows OLSKCommonWhatIsIt', function() {

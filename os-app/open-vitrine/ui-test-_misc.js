@@ -18,26 +18,26 @@ describe('EMTVitrine_Misc', function () {
 	
 	});
 
-	describe('EMTVitrineIdentity', function test_EMTVitrineIdentity() {
+	describe('EMTVitrineCrown', function test_EMTVitrineCrown() {
 
 		it('classes OLSKCommonCard', function () {
-			browser.assert.hasClass(EMTVitrineIdentity, 'OLSKCommonCard');
+			browser.assert.hasClass(EMTVitrineCrown, 'OLSKCommonCard');
 		});
 
 		it('classes OLSKCommonCrownCard', function () {
-			browser.assert.hasClass(EMTVitrineIdentity, 'OLSKCommonCrownCard');
+			browser.assert.hasClass(EMTVitrineCrown, 'OLSKCommonCrownCard');
 		});
 		
 	});
 
-	describe('EMTVitrineIdentityLogo', function () {
+	describe('EMTVitrineCrownIcon', function () {
 
 		it('sets role', function () {
-			browser.assert.attribute(EMTVitrineIdentityLogo, 'role', 'presentation');
+			browser.assert.attribute(EMTVitrineCrownIcon, 'role', 'presentation');
 		});
 
 		it('sets src', function () {
-			browser.assert.attribute(EMTVitrineIdentityLogo, 'src', '/_shared/EMTRootLink/ui-assets/identity.svg');
+			browser.assert.attribute(EMTVitrineCrownIcon, 'src', '/_shared/EMTRootLink/ui-assets/identity.svg');
 		});
 
 	});
