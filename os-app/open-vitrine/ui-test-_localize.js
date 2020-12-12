@@ -49,6 +49,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.element(`a[href="${ process.env.EMT_SHARED_GITHUB_URL }"]`);
 		});
 
+		it('localizes EMTVitrineContentAppButton', function () {
+			browser.assert.text(EMTVitrineContentAppButton, uLocalized('OLSKWordingOpenApp'));
+		});
+
 		context('EMTVitrineContentAppButton', function test_EMTVitrineContentAppButton () {
 
 			it('classes OLSKCommonButton', function () {
