@@ -24,8 +24,8 @@ describe('EMTVitrine_Misc', function () {
 			browser.assert.hasClass(EMTVitrineIdentity, 'OLSKCommonCard');
 		});
 
-		it('classes OLSKCommonIdentityCard', function () {
-			browser.assert.hasClass(EMTVitrineIdentity, 'OLSKCommonIdentityCard');
+		it('classes OLSKCommonCrownCard', function () {
+			browser.assert.hasClass(EMTVitrineIdentity, 'OLSKCommonCrownCard');
 		});
 		
 	});
