@@ -155,6 +155,18 @@ describe('EMTBrowseInfo_Misc', function () {
 
 	});
 
+	describe('EMTBrowseInfoForm', function test_EMTBrowseInfoForm() {
+
+		it('classes OLSKCommon', function () {
+			browser.assert.hasClass(EMTBrowseInfoForm, 'OLSKCommon');
+		});
+
+		it('classes OLSKCommonForm', function () {
+			browser.assert.hasClass(EMTBrowseInfoForm, 'OLSKCommonForm');
+		});
+
+	});
+
 	describe('EMTBrowseInfoFormNotesField', function test_EMTBrowseInfoFormNotesField() {
 
 		before(function () {

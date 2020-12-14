@@ -1,4 +1,8 @@
 .EMTBrowseInfo {
+	/* OLSKCommon */
+	--OLSKCommonFontFamily: 'Helvetica';
+	--OLSKCommonFontSize: 9pt;
+	
 	/* EMTBrowseInfoFlexbox:Parent */
 	display: flex;
 	flex-direction: column;
@@ -9,14 +13,6 @@
 .EMTBrowseInfo > :global(.OLSKDetailPlaceholder) {
 	/* EMTBrowseInfoFlexbox:Child */
 	flex-grow: 1;
-}
-
-}
-
-@media screen and (max-width: 760px) {
-
-.EMTBrowseInfo {
-	/*min-height: 100%;*/
 }
 
 }
@@ -32,40 +28,5 @@
 	/* browser quirks */
 	z-index: 999;
 }
-
-}
-
-.EMTBrowseInfoForm {
-	padding: 10px;
-}
-
-.EMTBrowseInfoForm p:nth-child(1) {
-	margin-top: 0;
-}
-
-.EMTBrowseInfoForm hr {
-	height: 1px;
-	border: none;
-
-	background: #e6e6e6;
-}
-
-.EMTBrowseInfoForm :global(input[type=text]), .EMTBrowseInfoForm :global(textarea) {
-	width: 50%;
-	border: var(--OLSKCommonEdgeBorder);
-	border-radius: 5px;
-	padding: 5px 7px;
-}
-
-.EMTBrowseInfoForm :global(textarea) {
-	min-height: 200px;
-}
-
-@media screen and (max-width: 760px) {
-
-	.EMTBrowseInfoForm :global(input[type=text]), .EMTBrowseInfoForm :global(textarea) {
-		width: 90%;
-		padding: 10px;
-	}
 
 }
