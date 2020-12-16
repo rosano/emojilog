@@ -11,6 +11,8 @@ Object.entries({
 	EMTVitrineContent: '.EMTVitrineContent',
 	EMTVitrineContentAppButton: '.EMTVitrineContentAppButton',
 
+	EMTVitrineFeaturesHeading: '.EMTVitrineFeaturesHeading',
+
 	EMTVitrineSupportHeading: '.EMTVitrineSupportHeading',
 	EMTVitrineSupportBlurb: '.EMTVitrineSupportBlurb',
 }).map(function (e) {
@@ -57,6 +59,14 @@ describe('EMTVitrine_Access', function () {
 
 	it('shows EMTVitrineContentAppButton', function() {
 		browser.assert.elements(EMTVitrineContentAppButton, 1);
+	});
+
+	it('shows EMTVitrineFeaturesHeading', function () {
+		browser.assert.elements(EMTVitrineFeaturesHeading, 1);
+	});
+
+	it('shows OLSKAppFeatureList', function () {
+		browser.assert.elements('.OLSKAppFeatureList', 1);
 	});
 
 	it('shows EMTVitrineSupportHeading', function () {

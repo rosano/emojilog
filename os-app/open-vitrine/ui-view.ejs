@@ -33,6 +33,10 @@ locals.OLSKPagePublicConstants = {
 
 <%- OLSKStringReplaceTokens(EMTVitrineContent, {}) %>
 
+<h1 class="EMTVitrineFeaturesHeading"><%= OLSKLocalized('OLSKWordingFeatures') %></h1>
+
+<%- include('../../node_modules/OLSKAppFeatureList/main.ejs').replace(/node_modules/g, '_shared/__external') %>
+
 </article>
 
 <h1 class="EMTVitrineSupportHeading"><%= OLSKLocalized('OLSKWordingSupportHeading') %></h1>

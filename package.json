@@ -25,6 +25,9 @@
     "// WORDING": null,
     "OLSKWording": "olsk/OLSKWording",
 
+    "// VITRINE": null,
+    "OLSKAppFeatureList": "olsk/OLSKAppFeatureList",
+
     "// FRONTEND NORMALIZE CSS": null,
     "normalize.css": "latest",
     "OLSKLayout": "olsk/OLSKLayout",
