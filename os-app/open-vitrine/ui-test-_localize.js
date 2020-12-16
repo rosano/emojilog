@@ -53,6 +53,14 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(EMTVitrineContentAppButton, uLocalized('OLSKWordingOpenApp'));
 		});
 
+		it('localizes EMTVitrineSupportHeading', function () {
+			browser.assert.text(EMTVitrineSupportHeading, uLocalized('OLSKWordingSupportHeading'));
+		});
+
+		it('localizes EMTVitrineSupportBlurb', function () {
+			browser.assert.text(EMTVitrineSupportBlurb, uLocalized('OLSKWordingSupportBlurb'));
+		});
+
 		context('EMTVitrineContentAppButton', function test_EMTVitrineContentAppButton () {
 
 			it('classes OLSKCommonButton', function () {

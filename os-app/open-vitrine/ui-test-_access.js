@@ -10,6 +10,9 @@ Object.entries({
 
 	EMTVitrineContent: '.EMTVitrineContent',
 	EMTVitrineContentAppButton: '.EMTVitrineContentAppButton',
+
+	EMTVitrineSupportHeading: '.EMTVitrineSupportHeading',
+	EMTVitrineSupportBlurb: '.EMTVitrineSupportBlurb',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -54,6 +57,14 @@ describe('EMTVitrine_Access', function () {
 
 	it('shows EMTVitrineContentAppButton', function() {
 		browser.assert.elements(EMTVitrineContentAppButton, 1);
+	});
+
+	it('shows EMTVitrineSupportHeading', function () {
+		browser.assert.elements(EMTVitrineSupportHeading, 1);
+	});
+
+	it('shows EMTVitrineSupportBlurb', function () {
+		browser.assert.elements(EMTVitrineSupportBlurb, 1);
 	});
 
 	it('shows ROCORootLink', function() {
