@@ -67,12 +67,12 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 		context('EMTVitrineContentAppButton', function test_EMTVitrineContentAppButton () {
 
-			it('classes OLSKCommonButton', function () {
-				browser.assert.hasClass(EMTVitrineContentAppButton, 'OLSKCommonButton');
+			it('classes OLSKDecorPress', function () {
+				browser.assert.hasClass(EMTVitrineContentAppButton, 'OLSKDecorPress');
 			});
 			
-			it('classes OLSKCommonButtonPrimary', function () {
-				browser.assert.hasClass(EMTVitrineContentAppButton, 'OLSKCommonButtonPrimary');
+			it('classes OLSKDecorPressCall', function () {
+				browser.assert.hasClass(EMTVitrineContentAppButton, 'OLSKDecorPressCall');
 			});
 			
 			it('sets href', function () {
