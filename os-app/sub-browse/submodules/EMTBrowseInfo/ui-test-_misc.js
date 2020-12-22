@@ -161,8 +161,8 @@ describe('EMTBrowseInfo_Misc', function () {
 			browser.assert.hasClass(EMTBrowseInfoForm, 'OLSKDecor');
 		});
 
-		it('classes OLSKCommonForm', function () {
-			browser.assert.hasClass(EMTBrowseInfoForm, 'OLSKCommonForm');
+		it('classes OLSKDecorBigForm', function () {
+			browser.assert.hasClass(EMTBrowseInfoForm, 'OLSKDecorBigForm');
 		});
 
 	});
