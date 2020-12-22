@@ -8,12 +8,12 @@ describe('EMTVitrine_Misc', function () {
 
 	describe('EMTVitrine', function () {
 		
-		it('classes OLSKCommon', function () {
-			browser.assert.hasClass(EMTVitrine, 'OLSKCommon');
+		it('classes OLSKDecor', function () {
+			browser.assert.hasClass(EMTVitrine, 'OLSKDecor');
 		});
 
-		it('classes OLSKCommonCapped', function () {
-			browser.assert.hasClass(EMTVitrine, 'OLSKCommonCapped');
+		it('classes OLSKDecorCapped', function () {
+			browser.assert.hasClass(EMTVitrine, 'OLSKDecorCapped');
 		});
 	
 	});

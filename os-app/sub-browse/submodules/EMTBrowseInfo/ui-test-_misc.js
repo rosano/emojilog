@@ -157,8 +157,8 @@ describe('EMTBrowseInfo_Misc', function () {
 
 	describe('EMTBrowseInfoForm', function test_EMTBrowseInfoForm() {
 
-		it('classes OLSKCommon', function () {
-			browser.assert.hasClass(EMTBrowseInfoForm, 'OLSKCommon');
+		it('classes OLSKDecor', function () {
+			browser.assert.hasClass(EMTBrowseInfoForm, 'OLSKDecor');
 		});
 
 		it('classes OLSKCommonForm', function () {
