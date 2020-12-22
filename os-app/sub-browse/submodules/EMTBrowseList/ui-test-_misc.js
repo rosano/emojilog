@@ -20,12 +20,12 @@ describe('EMTBrowseList_Misc', function () {
 
 	describe('EMTBrowseListToolbarCloseButton', function test_EMTBrowseListToolbarCloseButton() {
 
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(EMTBrowseListToolbarCloseButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(EMTBrowseListToolbarCloseButton, 'OLSKDecorButtonNoStyle');
 		});
 
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(EMTBrowseListToolbarCloseButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(EMTBrowseListToolbarCloseButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {
@@ -112,12 +112,12 @@ describe('EMTBrowseList_Misc', function () {
 
 	describe('EMTBrowseListToolbarFormButton', function test_EMTBrowseListToolbarFormButton() {
 
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(EMTBrowseListToolbarFormButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(EMTBrowseListToolbarFormButton, 'OLSKDecorButtonNoStyle');
 		});
 
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(EMTBrowseListToolbarFormButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(EMTBrowseListToolbarFormButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {
@@ -156,12 +156,12 @@ describe('EMTBrowseList_Misc', function () {
 
 	describe('EMTBrowseListToolbarCreateButton', function test_EMTBrowseListToolbarCreateButton() {
 
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(EMTBrowseListToolbarCreateButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(EMTBrowseListToolbarCreateButton, 'OLSKDecorButtonNoStyle');
 		});
 
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(EMTBrowseListToolbarCreateButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(EMTBrowseListToolbarCreateButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {

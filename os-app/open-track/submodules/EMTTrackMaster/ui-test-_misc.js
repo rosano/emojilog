@@ -20,12 +20,12 @@ describe('EMTTrackMaster_Misc', function () {
 
 	describe('EMTTrackMasterCreateButton', function () {
 		
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(EMTTrackMasterCreateButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(EMTTrackMasterCreateButton, 'OLSKDecorButtonNoStyle');
 		});
 		
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(EMTTrackMasterCreateButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(EMTTrackMasterCreateButton, 'OLSKDecorTappable');
 		});
 		
 		it('sets accesskey', function () {

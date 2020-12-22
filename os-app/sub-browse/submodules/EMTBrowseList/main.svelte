@@ -35,7 +35,7 @@ import EMTBrowseListItem from '../EMTBrowseListItem/main.svelte';
 	>
 	<div slot="OLSKMasterListToolbarHead">
 		<div class="OLSKToolbarElementGroup">
-			<button class="EMTBrowseListToolbarCloseButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('EMTBrowseListToolbarCloseButtonText') } on:click={ EMTBrowseListDispatchClose }>
+			<button class="EMTBrowseListToolbarCloseButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMTBrowseListToolbarCloseButtonText') } on:click={ EMTBrowseListDispatchClose }>
 				<div class="EMTBrowseListToolbarCloseButtonImage">{@html _OLSKSharedBack }</div>
 			</button>
 		</div>
@@ -43,11 +43,11 @@ import EMTBrowseListItem from '../EMTBrowseListItem/main.svelte';
 
 	<div slot="OLSKMasterListToolbarTail">
 		<div class="OLSKToolbarElementGroup">
-			<button class="EMTBrowseListToolbarFormButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('EMTBrowseListToolbarFormButtonText') } on:click={ () => EMTBrowseListDispatchForm() } accesskey="f">
+			<button class="EMTBrowseListToolbarFormButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMTBrowseListToolbarFormButtonText') } on:click={ () => EMTBrowseListDispatchForm() } accesskey="f">
 				<div class="EMTBrowseListToolbarFormButtonImage">{@html _OLSKSharedCreate }</div>
 			</button>
 
-			<button class="EMTBrowseListToolbarCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('EMTBrowseListToolbarCreateButtonText') } on:click={ () => EMTBrowseListDispatchCreate() } accesskey="n">
+			<button class="EMTBrowseListToolbarCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMTBrowseListToolbarCreateButtonText') } on:click={ () => EMTBrowseListDispatchCreate() } accesskey="n">
 				<div class="EMTBrowseListToolbarCreateButtonImage">{@html _OLSKSharedCreate }</div>
 			</button>
 		</div>

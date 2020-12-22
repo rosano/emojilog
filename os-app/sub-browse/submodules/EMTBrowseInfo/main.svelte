@@ -70,13 +70,13 @@ import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 {#if EMTBrowseInfoItem}
 <header class="EMTBrowseInfoToolbar OLSKMobileViewHeader OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeBottom">
 	<div class="OLSKToolbarElementGroup">
-		<button class="EMTBrowseInfoToolbarBackButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton OLSKVisibilityMobile" title={ OLSKLocalized('EMTBrowseInfoToolbarBackButtonText') } on:click={ EMTBrowseInfoDispatchBack }>
+		<button class="EMTBrowseInfoToolbarBackButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton OLSKVisibilityMobile" title={ OLSKLocalized('EMTBrowseInfoToolbarBackButtonText') } on:click={ EMTBrowseInfoDispatchBack }>
 			<div class="EMTBrowseInfoToolbarBackButtonImage">{@html _OLSKSharedBack }</div>
 		</button>
 	</div>
 
 	<div class="OLSKToolbarElementGroup">
-		<button class="EMTBrowseInfoToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKToolbarButton" title={ OLSKLocalized('EMTBrowseInfoToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('EMTBrowseInfoDiscardConfirmText')) && EMTBrowseInfoDispatchDiscard(EMTBrowseInfoItem) }>
+		<button class="EMTBrowseInfoToolbarDiscardButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMTBrowseInfoToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('EMTBrowseInfoDiscardConfirmText')) && EMTBrowseInfoDispatchDiscard(EMTBrowseInfoItem) }>
 			<div class="EMTBrowseInfoToolbarDiscardButtonImage">{@html _OLSKSharedDiscard }</div>
 		</button>
 	</div>

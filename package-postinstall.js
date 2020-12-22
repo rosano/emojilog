@@ -16,7 +16,7 @@
 		'launchlet',
 		'normalize.css',
 		'OLSKLanguageSwitcher',
-		'OLSKLayout',
+		'OLSKDecor',
 		'OLSKRootLink',
 		'OLSKRouting',
 		'OLSKServiceWorker',

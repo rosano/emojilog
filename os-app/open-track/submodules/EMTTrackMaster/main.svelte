@@ -61,13 +61,13 @@ import OLSKStandardView from 'OLSKStandardView';
 
 <div class="EMTTrackMasterHead OLSKToolbar OLSKCommonEdgeBottom" slot="OLSKStandardViewHead">
 	<div class="OLSKToolbarElementGroup">
-		<button class="EMTTrackMasterCreateButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTrackMasterDispatchCreate } accesskey="n">{ OLSKLocalized('EMTTrackMasterCreateButtonText') }</button>
+		<button class="EMTTrackMasterCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable" on:click={ EMTTrackMasterDispatchCreate } accesskey="n">{ OLSKLocalized('EMTTrackMasterCreateButtonText') }</button>
 	</div>
 </div>
 
 <div>
 	{#each EMTTrackMasterListItems as e}
-		<button class="EMTTrackMasterListItem OLSKLayoutButtonNoStyle OLSKLayoutElementTappable OLSKCommonEdgeBottom" class:EMTTrackMasterListItemSelected={ (EMTTrackMasterListItemSelected || {}).EMTJournalID === e.EMTJournalID } on:click={ () => EMTTrackMasterDispatchSelect(e) } >
+		<button class="EMTTrackMasterListItem OLSKDecorButtonNoStyle OLSKDecorTappable OLSKCommonEdgeBottom" class:EMTTrackMasterListItemSelected={ (EMTTrackMasterListItemSelected || {}).EMTJournalID === e.EMTJournalID } on:click={ () => EMTTrackMasterDispatchSelect(e) } >
 			<strong class="EMTTrackMasterListItemName">{ e.EMTJournalName || e.EMTJournalID }</strong>
 		</button>
 	{/each}

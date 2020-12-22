@@ -10,11 +10,11 @@ import { OLSKLocalized } from 'OLSKInternational';
 
 <header class="EMTTemplateToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeBottom">
 	<div class="OLSKToolbarElementGroup">
-		<button class="EMTTemplateToolbarDoneButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ EMTTemplateDispatchDone }>{ OLSKLocalized('EMTTemplateToolbarDoneButtonText') }</button>
+		<button class="EMTTemplateToolbarDoneButton OLSKDecorButtonNoStyle OLSKDecorTappable" on:click={ EMTTemplateDispatchDone }>{ OLSKLocalized('EMTTemplateToolbarDoneButtonText') }</button>
 	</div>
 
 	<div class="OLSKToolbarElementGroup">
-		<button class="EMTTemplateToolbarDiscardButton OLSKLayoutButtonNoStyle OLSKLayoutElementTappable" on:click={ () => window.confirm(OLSKLocalized('EMTTemplateDiscardConfirmText')) && EMTTemplateDispatchDiscard(EMTTemplateItem) }>{ OLSKLocalized('EMTTemplateToolbarDiscardButtonText') }</button>
+		<button class="EMTTemplateToolbarDiscardButton OLSKDecorButtonNoStyle OLSKDecorTappable" on:click={ () => window.confirm(OLSKLocalized('EMTTemplateDiscardConfirmText')) && EMTTemplateDispatchDiscard(EMTTemplateItem) }>{ OLSKLocalized('EMTTemplateToolbarDiscardButtonText') }</button>
 	</div>
 </header>
 

@@ -46,12 +46,12 @@ describe('EMTTemplate_Misc', function  test_EMTTemplate_Misc () {
 
 	describe('EMTTemplateToolbarDoneButton', function  test_EMTTemplateToolbarDoneButton () {
 		
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(EMTTemplateToolbarDoneButton, 'OLSKLayoutButtonNoStyle');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(EMTTemplateToolbarDoneButton, 'OLSKDecorButtonNoStyle');
 		});
 		
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(EMTTemplateToolbarDoneButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(EMTTemplateToolbarDoneButton, 'OLSKDecorTappable');
 		});
 
 		context('click', function () {
@@ -74,12 +74,12 @@ describe('EMTTemplate_Misc', function  test_EMTTemplate_Misc () {
 
 	describe('EMTTemplateToolbarDiscardButton', function  test_EMTTemplateToolbarDiscardButton () {
 		
-		it('classes OLSKLayoutButtonNoStyle', function () {
-			browser.assert.hasClass(EMTTemplateToolbarDiscardButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorButtonNoStyle', function () {
+			browser.assert.hasClass(EMTTemplateToolbarDiscardButton, 'OLSKDecorTappable');
 		});
 		
-		it('classes OLSKLayoutElementTappable', function () {
-			browser.assert.hasClass(EMTTemplateToolbarDiscardButton, 'OLSKLayoutElementTappable');
+		it('classes OLSKDecorTappable', function () {
+			browser.assert.hasClass(EMTTemplateToolbarDiscardButton, 'OLSKDecorTappable');
 		});
 
 		context('click', function () {

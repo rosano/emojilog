@@ -135,12 +135,12 @@ describe('EMTTrack_Misc', function () {
 				return browser.pressButton('.EMTBrowseListToolbarCloseButton');
 			});
 
-			it('classes OLSKLayoutButtonNoStyle', function() {
-				browser.assert.hasClass('.EMTTrackMasterListItem', 'OLSKLayoutButtonNoStyle');
+			it('classes OLSKDecorButtonNoStyle', function() {
+				browser.assert.hasClass('.EMTTrackMasterListItem', 'OLSKDecorButtonNoStyle');
 			});
 
-			it('classes OLSKLayoutElementTappable', function() {
-				browser.assert.hasClass('.EMTTrackMasterListItem', 'OLSKLayoutElementTappable');
+			it('classes OLSKDecorTappable', function() {
+				browser.assert.hasClass('.EMTTrackMasterListItem', 'OLSKDecorTappable');
 			});
 		
 		});
