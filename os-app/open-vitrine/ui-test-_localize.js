@@ -58,11 +58,11 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		});
 
 		it('localizes EMTVitrineSupportHeading', function () {
-			browser.assert.text(EMTVitrineSupportHeading, uLocalized('OLSKWordingSupportHeading'));
+			browser.assert.text(EMTVitrineSupportHeading, uLocalized('OLSKWordingFeedbackHeading'));
 		});
 
 		it('localizes EMTVitrineSupportBlurb', function () {
-			browser.assert.text(EMTVitrineSupportBlurb, uLocalized('OLSKWordingSupportBlurb'));
+			browser.assert.text(EMTVitrineSupportBlurb, uLocalized('OLSKWordingFeedbackBlurb'));
 		});
 
 		context('EMTVitrineContentAppButton', function test_EMTVitrineContentAppButton () {
