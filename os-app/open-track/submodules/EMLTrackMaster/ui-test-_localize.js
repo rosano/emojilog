@@ -13,9 +13,9 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				OLSKRoutingLanguage,
 			});
 		});
-	
+
 		it('localizes EMLTrackMasterCreateButton', function () {
-			browser.assert.text(EMLTrackMasterCreateButton, uLocalized('EMLTrackMasterCreateButtonText'));
+			browser.assert.attribute(EMLTrackMasterCreateButton, 'title', uLocalized('EMLTrackMasterCreateButtonText'));
 		});
 
 	});

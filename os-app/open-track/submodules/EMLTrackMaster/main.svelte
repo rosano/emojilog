@@ -44,15 +44,19 @@ const mod = {
 };
 
 import OLSKStandardView from 'OLSKStandardView';
+import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedCreate.svg';
 </script>
 
 <div class="EMLTrackMaster">
 
 <OLSKStandardView>
 
-<div class="EMLTrackMasterHead OLSKToolbar OLSKCommonEdgeBottom" slot="OLSKStandardViewHead">
+<div class="EMLTrackMasterHead OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeBottom" slot="OLSKStandardViewHead">
+	<div class="OLSKToolbarElementGroup"></div>
 	<div class="OLSKToolbarElementGroup">
-		<button class="EMLTrackMasterCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable" on:click={ EMLTrackMasterDispatchCreate } accesskey="n">{ OLSKLocalized('EMLTrackMasterCreateButtonText') }</button>
+		<button class="EMLTrackMasterCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLTrackMasterCreateButtonText') } on:click={ EMLTrackMasterDispatchCreate } accesskey="n">
+			<div class="EMLTrackMasterCreateButtonImage">{@html _OLSKSharedCreate }</div>
+		</button>
 	</div>
 </div>
 

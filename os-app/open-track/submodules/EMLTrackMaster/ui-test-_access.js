@@ -5,6 +5,7 @@ Object.entries({
 	
 	EMLTrackMasterHead: '.EMLTrackMasterHead',
 	EMLTrackMasterCreateButton: '.EMLTrackMasterCreateButton',
+	EMLTrackMasterCreateButtonImage: '.EMLTrackMasterCreateButtonImage',
 
 	EMLTrackMasterListItem: '.EMLTrackMasterListItem',
 	EMLTrackMasterListItemName: '.EMLTrackMasterListItemName',
@@ -29,6 +30,10 @@ describe('EMLTrackMaster_Access', function () {
 
 	it('shows EMLTrackMasterCreateButton', function () {
 		browser.assert.elements(EMLTrackMasterCreateButton, 1);
+	});
+
+	it('shows EMLTrackMasterCreateButtonImage', function () {
+		browser.assert.elements(EMLTrackMasterCreateButtonImage, 1);
 	});
 
 	it('hides EMLTrackMasterListItem', function () {

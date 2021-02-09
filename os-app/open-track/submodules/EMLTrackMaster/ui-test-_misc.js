@@ -12,13 +12,17 @@ describe('EMLTrackMaster_Misc', function () {
 			browser.assert.hasClass(EMLTrackMasterHead, 'OLSKToolbar');
 		});
 
+		it('classes OLSKToolbarJustify', function () {
+			browser.assert.hasClass(EMLTrackMasterHead, 'OLSKToolbarJustify');
+		});
+
 		it('classes OLSKCommonEdgeBottom', function () {
 			browser.assert.hasClass(EMLTrackMasterHead, 'OLSKCommonEdgeBottom');
 		});
 		
 	});
 
-	describe('EMLTrackMasterCreateButton', function () {
+	describe('EMLTrackMasterCreateButton', function test_EMLTrackMasterCreateButton () {
 		
 		it('classes OLSKDecorButtonNoStyle', function () {
 			browser.assert.hasClass(EMLTrackMasterCreateButton, 'OLSKDecorButtonNoStyle');
@@ -26,6 +30,10 @@ describe('EMLTrackMaster_Misc', function () {
 		
 		it('classes OLSKDecorTappable', function () {
 			browser.assert.hasClass(EMLTrackMasterCreateButton, 'OLSKDecorTappable');
+		});
+
+		it('classes OLSKToolbarButton', function () {
+			browser.assert.hasClass(EMLTrackMasterCreateButton, 'OLSKToolbarButton');
 		});
 		
 		it('sets accesskey', function () {
@@ -48,6 +56,14 @@ describe('EMLTrackMaster_Misc', function () {
 		
 		});
 	
+	});
+
+	describe('EMLTrackMasterCreateButtonImage', function test_EMLTrackMasterCreateButtonImage() {
+
+		it('sets src', function () {
+			browser.assert.elements(`${ EMLTrackMasterCreateButtonImage } #_OLSKSharedCreate`, 1);
+		});
+
 	});
 
 	describe('EMLTrackMasterListItem', function() {
