@@ -2,11 +2,13 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('EMLTrack_Transport', function () {	
 
+	const EMLJournalName = Math.random().toString();
+
+	const count = Math.max(1, Date.now() % 10);
+
+	const json = [];
+
 	describe('ImportJSON', function test_ImportJSON() {
-
-		const EMLJournalName = Math.random().toString();
-
-		const count = Math.max(1, Date.now() % 10);
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);
@@ -33,6 +35,8 @@ describe('EMLTrack_Transport', function () {
 					}),
 				})]);
 
+				json.push(dialog.response);
+
 				return dialog;
 			});
 		});
@@ -52,6 +56,33 @@ describe('EMLTrack_Transport', function () {
 			});
 		
 		});
+
+	});
+
+	describe('ExportJSON', function test_ExportJSON() {
+
+		before(function () {
+			return browser.pressButton('.OLSKAppToolbarLauncherButton');
+		});
+
+		before(function () {
+			return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_AlertFakeExportSerialized');
+		});
+
+		it('exports file', async function() {
+			const response = JSON.parse(await browser.OLSKAlertTextAsync(function () {
+    		return browser.click('.LCHLauncherPipeItem');
+    	}));
+
+    	const date = response.OLSKDownloadName.split('-').pop().split('.').shift();
+
+    	browser.assert.deepEqual(Object.assign(response, {
+    		OLSKDownloadData: JSON.parse(response.OLSKDownloadData),
+    	}), {
+    		OLSKDownloadName: `${ browser.window.location.hostname }-${ date }.json`,
+    		OLSKDownloadData: JSON.parse(json.pop()),
+    	});
+    });
 
 	});
 

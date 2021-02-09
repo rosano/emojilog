@@ -24,7 +24,11 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			return browser.assert.OLSKLauncherItemText('EMLTrackLauncherItemImportJSON', uLocalized('EMLTrackLauncherItemImportJSONText'));
 		});
 
-		describe('ImportData', function test_ImportData() {
+		it('localizes EMLTrackLauncherItemExportJSON', function () {
+			return browser.assert.OLSKLauncherItemText('EMLTrackLauncherItemExportJSON', uLocalized('EMLTrackLauncherItemExportJSONText'));
+		});
+
+		describe('KVCWriteLauncherItemImportJSON', function test_KVCWriteLauncherItemImportJSON() {
 
 			context('not filled', function () {
 				

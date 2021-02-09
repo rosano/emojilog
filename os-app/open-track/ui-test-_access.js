@@ -66,6 +66,10 @@ describe('EMLTrack_Access', function () {
 		return browser.assert.OLSKLauncherItems('EMLTrackLauncherItemImportJSON', 1);
 	});
 
+	it('shows EMLTrackLauncherItemExportJSON', function () {
+		return browser.assert.OLSKLauncherItems('EMLTrackLauncherItemExportJSON', 1);
+	});
+
 	describe('tongue', function test_tongue() {
 
 		before(function () {

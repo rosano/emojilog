@@ -55,16 +55,37 @@ const mod = {
 		};
 	},
 
+	async DataExportJSON () {
+		return JSON.stringify(await EML_Data.EML_DataExport(mod._ValueOLSKRemoteStorage, mod._ValueJournalsAll));
+	},
+
+	DataExportBasename () {
+		return `${ window.location.hostname }-${ Date.now() }`;
+	},
+
+	DataExportJSONFilename () {
+		return `${ mod.DataExportBasename() }.json`;
+	},	
+
 	DataTrackRecipes () {
-		const items = [{
-			LCHRecipeSignature: 'EMLTrackLauncherItemImportJSON',
-			LCHRecipeName: OLSKLocalized('EMLTrackLauncherItemImportJSONText'),
-			LCHRecipeCallback: async function EMLTrackLauncherItemImportJSON () {
-				return mod.ControlJournalsImportJSON(await this.api.LCHReadTextFile({
-					accept: '.json',
-				}));
+		const items = [
+			{
+				LCHRecipeSignature: 'EMLTrackLauncherItemImportJSON',
+				LCHRecipeName: OLSKLocalized('EMLTrackLauncherItemImportJSONText'),
+				LCHRecipeCallback: async function EMLTrackLauncherItemImportJSON () {
+					return mod.ControlJournalsImportJSON(await this.api.LCHReadTextFile({
+						accept: '.json',
+					}));
+				},
 			},
-		}];
+			{
+				LCHRecipeSignature: 'EMLTrackLauncherItemExportJSON',
+				LCHRecipeName: OLSKLocalized('EMLTrackLauncherItemExportJSONText'),
+				LCHRecipeCallback: async function EMLTrackLauncherItemExportJSON () {
+					return this.api.LCHSaveFile(await mod.DataExportJSON(), mod.DataExportJSONFilename());
+				},
+			},
+		];
 
 		items.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes({
 			ParamWindow: window,
@@ -85,6 +106,15 @@ const mod = {
 					LCHRecipeName: 'EMLTrackLauncherItemDebug_PromptFakeImportSerialized',
 					LCHRecipeCallback: function EMLTrackLauncherItemDebug_PromptFakeImportSerialized () {
 						return mod.ControlJournalsImportJSON(window.prompt());
+					},
+				},
+				{
+					LCHRecipeName: 'EMLTrackLauncherItemDebug_AlertFakeExportSerialized',
+					LCHRecipeCallback: async function EMLTrackLauncherItemDebug_AlertFakeExportSerialized () {
+						return window.alert(JSON.stringify({
+							OLSKDownloadName: mod.DataExportJSONFilename(),
+							OLSKDownloadData: await mod.DataExportJSON(),
+						}));
 					},
 				},
 			]);
