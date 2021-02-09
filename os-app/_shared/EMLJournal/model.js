@@ -35,6 +35,14 @@ const mod = {
 			];
 		}
 
+		if (typeof inputData.EMLJournalTouchDate !== 'undefined') {
+			if (!(inputData.EMLJournalTouchDate instanceof Date) || Number.isNaN(inputData.EMLJournalTouchDate.getTime())) {
+				errors.EMLJournalTouchDate = [
+					'EMLErrorNotDate',
+				];
+			}
+		}
+
 		return Object.entries(errors).length ? errors : null;
 	},
 

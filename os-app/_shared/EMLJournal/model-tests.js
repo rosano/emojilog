@@ -64,6 +64,26 @@ describe('EMLJournalModelErrorsFor', function test_EMLJournalModelErrorsFor() {
 		deepEqual(mod.EMLJournalModelErrorsFor(StubJournalObjectValid()), null);
 	});
 
+	context('EMLJournalTouchDate', function () {
+
+		it('returns object if not date', function () {
+			deepEqual(mod.EMLJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
+				EMLJournalTouchDate: new Date('alfa'),
+			})), {
+				EMLJournalTouchDate: [
+					'EMLErrorNotDate',
+				],
+			});
+		});
+
+		it('returns null', function () {
+			deepEqual(mod.EMLJournalModelErrorsFor(Object.assign(StubJournalObjectValid(), {
+				EMLJournalTouchDate: new Date(),
+			})), null);
+		});
+
+	});
+
 	context('EMLOptionValidateIfNotPresent', function() {
 
 		it('returns object if not valid', function() {
