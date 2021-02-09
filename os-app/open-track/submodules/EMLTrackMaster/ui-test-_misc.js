@@ -51,13 +51,17 @@ describe('EMLTrackMaster_Misc', function () {
 	});
 
 	describe('EMLTrackMasterListItem', function() {
+
+		const EMLJournalTouchDate = new Date();
+		const item = {
+			EMLJournalID: 'alfa',
+			EMLJournalName: 'bravo',
+			EMLJournalTouchDate,
+		};
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				EMLTrackMasterListItems: JSON.stringify([{
-					EMLJournalID: 'alfa',
-					EMLJournalName: 'bravo',
-				}]),
+				EMLTrackMasterListItems: JSON.stringify([item]),
 			});
 		});
 
@@ -65,8 +69,12 @@ describe('EMLTrackMaster_Misc', function () {
 			browser.assert.hasClass(EMLTrackMasterListItem, 'OLSKCommonEdgeBottom');
 		});
 
-		it('sets binds EMLJournalName', function () {
+		it('binds EMLJournalName', function () {
 			browser.assert.text(EMLTrackMasterListItemName, 'bravo');
+		});
+
+		it('binds EMLJournalTouchDate', function () {
+			browser.assert.text(EMLTrackMasterListItemDate, EMLJournalTouchDate.toDateString());
 		});
 
 		context('click', function () {
@@ -82,10 +90,7 @@ describe('EMLTrackMaster_Misc', function () {
 
 			it('sends EMLTrackMasterDispatchSelect', function () {
 				browser.assert.text('#TestEMLTrackMasterDispatchSelect', '1');
-				browser.assert.text('#TestEMLTrackMasterDispatchSelectData', JSON.stringify({
-					EMLJournalID: 'alfa',
-					EMLJournalName: 'bravo',
-				}));
+				browser.assert.text('#TestEMLTrackMasterDispatchSelectData', JSON.stringify(item));
 			});
 		
 		});

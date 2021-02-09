@@ -60,6 +60,7 @@ import OLSKStandardView from 'OLSKStandardView';
 	{#each EMLTrackMasterListItems as e}
 		<button class="EMLTrackMasterListItem OLSKDecorButtonNoStyle OLSKDecorTappable OLSKCommonEdgeBottom" on:click={ () => EMLTrackMasterDispatchSelect(e) } >
 			<strong class="EMLTrackMasterListItemName">{ e.EMLJournalName || e.EMLJournalID }</strong>
+			<span class="EMLTrackMasterListItemDate">{ e.EMLJournalTouchDate ? e.EMLJournalTouchDate.toDateString() : '' }</span>
 		</button>
 	{/each}
 </div>
