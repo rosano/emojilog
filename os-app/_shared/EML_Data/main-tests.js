@@ -91,3 +91,48 @@ describe('EML_DataImport', function test_EML_DataImport() {
 	});
 
 });
+
+describe('EML_DataExport', function test_EML_DataExport() {
+
+	it('throws if not array', function () {
+		throws(function () {
+			mod.EML_DataExport(EMLTestingStorageClient, null);
+		}, /EMLErrorInputNotValid/);
+	});
+
+	it('throws if not filled', function () {
+		throws(function () {
+			mod.EML_DataExport(EMLTestingStorageClient, []);
+		}, /EMLErrorInputNotValid/);
+	});
+
+	it('returns array', async function () {
+		deepEqual(Array.isArray(await mod.EML_DataExport(EMLTestingStorageClient, [StubJournalObjectValid()])), true);
+	});
+
+	it('copies input', async function () {
+		const item = StubJournalObjectValid();
+		deepEqual((await mod.EML_DataExport(EMLTestingStorageClient, [item]))[0] !== item, true);
+	});
+
+	it('strips dynamic attributes', async function () {
+		const item = StubJournalObjectValid({
+			$alfa: 'bravo',
+		});
+		deepEqual((await mod.EML_DataExport(EMLTestingStorageClient, [item]))[0].$alfa, undefined);
+	});
+
+	context('$EMLJournalMemos', function () {
+		
+		it('sets to EMLMemo objects', async function () {
+			const item = await EMLMemoAction.EMLMemoActionCreate(EMLTestingStorageClient, StubMemoObjectValid(), StubJournalObjectValid());
+
+			deepEqual(await mod.EML_DataExport(EMLTestingStorageClient, [StubJournalObjectValid()]), [Object.assign(StubJournalObjectValid(), {
+				$EMLJournalMemos: await EMLMemoAction.EMLMemoActionList(EMLTestingStorageClient, StubJournalObjectValid()),
+			})]);
+		});
+	
+	});
+
+});
+

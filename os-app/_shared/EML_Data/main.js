@@ -47,6 +47,22 @@ const mod = {
 		}));
 	},
 
+	EML_DataExport (storageClient, inputData) {
+		if (!Array.isArray(inputData)) {
+			throw new Error('EMLErrorInputNotValid');
+		}
+
+		if (!inputData.length) {
+			throw new Error('EMLErrorInputNotValid');
+		}
+
+		return Promise.all(inputData.map(async function (journal) {
+			return Object.assign(OLSKRemoteStorage.OLSKRemoteStorageSafeCopy(journal), {
+				$EMLJournalMemos: await EMLMemoAction.EMLMemoActionList(storageClient, journal),
+			});
+		}));
+	},
+
 };
 
 export default mod;
