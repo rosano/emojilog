@@ -26,7 +26,7 @@ describe('EMLBrowseListItem_Misc', function () {
 	describe('EMLBrowseListItemEventDate', function test_EMLBrowseListItemEventDate () {
 		
 		it('binds EMLMemoEventDate', function () {
-			browser.assert.text(EMLBrowseListItemEventDate, item.EMLMemoEventDate.valueOf().toString());
+			browser.assert.text(EMLBrowseListItemEventDate, item.EMLMemoEventDate.toLocaleString());
 		});
 
 	});

@@ -7,7 +7,7 @@ import OLSKString from 'OLSKString';
 
 <div class="EMLBrowseListItem OLSKCommonEdgeBottom">
 
-<div class="EMLBrowseListItemEventDate">{ EMLBrowseListItemObject.EMLMemoEventDate.valueOf() }</div>
+<div class="EMLBrowseListItemEventDate">{ EMLBrowseListItemObject.EMLMemoEventDate.toLocaleString() }</div>
 <div class="EMLBrowseListItemNotesSnippet">{ OLSKString.OLSKStringSnippet(EMLBrowseListItemObject.EMLMemoNotes) }</div>
 
 </div>
