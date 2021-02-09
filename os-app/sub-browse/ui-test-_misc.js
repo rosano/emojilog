@@ -45,6 +45,8 @@ describe('EMLBrowse_Misc', function () {
 		before(function () {
 			browser.assert.text('#TestEMLBrowseListDispatchCreate', '0');
 			browser.assert.text('#TestEMLBrowseListDispatchCreateData', 'undefined');
+			browser.assert.text('#TestEMLBrowseListDispatchTouch', '0');
+			browser.assert.text('#TestEMLBrowseListDispatchTouchData', 'undefined');
 		});
 
 		before(function () {
@@ -78,6 +80,11 @@ describe('EMLBrowse_Misc', function () {
 				'EMLMemoEventDate',
 				'EMLMemoNotes',
 			]));
+		});
+
+		it('sends EMLBrowseListDispatchTouch', function () {
+			browser.assert.text('#TestEMLBrowseListDispatchTouch', '1');
+			browser.assert.text('#TestEMLBrowseListDispatchTouchData', (new Date()).toJSON().slice(0, 13));
 		});
 
 	});

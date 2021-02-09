@@ -54,6 +54,10 @@ const EMLBrowse = new RollupStart({
 		EMLBrowseListDispatchExport: (function () {
 			window.TestEMLBrowseListDispatchExport.innerHTML = parseInt(window.TestEMLBrowseListDispatchExport.innerHTML) + 1;
 		}),
+		EMLBrowseListDispatchTouch: (function (inputData) {
+			window.TestEMLBrowseListDispatchTouch.innerHTML = parseInt(window.TestEMLBrowseListDispatchTouch.innerHTML) + 1;
+			window.TestEMLBrowseListDispatchTouchData.innerHTML = inputData.toJSON().slice(0, 13);
+		}),
 		EMLBrowseJournalMemos: [],
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e, index, coll) {
 		if (['EMLBrowseJournalSelected', 'EMLBrowseItemSelected'].includes(e[0])) {

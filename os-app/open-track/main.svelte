@@ -296,6 +296,12 @@ const mod = {
 	EMLBrowseListDispatchExport () {
 		mod.ControlExportData([mod._ValueJournalSelected]);
 	},
+	
+	EMLBrowseListDispatchTouch (inputData) {
+		mod.ControlJournalSave(Object.assign(mod._ValueJournalSelected, {
+			EMLJournalTouchDate: inputData,
+		}));
+	},
 
 	// OLSKChangeDelegateCreate (inputData) {
 	// 	// console.log('OLSKChangeDelegateCreate', inputData);
@@ -466,6 +472,7 @@ import OLSKApropos from 'OLSKApropos';
 			EMLBrowseListDispatchForm={ mod.EMLBrowseListDispatchForm }
 			EMLBrowseListDispatchClose={ mod.EMLBrowseListDispatchClose }
 			EMLBrowseListDispatchExport={ mod.EMLBrowseListDispatchExport }
+			EMLBrowseListDispatchTouch={ mod.EMLBrowseListDispatchTouch }
 			bind:this={ mod._EMLBrowse }
 			/>
 	{/if}

@@ -7,6 +7,7 @@ export let EMLBrowseListDispatchCreate;
 export let EMLBrowseListDispatchForm;
 export let EMLBrowseListDispatchClose;
 export let EMLBrowseListDispatchExport;
+export let EMLBrowseListDispatchTouch;
 
 export const modPublic = {
 
@@ -156,6 +157,8 @@ const mod = {
 		mod.ControlMemoSelect(item);
 
 		EMLBrowseListDispatchCreate(item);
+		
+		EMLBrowseListDispatchTouch(item.EMLMemoCreationDate);
 	},
 
 	ControlMemoUpdate(param1, param2) {
