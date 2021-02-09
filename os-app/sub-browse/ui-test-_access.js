@@ -47,6 +47,10 @@ describe('EMLBrowse_Access', function () {
 		return browser.assert.OLSKLauncherItems('EMLBrowseInfoLauncherFakeItemProxy', 0);
 	});
 
+	it('shows EMLBrowseLauncherItemExport', function () {
+		return browser.assert.OLSKLauncherItems('EMLBrowseLauncherItemExport', 1);
+	});
+
 	context('create', function test_create() {
 
 		before(function () {

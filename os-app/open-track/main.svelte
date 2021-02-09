@@ -184,6 +184,23 @@ const mod = {
 		}
 	},
 
+	ControlExportData (inputData) {
+		Launchlet.LCHTasksRun([{
+			async LCHRecipeCallback () {
+				if (OLSK_SPEC_UI()) {
+					return window.alert(JSON.stringify({
+						OLSKDownloadName: mod.DataExportJSONFilename(),
+						OLSKDownloadData: JSON.stringify(await EML_Data.EML_DataExport(mod._ValueOLSKRemoteStorage, inputData)),
+					}));
+				};
+
+				return this.api.LCHSaveFile(JSON.stringify(await EML_Data.EML_DataExport(mod._ValueOLSKRemoteStorage, inputData)), mod.DataExportJSONFilename())
+			},
+			LCHRecipeURLFilter: '*',
+		  LCHRecipeIsAutomatic: true,
+		}]);
+	},
+
 	// MESSAGE
 
 	OLSKAppToolbarDispatchApropos () {
@@ -274,6 +291,10 @@ const mod = {
 
 	EMLBrowseListDispatchClose () {
 		mod.ControlJournalSelect(null);
+	},
+	
+	EMLBrowseListDispatchExport () {
+		mod.ControlExportData([mod._ValueJournalSelected]);
 	},
 
 	// OLSKChangeDelegateCreate (inputData) {
@@ -444,6 +465,7 @@ import OLSKApropos from 'OLSKApropos';
 			EMLBrowseDispatchCreate={ mod.EMLBrowseDispatchCreate }
 			EMLBrowseListDispatchForm={ mod.EMLBrowseListDispatchForm }
 			EMLBrowseListDispatchClose={ mod.EMLBrowseListDispatchClose }
+			EMLBrowseListDispatchExport={ mod.EMLBrowseListDispatchExport }
 			bind:this={ mod._EMLBrowse }
 			/>
 	{/if}

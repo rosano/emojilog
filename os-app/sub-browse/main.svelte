@@ -6,6 +6,7 @@ export let EMLBrowseJournalMemos;
 export let EMLBrowseDispatchCreate;
 export let EMLBrowseListDispatchForm;
 export let EMLBrowseListDispatchClose;
+export let EMLBrowseListDispatchExport;
 
 export const modPublic = {
 
@@ -78,7 +79,13 @@ const mod = {
 	},
 
 	DataBrowseRecipes () {
-		const items = [];
+		const items = [{
+			LCHRecipeSignature: 'EMLBrowseLauncherItemExport',
+			LCHRecipeName: OLSKLocalized('EMLBrowseLauncherItemExportText'),
+			LCHRecipeCallback: (function EMLBrowseLauncherItemExport () {
+				return EMLBrowseListDispatchExport();
+			}),
+		}];
 
 		if (OLSK_SPEC_UI()) {
 			items.push(...[

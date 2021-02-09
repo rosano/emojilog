@@ -51,6 +51,9 @@ const EMLBrowse = new RollupStart({
 		EMLBrowseListDispatchClose: (function () {
 			window.TestEMLBrowseListDispatchClose.innerHTML = parseInt(window.TestEMLBrowseListDispatchClose.innerHTML) + 1;
 		}),
+		EMLBrowseListDispatchExport: (function () {
+			window.TestEMLBrowseListDispatchExport.innerHTML = parseInt(window.TestEMLBrowseListDispatchExport.innerHTML) + 1;
+		}),
 		EMLBrowseJournalMemos: [],
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e, index, coll) {
 		if (['EMLBrowseJournalSelected', 'EMLBrowseItemSelected'].includes(e[0])) {
