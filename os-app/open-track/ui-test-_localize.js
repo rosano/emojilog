@@ -20,6 +20,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text('title', uLocalized('EMLTrackTitle'));
 		});
 
+		it('localizes EMLTrackLauncherItemImportJSON', function () {
+			return browser.assert.OLSKLauncherItemText('EMLTrackLauncherItemImportJSON', uLocalized('EMLTrackLauncherItemImportJSONText'));
+		});
+
 		describe('ImportData', function test_ImportData() {
 
 			context('not filled', function () {
@@ -29,7 +33,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				before(async function () {
-					return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_ImportFileData');
+					return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_PromptFakeImportSerialized');
 				});
 
 				it('alerts if not filled', function () {
@@ -41,7 +45,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 							return dialog;
 						});
-					}, uLocalized('EMLTrackStorageImportErrorNotFilledAlertText'));
+					}, uLocalized('EMLTrackLauncherItemImportJSONErrorNotFilledAlertText'));
 				});
 			
 			});
@@ -53,7 +57,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				before(async function () {
-					return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_ImportFileData');
+					return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_PromptFakeImportSerialized');
 				});
 
 				it('alerts if not json', function () {
@@ -65,7 +69,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 							return dialog;
 						});
-					}, uLocalized('EMLTrackStorageImportErrorNotValidAlertText'));
+					}, uLocalized('EMLTrackLauncherItemImportJSONErrorNotValidAlertText'));
 				});
 			
 			});
@@ -77,7 +81,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				before(async function () {
-					return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_ImportFileData');
+					return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_PromptFakeImportSerialized');
 				});
 
 				it('alerts if not valid', function () {
@@ -89,7 +93,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 							return dialog;
 						});
-					}, uLocalized('EMLTrackStorageImportErrorNotValidAlertText'));
+					}, uLocalized('EMLTrackLauncherItemImportJSONErrorNotValidAlertText'));
 				});
 			
 			});

@@ -1,3 +1,4 @@
 EMLTrackTitle: Emoji Log
-EMLTrackStorageImportErrorNotFilledAlertText: Input not filled
-EMLTrackStorageImportErrorNotValidAlertText: Input not valid
+EMLTrackLauncherItemImportJSONText: Import JSON (beta)
+EMLTrackLauncherItemImportJSONErrorNotFilledAlertText: Input not filled
+EMLTrackLauncherItemImportJSONErrorNotValidAlertText: Input not valid

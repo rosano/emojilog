@@ -56,16 +56,15 @@ const mod = {
 	},
 
 	DataTrackRecipes () {
-		const items = [];
-
-		if (OLSK_SPEC_UI()) {
-			items.push(...[{
-				LCHRecipeName: 'EMLTrackLauncherItemDebug_ImportFileData',
-				LCHRecipeCallback: function EMLTrackLauncherItemDebug_ImportFileData () {
-					mod.InterfaceStorageInputFieldDidRead(window.prompt());
-				},
-			}])
-		}
+		const items = [{
+			LCHRecipeSignature: 'EMLTrackLauncherItemImportJSON',
+			LCHRecipeName: OLSKLocalized('EMLTrackLauncherItemImportJSONText'),
+			LCHRecipeCallback: async function EMLTrackLauncherItemImportJSON () {
+				return mod.ControlJournalsImportJSON(await this.api.LCHReadTextFile({
+					accept: '.json',
+				}));
+			},
+		}];
 
 		items.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes({
 			ParamWindow: window,
@@ -80,22 +79,18 @@ const mod = {
 			items.push(...mod._EMLTrackMaster.modPublic.EMLTrackMasterRecipes());
 		}
 
+		if (OLSK_SPEC_UI()) {
+			items.push(...[
+				{
+					LCHRecipeName: 'EMLTrackLauncherItemDebug_PromptFakeImportSerialized',
+					LCHRecipeCallback: function EMLTrackLauncherItemDebug_PromptFakeImportSerialized () {
+						return mod.ControlJournalsImportJSON(window.prompt());
+					},
+				},
+			]);
+		}
+
 		return items;
-	},
-
-	// INTERFACE
-
-	async InterfaceStorageInputFieldDidRead (inputData) {
-		if (!inputData.trim()) {
-			return window.alert(OLSKLocalized('EMLTrackStorageImportErrorNotFilledAlertText'))
-		}
-
-		try {
-			await EML_Data.EML_DataImport(mod._ValueOLSKRemoteStorage, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
-			await mod.SetupValueJournalsAll();
-		} catch (e) {
-			window.alert(OLSKLocalized('EMLTrackStorageImportErrorNotValidAlertText'));
-		}
 	},
 
 	// CONTROL
@@ -140,6 +135,19 @@ const mod = {
 		mod.ControlJournalSelect(null);
 
 		mod._ValueFormVisible = false;
+	},
+
+	async ControlJournalsImportJSON (inputData) {
+		if (!inputData.trim()) {
+			return window.alert(OLSKLocalized('EMLTrackLauncherItemImportJSONErrorNotFilledAlertText'))
+		}
+
+		try {
+			await EML_Data.EML_DataImport(mod._ValueOLSKRemoteStorage, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
+			await mod.SetupValueJournalsAll();
+		} catch (e) {
+			window.alert(OLSKLocalized('EMLTrackLauncherItemImportJSONErrorNotValidAlertText'));
+		}
 	},
 
 	// MESSAGE

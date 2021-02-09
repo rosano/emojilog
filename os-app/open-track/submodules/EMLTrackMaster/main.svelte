@@ -22,15 +22,7 @@ const mod = {
 	// DATA
 
 	DataTrackMasterRecipes () {
-		const items = [{
-			LCHRecipeSignature: 'EMLTrackMasterLauncherItemImportData',
-			LCHRecipeName: OLSKLocalized('EMLTrackMasterLauncherItemImportDataText'),
-			LCHRecipeCallback: function EMLTrackMasterLauncherItemImportData () {
-				return this.api.LCHReadTextFile({
-					accept: '.json',
-				}).then(EMLTrackMasterDispatchImportData);
-			},
-		}];
+		const items = [];
 
 		if (OLSK_SPEC_UI()) {
 			items.push({

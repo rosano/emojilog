@@ -117,20 +117,4 @@ describe('EMLTrackMaster_Misc', function () {
 		
 	});
 
-	describe.skip('EMLTrackMasterLauncherItemImportData', function test_EMLTrackMasterLauncherItemImportData() {
-
-		before(function () {
-			browser.assert.text('#TestEMLTrackMasterDispatchImportData', '0');
-		});
-
-		before(function () {
-			return browser.OLSKLauncherRun('EMLTrackMasterLauncherItemImportData');
-		});
-
-		it('sends EMLTrackMasterDispatchImportData', function () {
-			browser.assert.text('#TestEMLTrackMasterDispatchImportData', '1');
-		});
-
-	});
-
 });

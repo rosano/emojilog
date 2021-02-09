@@ -66,51 +66,6 @@ describe('EMLTrack_Misc', function () {
 	
 	});
 
-	describe('ImportData', function test_ImportData() {
-
-		before(function () {
-			return browser.pressButton('.OLSKAppToolbarLauncherButton');
-		});
-
-		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_ImportFileData');
-		});
-
-		before(function () {
-			return browser.OLSKPrompt(function () {
-				return browser.click('.LCHLauncherPipeItem');
-			}, function (dialog) {
-				dialog.response = JSON.stringify([StubJournalObjectValid({
-					EMLJournalName: 'zulu',
-					$EMLJournalMemos: [StubMemoObjectValid({
-						EMLMemoID: 'alfa',
-					}), StubMemoObjectValid({
-						EMLMemoID: 'bravo',
-					})],
-				})]);
-
-				return dialog;
-			});
-		});
-
-		it('creates journal', function () {
-			browser.assert.text('.EMLTrackMasterListItemName', 'zulu');
-		});
-
-		context('click', function () {
-
-			before(function () {
-				return browser.pressButton('.EMLTrackMasterListItem');
-			});
-			
-			it('creates memo', function () {
-				browser.assert.elements('.EMLBrowseListItem', 2);
-			});
-		
-		});
-		
-	});
-
 	context('create', function() {
 
 		before(function() {

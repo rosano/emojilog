@@ -18,10 +18,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(EMLTrackMasterCreateButton, uLocalized('EMLTrackMasterCreateButtonText'));
 		});
 
-		it('localizes EMLTrackMasterLauncherItemImportData', function () {
-			return browser.assert.OLSKLauncherItemText('EMLTrackMasterLauncherItemImportData', uLocalized('EMLTrackMasterLauncherItemImportDataText'));
-		});
-
 	});
 
 });

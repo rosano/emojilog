@@ -34,10 +34,6 @@ describe('EMLTrackMaster_Access', function () {
 		browser.assert.elements(EMLTrackMasterListItem, 0);
 	});
 
-	it('shows EMLTrackMasterLauncherItemImportData', function () {
-		return browser.assert.OLSKLauncherItems('EMLTrackMasterLauncherItemImportData', 1);
-	});
-
 	context('EMLTrackMasterListItems', function() {
 		
 		before(function() {
