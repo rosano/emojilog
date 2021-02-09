@@ -88,6 +88,10 @@ const mod = {
 						mod.ControlMemoSelect(null);
 					},
 				},
+				{
+					LCHRecipeName: 'EMLBrowseLauncherFakeItemProxy',
+					LCHRecipeCallback: function EMLBrowseLauncherFakeItemProxy () {},
+				},
 			]);
 		}
 

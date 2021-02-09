@@ -100,6 +100,10 @@ const mod = {
 			items.push(...mod._EMLTrackMaster.modPublic.EMLTrackMasterRecipes());
 		}
 
+		if (mod._EMLBrowse) {
+			items.push(...mod._EMLBrowse.modPublic.EMLBrowseRecipes());
+		}
+
 		if (OLSK_SPEC_UI()) {
 			items.push(...[
 				{
