@@ -41,9 +41,9 @@ const EMLBrowse = new RollupStart({
 	target: document.body,
 	props: Object.assign({
 		EMLBrowseStorageClient: mod._ValueOLSKRemoteStorage,
-		EMLBrowseDispatchCreate: (function (inputData) {
-			window.TestEMLBrowseDispatchCreate.innerHTML = parseInt(window.TestEMLBrowseDispatchCreate.innerHTML) + 1;
-			window.TestEMLBrowseDispatchCreateData.innerHTML = JSON.stringify(Object.keys(inputData));
+		EMLBrowseListDispatchCreate: (function (inputData) {
+			window.TestEMLBrowseListDispatchCreate.innerHTML = parseInt(window.TestEMLBrowseListDispatchCreate.innerHTML) + 1;
+			window.TestEMLBrowseListDispatchCreateData.innerHTML = JSON.stringify(Object.keys(inputData));
 		}),
 		EMLBrowseListDispatchForm: (function () {
 			window.TestEMLBrowseListDispatchForm.innerHTML = parseInt(window.TestEMLBrowseListDispatchForm.innerHTML) + 1;

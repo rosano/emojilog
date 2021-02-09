@@ -43,8 +43,8 @@ describe('EMLBrowse_Misc', function () {
 		});
 
 		before(function () {
-			browser.assert.text('#TestEMLBrowseDispatchCreate', '0');
-			browser.assert.text('#TestEMLBrowseDispatchCreateData', 'undefined');
+			browser.assert.text('#TestEMLBrowseListDispatchCreate', '0');
+			browser.assert.text('#TestEMLBrowseListDispatchCreateData', 'undefined');
 		});
 
 		before(function () {
@@ -68,9 +68,9 @@ describe('EMLBrowse_Misc', function () {
 			browser.assert.hasFocus('.EMLBrowseInfoFormNotesField');
 		});
 
-		it('sends EMLBrowseDispatchCreate', function () {
-			browser.assert.text('#TestEMLBrowseDispatchCreate', '1');
-			browser.assert.text('#TestEMLBrowseDispatchCreateData', JSON.stringify([
+		it('sends EMLBrowseListDispatchCreate', function () {
+			browser.assert.text('#TestEMLBrowseListDispatchCreate', '1');
+			browser.assert.text('#TestEMLBrowseListDispatchCreateData', JSON.stringify([
 				'EMLMemoID',
 				'EMLMemoJournalID',
 				'EMLMemoCreationDate',

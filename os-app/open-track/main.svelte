@@ -283,7 +283,7 @@ const mod = {
 		mod.ControlJournalSave(mod._ValueJournalSelected);
 	},
 
-	EMLBrowseDispatchCreate () {},
+	EMLBrowseListDispatchCreate () {},
 
 	EMLBrowseListDispatchForm () {
 		mod._ValueFormVisible = true;
@@ -462,7 +462,7 @@ import OLSKApropos from 'OLSKApropos';
 			EMLBrowseStorageClient={ mod._ValueOLSKRemoteStorage }
 			EMLBrowseJournalSelected={ mod._ValueJournalSelected }
 			EMLBrowseJournalMemos={ mod._ValueBrowseMemos }
-			EMLBrowseDispatchCreate={ mod.EMLBrowseDispatchCreate }
+			EMLBrowseListDispatchCreate={ mod.EMLBrowseListDispatchCreate }
 			EMLBrowseListDispatchForm={ mod.EMLBrowseListDispatchForm }
 			EMLBrowseListDispatchClose={ mod.EMLBrowseListDispatchClose }
 			EMLBrowseListDispatchExport={ mod.EMLBrowseListDispatchExport }

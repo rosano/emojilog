@@ -3,7 +3,7 @@ export let EMLBrowseStorageClient;
 
 export let EMLBrowseJournalSelected;
 export let EMLBrowseJournalMemos;
-export let EMLBrowseDispatchCreate;
+export let EMLBrowseListDispatchCreate;
 export let EMLBrowseListDispatchForm;
 export let EMLBrowseListDispatchClose;
 export let EMLBrowseListDispatchExport;
@@ -155,7 +155,7 @@ const mod = {
 
 		mod.ControlMemoSelect(item);
 
-		EMLBrowseDispatchCreate(item);
+		EMLBrowseListDispatchCreate(item);
 	},
 
 	ControlMemoUpdate(param1, param2) {
