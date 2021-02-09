@@ -17,8 +17,8 @@ const EMLTrackMaster = new RollupStart({
 		}),
 		EMLTrackMaster_DebugShowLauncherButton: true,
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
-		if (['EMLTrackMasterListItems', 'EMLTrackMasterListItemSelected'].includes(e[0])) {
 			e[1] = JSON.parse(e[1]);
+		if (['EMLTrackMasterListItems'].includes(e[0])) {
 		}
 
 		return e;

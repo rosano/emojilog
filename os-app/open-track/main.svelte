@@ -455,7 +455,6 @@ import OLSKApropos from 'OLSKApropos';
 	{#if !mod._ValueJournalSelected }
 		<EMLTrackMaster
 			EMLTrackMasterListItems={ mod._ValueJournalsAll }
-			EMLTrackMasterListItemSelected={ mod._ValueJournalSelected }
 			EMLTrackMasterDispatchCreate={ mod.EMLTrackMasterDispatchCreate }
 			EMLTrackMasterDispatchSelect={ mod.EMLTrackMasterDispatchSelect }
 			EMLTrackMasterDispatchImportData={ mod.EMLTrackMasterDispatchImportData }

@@ -92,29 +92,4 @@ describe('EMLTrackMaster_Misc', function () {
 		
 	});
 
-	describe('EMLTrackMasterListItemSelected', function() {
-		
-		before(function() {
-			return browser.OLSKVisit(kDefaultRoute, {
-				EMLTrackMasterListItems: JSON.stringify([{
-					EMLJournalID: 'alfa',
-					EMLJournalName: 'bravo',
-				}, {
-					EMLJournalID: 'charlie',
-					EMLJournalName: 'delta',
-				}]),
-				EMLTrackMasterListItemSelected: JSON.stringify({
-					EMLJournalID: 'charlie',
-					EMLJournalName: 'delta',
-				}),
-			});
-		});
-
-		it('classes 1', function () {
-			browser.assert.elements('.EMLTrackMasterListItemSelected', 1);
-			browser.assert.hasClass(`${ EMLTrackMasterListItem }:nth-child(2)`, 'EMLTrackMasterListItemSelected');
-		});
-		
-	});
-
 });

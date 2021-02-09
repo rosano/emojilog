@@ -1,6 +1,5 @@
 <script>
 export let EMLTrackMasterListItems;
-export let EMLTrackMasterListItemSelected = null;
 export let EMLTrackMasterDispatchCreate;
 export let EMLTrackMasterDispatchSelect;
 export let EMLTrackMasterDispatchImportData;
@@ -59,7 +58,7 @@ import OLSKStandardView from 'OLSKStandardView';
 
 <div>
 	{#each EMLTrackMasterListItems as e}
-		<button class="EMLTrackMasterListItem OLSKDecorButtonNoStyle OLSKDecorTappable OLSKCommonEdgeBottom" class:EMLTrackMasterListItemSelected={ (EMLTrackMasterListItemSelected || {}).EMLJournalID === e.EMLJournalID } on:click={ () => EMLTrackMasterDispatchSelect(e) } >
+		<button class="EMLTrackMasterListItem OLSKDecorButtonNoStyle OLSKDecorTappable OLSKCommonEdgeBottom" on:click={ () => EMLTrackMasterDispatchSelect(e) } >
 			<strong class="EMLTrackMasterListItemName">{ e.EMLJournalName || e.EMLJournalID }</strong>
 		</button>
 	{/each}
