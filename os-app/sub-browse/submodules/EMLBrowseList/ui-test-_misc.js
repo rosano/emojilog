@@ -149,7 +149,7 @@ describe('EMLBrowseList_Misc', function () {
 	describe('EMLBrowseListToolbarFormButtonImage', function test_EMLBrowseListToolbarFormButtonImage() {
 
 		it('sets src', function () {
-			browser.assert.elements(`${ EMLBrowseListToolbarFormButtonImage } #_OLSKSharedCreate`, 1);
+			browser.assert.elements(`${ EMLBrowseListToolbarFormButtonImage } #_OLSKSharedEdit`, 1);
 		});
 
 	});

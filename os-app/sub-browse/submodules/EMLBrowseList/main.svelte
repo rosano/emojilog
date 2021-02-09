@@ -17,6 +17,7 @@ import EMLBrowseListLogic from './ui-logic.js';
 
 import OLSKMasterList from 'OLSKMasterList';
 import _OLSKSharedBack from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedBack.svg';
+import _OLSKSharedEdit from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedEdit.svg';
 import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedCreate.svg';
 import EMLBrowseListItem from '../EMLBrowseListItem/main.svelte';
 </script>
@@ -44,7 +45,7 @@ import EMLBrowseListItem from '../EMLBrowseListItem/main.svelte';
 	<div slot="OLSKMasterListToolbarTail">
 		<div class="OLSKToolbarElementGroup">
 			<button class="EMLBrowseListToolbarFormButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseListToolbarFormButtonText') } on:click={ () => EMLBrowseListDispatchForm() } accesskey="f">
-				<div class="EMLBrowseListToolbarFormButtonImage">{@html _OLSKSharedCreate }</div>
+				<div class="EMLBrowseListToolbarFormButtonImage">{@html _OLSKSharedEdit }</div>
 			</button>
 
 			<button class="EMLBrowseListToolbarCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseListToolbarCreateButtonText') } on:click={ () => EMLBrowseListDispatchCreate() } accesskey="n">
