@@ -1,43 +1,43 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-describe('EMTVitrine_Misc', function () {
+describe('EMLVitrine_Misc', function () {
 
 	before(function () {
 		return browser.visit(kDefaultRoute.OLSKRoutePath);
 	});
 
-	describe('EMTVitrine', function () {
+	describe('EMLVitrine', function () {
 		
 		it('classes OLSKDecor', function () {
-			browser.assert.hasClass(EMTVitrine, 'OLSKDecor');
+			browser.assert.hasClass(EMLVitrine, 'OLSKDecor');
 		});
 
 		it('classes OLSKDecorCapped', function () {
-			browser.assert.hasClass(EMTVitrine, 'OLSKDecorCapped');
+			browser.assert.hasClass(EMLVitrine, 'OLSKDecorCapped');
 		});
 	
 	});
 
-	describe('EMTVitrineCrown', function test_EMTVitrineCrown() {
+	describe('EMLVitrineCrown', function test_EMLVitrineCrown() {
 
 		it('classes OLSKCommonCard', function () {
-			browser.assert.hasClass(EMTVitrineCrown, 'OLSKCommonCard');
+			browser.assert.hasClass(EMLVitrineCrown, 'OLSKCommonCard');
 		});
 
 		it('classes OLSKCommonCrownCard', function () {
-			browser.assert.hasClass(EMTVitrineCrown, 'OLSKCommonCrownCard');
+			browser.assert.hasClass(EMLVitrineCrown, 'OLSKCommonCrownCard');
 		});
 		
 	});
 
-	describe('EMTVitrineCrownIcon', function () {
+	describe('EMLVitrineCrownIcon', function () {
 
 		it('sets role', function () {
-			browser.assert.attribute(EMTVitrineCrownIcon, 'role', 'presentation');
+			browser.assert.attribute(EMLVitrineCrownIcon, 'role', 'presentation');
 		});
 
 		it('sets src', function () {
-			browser.assert.attribute(EMTVitrineCrownIcon, 'src', '/_shared/EMTRootLink/ui-assets/identity.svg');
+			browser.assert.attribute(EMLVitrineCrownIcon, 'src', '/_shared/EMLRootLink/ui-assets/identity.svg');
 		});
 
 	});

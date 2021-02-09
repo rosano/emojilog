@@ -1,0 +1,30 @@
+<%
+locals.OLSKPageAssets = [
+	'/_shared/__external/normalize.css/normalize.css',
+	'__compiled/ui-style.css',
+
+	'/_shared/__external/launchlet/__compiled/launchlet.js',
+];
+locals.OLSKPagePublicConstants = {
+	OLSKSharedPageCurrentLanguage,
+};
+%>
+
+<script src="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-behaviour.js"></script>
+
+<p>
+	<strong>EMLTrackMasterDispatchCreate</strong>
+	<span id="TestEMLTrackMasterDispatchCreate">0</span>
+</p>
+
+<p>
+	<strong>EMLTrackMasterDispatchSelect</strong>
+	<span id="TestEMLTrackMasterDispatchSelect">0</span>
+	<span id="TestEMLTrackMasterDispatchSelectData">undefined</span>
+</p>
+
+<p>
+	<strong>EMLTrackMasterDispatchImportData</strong>
+	<span id="TestEMLTrackMasterDispatchImportData">0</span>
+	<span id="TestEMLTrackMasterDispatchImportDataData">undefined</span>
+</p>

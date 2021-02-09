@@ -8,7 +8,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		return OLSKTestingLocalized(inputData, OLSKRoutingLanguage);
 	};
 
-	describe(`EMTTrack_Localize-${ OLSKRoutingLanguage }`, function () {
+	describe(`EMLTrack_Localize-${ OLSKRoutingLanguage }`, function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
@@ -17,7 +17,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		});
 
 		it('localizes title', function() {
-			browser.assert.text('title', uLocalized('EMTTrackTitle'));
+			browser.assert.text('title', uLocalized('EMLTrackTitle'));
 		});
 
 		describe('ImportData', function test_ImportData() {
@@ -29,7 +29,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				before(async function () {
-					return browser.fill('.LCHLauncherFilterInput', 'EMTTrackLauncherItemDebug_ImportFileData');
+					return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_ImportFileData');
 				});
 
 				it('alerts if not filled', function () {
@@ -41,7 +41,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 							return dialog;
 						});
-					}, uLocalized('EMTTrackStorageImportErrorNotFilledAlertText'));
+					}, uLocalized('EMLTrackStorageImportErrorNotFilledAlertText'));
 				});
 			
 			});
@@ -53,7 +53,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				before(async function () {
-					return browser.fill('.LCHLauncherFilterInput', 'EMTTrackLauncherItemDebug_ImportFileData');
+					return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_ImportFileData');
 				});
 
 				it('alerts if not json', function () {
@@ -65,7 +65,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 							return dialog;
 						});
-					}, uLocalized('EMTTrackStorageImportErrorNotValidAlertText'));
+					}, uLocalized('EMLTrackStorageImportErrorNotValidAlertText'));
 				});
 			
 			});
@@ -77,7 +77,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				before(async function () {
-					return browser.fill('.LCHLauncherFilterInput', 'EMTTrackLauncherItemDebug_ImportFileData');
+					return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_ImportFileData');
 				});
 
 				it('alerts if not valid', function () {
@@ -89,7 +89,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 							return dialog;
 						});
-					}, uLocalized('EMTTrackStorageImportErrorNotValidAlertText'));
+					}, uLocalized('EMLTrackStorageImportErrorNotValidAlertText'));
 				});
 			
 			});

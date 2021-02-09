@@ -1,52 +1,52 @@
 const RemoteStorage = require('remotestoragejs');
 
-const EMT_Data = require('./os-app/_shared/EMT_Data/main.js').default;
-const EMTJournalStorage = require('./os-app/_shared/EMTJournal/storage.js').default;
-const EMTMemoStorage = require('./os-app/_shared/EMTMemo/storage.js').default;
+const EML_Data = require('./os-app/_shared/EML_Data/main.js').default;
+const EMLJournalStorage = require('./os-app/_shared/EMLJournal/storage.js').default;
+const EMLMemoStorage = require('./os-app/_shared/EMLMemo/storage.js').default;
 
-(function EMTMochaStorage() {
+(function EMLMochaStorage() {
 	if (process.env.OLSK_SPEC_MOCHA_INTERFACE === 'true') {
 		return;
 	}
 
-	const storageModule = EMT_Data.EMT_DataModule([
-		EMTJournalStorage.EMTJournalStorageBuild,
-		EMTMemoStorage.EMTMemoStorageBuild,
+	const storageModule = EML_Data.EML_DataModule([
+		EMLJournalStorage.EMLJournalStorageBuild,
+		EMLMemoStorage.EMLMemoStorageBuild,
 	], {
 		OLSKOptionIncludeDebug: true,
 	});
 
 	before(function() {
-		global.EMTTestingStorageClient = new RemoteStorage({ modules: [ storageModule ] });
+		global.EMLTestingStorageClient = new RemoteStorage({ modules: [ storageModule ] });
 
-		global.EMTTestingStorageClient.access.claim(storageModule.name, 'rw');
+		global.EMLTestingStorageClient.access.claim(storageModule.name, 'rw');
 	});
 
 	beforeEach(function() {
-		return global.EMTTestingStorageClient[storageModule.name].__DEBUG.__OLSKRemoteStorageReset();
+		return global.EMLTestingStorageClient[storageModule.name].__DEBUG.__OLSKRemoteStorageReset();
 	});
 })();
 
-(function EMTMochaStubs() {
+(function EMLMochaStubs() {
 	Object.entries({
 
 		StubJournalObjectValid(inputData) {
 			return Object.assign({
-				EMTJournalID: 'alfa',
-				EMTJournalName: 'bravo',
-				EMTJournalCreationDate: new Date('2019-02-23T13:56:36Z'),
-				EMTJournalModificationDate: new Date('2019-02-23T13:56:36Z'),
+				EMLJournalID: 'alfa',
+				EMLJournalName: 'bravo',
+				EMLJournalCreationDate: new Date('2019-02-23T13:56:36Z'),
+				EMLJournalModificationDate: new Date('2019-02-23T13:56:36Z'),
 			}, inputData);
 		},
 
 		StubMemoObjectValid(inputData) {
 			return Object.assign({
-				EMTMemoID: 'charlie',
-				EMTMemoJournalID: 'alfa',
-				EMTMemoCreationDate: new Date('2019-02-23T13:56:36Z'),
-				EMTMemoModificationDate: new Date('2019-02-23T13:56:36Z'),
-				EMTMemoEventDate: new Date('2019-02-23T13:56:36Z'),
-				EMTMemoNotes: '',
+				EMLMemoID: 'charlie',
+				EMLMemoJournalID: 'alfa',
+				EMLMemoCreationDate: new Date('2019-02-23T13:56:36Z'),
+				EMLMemoModificationDate: new Date('2019-02-23T13:56:36Z'),
+				EMLMemoEventDate: new Date('2019-02-23T13:56:36Z'),
+				EMLMemoNotes: '',
 			}, inputData);
 		},
 

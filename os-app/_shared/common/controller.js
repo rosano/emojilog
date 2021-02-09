@@ -1,9 +1,9 @@
 exports.OLSKControllerRoutes = function() {
 	return {
-		EMTCommonIdentityRedirect: {
+		EMLCommonIdentityRedirect: {
 			OLSKRoutePath: '/identity.svg',
 			OLSKRouteMethod: 'get',
-			OLSKRouteRedirect: '/_shared/EMTRootLink/ui-assets/identity.svg',
+			OLSKRouteRedirect: '/_shared/EMLRootLink/ui-assets/identity.svg',
 		},
 	};
 };

@@ -3,48 +3,48 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 const kTesting = {
 	StubJournalObjectValid() {
 		return {
-			EMTJournalID: 'alfa',
-			EMTJournalName: '',
-			EMTJournalCreationDate: new Date('2019-02-23T13:56:36Z'),
-			EMTJournalModificationDate: new Date('2019-02-23T13:56:36Z'),
+			EMLJournalID: 'alfa',
+			EMLJournalName: '',
+			EMLJournalCreationDate: new Date('2019-02-23T13:56:36Z'),
+			EMLJournalModificationDate: new Date('2019-02-23T13:56:36Z'),
 		};
 	},
 };
 
-describe('EMTBrowse_Sort', function () {
+describe('EMLBrowse_Sort', function () {
 
 	before(function () {
 		return browser.OLSKVisit(kDefaultRoute, {
-			EMTBrowseJournalSelected: JSON.stringify(kTesting.StubJournalObjectValid()),
+			EMLBrowseJournalSelected: JSON.stringify(kTesting.StubJournalObjectValid()),
 		});
 	});
 
 	before(function () {
-		return browser.pressButton('.EMTBrowseListToolbarCreateButton');
+		return browser.pressButton('.EMLBrowseListToolbarCreateButton');
 	});
 
 	before(function () {
-		return browser.fill('.EMTBrowseInfoFormNotesField', 'alfa');
+		return browser.fill('.EMLBrowseInfoFormNotesField', 'alfa');
 	});
 
 	before(function () {
-		return browser.pressButton('.EMTBrowseListToolbarCreateButton');
+		return browser.pressButton('.EMLBrowseListToolbarCreateButton');
 	});
 
 	before(function () {
-		return browser.fill('.EMTBrowseInfoFormNotesField', 'bravo');
+		return browser.fill('.EMLBrowseInfoFormNotesField', 'bravo');
 	});
 
 	before(function () {
-		return browser.pressButton('.EMTBrowseListToolbarCreateButton');
+		return browser.pressButton('.EMLBrowseListToolbarCreateButton');
 	});
 
 	before(function () {
-		return browser.fill('.EMTBrowseInfoFormNotesField', 'charlie');
+		return browser.fill('.EMLBrowseInfoFormNotesField', 'charlie');
 	});
 
 	it('sorts list', function () {
-		browser.assert.text('.EMTBrowseListItemNotesSnippet', 'charliebravoalfa');
+		browser.assert.text('.EMLBrowseListItemNotesSnippet', 'charliebravoalfa');
 	});
 
 });

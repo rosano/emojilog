@@ -1,7 +1,7 @@
-.EMTTrack {
+.EMLTrack {
 	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 	font-size: 9pt;
 
-	background: var(--EMTCommonBackground);
-	color: var(--EMTCommonForeground);
+	background: var(--EMLCommonBackground);
+	color: var(--EMLCommonForeground);
 }

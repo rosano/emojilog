@@ -1,80 +1,80 @@
 const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().shift().OLSKRoutePath;
 
 Object.entries({
-	EMTVitrine: '.EMTVitrine',
+	EMLVitrine: '.EMLVitrine',
 	
-	EMTVitrineCrown: '.EMTVitrineCrown',
-	EMTVitrineCrownIcon: '.EMTVitrineCrownIcon',
-	EMTVitrineCrownName: '.EMTVitrineCrownName',
-	EMTVitrineCrownBlurb: '.EMTVitrineCrownBlurb',
+	EMLVitrineCrown: '.EMLVitrineCrown',
+	EMLVitrineCrownIcon: '.EMLVitrineCrownIcon',
+	EMLVitrineCrownName: '.EMLVitrineCrownName',
+	EMLVitrineCrownBlurb: '.EMLVitrineCrownBlurb',
 
-	EMTVitrineContent: '.EMTVitrineContent',
-	EMTVitrineContentAppButton: '.EMTVitrineContentAppButton',
+	EMLVitrineContent: '.EMLVitrineContent',
+	EMLVitrineContentAppButton: '.EMLVitrineContentAppButton',
 
-	EMTVitrineFeaturesHeading: '.EMTVitrineFeaturesHeading',
+	EMLVitrineFeaturesHeading: '.EMLVitrineFeaturesHeading',
 
-	EMTVitrineSupportHeading: '.EMTVitrineSupportHeading',
-	EMTVitrineSupportBlurb: '.EMTVitrineSupportBlurb',
+	EMLVitrineSupportHeading: '.EMLVitrineSupportHeading',
+	EMLVitrineSupportBlurb: '.EMLVitrineSupportBlurb',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
 
-describe('EMTVitrine_Access', function () {
+describe('EMLVitrine_Access', function () {
 
 	before(function() {
 		return browser.visit(kDefaultRoutePath);
 	});
 	
-	it('shows EMTVitrine', function() {
-		browser.assert.elements(EMTVitrine, 1);
+	it('shows EMLVitrine', function() {
+		browser.assert.elements(EMLVitrine, 1);
 	});
 	
 	it('shows OLSKLanguageSwitcher', function() {
 		browser.assert.elements('.OLSKLanguageSwitcher', 1);
 	});
 	
-	it('shows EMTVitrineCrown', function() {
-		browser.assert.elements(EMTVitrineCrown, 1);
+	it('shows EMLVitrineCrown', function() {
+		browser.assert.elements(EMLVitrineCrown, 1);
 	});
 	
-	it('shows EMTVitrineCrownIcon', function() {
-		browser.assert.elements(EMTVitrineCrownIcon, 1);
+	it('shows EMLVitrineCrownIcon', function() {
+		browser.assert.elements(EMLVitrineCrownIcon, 1);
 	});
 	
-	it('shows EMTVitrineCrownName', function() {
-		browser.assert.elements(EMTVitrineCrownName, 1);
+	it('shows EMLVitrineCrownName', function() {
+		browser.assert.elements(EMLVitrineCrownName, 1);
 	});
 
-	it('shows EMTVitrineCrownBlurb', function () {
-		browser.assert.elements(EMTVitrineCrownBlurb, 1);
+	it('shows EMLVitrineCrownBlurb', function () {
+		browser.assert.elements(EMLVitrineCrownBlurb, 1);
 	});
 	
 	it('shows OLSKCommonWhatIsIt', function() {
 		browser.assert.elements('.OLSKCommonWhatIsIt', 1);
 	});
 
-	it('shows EMTVitrineContent', function() {
-		browser.assert.elements(EMTVitrineContent, 1);
+	it('shows EMLVitrineContent', function() {
+		browser.assert.elements(EMLVitrineContent, 1);
 	});
 
-	it('shows EMTVitrineContentAppButton', function() {
-		browser.assert.elements(EMTVitrineContentAppButton, 1);
+	it('shows EMLVitrineContentAppButton', function() {
+		browser.assert.elements(EMLVitrineContentAppButton, 1);
 	});
 
-	it('shows EMTVitrineFeaturesHeading', function () {
-		browser.assert.elements(EMTVitrineFeaturesHeading, 1);
+	it('shows EMLVitrineFeaturesHeading', function () {
+		browser.assert.elements(EMLVitrineFeaturesHeading, 1);
 	});
 
 	it('shows OLSKAppFeatureList', function () {
 		browser.assert.elements('.OLSKAppFeatureList', 1);
 	});
 
-	it('shows EMTVitrineSupportHeading', function () {
-		browser.assert.elements(EMTVitrineSupportHeading, 1);
+	it('shows EMLVitrineSupportHeading', function () {
+		browser.assert.elements(EMLVitrineSupportHeading, 1);
 	});
 
-	it('shows EMTVitrineSupportBlurb', function () {
-		browser.assert.elements(EMTVitrineSupportBlurb, 1);
+	it('shows EMLVitrineSupportBlurb', function () {
+		browser.assert.elements(EMLVitrineSupportBlurb, 1);
 	});
 
 	it('shows ROCORootLink', function() {

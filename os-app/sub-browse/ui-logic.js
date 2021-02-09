@@ -2,17 +2,17 @@ import OLSKString from 'OLSKString';
 
 const mod = {
 
-	EMTBrowseSort(a, b) {
-		return b.EMTMemoEventDate - a.EMTMemoEventDate;
+	EMLBrowseSort(a, b) {
+		return b.EMLMemoEventDate - a.EMLMemoEventDate;
 	},
 
-	EMTBrowseFilterFunction(inputData) {
+	EMLBrowseFilterFunction(inputData) {
 		if (typeof inputData !== 'string') {
-			throw new Error('EMTErrorInputNotValid');
+			throw new Error('EMLErrorInputNotValid');
 		}
 
 		return function (e) {
-			return [e.EMTMemoNotes].filter(function (e) {
+			return [e.EMLMemoNotes].filter(function (e) {
 				return !!e;
 			}).filter(function (e) {
 				return OLSKString.OLSKStringMatch(inputData, e);
@@ -20,18 +20,18 @@ const mod = {
 		};
 	},
 
-	EMTBrowseExactMatchFirst(param1, param2) {
+	EMLBrowseExactMatchFirst(param1, param2) {
 		if (typeof param1 !== 'string') {
-			throw new Error('EMTErrorInputNotValid');
+			throw new Error('EMLErrorInputNotValid');
 		}
 
 		if (!Array.isArray(param2)) {
-			throw new Error('EMTErrorInputNotValid');
+			throw new Error('EMLErrorInputNotValid');
 		}
 
 		return param2.slice().sort(function (a, b) {
 			const isExact = function (e) {
-				return [e.EMTMemoNotes].filter(function (e) {
+				return [e.EMLMemoNotes].filter(function (e) {
 					if (!e) {
 						return;
 					}

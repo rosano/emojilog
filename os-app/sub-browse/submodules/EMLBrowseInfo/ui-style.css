@@ -1,0 +1,32 @@
+.EMLBrowseInfo {
+	/* OLSKDecor */
+	--OLSKCommonFontFamily: 'Helvetica';
+	--OLSKCommonFontSize: 9pt;
+	
+	/* EMLBrowseInfoFlexbox:Parent */
+	display: flex;
+	flex-direction: column;
+}
+
+@media screen and (min-width: 760px) {
+
+.EMLBrowseInfo > :global(.OLSKDetailPlaceholder) {
+	/* EMLBrowseInfoFlexbox:Child */
+	flex-grow: 1;
+}
+
+}
+
+.EMLBrowseInfoToolbar {
+	/* EMLBrowseInfoFlexbox:Child */
+	flex-shrink: 0;
+}
+
+@media screen and (max-width: 760px) {
+
+.EMLBrowseInfoToolbar {
+	/* browser quirks */
+	z-index: 999;
+}
+
+}

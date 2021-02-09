@@ -1,7 +1,7 @@
 import RollupStart from './main.svelte';
 
-import EMT_Data from '../_shared/EMT_Data/main.js';
-import EMTMemoStorage from '../_shared/EMTMemo/storage.js';
+import EML_Data from '../_shared/EML_Data/main.js';
+import EMLMemoStorage from '../_shared/EMLMemo/storage.js';
 import RemoteStorage from 'remotestoragejs';
 import OLSKRemoteStorage from 'OLSKRemoteStorage';
 
@@ -16,8 +16,8 @@ const mod = {
 	},
 
 	SetupStorageClient() {
-		const storageModule = EMT_Data.EMT_DataModule([
-			EMTMemoStorage.EMTMemoStorageBuild,
+		const storageModule = EML_Data.EML_DataModule([
+			EMLMemoStorage.EMLMemoStorageBuild,
 		]);
 		
 		mod._ValueOLSKRemoteStorage = new RemoteStorage({ modules: [ storageModule ] });
@@ -37,33 +37,33 @@ const mod = {
 
 mod.LifecycleModuleDidLoad();
 
-const EMTBrowse = new RollupStart({
+const EMLBrowse = new RollupStart({
 	target: document.body,
 	props: Object.assign({
-		EMTBrowseStorageClient: mod._ValueOLSKRemoteStorage,
-		EMTBrowseDispatchCreate: (function (inputData) {
-			window.TestEMTBrowseDispatchCreate.innerHTML = parseInt(window.TestEMTBrowseDispatchCreate.innerHTML) + 1;
-			window.TestEMTBrowseDispatchCreateData.innerHTML = JSON.stringify(Object.keys(inputData));
+		EMLBrowseStorageClient: mod._ValueOLSKRemoteStorage,
+		EMLBrowseDispatchCreate: (function (inputData) {
+			window.TestEMLBrowseDispatchCreate.innerHTML = parseInt(window.TestEMLBrowseDispatchCreate.innerHTML) + 1;
+			window.TestEMLBrowseDispatchCreateData.innerHTML = JSON.stringify(Object.keys(inputData));
 		}),
-		EMTBrowseListDispatchForm: (function () {
-			window.TestEMTBrowseListDispatchForm.innerHTML = parseInt(window.TestEMTBrowseListDispatchForm.innerHTML) + 1;
+		EMLBrowseListDispatchForm: (function () {
+			window.TestEMLBrowseListDispatchForm.innerHTML = parseInt(window.TestEMLBrowseListDispatchForm.innerHTML) + 1;
 		}),
-		EMTBrowseListDispatchClose: (function () {
-			window.TestEMTBrowseListDispatchClose.innerHTML = parseInt(window.TestEMTBrowseListDispatchClose.innerHTML) + 1;
+		EMLBrowseListDispatchClose: (function () {
+			window.TestEMLBrowseListDispatchClose.innerHTML = parseInt(window.TestEMLBrowseListDispatchClose.innerHTML) + 1;
 		}),
-		EMTBrowseJournalMemos: [],
+		EMLBrowseJournalMemos: [],
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e, index, coll) {
-		if (['EMTBrowseJournalSelected', 'EMTBrowseItemSelected'].includes(e[0])) {
+		if (['EMLBrowseJournalSelected', 'EMLBrowseItemSelected'].includes(e[0])) {
 			e[1] = JSON.parse(e[1]);
 		}
 
-		if (['EMTBrowseJournalSelected'].includes(e[0])) {
+		if (['EMLBrowseJournalSelected'].includes(e[0])) {
 			e[1] = OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(e[1]);
 		}
 
-		if (['EMTBrowseItemSelected'].includes(e[0]) && coll.length > 1) {
+		if (['EMLBrowseItemSelected'].includes(e[0]) && coll.length > 1) {
 			e[1] = coll[index - 1][1].filter(function (item) {
-				return item.EMTMemoID === e[1].EMTMemoID;
+				return item.EMLMemoID === e[1].EMLMemoID;
 			}).pop();
 		}
 
@@ -71,4 +71,4 @@ const EMTBrowse = new RollupStart({
 	}))),
 });
 
-export default EMTBrowse;
+export default EMLBrowse;

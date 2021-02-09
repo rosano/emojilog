@@ -1,50 +1,50 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
-	EMTTemplate: '.EMTTemplate',
+	EMLTemplate: '.EMLTemplate',
 
-	EMTTemplateToolbar: '.EMTTemplateToolbar',
-	EMTTemplateToolbarDoneButton: '.EMTTemplateToolbarDoneButton',
-	EMTTemplateToolbarDiscardButton: '.EMTTemplateToolbarDiscardButton',
+	EMLTemplateToolbar: '.EMLTemplateToolbar',
+	EMLTemplateToolbarDoneButton: '.EMLTemplateToolbarDoneButton',
+	EMLTemplateToolbarDiscardButton: '.EMLTemplateToolbarDiscardButton',
 	
-	EMTTemplateForm: '.EMTTemplateForm',
-	EMTTemplateFormNameField: '.EMTTemplateFormNameField',
+	EMLTemplateForm: '.EMLTemplateForm',
+	EMLTemplateFormNameField: '.EMLTemplateFormNameField',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
 
-describe('EMTTemplate_Access', function () {
+describe('EMLTemplate_Access', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
-			EMTTemplateItem: JSON.stringify({
-				EMTJournalName: 'alfa',
+			EMLTemplateItem: JSON.stringify({
+				EMLJournalName: 'alfa',
 			}),
 		});
 	});
 
-	it('shows EMTTemplate', function () {
-		browser.assert.elements(EMTTemplate, 1);
+	it('shows EMLTemplate', function () {
+		browser.assert.elements(EMLTemplate, 1);
 	});
 
-	it('shows EMTTemplateToolbar', function () {
-		browser.assert.elements(EMTTemplateToolbar, 1);
+	it('shows EMLTemplateToolbar', function () {
+		browser.assert.elements(EMLTemplateToolbar, 1);
 	});
 
-	it('shows EMTTemplateToolbarDoneButton', function () {
-		browser.assert.elements(EMTTemplateToolbarDoneButton, 1);
+	it('shows EMLTemplateToolbarDoneButton', function () {
+		browser.assert.elements(EMLTemplateToolbarDoneButton, 1);
 	});
 
-	it('shows EMTTemplateToolbarDiscardButton', function () {
-		browser.assert.elements(EMTTemplateToolbarDiscardButton, 1);
+	it('shows EMLTemplateToolbarDiscardButton', function () {
+		browser.assert.elements(EMLTemplateToolbarDiscardButton, 1);
 	});
 
-	it('shows EMTTemplateForm', function () {
-		browser.assert.elements(EMTTemplateForm, 1);
+	it('shows EMLTemplateForm', function () {
+		browser.assert.elements(EMLTemplateForm, 1);
 	});
 
-	it('shows EMTTemplateFormNameField', function () {
-		browser.assert.elements(EMTTemplateFormNameField, 1);
+	it('shows EMLTemplateFormNameField', function () {
+		browser.assert.elements(EMLTemplateFormNameField, 1);
 	});
 
 });

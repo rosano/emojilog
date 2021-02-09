@@ -6,13 +6,13 @@ exports.OLSKControllerRoutes = function() {
 	return [{
 		OLSKRoutePath: '/',
 		OLSKRouteMethod: 'get',
-		OLSKRouteSignature: 'EMTVitrineRoute',
+		OLSKRouteSignature: 'EMLVitrineRoute',
 		OLSKRouteFunction (req, res, next) {
 			return res.OLSKExpressLayoutRender(require('path').join(__dirname, 'ui-view'), {
-				EMTVitrineContent: res.OLSKMarkdownContent(require('path').join(__dirname, `text.${ res.locals.OLSKSharedPageCurrentLanguage }.md`), {
-					EMTVitrineTokenTrackURL: res.locals.OLSKCanonical('EMTTrackRoute'),
+				EMLVitrineContent: res.OLSKMarkdownContent(require('path').join(__dirname, `text.${ res.locals.OLSKSharedPageCurrentLanguage }.md`), {
+					EMLVitrineTokenTrackURL: res.locals.OLSKCanonical('EMLTrackRoute'),
 
-					EMT_SHARED_GITHUB_URL: process.env.EMT_SHARED_GITHUB_URL,
+					EML_SHARED_GITHUB_URL: process.env.EML_SHARED_GITHUB_URL,
 				}),
 				OLSKStringReplaceTokens: require('OLSKString').OLSKStringReplaceTokens,
 			});

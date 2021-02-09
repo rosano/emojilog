@@ -1,27 +1,27 @@
 <script>
-export let EMTBrowseStorageClient;
+export let EMLBrowseStorageClient;
 
-export let EMTBrowseJournalSelected;
-export let EMTBrowseJournalMemos;
-export let EMTBrowseDispatchCreate;
-export let EMTBrowseListDispatchForm;
-export let EMTBrowseListDispatchClose;
+export let EMLBrowseJournalSelected;
+export let EMLBrowseJournalMemos;
+export let EMLBrowseDispatchCreate;
+export let EMLBrowseListDispatchForm;
+export let EMLBrowseListDispatchClose;
 
 export const modPublic = {
 
-	EMTBrowseChangeDelegateCreateMemo () {
+	EMLBrowseChangeDelegateCreateMemo () {
 		mod.ChangeDelegateCreateMemo(...arguments);
 	},
 
-	EMTBrowseChangeDelegateUpdateMemo () {
+	EMLBrowseChangeDelegateUpdateMemo () {
 		mod.ChangeDelegateUpdateMemo(...arguments);
 	},
 
-	EMTBrowseChangeDelegateDeleteMemo () {
+	EMLBrowseChangeDelegateDeleteMemo () {
 		mod.ChangeDelegateDeleteMemo(...arguments);
 	},
 
-	EMTBrowseRecipes () {
+	EMLBrowseRecipes () {
 		return mod.DataBrowseRecipes();
 	},
 
@@ -30,23 +30,23 @@ export const modPublic = {
 import { OLSKLocalized } from 'OLSKInternational';
 import { OLSK_SPEC_UI } from 'OLSKSpec';
 import OLSKThrottle from 'OLSKThrottle';
-import EMTBrowseLogic from './ui-logic.js';
-import EMTMemoAction from '../_shared/EMTMemo/action.js';
-import EMTMemoStorage from '../_shared/EMTMemo/storage.js';
+import EMLBrowseLogic from './ui-logic.js';
+import EMLMemoAction from '../_shared/EMLMemo/action.js';
+import EMLMemoStorage from '../_shared/EMLMemo/storage.js';
 
 const mod = {
 
 	// VALUE
 
-	_ValueMemosAll: EMTBrowseJournalMemos,
+	_ValueMemosAll: EMLBrowseJournalMemos,
 	ValueMemosAll (inputData, shouldSort = true) {
 		mod.ValueMemosVisible(mod._ValueMemosAll = inputData, shouldSort);
 	},
 
 	_ValueMemosVisible: [],
 	ValueMemosVisible (inputData, shouldSort = true) {
-		const items = !mod._ValueFilterText ? inputData : inputData.filter(EMTBrowseLogic.EMTBrowseFilterFunction(mod._ValueFilterText));
-		mod._ValueMemosVisible = shouldSort ? items.sort(EMTBrowseLogic.EMTBrowseSort) : items;
+		const items = !mod._ValueFilterText ? inputData : inputData.filter(EMLBrowseLogic.EMLBrowseFilterFunction(mod._ValueFilterText));
+		mod._ValueMemosVisible = shouldSort ? items.sort(EMLBrowseLogic.EMLBrowseSort) : items;
 	},
 	
 	_ValueMemoSelected: undefined,
@@ -72,8 +72,8 @@ const mod = {
 
 	DataMemoObjectTemplate (inputData = {}) {
 		return Object.assign({
-			EMTMemoEventDate: new Date(),
-			EMTMemoNotes: '',
+			EMLMemoEventDate: new Date(),
+			EMLMemoNotes: '',
 		}, inputData);
 	},
 
@@ -91,8 +91,8 @@ const mod = {
 			]);
 		}
 
-		if (mod._EMTBrowseInfo) {
-			items.push(...mod._EMTBrowseInfo.modPublic.EMTBrowseInfoRecipes());
+		if (mod._EMLBrowseInfo) {
+			items.push(...mod._EMLBrowseInfo.modPublic.EMLBrowseInfoRecipes());
 		}
 		
 		return items;
@@ -108,7 +108,7 @@ const mod = {
 		const handlerFunctions = {
 			Escape () {
 				if (document.activeElement === document.querySelector('.OLSKMasterListFilterField') && !mod._ValueFilterText) {
-					return EMTBrowseListDispatchClose();
+					return EMLBrowseListDispatchClose();
 				}
 
 				mod.ControlFilter('');
@@ -124,7 +124,7 @@ const mod = {
 					return event.preventDefault();
 				}
 
-				if (document.activeElement === document.querySelector('.EMTBrowseInfoFormNotesField') && event.shiftKey) {
+				if (document.activeElement === document.querySelector('.EMLBrowseInfoFormNotesField') && event.shiftKey) {
 					mod.ControlFocusMaster();
 
 					return event.preventDefault();
@@ -138,20 +138,20 @@ const mod = {
 	// CONTROL
 
 	async ControlMemoCreate(inputData) {
-		const item = await EMTMemoAction.EMTMemoActionCreate(EMTBrowseStorageClient, mod.DataMemoObjectTemplate(), inputData);
+		const item = await EMLMemoAction.EMLMemoActionCreate(EMLBrowseStorageClient, mod.DataMemoObjectTemplate(), inputData);
 
 		mod.ValueMemosAll(mod._ValueMemosAll.concat(item));
 
 		mod.ControlMemoSelect(item);
 
-		EMTBrowseDispatchCreate(item);
+		EMLBrowseDispatchCreate(item);
 	},
 
 	ControlMemoUpdate(param1, param2) {
-		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueMemoUpdateThrottleMap, param1.EMTMemoID, {
+		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueMemoUpdateThrottleMap, param1.EMLMemoID, {
 			OLSKThrottleDuration: OLSK_SPEC_UI() ? 0 : 500,
 			OLSKThrottleCallback () {
-				return EMTMemoAction.EMTMemoActionUpdate(EMTBrowseStorageClient, param1, param2);
+				return EMLMemoAction.EMLMemoActionUpdate(EMLBrowseStorageClient, param1, param2);
 			},
 		});
 	},
@@ -161,7 +161,7 @@ const mod = {
 			return e !== param1;
 		}), false);
 
-		await EMTMemoAction.EMTMemoActionDelete(EMTBrowseStorageClient, param1, param2);
+		await EMLMemoAction.EMLMemoActionDelete(EMLBrowseStorageClient, param1, param2);
 
 		mod.ControlMemoSelect(null);
 	},
@@ -171,7 +171,7 @@ const mod = {
 	},
 
 	ControlFocusDetail () {
-		document.querySelector('.EMTBrowseInfoFormNotesField').focus();
+		document.querySelector('.EMLBrowseInfoFormNotesField').focus();
 	},
 
 	ControlMemoSelect(inputData) {
@@ -199,43 +199,43 @@ const mod = {
 			return mod.ControlMemoSelect(null);
 		}
 
-		mod.ValueMemoSelected(EMTBrowseLogic.EMTBrowseExactMatchFirst(inputData, mod._ValueMemosVisible).shift());
+		mod.ValueMemoSelected(EMLBrowseLogic.EMLBrowseExactMatchFirst(inputData, mod._ValueMemosVisible).shift());
 	},
 
 	// MESSAGE
 
-	EMTBrowseListDispatchCreate () {
-		mod.ControlMemoCreate(EMTBrowseJournalSelected);
+	EMLBrowseListDispatchCreate () {
+		mod.ControlMemoCreate(EMLBrowseJournalSelected);
 	},
 
-	EMTBrowseListDispatchClick (inputData) {
+	EMLBrowseListDispatchClick (inputData) {
 		mod.ControlMemoSelect(inputData);
 	},
 
-	EMTBrowseListDispatchArrow (inputData) {
+	EMLBrowseListDispatchArrow (inputData) {
 		mod.ValueMemoSelected(inputData);
 	},
 
-	EMTBrowseListDispatchFilter (inputData) {
+	EMLBrowseListDispatchFilter (inputData) {
 		mod.ControlFilter(inputData);
 	},
 
-	EMTBrowseInfoDispatchBack () {
+	EMLBrowseInfoDispatchBack () {
 		mod.OLSKMobileViewInactive = false;
 	},
 
-	EMTBrowseInfoDispatchDiscard () {
-		mod.ControlMemoDiscard(mod._ValueMemoSelected, EMTBrowseJournalSelected);
+	EMLBrowseInfoDispatchDiscard () {
+		mod.ControlMemoDiscard(mod._ValueMemoSelected, EMLBrowseJournalSelected);
 	},
 
-	EMTBrowseInfoDispatchUpdate () {
+	EMLBrowseInfoDispatchUpdate () {
 		mod._ValueMemoSelected = mod._ValueMemoSelected; // #purge-svelte-force-update
 
-		mod.ControlMemoUpdate(mod._ValueMemoSelected, EMTBrowseJournalSelected);
+		mod.ControlMemoUpdate(mod._ValueMemoSelected, EMLBrowseJournalSelected);
 	},
 
-	EMTBrowseInfoDispatchDebug (inputData) {
-		const url = `https://inspektor.5apps.com/?path=emojitimer%2F${ encodeURIComponent(EMTMemoStorage.EMTMemoStorageFolderPath(inputData, EMTBrowseJournalSelected)) }`;
+	EMLBrowseInfoDispatchDebug (inputData) {
+		const url = `https://inspektor.5apps.com/?path=emojilog%2F${ encodeURIComponent(EMLMemoStorage.EMLMemoStorageFolderPath(inputData, EMLBrowseJournalSelected)) }`;
 
 		if (OLSK_SPEC_UI()) {
 			window.FakeWindowOpen = url;
@@ -256,22 +256,22 @@ const mod = {
 	},
 
 	ChangeDelegateUpdateMemo (inputData) {
-		if (mod._ValueMemoSelected && mod._ValueMemoSelected.EMTMemoID === inputData.EMTMemoID) {
+		if (mod._ValueMemoSelected && mod._ValueMemoSelected.EMLMemoID === inputData.EMLMemoID) {
 			mod.ControlMemoSelect(inputData);
 		}
 
 		mod.ValueMemosAll(mod._ValueMemosAll.map(function (e) {
-			return e.EMTMemoID === inputData.EMTMemoID ? inputData : e;
+			return e.EMLMemoID === inputData.EMLMemoID ? inputData : e;
 		}), !mod._ValueMemoSelected);
 	},
 
 	ChangeDelegateDeleteMemo (inputData) {
-		if (mod._ValueMemoSelected && (mod._ValueMemoSelected.EMTMemoID === inputData.EMTMemoID)) {
+		if (mod._ValueMemoSelected && (mod._ValueMemoSelected.EMLMemoID === inputData.EMLMemoID)) {
 			mod.ControlMemoSelect(null);
 		}
 
 		mod.ValueMemosAll(mod._ValueMemosAll.filter(function (e) {
-			return e.EMTMemoID !== inputData.EMTMemoID;
+			return e.EMLMemoID !== inputData.EMLMemoID;
 		}), false);
 	},
 
@@ -283,7 +283,7 @@ const mod = {
 		}
 
 		mod._ValueMemoSelected = mod._ValueMemosVisible.filter(function (e) {
-			return e.EMTMemoID === mod._ValueMemoSelected.EMTMemoID;
+			return e.EMLMemoID === mod._ValueMemoSelected.EMLMemoID;
 		}).pop();
 	},
 
@@ -315,34 +315,34 @@ const mod = {
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
-import EMTBrowseList from './submodules/EMTBrowseList/main.svelte';
-import EMTBrowseInfo from './submodules/EMTBrowseInfo/main.svelte';
+import EMLBrowseList from './submodules/EMLBrowseList/main.svelte';
+import EMLBrowseInfo from './submodules/EMLBrowseInfo/main.svelte';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
 
-<EMTBrowseList
-	EMTBrowseListItems={ mod._ValueMemosVisible }
-	EMTBrowseListItemSelected={ mod._ValueMemoSelected }
-	EMTBrowseListFilterText={ mod._ValueFilterText }
-	EMTBrowseListDispatchForm={ EMTBrowseListDispatchForm }
-	EMTBrowseListDispatchClose={ EMTBrowseListDispatchClose }
-	EMTBrowseListDispatchCreate={ mod.EMTBrowseListDispatchCreate }
-	EMTBrowseListDispatchClick={ mod.EMTBrowseListDispatchClick }
-	EMTBrowseListDispatchArrow={ mod.EMTBrowseListDispatchArrow }
-	EMTBrowseListDispatchFilter={ mod.EMTBrowseListDispatchFilter }
+<EMLBrowseList
+	EMLBrowseListItems={ mod._ValueMemosVisible }
+	EMLBrowseListItemSelected={ mod._ValueMemoSelected }
+	EMLBrowseListFilterText={ mod._ValueFilterText }
+	EMLBrowseListDispatchForm={ EMLBrowseListDispatchForm }
+	EMLBrowseListDispatchClose={ EMLBrowseListDispatchClose }
+	EMLBrowseListDispatchCreate={ mod.EMLBrowseListDispatchCreate }
+	EMLBrowseListDispatchClick={ mod.EMLBrowseListDispatchClick }
+	EMLBrowseListDispatchArrow={ mod.EMLBrowseListDispatchArrow }
+	EMLBrowseListDispatchFilter={ mod.EMLBrowseListDispatchFilter }
 	OLSKMobileViewInactive={ !!mod.OLSKMobileViewInactive }
 	/>
 
-<EMTBrowseInfo
-	EMTBrowseInfoItem={ mod._ValueMemoSelected }
-	EMTBrowseInfoDispatchBack={ mod.EMTBrowseInfoDispatchBack }
-	EMTBrowseInfoDispatchDiscard={ mod.EMTBrowseInfoDispatchDiscard }
-	EMTBrowseInfoDispatchUpdate={ mod.EMTBrowseInfoDispatchUpdate }
+<EMLBrowseInfo
+	EMLBrowseInfoItem={ mod._ValueMemoSelected }
+	EMLBrowseInfoDispatchBack={ mod.EMLBrowseInfoDispatchBack }
+	EMLBrowseInfoDispatchDiscard={ mod.EMLBrowseInfoDispatchDiscard }
+	EMLBrowseInfoDispatchUpdate={ mod.EMLBrowseInfoDispatchUpdate }
 	OLSKMobileViewInactive={ !mod.OLSKMobileViewInactive }
-	EMTBrowseInfoDispatchDebug={ mod.EMTBrowseInfoDispatchDebug }
-	bind:this={ mod._EMTBrowseInfo }
+	EMLBrowseInfoDispatchDebug={ mod.EMLBrowseInfoDispatchDebug }
+	bind:this={ mod._EMLBrowseInfo }
 	/>
 
-{#if OLSK_SPEC_UI() && EMTBrowseStorageClient.FakeStorageClient }
+{#if OLSK_SPEC_UI() && EMLBrowseStorageClient.FakeStorageClient }
 	 <button class="OLSKAppToolbarLauncherButton" on:click={ mod._OLSKAppToolbarDispatchLauncher }></button>
 {/if}

@@ -1,20 +1,20 @@
 import RollupStart from './main.svelte';
 
-const EMTTemplate = new RollupStart({
+const EMLTemplate = new RollupStart({
 	target: document.body,
 	props: Object.assign({
-		EMTTemplateDispatchDone: (function () {
-			window.TestEMTTemplateDispatchDone.innerHTML = parseInt(window.TestEMTTemplateDispatchDone.innerHTML) + 1;
+		EMLTemplateDispatchDone: (function () {
+			window.TestEMLTemplateDispatchDone.innerHTML = parseInt(window.TestEMLTemplateDispatchDone.innerHTML) + 1;
 		}),
-		EMTTemplateDispatchDiscard: (function (inputData) {
-			window.TestEMTTemplateDispatchDiscard.innerHTML = parseInt(window.TestEMTTemplateDispatchDiscard.innerHTML) + 1;
-			window.TestEMTTemplateDispatchDiscardData.innerHTML = JSON.stringify(inputData);
+		EMLTemplateDispatchDiscard: (function (inputData) {
+			window.TestEMLTemplateDispatchDiscard.innerHTML = parseInt(window.TestEMLTemplateDispatchDiscard.innerHTML) + 1;
+			window.TestEMLTemplateDispatchDiscardData.innerHTML = JSON.stringify(inputData);
 		}),
-		EMTTemplateDispatchUpdate: (function () {
-			window.TestEMTTemplateDispatchUpdate.innerHTML = parseInt(window.TestEMTTemplateDispatchUpdate.innerHTML) + 1;
+		EMLTemplateDispatchUpdate: (function () {
+			window.TestEMLTemplateDispatchUpdate.innerHTML = parseInt(window.TestEMLTemplateDispatchUpdate.innerHTML) + 1;
 		}),
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
-		if (['EMTTemplateItem'].includes(e[0])) {
+		if (['EMLTemplateItem'].includes(e[0])) {
 			e[1] = JSON.parse(e[1]);
 		}
 
@@ -22,4 +22,4 @@ const EMTTemplate = new RollupStart({
 	}))),
 });
 
-export default EMTTemplate;
+export default EMLTemplate;

@@ -1,0 +1,44 @@
+<%
+locals.OLSKPageAssets = [
+	'/_shared/__external/normalize.css/normalize.css',
+	'__compiled/ui-style.css',
+
+	'/_shared/__external/launchlet/__compiled/launchlet.js',
+];
+locals.OLSKPagePublicConstants = {
+	OLSKSharedPageCurrentLanguage,
+};
+%>
+
+<p>
+	<strong>EMLBrowseInfoItem</strong>
+	<span id="TestEMLBrowseInfoItem">undefined</span>
+</p>
+
+<script src="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-behaviour.js"></script>
+
+<p>
+	<strong>EMLBrowseInfoDispatchBack</strong>
+	<span id="TestEMLBrowseInfoDispatchBack">0</span>
+</p>
+
+<p>
+	<strong>EMLBrowseInfoDispatchDiscard</strong>
+	<span id="TestEMLBrowseInfoDispatchDiscard">0</span>
+</p>
+
+<p>
+	<strong>EMLBrowseInfoDispatchDiscardData</strong>
+	<span id="TestEMLBrowseInfoDispatchDiscardData">undefined</span>
+</p>
+
+<p>
+	<strong>EMLBrowseInfoDispatchUpdate</strong>
+	<span id="TestEMLBrowseInfoDispatchUpdate">0</span>
+</p>
+
+<p>
+	<strong>EMLBrowseInfoDispatchDebug</strong>
+	<span id="TestEMLBrowseInfoDispatchDebug">0</span>
+	<span id="TestEMLBrowseInfoDispatchDebugData">undefined</span>
+</p>

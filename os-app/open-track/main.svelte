@@ -4,13 +4,13 @@ import OLSKThrottle from 'OLSKThrottle';
 import { OLSK_SPEC_UI } from 'OLSKSpec'
 import OLSKRemoteStorage from 'OLSKRemoteStorage';
 import OLSKServiceWorker from 'OLSKServiceWorker';
-import EMT_Data from '../_shared/EMT_Data/main.js';
-import EMTJournalStorage from '../_shared/EMTJournal/storage.js';
-import EMTJournalAction from '../_shared/EMTJournal/action.js';
+import EML_Data from '../_shared/EML_Data/main.js';
+import EMLJournalStorage from '../_shared/EMLJournal/storage.js';
+import EMLJournalAction from '../_shared/EMLJournal/action.js';
 import RemoteStorage from 'remotestoragejs';
-import EMTTrackLogic from './ui-logic.js';
-import EMTMemoStorage from '../_shared/EMTMemo/storage.js';
-import EMTMemoAction from '../_shared/EMTMemo/action.js';
+import EMLTrackLogic from './ui-logic.js';
+import EMLMemoStorage from '../_shared/EMLMemo/storage.js';
+import EMLMemoAction from '../_shared/EMLMemo/action.js';
 import OLSKString from 'OLSKString';
 import OLSKLanguageSwitcher from 'OLSKLanguageSwitcher';
 
@@ -22,7 +22,7 @@ const mod = {
 
 	_ValueJournalsAll: [],
 	ValueJournalsAll (inputData, shouldSort = true) {
-		mod._ValueJournalsAll = shouldSort ? inputData.sort(EMTTrackLogic.EMTTrackSort) : inputData;
+		mod._ValueJournalsAll = shouldSort ? inputData.sort(EMLTrackLogic.EMLTrackSort) : inputData;
 	},
 	
 	_ValueJournalSelected: undefined,
@@ -60,8 +60,8 @@ const mod = {
 
 		if (OLSK_SPEC_UI()) {
 			items.push(...[{
-				LCHRecipeName: 'EMTTrackLauncherItemDebug_ImportFileData',
-				LCHRecipeCallback: function EMTTrackLauncherItemDebug_ImportFileData () {
+				LCHRecipeName: 'EMLTrackLauncherItemDebug_ImportFileData',
+				LCHRecipeCallback: function EMLTrackLauncherItemDebug_ImportFileData () {
 					mod.InterfaceStorageInputFieldDidRead(window.prompt());
 				},
 			}])
@@ -76,8 +76,8 @@ const mod = {
 		}));
 		items.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_SPEC_UI()));
 
-		if (mod._EMTTrackMaster) {
-			items.push(...mod._EMTTrackMaster.modPublic.EMTTrackMasterRecipes());
+		if (mod._EMLTrackMaster) {
+			items.push(...mod._EMLTrackMaster.modPublic.EMLTrackMasterRecipes());
 		}
 
 		return items;
@@ -87,36 +87,36 @@ const mod = {
 
 	async InterfaceStorageInputFieldDidRead (inputData) {
 		if (!inputData.trim()) {
-			return window.alert(OLSKLocalized('EMTTrackStorageImportErrorNotFilledAlertText'))
+			return window.alert(OLSKLocalized('EMLTrackStorageImportErrorNotFilledAlertText'))
 		}
 
 		try {
-			await EMT_Data.EMT_DataImport(mod._ValueOLSKRemoteStorage, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
+			await EML_Data.EML_DataImport(mod._ValueOLSKRemoteStorage, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
 			await mod.SetupValueJournalsAll();
 		} catch (e) {
-			window.alert(OLSKLocalized('EMTTrackStorageImportErrorNotValidAlertText'));
+			window.alert(OLSKLocalized('EMLTrackStorageImportErrorNotValidAlertText'));
 		}
 	},
 
 	// CONTROL
 
 	ControlJournalSave(inputData) {
-		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveThrottleMap, inputData.EMTJournalID, {
+		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveThrottleMap, inputData.EMLJournalID, {
 			OLSKThrottleDuration: 500,
 			async OLSKThrottleCallback () {
-				await EMTJournalAction.EMTJournalActionUpdate(mod._ValueOLSKRemoteStorage, inputData);
+				await EMLJournalAction.EMLJournalActionUpdate(mod._ValueOLSKRemoteStorage, inputData);
 			},
 		});
 
 		if (OLSK_SPEC_UI()) {
-			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[inputData.EMTJournalID])	
+			OLSKThrottle.OLSKThrottleSkip(mod._ValueSaveThrottleMap[inputData.EMLJournalID])	
 		};
 	},
 
 	async ControlJournalCreate() {
-		const item = await EMTJournalAction.EMTJournalActionCreate(mod._ValueOLSKRemoteStorage, {
-			EMTJournalName: '',
-			EMTJournalModificationDate: new Date(),
+		const item = await EMLJournalAction.EMLJournalActionCreate(mod._ValueOLSKRemoteStorage, {
+			EMLJournalName: '',
+			EMLJournalModificationDate: new Date(),
 		});
 
 		mod.ValueJournalsAll(mod._ValueJournalsAll.concat(item));
@@ -135,7 +135,7 @@ const mod = {
 			return e !== inputData;
 		}))
 
-		await EMTJournalAction.EMTJournalActionDelete(mod._ValueOLSKRemoteStorage, inputData);
+		await EMLJournalAction.EMLJournalActionDelete(mod._ValueOLSKRemoteStorage, inputData);
 
 		mod.ControlJournalSelect(null);
 
@@ -196,41 +196,41 @@ const mod = {
 		});
 	},
 
-	EMTTrackMasterDispatchCreate () {
+	EMLTrackMasterDispatchCreate () {
 		mod.ControlJournalCreate();
 	},
 
-	async EMTTrackMasterDispatchSelect (inputData) {
-		mod.ValueBrowseMemos(await EMTMemoAction.EMTMemoActionList(mod._ValueOLSKRemoteStorage, inputData));
+	async EMLTrackMasterDispatchSelect (inputData) {
+		mod.ValueBrowseMemos(await EMLMemoAction.EMLMemoActionList(mod._ValueOLSKRemoteStorage, inputData));
 		
 		mod.ControlJournalSelect(inputData);
 	},
 
-	EMTTrackMasterDispatchImportData (inputData) {
+	EMLTrackMasterDispatchImportData (inputData) {
 		mod.InterfaceStorageInputFieldDidRead(inputData);
 	},
 
-	EMTTemplateDispatchDone () {
+	EMLTemplateDispatchDone () {
 		mod._ValueFormVisible = false;
 	},
 
-	EMTTemplateDispatchDiscard (inputData) {
+	EMLTemplateDispatchDiscard (inputData) {
 		mod.ControlJournalDiscard(inputData);
 	},
 
-	EMTTemplateDispatchUpdate () {
+	EMLTemplateDispatchUpdate () {
 		mod._ValueJournalSelected = mod._ValueJournalSelected; // #purge-svelte-force-update
 		
 		mod.ControlJournalSave(mod._ValueJournalSelected);
 	},
 
-	EMTBrowseDispatchCreate () {},
+	EMLBrowseDispatchCreate () {},
 
-	EMTBrowseListDispatchForm () {
+	EMLBrowseListDispatchForm () {
 		mod._ValueFormVisible = true;
 	},
 
-	EMTBrowseListDispatchClose () {
+	EMLBrowseListDispatchClose () {
 		mod.ControlJournalSelect(null);
 	},
 
@@ -238,29 +238,29 @@ const mod = {
 	// 	// console.log('OLSKChangeDelegateCreate', inputData);
 
 	// 	mod.ValueJournalsAll(mod._ValueJournalsAll.filter(function (e) {
-	// 		return e.EMTJournalID !== inputData.EMTJournalID; // @Hotfix Dropbox sending DelegateAdd
+	// 		return e.EMLJournalID !== inputData.EMLJournalID; // @Hotfix Dropbox sending DelegateAdd
 	// 	}).concat(inputData));
 	// },
 	// OLSKChangeDelegateUpdate (inputData) {
 	// 	// console.log('OLSKChangeDelegateUpdate', inputData);
 
-	// 	if (mod._ValueJournalSelected && mod._ValueJournalSelected.EMTJournalID === inputData.EMTJournalID) {
+	// 	if (mod._ValueJournalSelected && mod._ValueJournalSelected.EMLJournalID === inputData.EMLJournalID) {
 	// 		mod.ControlJournalSelect(inputData);
 	// 	}
 
 	// 	mod.ValueJournalsAll(mod._ValueJournalsAll.map(function (e) {
-	// 		return Object.assign(e, e.EMTJournalID === inputData.EMTJournalID ? inputData : {});
+	// 		return Object.assign(e, e.EMLJournalID === inputData.EMLJournalID ? inputData : {});
 	// 	}), false);
 	// },
 	// OLSKChangeDelegateDelete (inputData) {
 	// 	// console.log('OLSKChangeDelegateDelete', inputData);
 
-	// 	if (mod._ValueJournalSelected && (mod._ValueJournalSelected.EMTJournalID === inputData.EMTJournalID)) {
+	// 	if (mod._ValueJournalSelected && (mod._ValueJournalSelected.EMLJournalID === inputData.EMLJournalID)) {
 	// 		mod.ControlJournalSelect(null);
 	// 	}
 
 	// 	mod.ValueJournalsAll(mod._ValueJournalsAll.filter(function (e) {
-	// 		return e.EMTJournalID !== inputData.EMTJournalID;
+	// 		return e.EMLJournalID !== inputData.EMLJournalID;
 	// 	}), false);
 	// },
 
@@ -283,15 +283,15 @@ const mod = {
 	},
 
 	SetupStorageClient() {
-		const storageModule = EMT_Data.EMT_DataModule([
-			Object.assign(EMTJournalStorage.EMTJournalStorageBuild, {
+		const storageModule = EML_Data.EML_DataModule([
+			Object.assign(EMLJournalStorage.EMLJournalStorageBuild, {
 				// OLSKChangeDelegate: {
 				// 	OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateJournal,
 				// 	OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateJournal,
 				// 	OLSKChangeDelegateDelete: mod.OLSKChangeDelegateDeleteJournal,
 				// },
 			}),
-			Object.assign(EMTMemoStorage.EMTMemoStorageBuild, {
+			Object.assign(EMLMemoStorage.EMLMemoStorageBuild, {
 				// OLSKChangeDelegate: {
 				// 	OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateMemo,
 				// 	OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateMemo,
@@ -354,7 +354,7 @@ const mod = {
 	},
 
 	async SetupValueJournalsAll() {
-		mod.ValueJournalsAll((await EMTJournalAction.EMTJournalActionList(mod._ValueOLSKRemoteStorage)).filter(function (e) {
+		mod.ValueJournalsAll((await EMLJournalAction.EMLJournalActionList(mod._ValueOLSKRemoteStorage)).filter(function (e) {
 			return typeof e === 'object'; // #patch-remotestorage-true
 		}));
 	},
@@ -370,9 +370,9 @@ const mod = {
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
-import EMTTrackMaster from './submodules/EMTTrackMaster/main.svelte';
-import EMTTemplate from '../sub-template/main.svelte';
-import EMTBrowse from '../sub-browse/main.svelte';
+import EMLTrackMaster from './submodules/EMLTrackMaster/main.svelte';
+import EMLTemplate from '../sub-template/main.svelte';
+import EMLBrowse from '../sub-browse/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorkerView from '../_shared/__external/OLSKServiceWorker/main.svelte';
 import OLSKStorageWidget from 'OLSKStorageWidget';
@@ -380,45 +380,45 @@ import OLSKModalView from 'OLSKModalView';
 import OLSKApropos from 'OLSKApropos';
 </script>
 
-<div class="EMTTrack OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading }>
+<div class="EMLTrack OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading }>
 
 <div class="OLSKViewportContent">
 	{#if !mod._ValueJournalSelected }
-		<EMTTrackMaster
-			EMTTrackMasterListItems={ mod._ValueJournalsAll }
-			EMTTrackMasterListItemSelected={ mod._ValueJournalSelected }
-			EMTTrackMasterDispatchCreate={ mod.EMTTrackMasterDispatchCreate }
-			EMTTrackMasterDispatchSelect={ mod.EMTTrackMasterDispatchSelect }
-			EMTTrackMasterDispatchImportData={ mod.EMTTrackMasterDispatchImportData }
-			bind:this={ mod._EMTTrackMaster }
+		<EMLTrackMaster
+			EMLTrackMasterListItems={ mod._ValueJournalsAll }
+			EMLTrackMasterListItemSelected={ mod._ValueJournalSelected }
+			EMLTrackMasterDispatchCreate={ mod.EMLTrackMasterDispatchCreate }
+			EMLTrackMasterDispatchSelect={ mod.EMLTrackMasterDispatchSelect }
+			EMLTrackMasterDispatchImportData={ mod.EMLTrackMasterDispatchImportData }
+			bind:this={ mod._EMLTrackMaster }
 			/>
 	{/if}
 
 	{#if mod._ValueJournalSelected && !mod._ValueFormVisible }
-		<EMTBrowse
-			EMTBrowseStorageClient={ mod._ValueOLSKRemoteStorage }
-			EMTBrowseJournalSelected={ mod._ValueJournalSelected }
-			EMTBrowseJournalMemos={ mod._ValueBrowseMemos }
-			EMTBrowseDispatchCreate={ mod.EMTBrowseDispatchCreate }
-			EMTBrowseListDispatchForm={ mod.EMTBrowseListDispatchForm }
-			EMTBrowseListDispatchClose={ mod.EMTBrowseListDispatchClose }
-			bind:this={ mod._EMTBrowse }
+		<EMLBrowse
+			EMLBrowseStorageClient={ mod._ValueOLSKRemoteStorage }
+			EMLBrowseJournalSelected={ mod._ValueJournalSelected }
+			EMLBrowseJournalMemos={ mod._ValueBrowseMemos }
+			EMLBrowseDispatchCreate={ mod.EMLBrowseDispatchCreate }
+			EMLBrowseListDispatchForm={ mod.EMLBrowseListDispatchForm }
+			EMLBrowseListDispatchClose={ mod.EMLBrowseListDispatchClose }
+			bind:this={ mod._EMLBrowse }
 			/>
 	{/if}
 
 	{#if mod._ValueJournalSelected && mod._ValueFormVisible }
-		<EMTTemplate
-			EMTTemplateItem={ mod._ValueJournalSelected }
-			EMTTemplateDispatchDone={ mod.EMTTemplateDispatchDone }
-			EMTTemplateDispatchDiscard={ mod.EMTTemplateDispatchDiscard }
-			EMTTemplateDispatchUpdate={ mod.EMTTemplateDispatchUpdate }
+		<EMLTemplate
+			EMLTemplateItem={ mod._ValueJournalSelected }
+			EMLTemplateDispatchDone={ mod.EMLTemplateDispatchDone }
+			EMLTemplateDispatchDiscard={ mod.EMLTemplateDispatchDiscard }
+			EMLTemplateDispatchUpdate={ mod.EMLTemplateDispatchUpdate }
 			/>
 	{/if}
 </div>
 
-<footer class="EMTTrackViewportFooter OLSKMobileViewFooter">
+<footer class="EMLTrackViewportFooter OLSKMobileViewFooter">
 	{#if !mod._ValueStorageToolbarHidden }
-		<div class="EMTTrackStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeTop OLSKStorageToolbar">
+		<div class="EMLTrackStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeTop OLSKStorageToolbar">
 			<div class="OLSKToolbarElementGroup">
 			</div>
 
@@ -446,7 +446,7 @@ import OLSKApropos from 'OLSKApropos';
 </div>
 
 {#if !OLSK_SPEC_UI()}
-	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonical('EMTServiceWorkerRoute') } />
+	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonical('EMLServiceWorkerRoute') } />
 {/if}
 
 <style src="./ui-style.css"></style>

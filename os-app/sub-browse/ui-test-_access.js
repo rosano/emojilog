@@ -7,70 +7,70 @@ Object.entries({}).map(function (e) {
 const kTesting = {
 	StubJournalObjectValid() {
 		return {
-			EMTJournalID: 'alfa',
-			EMTJournalName: '',
-			EMTJournalCreationDate: new Date('2019-02-23T13:56:36Z'),
-			EMTJournalModificationDate: new Date('2019-02-23T13:56:36Z'),
+			EMLJournalID: 'alfa',
+			EMLJournalName: '',
+			EMLJournalCreationDate: new Date('2019-02-23T13:56:36Z'),
+			EMLJournalModificationDate: new Date('2019-02-23T13:56:36Z'),
 		};
 	},
 };
 
-describe('EMTBrowse_Access', function () {
+describe('EMLBrowse_Access', function () {
 
 	before(function () {
 		return browser.OLSKVisit(kDefaultRoute, {
-			EMTBrowseJournalSelected: JSON.stringify(kTesting.StubJournalObjectValid()),
+			EMLBrowseJournalSelected: JSON.stringify(kTesting.StubJournalObjectValid()),
 		});
 	});
 
-	it('shows EMTBrowseList', function () {
-		browser.assert.elements('.EMTBrowseList', 1);
+	it('shows EMLBrowseList', function () {
+		browser.assert.elements('.EMLBrowseList', 1);
 	});
 
-	it('hides EMTBrowseListItem', function () {
-		browser.assert.elements('.EMTBrowseListItem', 0);
+	it('hides EMLBrowseListItem', function () {
+		browser.assert.elements('.EMLBrowseListItem', 0);
 	});
 
-	it('shows EMTBrowseInfo', function () {
-		browser.assert.elements('.EMTBrowseInfo', 1);
+	it('shows EMLBrowseInfo', function () {
+		browser.assert.elements('.EMLBrowseInfo', 1);
 	});
 
 	it('shows OLSKDetailPlaceholder', function () {
 		browser.assert.elements('.OLSKDetailPlaceholder', 1);
 	});
 
-	it('hides EMTBrowseInfoForm', function () {
-		browser.assert.elements('.EMTBrowseInfoForm', 0);
+	it('hides EMLBrowseInfoForm', function () {
+		browser.assert.elements('.EMLBrowseInfoForm', 0);
 	});
 
-	it('hides EMTBrowseInfoLauncherFakeItemProxy', function () {
-		return browser.assert.OLSKLauncherItems('EMTBrowseInfoLauncherFakeItemProxy', 0);
+	it('hides EMLBrowseInfoLauncherFakeItemProxy', function () {
+		return browser.assert.OLSKLauncherItems('EMLBrowseInfoLauncherFakeItemProxy', 0);
 	});
 
 	context('create', function test_create() {
 
 		before(function () {
-			return browser.pressButton('.EMTBrowseListToolbarCreateButton');
+			return browser.pressButton('.EMLBrowseListToolbarCreateButton');
 		});
 
-		it('shows EMTBrowseListItem', function () {
-			browser.assert.elements('.EMTBrowseListItem', 1);
+		it('shows EMLBrowseListItem', function () {
+			browser.assert.elements('.EMLBrowseListItem', 1);
 		});
 
 		it('hides OLSKDetailPlaceholder', function () {
 			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
 
-		it('shows EMTBrowseInfoForm', function () {
-			browser.assert.elements('.EMTBrowseInfoForm', 1);
+		it('shows EMLBrowseInfoForm', function () {
+			browser.assert.elements('.EMLBrowseInfoForm', 1);
 		});
 
 	});
 
 	context('select', function test_select() {
 
-		it('shows EMTBrowseInfoLauncherFakeItemProxy', function () {
-			return browser.assert.OLSKLauncherItems('EMTBrowseInfoLauncherFakeItemProxy', 1);
+		it('shows EMLBrowseInfoLauncherFakeItemProxy', function () {
+			return browser.assert.OLSKLauncherItems('EMLBrowseInfoLauncherFakeItemProxy', 1);
 		});
 
 	});
@@ -78,19 +78,19 @@ describe('EMTBrowse_Access', function () {
 	context('discard', function test_discard() {
 
 		before(function () {
-			return browser.pressButton('.EMTBrowseInfoToolbarDiscardButton');
+			return browser.pressButton('.EMLBrowseInfoToolbarDiscardButton');
 		});
 
-		it('hides EMTBrowseListItem', function () {
-			browser.assert.elements('.EMTBrowseListItem', 0);
+		it('hides EMLBrowseListItem', function () {
+			browser.assert.elements('.EMLBrowseListItem', 0);
 		});
 
 		it('shows OLSKDetailPlaceholder', function () {
 			browser.assert.elements('.OLSKDetailPlaceholder', 1);
 		});
 
-		it('hides EMTBrowseInfoForm', function () {
-			browser.assert.elements('.EMTBrowseInfoForm', 0);
+		it('hides EMLBrowseInfoForm', function () {
+			browser.assert.elements('.EMLBrowseInfoForm', 0);
 		});
 
 	});

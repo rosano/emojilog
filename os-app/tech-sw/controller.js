@@ -1,16 +1,16 @@
-const kEMTServiceWorkerVersionID = Date.now().toString();
+const kEMLServiceWorkerVersionID = Date.now().toString();
 
 const OLSKServiceWorker = require('../_shared/__external/OLSKServiceWorker/main.js');
 
 exports.OLSKControllerRoutes = function() {
 	return {
-		EMTServiceWorkerRoute: {
+		EMLServiceWorkerRoute: {
 			OLSKRoutePath: '/sw.js',
 			OLSKRouteMethod: 'get',
 			OLSKRouteFunction (req, res, next) {
 				return res.type('js').send(OLSKServiceWorker.OLSKServiceWorkerView({
-					VERSION_ID_TOKEN: kEMTServiceWorkerVersionID,
-					ORIGIN_PAGE_PATH_TOKEN: res.locals.OLSKCanonical('EMTTrackRoute'),
+					VERSION_ID_TOKEN: kEMLServiceWorkerVersionID,
+					ORIGIN_PAGE_PATH_TOKEN: res.locals.OLSKCanonical('EMLTrackRoute'),
 				}));
 			},
 		},

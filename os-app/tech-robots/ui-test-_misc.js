@@ -1,6 +1,6 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-describe('EMTRobots_Misc', function () {
+describe('EMLRobots_Misc', function () {
 
 	it('sends text', async function () {
 		browser.assert.deepEqual(await (await browser.fetch('http://loc.tests' + kDefaultRoute.OLSKRoutePath)).text(), require('OLSKRobots').OLSKRobotsTXT([

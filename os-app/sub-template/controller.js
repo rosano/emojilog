@@ -1,8 +1,8 @@
 exports.OLSKControllerRoutes = function() {
 	return [{
-		OLSKRoutePath: '/stub/EMTTemplate',
+		OLSKRoutePath: '/stub/EMLTemplate',
 		OLSKRouteMethod: 'get',
-		OLSKRouteSignature: 'EMTTemplateStubRoute',
+		OLSKRouteSignature: 'EMLTemplateStubRoute',
 		OLSKRouteFunction (req, res, next) {
 			return res.OLSKExpressLayoutRender(require('path').join(__dirname, 'stub-view'));
 		},

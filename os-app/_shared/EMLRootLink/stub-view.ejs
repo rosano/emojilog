@@ -1,0 +1,22 @@
+<%
+locals.OLSKPageAssets = [
+	'/_shared/__external/normalize.css/normalize.css',
+	'__compiled/ui-style.css',
+];
+locals.OLSKPagePublicConstants = {
+	OLSKSharedPageCurrentLanguage,
+};
+locals.OLSKPagePublicRouteKeys = ['EMLVitrineRoute'];
+%>
+
+<% if (OLSKSharedActiveRouteConstant !== 'EMLRootLinkSvelteStubRoute') { -%>
+
+<%- include('./main.ejs') %>	
+
+<% } -%>
+
+<% if (OLSKSharedActiveRouteConstant === 'EMLRootLinkSvelteStubRoute') { -%>
+
+<script src="/<%= OLSKSharedPageControllerSlug %>/__compiled/ui-behaviour.js"></script>
+
+<% } -%>

@@ -1,6 +1,6 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-describe('EMTTrack_Misc', function () {
+describe('EMLTrack_Misc', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute);
@@ -18,10 +18,10 @@ describe('EMTTrack_Misc', function () {
 		browser.assert.attribute('meta[name=apple-mobile-web-app-capable]', 'content', 'yes');
 	});
 
-	describe('EMTTrackViewportFooter', function test_EMTTrackViewportFooter () {
+	describe('EMLTrackViewportFooter', function test_EMLTrackViewportFooter () {
 
 		it('classes OLSKMobileViewFooter', function () {
-			browser.assert.hasClass(EMTTrackViewportFooter, 'OLSKMobileViewFooter');
+			browser.assert.hasClass(EMLTrackViewportFooter, 'OLSKMobileViewFooter');
 		});
 
 	});
@@ -42,26 +42,26 @@ describe('EMTTrack_Misc', function () {
 
 	});
 
-	describe('EMTTrackStorageToolbar', function test_EMTTrackStorageToolbar () {
+	describe('EMLTrackStorageToolbar', function test_EMLTrackStorageToolbar () {
 		
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarStorageButton');
 		});
 		
 		it('classes OLSKToolbar', function () {
-			browser.assert.hasClass(EMTTrackStorageToolbar, 'OLSKToolbar');
+			browser.assert.hasClass(EMLTrackStorageToolbar, 'OLSKToolbar');
 		});
 
 		it('classes OLSKToolbarJustify', function () {
-			browser.assert.hasClass(EMTTrackStorageToolbar, 'OLSKToolbarJustify');
+			browser.assert.hasClass(EMLTrackStorageToolbar, 'OLSKToolbarJustify');
 		});
 
 		it('classes OLSKCommonEdgeTop', function () {
-			browser.assert.hasClass(EMTTrackStorageToolbar, 'OLSKCommonEdgeTop');
+			browser.assert.hasClass(EMLTrackStorageToolbar, 'OLSKCommonEdgeTop');
 		});
 		
 		it('classes OLSKStorageToolbar', function () {
-			browser.assert.hasClass(EMTTrackStorageToolbar, 'OLSKStorageToolbar');
+			browser.assert.hasClass(EMLTrackStorageToolbar, 'OLSKStorageToolbar');
 		});
 	
 	});
@@ -73,7 +73,7 @@ describe('EMTTrack_Misc', function () {
 		});
 
 		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'EMTTrackLauncherItemDebug_ImportFileData');
+			return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_ImportFileData');
 		});
 
 		before(function () {
@@ -81,11 +81,11 @@ describe('EMTTrack_Misc', function () {
 				return browser.click('.LCHLauncherPipeItem');
 			}, function (dialog) {
 				dialog.response = JSON.stringify([StubJournalObjectValid({
-					EMTJournalName: 'zulu',
-					$EMTJournalMemos: [StubMemoObjectValid({
-						EMTMemoID: 'alfa',
+					EMLJournalName: 'zulu',
+					$EMLJournalMemos: [StubMemoObjectValid({
+						EMLMemoID: 'alfa',
 					}), StubMemoObjectValid({
-						EMTMemoID: 'bravo',
+						EMLMemoID: 'bravo',
 					})],
 				})]);
 
@@ -94,17 +94,17 @@ describe('EMTTrack_Misc', function () {
 		});
 
 		it('creates journal', function () {
-			browser.assert.text('.EMTTrackMasterListItemName', 'zulu');
+			browser.assert.text('.EMLTrackMasterListItemName', 'zulu');
 		});
 
 		context('click', function () {
 
 			before(function () {
-				return browser.pressButton('.EMTTrackMasterListItem');
+				return browser.pressButton('.EMLTrackMasterListItem');
 			});
 			
 			it('creates memo', function () {
-				browser.assert.elements('.EMTBrowseListItem', 2);
+				browser.assert.elements('.EMLBrowseListItem', 2);
 			});
 		
 		});
@@ -118,29 +118,29 @@ describe('EMTTrack_Misc', function () {
 		});
 
 		before(function () {
-			return browser.pressButton(EMTTrackMasterCreateButton);
+			return browser.pressButton(EMLTrackMasterCreateButton);
 		});
 
-		it('focuses EMTTemplateFormNameField', function() {
-			browser.assert.hasFocus('.EMTTemplateFormNameField');
+		it('focuses EMLTemplateFormNameField', function() {
+			browser.assert.hasFocus('.EMLTemplateFormNameField');
 		});
 
-		describe('EMTTrackMasterListItem', function test_EMTTrackMasterListItem () {
+		describe('EMLTrackMasterListItem', function test_EMLTrackMasterListItem () {
 
 			before(function () {
-				return browser.pressButton('.EMTTemplateToolbarDoneButton');
+				return browser.pressButton('.EMLTemplateToolbarDoneButton');
 			});
 
 			before(function () {
-				return browser.pressButton('.EMTBrowseListToolbarCloseButton');
+				return browser.pressButton('.EMLBrowseListToolbarCloseButton');
 			});
 
 			it('classes OLSKDecorButtonNoStyle', function() {
-				browser.assert.hasClass('.EMTTrackMasterListItem', 'OLSKDecorButtonNoStyle');
+				browser.assert.hasClass('.EMLTrackMasterListItem', 'OLSKDecorButtonNoStyle');
 			});
 
 			it('classes OLSKDecorTappable', function() {
-				browser.assert.hasClass('.EMTTrackMasterListItem', 'OLSKDecorTappable');
+				browser.assert.hasClass('.EMLTrackMasterListItem', 'OLSKDecorTappable');
 			});
 		
 		});

@@ -6,34 +6,34 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		return OLSKTestingLocalized(inputData, OLSKRoutingLanguage);
 	};
 
-	describe(`EMTTemplate_Localize-${ OLSKRoutingLanguage }`, function () {
+	describe(`EMLTemplate_Localize-${ OLSKRoutingLanguage }`, function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				EMTTemplateItem: JSON.stringify({
-					EMTJournalName: 'alfa',
+				EMLTemplateItem: JSON.stringify({
+					EMLJournalName: 'alfa',
 				}),
 			});
 		});
 
-		it('localizes EMTTemplateToolbarDoneButton', function () {
-			browser.assert.text(EMTTemplateToolbarDoneButton, uLocalized('EMTTemplateToolbarDoneButtonText'));
+		it('localizes EMLTemplateToolbarDoneButton', function () {
+			browser.assert.text(EMLTemplateToolbarDoneButton, uLocalized('EMLTemplateToolbarDoneButtonText'));
 		});
 
-		it('localizes EMTTemplateToolbarDiscardButton', function () {
-			browser.assert.text(EMTTemplateToolbarDiscardButton, uLocalized('EMTTemplateToolbarDiscardButtonText'));
+		it('localizes EMLTemplateToolbarDiscardButton', function () {
+			browser.assert.text(EMLTemplateToolbarDiscardButton, uLocalized('EMLTemplateToolbarDiscardButtonText'));
 		});
 		
-		it('localizes EMTTemplateFormNameField', function () {
-			browser.assert.attribute(EMTTemplateFormNameField, 'placeholder', uLocalized('EMTTemplateFormNameFieldPlaceholderText'));
+		it('localizes EMLTemplateFormNameField', function () {
+			browser.assert.attribute(EMLTemplateFormNameField, 'placeholder', uLocalized('EMLTemplateFormNameFieldPlaceholderText'));
 		});
 
 		context('on discard', function () {
 		
-			it('localizes EMTTemplateDiscardConfirm', function() {
+			it('localizes EMLTemplateDiscardConfirm', function() {
 				browser.assert.OLSKConfirmQuestion(function () {
-					return browser.pressButton(EMTTemplateToolbarDiscardButton);
-				}, uLocalized('EMTTemplateDiscardConfirmText'));
+					return browser.pressButton(EMLTemplateToolbarDiscardButton);
+				}, uLocalized('EMLTemplateDiscardConfirmText'));
 			});
 		
 		});
