@@ -265,10 +265,6 @@ const mod = {
 		mod.ControlJournalSelect(inputData);
 	},
 
-	EMLTrackMasterDispatchImportData (inputData) {
-		mod.InterfaceStorageInputFieldDidRead(inputData);
-	},
-
 	EMLTemplateDispatchDone () {
 		mod._ValueFormVisible = false;
 	},
@@ -457,7 +453,6 @@ import OLSKApropos from 'OLSKApropos';
 			EMLTrackMasterListItems={ mod._ValueJournalsAll }
 			EMLTrackMasterDispatchCreate={ mod.EMLTrackMasterDispatchCreate }
 			EMLTrackMasterDispatchSelect={ mod.EMLTrackMasterDispatchSelect }
-			EMLTrackMasterDispatchImportData={ mod.EMLTrackMasterDispatchImportData }
 			bind:this={ mod._EMLTrackMaster }
 			/>
 	{/if}
