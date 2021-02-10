@@ -6,10 +6,6 @@ Object.entries({
 	EMLVitrineCrown: '.EMLVitrineCrown',
 	EMLVitrineCrownIcon: '.EMLVitrineCrownIcon',
 	EMLVitrineCrownName: '.EMLVitrineCrownName',
-	EMLVitrineCrownBlurb: '.EMLVitrineCrownBlurb',
-
-	EMLVitrineContent: '.EMLVitrineContent',
-	EMLVitrineContentAppButton: '.EMLVitrineContentAppButton',
 
 	EMLVitrineFeaturesHeading: '.EMLVitrineFeaturesHeading',
 
@@ -45,20 +41,8 @@ describe('EMLVitrine_Access', function () {
 		browser.assert.elements(EMLVitrineCrownName, 1);
 	});
 
-	it('shows EMLVitrineCrownBlurb', function () {
-		browser.assert.elements(EMLVitrineCrownBlurb, 1);
-	});
-	
-	it('shows OLSKCommonWhatIsIt', function() {
-		browser.assert.elements('.OLSKCommonWhatIsIt', 1);
-	});
-
-	it('shows EMLVitrineContent', function() {
-		browser.assert.elements(EMLVitrineContent, 1);
-	});
-
-	it('shows EMLVitrineContentAppButton', function() {
-		browser.assert.elements(EMLVitrineContentAppButton, 1);
+	it('shows OLSKLanding', function() {
+		browser.assert.elements('.OLSKLanding', 1);
 	});
 
 	it('shows EMLVitrineFeaturesHeading', function () {

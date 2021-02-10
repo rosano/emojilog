@@ -26,33 +26,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(EMLVitrineCrownName, uLocalized('EMLVitrineTitle'));
 		});
 
-		it('localizes EMLVitrineCrownBlurb', function () {
-			browser.assert.text(EMLVitrineCrownBlurb, uLocalized('EMLVitrineDescription'));
-		});
-
-		it('localizes OLSKCommonWhatIsIt', function () {
-			browser.assert.text('.OLSKCommonWhatIsIt', uLocalized('OLSKCommonWhatIsItText'));
-		});
-
-		it('localizes EMLVitrineContent', function() {
-			const item = require('OLSKString').OLSKStringReplaceTokens(require('fs').readFileSync(require('path').join(__dirname, `text.${ OLSKRoutingLanguage }.md`), 'utf-8'), {
-				'\\*': '',
-				'\n\n': '\n',
-				'EMLVitrineDescription': uLocalized('EMLVitrineDescription'),
-			});
-			browser.assert.OLSKTextContent(EMLVitrineContent, item.slice(0, 20), function (inputData) {
-				return inputData.slice(0, 20);
-			});
-		});
-
-		it('localizes EML_SHARED_GITHUB_URL', function() {
-			browser.assert.element(`a[href="${ process.env.EML_SHARED_GITHUB_URL }"]`);
-		});
-
-		it('localizes EMLVitrineContentAppButton', function () {
-			browser.assert.text(EMLVitrineContentAppButton, uLocalized('OLSKWordingOpenApp'));
-		});
-
 		it('localizes EMLVitrineFeaturesHeading', function () {
 			browser.assert.text(EMLVitrineFeaturesHeading, uLocalized('OLSKWordingFeatures'));
 		});
@@ -65,21 +38,22 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(EMLVitrineSupportBlurb, uLocalized('OLSKWordingFeedbackBlurb'));
 		});
 
-		context('EMLVitrineContentAppButton', function test_EMLVitrineContentAppButton () {
+		context('OLSKLanding', function test_OLSKLanding () {
 
-			it('classes OLSKDecorPress', function () {
-				browser.assert.hasClass(EMLVitrineContentAppButton, 'OLSKDecorPress');
+			it('localizes OLSKLandingHeadingText', function () {
+				browser.assert.text('.OLSKLandingHeading', uLocalized('EMLVitrineDescription'));
 			});
-			
-			it('classes OLSKDecorPressCall', function () {
-				browser.assert.hasClass(EMLVitrineContentAppButton, 'OLSKDecorPressCall');
+
+			it('localizes OLSKLandingBlurbText', function () {
+				browser.assert.text('.OLSKLandingBlurb', uLocalized('OLSKLandingBlurbText'));
 			});
-			
-			it('sets href', function () {
-				browser.assert.attribute(EMLVitrineContentAppButton, 'href', OLSKTestingCanonical(require('../open-track/controller.js').OLSKControllerRoutes().shift()));
+
+			it('localizes OLSKLandingActionText', function () {
+				browser.assert.text('.OLSKLandingAction', uLocalized('OLSKWordingOpenApp'));
 			});
 		
 		});
+
 
 	});
 

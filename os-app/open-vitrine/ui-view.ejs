@@ -13,31 +13,29 @@ locals.OLSKPagePublicConstants = {
 };
 %>
 
-<div class="EMLVitrine OLSKDecor OLSKDecorCapped">
+<div class="EMLVitrine OLSKDecor OLSKDecorCapped">	
 
-<%- include('../_shared/__external/OLSKLanguageSwitcher/main.ejs') %>
+<div class="OLSKToolbar OLSKToolbarJustify OLSKMobileViewHeader OLSKCommonEdgeBottom OLSKStickyHeader">
+	<div class="EMLVitrineCrown OLSKCommonCard OLSKCommonCrownCardMini">
+		<img class="EMLVitrineCrownIcon" src="/_shared/EMLRootLink/ui-assets/identity.svg" role="presentation" />
+		<section>
+			<span class="EMLVitrineCrownName"><%= OLSKLocalized('EMLVitrineTitle') %></span>
+		</section>
+	</div>
 
-<hr role="presentation" />
-
-<div class="EMLVitrineCrown OLSKCommonCard OLSKCommonCrownCard">
-	<img class="EMLVitrineCrownIcon" src="/_shared/EMLRootLink/ui-assets/identity.svg" role="presentation" />
-	<section>
-		<span class="EMLVitrineCrownName"><%= OLSKLocalized('EMLVitrineTitle') %></span>
-		<span class="EMLVitrineCrownBlurb"><%= OLSKLocalized('EMLVitrineDescription') %></span>
-	</section>
+	<%- include('../_shared/__external/OLSKLanguageSwitcher/main.ejs') %>
 </div>
 
-<p class="OLSKCommonWhatIsIt"><%= OLSKLocalized('OLSKCommonWhatIsItText') %></p>
-
-<article class="EMLVitrineContent">
-
-<%- OLSKStringReplaceTokens(EMLVitrineContent, {}) %>
+<%- include('../../node_modules/OLSKLanding/main.ejs', {
+	OLSKLandingHeadingText: OLSKLocalized('EMLVitrineDescription'),
+	OLSKLandingBlurbText: OLSKLocalized('OLSKLandingBlurbText'),
+	OLSKLandingActionText: OLSKLocalized('OLSKWordingOpenApp'),
+	OLSKLandingActionHref: OLSKCanonical('EMLTrackRoute'),
+}) %>
 
 <h1 class="EMLVitrineFeaturesHeading"><%= OLSKLocalized('OLSKWordingFeatures') %></h1>
 
 <%- include('../../node_modules/OLSKAppFeatureList/main.ejs').replace(/node_modules/g, '_shared/__external') %>
-
-</article>
 
 <h1 class="EMLVitrineSupportHeading"><%= OLSKLocalized('OLSKWordingFeedbackHeading') %></h1>
 <p class="EMLVitrineSupportBlurb"><%= OLSKLocalized('OLSKWordingFeedbackBlurb') %></p>
