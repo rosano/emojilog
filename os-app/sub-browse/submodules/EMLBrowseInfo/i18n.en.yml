@@ -2,4 +2,6 @@ EMLBrowseInfoToolbarBackButtonText: Back
 EMLBrowseInfoToolbarDiscardButtonText: Discard
 EMLBrowseInfoDiscardConfirmText: Are you sure?
 EMLBrowseInfoFormNotesFieldText: Notes
+EMLBrowseInfoFormDateButtonText: Edit time
+EMLBrowseInfoFormDateSaveButtonText: Save
 EMLBrowseInfoLauncherItemDebugText: Debug memo

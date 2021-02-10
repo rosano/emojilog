@@ -211,6 +211,123 @@ describe('EMLBrowseInfo_Misc', function () {
 
 	});
 
+	describe('EMLBrowseInfoFormDateField', function test_EMLBrowseInfoFormDateField() {
+
+		const EMLMemoEventDate = new Date();
+		const item = StubMemoObjectValid({
+			EMLMemoEventDate,
+		});
+
+		before(function () {
+			return browser.OLSKVisit(kDefaultRoute, {
+				EMLBrowseInfoItem: JSON.stringify(item),
+			});
+		});
+
+		before(function () {
+			return browser.pressButton(EMLBrowseInfoFormDateButton);
+		});
+
+		it('sets type', function () {
+			browser.assert.attribute(EMLBrowseInfoFormDateField, 'type', 'text');
+		});
+
+		it('sets autofocus', function () {
+			browser.assert.attribute(EMLBrowseInfoFormDateField, 'autofocus', '');
+		});
+
+		it('binds EMLMemoEventDate', function () {
+			browser.assert.input(EMLBrowseInfoFormDateField, EMLMemoEventDate.toJSON());
+		});
+
+		context('save not valid', function () {
+
+			before(function () {
+				browser.fill(EMLBrowseInfoFormDateField, 'alfa');
+			});
+
+			before(function () {
+				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(item));
+			});
+
+			before(function () {
+				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '0');
+			});
+
+			before(function () {
+				return browser.pressButton(EMLBrowseInfoFormDateSaveButton);
+			});
+
+			it('updates no EMLBrowseInfoItem', function () {
+				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(item));
+			});
+
+			it('sends no EMLBrowseInfoDispatchUpdate', function () {
+				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '0');
+			});
+
+		});
+
+		context('save valid', function () {
+
+			const EMLMemoEventDate = new Date(Math.random() * 1000 * 1000 * 1000);
+
+			before(function () {
+				return browser.pressButton(EMLBrowseInfoFormDateButton);
+			});
+
+			before(function () {
+				browser.fill(EMLBrowseInfoFormDateField, EMLMemoEventDate.toJSON());
+			});
+
+			before(function () {
+				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(item));
+			});
+
+			before(function () {
+				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '0');
+			});
+
+			before(function () {
+				return browser.pressButton(EMLBrowseInfoFormDateSaveButton);
+			});
+
+			it('updates EMLBrowseInfoItem', function () {
+				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(Object.assign(item, {
+					EMLMemoEventDate,
+				})));
+			});
+
+			it('sends EMLBrowseInfoDispatchUpdate', function () {
+				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '1');
+			});
+
+		});
+
+		context('submit', function () {
+
+			const EMLMemoEventDate = new Date(Math.random() * 1000 * 1000 * 1000);
+
+			before(function () {
+				return browser.pressButton(EMLBrowseInfoFormDateButton);
+			});
+
+			before(function () {
+				browser.fill(EMLBrowseInfoFormDateField, EMLMemoEventDate.toJSON());
+			});
+
+			before(function () {
+				return browser.fire(EMLBrowseInfoFormDateForm, 'submit');
+			});
+
+			it('sends EMLBrowseInfoDispatchUpdate', function () {
+				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '2');
+			});
+
+		});
+
+	});
+
 	describe('EMLBrowseInfoLauncherItemDebug', function test_EMLBrowseInfoLauncherItemDebug() {
 
 		before(function () {

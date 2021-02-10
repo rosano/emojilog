@@ -13,7 +13,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			before(function () {
 				return browser.OLSKVisit(kDefaultRoute, {
 					OLSKRoutingLanguage,
-					EMLBrowseInfoItem: JSON.stringify({}),
+					EMLBrowseInfoItem: JSON.stringify(StubMemoObjectValid()),
 				});
 			});
 
@@ -29,6 +29,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				browser.assert.attribute(EMLBrowseInfoFormNotesField, 'placeholder', uLocalized('EMLBrowseInfoFormNotesFieldText'));
 			});
 
+			it('localizes EMLBrowseInfoFormDateButton', function () {
+				browser.assert.text(EMLBrowseInfoFormDateButton, uLocalized('EMLBrowseInfoFormDateButtonText'));
+			});
+
 			it('localizes EMLBrowseInfoLauncherItemDebug', function () {
 				return browser.assert.OLSKLauncherItemText('EMLBrowseInfoLauncherItemDebug', uLocalized('EMLBrowseInfoLauncherItemDebugText'));
 			});
@@ -39,6 +43,18 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 					browser.assert.OLSKConfirmQuestion(function () {
 						return browser.pressButton(EMLBrowseInfoToolbarDiscardButton);
 					}, uLocalized('EMLBrowseInfoDiscardConfirmText'));
+				});
+			
+			});
+
+			context('EMLBrowseInfoFormDateButton', function test_EMLBrowseInfoFormDateButton () {
+
+				before(function () {
+					return browser.pressButton(EMLBrowseInfoFormDateButton);
+				});
+
+				it('localizes EMLBrowseInfoFormDateSaveButton', function () {
+					browser.assert.text(EMLBrowseInfoFormDateSaveButton, uLocalized('EMLBrowseInfoFormDateSaveButtonText'));
 				});
 			
 			});

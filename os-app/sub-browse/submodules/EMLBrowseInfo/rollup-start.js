@@ -1,8 +1,14 @@
 import RollupStart from './main.svelte';
 
+import OLSKRemoteStorage from 'OLSKRemoteStorage';
+
 const params = Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
 	if (['EMLBrowseInfoItem'].includes(e[0])) {
 		e[1] = JSON.parse(e[1]);
+	}
+
+	if (['EMLBrowseInfoItem'].includes(e[0])) {
+		e[1] = OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(e[1]);
 	}
 
 	return e;

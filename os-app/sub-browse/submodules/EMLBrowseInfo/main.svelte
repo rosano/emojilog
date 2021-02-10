@@ -20,6 +20,10 @@ import { OLSK_SPEC_UI } from 'OLSKSpec';
 
 const mod = {
 
+	// VALUE
+
+	_ValueDateFieldIsVisible: false,
+
 	// DATA
 
 	DataBrowseInfoRecipes () {
@@ -43,6 +47,38 @@ const mod = {
 		}
 		
 		return items;
+	},
+
+	// INTERFACE
+
+	InterfaceDateButtonDidClick () {
+		mod._ValueDateFieldIsVisible = true;
+	},
+
+	InterfaceDateFieldDidInput (event) {
+		mod._ValueDateNext = event.target.value;
+	},
+
+	InterfaceDateFormDidSubmit (event) {
+		event.preventDefault();
+
+		if (!mod._ValueDateFieldIsVisible) {
+			return;
+		};
+		
+		mod._ValueDateFieldIsVisible = false;
+
+		const EMLMemoEventDate = new Date(mod._ValueDateNext);
+
+		if (Number.isNaN(EMLMemoEventDate.getTime())) {
+			return;
+		}
+
+		Object.assign(EMLBrowseInfoItem, {
+			EMLMemoEventDate,
+		});
+
+		EMLBrowseInfoDispatchUpdate();		
 	},
 
 	// MESSAGE
@@ -89,6 +125,20 @@ import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 </p>
 
 <hr role="presentation" />
+
+<p>
+	{#if !mod._ValueDateFieldIsVisible }
+		<button class="EMLBrowseInfoFormDateButton" on:click={ mod.InterfaceDateButtonDidClick }>{ OLSKLocalized('EMLBrowseInfoFormDateButtonText') }</button>
+	{/if}
+
+	{#if mod._ValueDateFieldIsVisible }
+		<form class="EMLBrowseInfoFormDateForm" on:submit={ mod.InterfaceDateFormDidSubmit }>
+			<input class="EMLBrowseInfoFormDateField" type="text" value={ EMLBrowseInfoItem.EMLMemoEventDate.toJSON() } on:input={ mod.InterfaceDateFieldDidInput } autofocus />
+
+			<button class="EMLBrowseInfoFormDateSaveButton">{ OLSKLocalized('EMLBrowseInfoFormDateSaveButtonText') }</button>
+		</form>
+	{/if}
+</p>
 
 </div>
 {/if}

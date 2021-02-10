@@ -12,6 +12,11 @@ Object.entries({
 	EMLBrowseInfoForm: '.EMLBrowseInfoForm',
 
 	EMLBrowseInfoFormNotesField: '.EMLBrowseInfoFormNotesField',
+
+	EMLBrowseInfoFormDateButton: '.EMLBrowseInfoFormDateButton',
+	EMLBrowseInfoFormDateForm: '.EMLBrowseInfoFormDateForm',
+	EMLBrowseInfoFormDateField: '.EMLBrowseInfoFormDateField',
+	EMLBrowseInfoFormDateSaveButton: '.EMLBrowseInfoFormDateSaveButton',
 }).map(function (e) {
 	return global[e.shift()] = e.pop();
 });
@@ -48,7 +53,7 @@ describe('EMLBrowseInfo_Access', function () {
 
 		before(function () {
 			return browser.OLSKVisit(kDefaultRoute, {
-				EMLBrowseInfoItem: JSON.stringify({}),
+				EMLBrowseInfoItem: JSON.stringify(StubMemoObjectValid()),
 			});
 		});
 
@@ -84,8 +89,72 @@ describe('EMLBrowseInfo_Access', function () {
 			browser.assert.elements(EMLBrowseInfoFormNotesField, 1);
 		});
 
+		it('shows EMLBrowseInfoFormDateButton', function () {
+			browser.assert.elements(EMLBrowseInfoFormDateButton, 1);
+		});
+
+		it('hides EMLBrowseInfoFormDateForm', function () {
+			browser.assert.elements(EMLBrowseInfoFormDateForm, 0);
+		});
+
+		it('hides EMLBrowseInfoFormDateField', function () {
+			browser.assert.elements(EMLBrowseInfoFormDateField, 0);
+		});
+
+		it('hides EMLBrowseInfoFormDateSaveButton', function () {
+			browser.assert.elements(EMLBrowseInfoFormDateSaveButton, 0);
+		});
+
 		it('shows EMLBrowseInfoLauncherItemDebug', function () {
 			return browser.assert.OLSKLauncherItems('EMLBrowseInfoLauncherItemDebug', 1);
+		});
+
+		context('EMLBrowseInfoFormDateButton', function test_EMLBrowseInfoFormDateButton () {
+
+			before(function () {
+				return browser.pressButton(EMLBrowseInfoFormDateButton);
+			});
+
+			it('shows EMLBrowseInfoFormDateForm', function () {
+				browser.assert.elements(EMLBrowseInfoFormDateForm, 1);
+			});
+
+			it('hides EMLBrowseInfoFormDateButton', function () {
+				browser.assert.elements(EMLBrowseInfoFormDateButton, 0);
+			});
+
+			it('shows EMLBrowseInfoFormDateField', function () {
+				browser.assert.elements(EMLBrowseInfoFormDateField, 1);
+			});
+
+			it('shows EMLBrowseInfoFormDateSaveButton', function () {
+				browser.assert.elements(EMLBrowseInfoFormDateSaveButton, 1);
+			});
+		
+		});
+
+		context('EMLBrowseInfoFormDateSaveButton', function test_EMLBrowseInfoFormDateSaveButton () {
+
+			before(function () {
+				return browser.pressButton(EMLBrowseInfoFormDateSaveButton);
+			});
+
+			it('hides EMLBrowseInfoFormDateForm', function () {
+				browser.assert.elements(EMLBrowseInfoFormDateForm, 0);
+			});
+
+			it('shows EMLBrowseInfoFormDateButton', function () {
+				browser.assert.elements(EMLBrowseInfoFormDateButton, 1);
+			});
+
+			it('hides EMLBrowseInfoFormDateField', function () {
+				browser.assert.elements(EMLBrowseInfoFormDateField, 0);
+			});
+
+			it('hides EMLBrowseInfoFormDateSaveButton', function () {
+				browser.assert.elements(EMLBrowseInfoFormDateSaveButton, 0);
+			});
+		
 		});
 
 	});
