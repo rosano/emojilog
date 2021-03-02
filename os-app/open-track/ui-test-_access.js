@@ -50,6 +50,14 @@ describe('EMLTrack_Access', function () {
 		browser.assert.elements('.OLSKAppToolbarLauncherButton', 1);
 	});
 
+	it('shows EMLTrackLauncherItemImportJSON', function () {
+		return browser.assert.OLSKLauncherItems('EMLTrackLauncherItemImportJSON', 1);
+	});
+
+	it('shows EMLTrackLauncherItemExportJSON', function () {
+		return browser.assert.OLSKLauncherItems('EMLTrackLauncherItemExportJSON', 1);
+	});
+
 	it('shows OLSKRemoteStorageLauncherFakeItemProxy', function () {
 		return browser.assert.OLSKLauncherItems('OLSKRemoteStorageLauncherFakeItemProxy', 1);
 	});
@@ -64,14 +72,6 @@ describe('EMLTrack_Access', function () {
 
 	it('hides EMLBrowseLauncherFakeItemProxy', function () {
 		return browser.assert.OLSKLauncherItems('EMLBrowseLauncherFakeItemProxy', 0);
-	});
-
-	it('shows EMLTrackLauncherItemImportJSON', function () {
-		return browser.assert.OLSKLauncherItems('EMLTrackLauncherItemImportJSON', 1);
-	});
-
-	it('shows EMLTrackLauncherItemExportJSON', function () {
-		return browser.assert.OLSKLauncherItems('EMLTrackLauncherItemExportJSON', 1);
 	});
 
 	describe('tongue', function test_tongue() {

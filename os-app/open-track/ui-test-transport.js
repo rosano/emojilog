@@ -8,7 +8,7 @@ describe('EMLTrack_Transport', function () {
 
 	const json = [];
 
-	describe('ImportJSON', function test_ImportJSON() {
+	describe('EMLTrackLauncherItemImportJSON', function test_EMLTrackLauncherItemImportJSON() {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);
@@ -59,7 +59,7 @@ describe('EMLTrack_Transport', function () {
 
 	});
 
-	describe('ExportJSON', function test_ExportJSON() {
+	describe('EMLTrackLauncherItemExportJSON', function test_EMLTrackLauncherItemExportJSON() {
 
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarLauncherButton');

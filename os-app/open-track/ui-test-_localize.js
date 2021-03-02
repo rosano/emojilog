@@ -28,7 +28,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			return browser.assert.OLSKLauncherItemText('EMLTrackLauncherItemExportJSON', uLocalized('EMLTrackLauncherItemExportJSONText'));
 		});
 
-		describe('KVCWriteLauncherItemImportJSON', function test_KVCWriteLauncherItemImportJSON() {
+		describe('EMLTrackLauncherItemImportJSON', function test_EMLTrackLauncherItemImportJSON() {
 
 			context('not filled', function () {
 				
