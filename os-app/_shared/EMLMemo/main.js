@@ -17,7 +17,7 @@ const mod = {
 			errors.EMLMemoID = [
 				'EMLErrorNotString',
 			];
-		} else if (inputData.EMLMemoID.trim() === '') {
+		} else if (!inputData.EMLMemoID.trim()) {
 			errors.EMLMemoID = [
 				'EMLErrorNotFilled',
 			];
@@ -27,7 +27,7 @@ const mod = {
 			errors.EMLMemoJournalID = [
 				'EMLErrorNotString',
 			];
-		} else if (inputData.EMLMemoJournalID.trim() === '') {
+		} else if (!inputData.EMLMemoJournalID.trim()) {
 			errors.EMLMemoJournalID = [
 				'EMLErrorNotFilled',
 			];
