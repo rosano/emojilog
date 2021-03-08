@@ -45,7 +45,7 @@ describe('EMLTrack_Misc', function () {
 	describe('EMLTrackStorageToolbar', function test_EMLTrackStorageToolbar () {
 		
 		before(function () {
-			return browser.pressButton('.OLSKAppToolbarStorageButton');
+			return browser.pressButton('.OLSKAppToolbarCloudButton');
 		});
 		
 		it('classes OLSKToolbar', function () {
