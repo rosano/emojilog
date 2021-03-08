@@ -126,7 +126,16 @@ const mod = {
 					LCHRecipeCallback: async function EMLTrackLauncherItemDebug_AlertFakeExportSerialized () {
 						return window.alert(JSON.stringify({
 							OLSKDownloadName: mod.DataExportJSONFilename(),
-							OLSKDownloadData: await mod.DataExportJSON(),
+							OLSKDownloadData: await mod.DataExportJSON(mod._ValueJournalsAll),
+						}));
+					},
+				},
+				{
+					LCHRecipeName: 'EMLTrackLauncherItemDebug_AlertFakeExportSelectedSerialized',
+					LCHRecipeCallback: async function EMLTrackLauncherItemDebug_AlertFakeExportSelectedSerialized () {
+						return window.alert(JSON.stringify({
+							OLSKDownloadName: mod.DataExportJSONFilename(),
+							OLSKDownloadData: await mod.DataExportJSON([mod._ValueJournalSelected]),
 						}));
 					},
 				},

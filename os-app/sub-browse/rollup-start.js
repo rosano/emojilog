@@ -37,6 +37,7 @@ import zerodatawrap from 'zerodatawrap';
 				window.TestEMLBrowseListDispatchTouchData.innerHTML = inputData.toJSON().slice(0, 13);
 			}),
 			EMLBrowseJournalMemos: [],
+			EMLBrowse_DEBUG: true,
 		}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e, index, coll) {
 			if (['EMLBrowseJournalSelected', 'EMLBrowseItemSelected'].includes(e[0])) {
 				e[1] = JSON.parse(e[1]);

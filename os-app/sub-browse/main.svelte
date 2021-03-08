@@ -8,6 +8,7 @@ export let EMLBrowseListDispatchForm;
 export let EMLBrowseListDispatchClose;
 export let EMLBrowseListDispatchExport;
 export let EMLBrowseListDispatchTouch;
+export let EMLBrowse_DEBUG = false;
 
 export const modPublic = {
 
@@ -356,6 +357,6 @@ import EMLBrowseInfo from './submodules/EMLBrowseInfo/main.svelte';
 	bind:this={ mod._EMLBrowseInfo }
 	/>
 
-{#if OLSK_SPEC_UI() && EMLBrowseStorageClient.FakeStorageClient }
+{#if OLSK_SPEC_UI() && EMLBrowse_DEBUG }
 	 <button class="OLSKAppToolbarLauncherButton" on:click={ mod._OLSKAppToolbarDispatchLauncher }></button>
 {/if}
