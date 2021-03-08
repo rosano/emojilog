@@ -83,7 +83,7 @@ const mod = {
 				LCHRecipeSignature: 'EMLTrackLauncherItemExportJSON',
 				LCHRecipeName: OLSKLocalized('EMLTrackLauncherItemExportJSONText'),
 				LCHRecipeCallback: async function EMLTrackLauncherItemExportJSON () {
-					return this.api.LCHSaveFile(await mod.DataExportJSON(), mod.DataExportJSONFilename());
+					return this.api.LCHSaveFile(await mod.DataExportJSON(mod._ValueJournalsAll), mod.DataExportJSONFilename());
 				},
 			},
 		];
@@ -111,6 +111,14 @@ const mod = {
 
 		if (mod._EMLBrowse) {
 			items.push(...mod._EMLBrowse.modPublic.EMLBrowseRecipes());
+
+			items.push({
+				LCHRecipeSignature: 'EMLTrackLauncherItemExportSelectedJSON',
+				LCHRecipeName: OLSKLocalized('EMLTrackLauncherItemExportSelectedJSONText'),
+				LCHRecipeCallback: async function EMLTrackLauncherItemExportSelectedJSON () {
+					return this.api.LCHSaveFile(await mod.DataExportJSON(mod._ValueJournalSelected), mod.DataExportJSONFilename());
+				},
+			});
 		}
 
 		if (OLSK_SPEC_UI()) {
@@ -305,10 +313,6 @@ const mod = {
 
 	EMLBrowseListDispatchClose () {
 		mod.ControlJournalSelect(null);
-	},
-	
-	EMLBrowseListDispatchExport () {
-		mod.ControlExportData([mod._ValueJournalSelected]);
 	},
 	
 	EMLBrowseListDispatchTouch (inputData) {
@@ -507,7 +511,6 @@ import OLSKApropos from 'OLSKApropos';
 			EMLBrowseListDispatchCreate={ mod.EMLBrowseListDispatchCreate }
 			EMLBrowseListDispatchForm={ mod.EMLBrowseListDispatchForm }
 			EMLBrowseListDispatchClose={ mod.EMLBrowseListDispatchClose }
-			EMLBrowseListDispatchExport={ mod.EMLBrowseListDispatchExport }
 			EMLBrowseListDispatchTouch={ mod.EMLBrowseListDispatchTouch }
 			bind:this={ mod._EMLBrowse }
 			/>

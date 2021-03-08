@@ -58,6 +58,10 @@ describe('EMLTrack_Access', function () {
 		return browser.assert.OLSKLauncherItems('EMLTrackLauncherItemExportJSON', 1);
 	});
 
+	it('hides EMLTrackLauncherItemExportSelectedJSON', function () {
+		return browser.assert.OLSKLauncherItems('EMLTrackLauncherItemExportSelectedJSON', 0);
+	});
+
 	it('shows ZDRLauncherFakeItemProxy', function () {
 		return browser.assert.OLSKLauncherItems('ZDRLauncherFakeItemProxy', 1);
 	});
@@ -272,6 +276,10 @@ describe('EMLTrack_Access', function () {
 
 		it('shows EMLBrowseList', function () {
 			browser.assert.elements('.EMLBrowseList', 1);
+		});
+
+		it('shows EMLTrackLauncherItemExportSelectedJSON', function () {
+			return browser.assert.OLSKLauncherItems('EMLTrackLauncherItemExportSelectedJSON', 1);
 		});
 
 		it('shows EMLBrowseLauncherFakeItemProxy', function () {

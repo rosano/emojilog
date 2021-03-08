@@ -6,7 +6,6 @@ export let EMLBrowseJournalMemos;
 export let EMLBrowseListDispatchCreate;
 export let EMLBrowseListDispatchForm;
 export let EMLBrowseListDispatchClose;
-export let EMLBrowseListDispatchExport;
 export let EMLBrowseListDispatchTouch;
 export let EMLBrowse_DEBUG = false;
 
@@ -80,13 +79,7 @@ const mod = {
 	},
 
 	DataBrowseRecipes () {
-		const items = [{
-			LCHRecipeSignature: 'EMLBrowseLauncherItemExport',
-			LCHRecipeName: OLSKLocalized('EMLBrowseLauncherItemExportText'),
-			LCHRecipeCallback: (function EMLBrowseLauncherItemExport () {
-				return EMLBrowseListDispatchExport();
-			}),
-		}];
+		const items = [];
 
 		if (OLSK_SPEC_UI()) {
 			items.push(...[

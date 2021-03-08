@@ -505,22 +505,6 @@ describe('EMLBrowse_Misc', function () {
 
 	});
 
-	describe('EMLBrowseLauncherItemExport', function test_EMLBrowseLauncherItemExport() {
-
-		before(function () {
-			browser.assert.text('#TestEMLBrowseListDispatchExport', '0')
-		});
-
-		before(function () {
-			return browser.OLSKLauncherRun('EMLBrowseLauncherItemExport');
-		});
-
-		it('sends EMLBrowseListDispatchExport', function () {
-			browser.assert.text('#TestEMLBrowseListDispatchExport', '1');
-		});
-
-	});
-
 	describe('EMLBrowseInfoLauncherItemDebug', function test_EMLBrowseInfoLauncherItemDebug() {
 
 		before(function () {

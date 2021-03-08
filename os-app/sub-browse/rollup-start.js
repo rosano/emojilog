@@ -29,9 +29,6 @@ import zerodatawrap from 'zerodatawrap';
 			EMLBrowseListDispatchClose: (function () {
 				window.TestEMLBrowseListDispatchClose.innerHTML = parseInt(window.TestEMLBrowseListDispatchClose.innerHTML) + 1;
 			}),
-			EMLBrowseListDispatchExport: (function () {
-				window.TestEMLBrowseListDispatchExport.innerHTML = parseInt(window.TestEMLBrowseListDispatchExport.innerHTML) + 1;
-			}),
 			EMLBrowseListDispatchTouch: (function (inputData) {
 				window.TestEMLBrowseListDispatchTouch.innerHTML = parseInt(window.TestEMLBrowseListDispatchTouch.innerHTML) + 1;
 				window.TestEMLBrowseListDispatchTouchData.innerHTML = inputData.toJSON().slice(0, 13);

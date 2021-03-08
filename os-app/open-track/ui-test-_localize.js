@@ -150,6 +150,22 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 		});
 
+		context('EMLTrackLauncherItemExportSelectedJSON', function test_EMLTrackLauncherItemExportSelectedJSON () {
+			
+			before(function () {
+				return browser.pressButton('.EMLTrackMasterCreateButton');
+			});
+
+			before(function () {
+				return browser.pressButton('.EMLTemplateToolbarDoneButton');
+			});
+
+			it('localizes EMLTrackLauncherItemExportSelectedJSON', function () {
+				return browser.assert.OLSKLauncherItemText('EMLTrackLauncherItemExportSelectedJSON', uLocalized('EMLTrackLauncherItemExportSelectedJSONText'));
+			});
+		
+		});
+
 	});
 
 });

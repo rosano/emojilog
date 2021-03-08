@@ -92,7 +92,7 @@ describe('EMLTrack_Transport', function () {
 
 	});
 
-	describe('EMLBrowseLauncherItemExport', function test_EMLBrowseLauncherItemExport() {
+	describe('EMLTrackLauncherItemExportSelectedJSON', function test_EMLTrackLauncherItemExportSelectedJSON() {
 
 		const EMLJournalName = Math.random().toString();
 
