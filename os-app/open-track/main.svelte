@@ -450,6 +450,19 @@ const mod = {
 	},
 
 	async SetupValueJournalsAll() {
+		if (zerodatawrap.ZDRPreferenceProtocolMigrate()) {
+			const client = await mod.DataStorageClient(zerodatawrap.ZDRPreferenceProtocolMigrate());
+
+			await Promise.all((await client.App.ZDRStoragePathsRecursive('/')).map(async function (e) {
+				await mod._ValueZDRWrap.App.ZDRStorageWriteObject(e, await client.App.ZDRStorageReadObject(e));
+				await client.App.ZDRStorageDeleteFile(e);
+			}));
+
+			zerodatawrap.ZDRPreferenceProtocolMigrateClear();
+
+			client.ZDRCloudDisconnect();
+		};
+
 		mod.ValueJournalsAll(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalList());
 	},
 
