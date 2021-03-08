@@ -3,6 +3,7 @@ import { OLSKLocalized } from 'OLSKInternational';
 import OLSKThrottle from 'OLSKThrottle';
 import { OLSK_SPEC_UI } from 'OLSKSpec'
 import OLSKRemoteStorage from 'OLSKRemoteStorage';
+import OLSKObject from 'OLSKObject';
 import zerodatawrap from 'zerodatawrap';
 import OLSKServiceWorker from 'OLSKServiceWorker';
 import EMLJournal from '../_shared/EMLJournal/main.js';
@@ -445,6 +446,7 @@ const mod = {
 			ZDRParamDispatchConnected: mod.ZDRParamDispatchConnected,
 			ZDRParamDispatchOnline: mod.ZDRParamDispatchOnline,
 			ZDRParamDispatchOffline: mod.ZDRParamDispatchOffline,
+			_ZDRParamDispatchJSONPreStringify: OLSKObject.OLSKObjectSafeCopy,
 			_ZDRParamDispatchJSONPostParse: OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse,
 		})
 	},
