@@ -30,31 +30,31 @@
 
 		StubJournalObject(inputData) {
 			return Object.assign({
-				EMLJournalName: 'bravo',
+				EMLJournalName: Math.random().toString(),
 			}, inputData);
 		},
 
 		StubJournalObjectValid(inputData) {
 			return StubJournalObject(Object.assign({
-				EMLJournalID: 'alfa',
-				EMLJournalCreationDate: new Date('2019-02-23T13:56:36Z'),
-				EMLJournalModificationDate: new Date('2019-02-23T13:56:36Z'),
+				EMLJournalID: Math.random().toString(),
+				EMLJournalCreationDate: new Date(),
+				EMLJournalModificationDate: new Date(),
 			}, inputData));
 		},
 
 		StubMemoObject(inputData) {
 			return Object.assign({
-				EMLMemoEventDate: new Date('2019-02-23T13:56:36Z'),
-				EMLMemoNotes: '',
+				EMLMemoEventDate: new Date(),
+				EMLMemoNotes: Math.random().toString(),
 			}, inputData);
 		},
 
 		StubMemoObjectValid(inputData) {
 			return StubMemoObject(Object.assign({
-				EMLMemoID: 'charlie',
-				EMLMemoJournalID: 'alfa',
-				EMLMemoCreationDate: new Date('2019-02-23T13:56:36Z'),
-				EMLMemoModificationDate: new Date('2019-02-23T13:56:36Z'),
+				EMLMemoID: Math.random().toString(),
+				EMLMemoJournalID: Math.random().toString(),
+				EMLMemoCreationDate: new Date(),
+				EMLMemoModificationDate: new Date(),
 			}, inputData));
 		},
 
