@@ -73,12 +73,12 @@ describe('EMLBrowse_Misc', function () {
 		it('sends EMLBrowseListDispatchCreate', function () {
 			browser.assert.text('#TestEMLBrowseListDispatchCreate', '1');
 			browser.assert.text('#TestEMLBrowseListDispatchCreateData', JSON.stringify([
+				'EMLMemoEventDate',
+				'EMLMemoNotes',
 				'EMLMemoID',
 				'EMLMemoJournalID',
 				'EMLMemoCreationDate',
 				'EMLMemoModificationDate',
-				'EMLMemoEventDate',
-				'EMLMemoNotes',
 			]));
 		});
 

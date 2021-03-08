@@ -8,7 +8,7 @@
 			ZDRParamLibrary: require('remotestoragejs'),
 			ZDRParamScopes: [{
 				ZDRScopeKey: 'App',
-				ZDRScopeDirectory: 'emojitimer',
+				ZDRScopeDirectory: 'emojilog',
 				ZDRScopeSchemas: [
 					require('./os-app/_shared/EMLJournal/main.js').default,
 					require('./os-app/_shared/EMLMemo/main.js').default,
