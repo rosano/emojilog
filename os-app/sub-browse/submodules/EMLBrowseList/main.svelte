@@ -54,9 +54,11 @@ import EMLBrowseListItem from '../EMLBrowseListItem/main.svelte';
 		</div>
 	</div>
 
-	<EMLBrowseListItem
-		EMLBrowseListItemObject={ item }
-		/>
+	<div slot="OLSKMasterListItem">
+		<EMLBrowseListItem
+			EMLBrowseListItemObject={ item }
+			/>
+	</div>
 </OLSKMasterList>	
 
 <style src="./ui-style.css"></style>

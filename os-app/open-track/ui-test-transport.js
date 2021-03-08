@@ -2,13 +2,11 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('EMLTrack_Transport', function () {	
 
-	const EMLJournalName = Math.random().toString();
-
-	const count = Math.max(1, Date.now() % 10);
-
-	const json = [];
+	const json = {};
 
 	describe('EMLTrackLauncherItemImportJSON', function test_EMLTrackLauncherItemImportJSON() {
+
+		const EMLJournalName = Math.random().toString();
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute);
@@ -26,16 +24,24 @@ describe('EMLTrack_Transport', function () {
 			return browser.OLSKPrompt(function () {
 				return browser.click('.LCHLauncherPipeItem');
 			}, function (dialog) {
-				dialog.response = JSON.stringify([StubJournalObjectValid({
-					EMLJournalName,
-					$EMLJournalMemos: Array.from(Array(count)).map(function (e) {
-						return StubMemoObjectValid({
-							EMLMemoID: Math.random().toString(),
-						});
-					}),
-				})]);
+				const EMLJournalID = Math.random().toString();
 
-				json.push(dialog.response);
+				dialog.response = JSON.stringify({
+					EMLJournal: [StubJournalObjectValid({
+						EMLJournalName,
+						EMLJournalID,
+						$EMLJournalMemos: [StubMemoObjectValid({
+							EMLMemoID: Math.random().toString(),
+							EMLMemoJournalID: EMLJournalID,
+						})],
+					})],
+					EMLSetting: [StubSettingObjectValid({
+						EMLSettingKey: Math.random().toString(),
+						EMLSettingValue: Math.random().toString(),
+					})],
+				});
+
+				Object.assign(json, JSON.parse(dialog.response));
 
 				return dialog;
 			});
@@ -52,7 +58,7 @@ describe('EMLTrack_Transport', function () {
 			});
 			
 			it('creates memo', function () {
-				browser.assert.elements('.EMLBrowseListItem', count);
+				browser.assert.elements('.EMLBrowseListItem', 1);
 			});
 		
 		});
@@ -80,18 +86,18 @@ describe('EMLTrack_Transport', function () {
     		OLSKDownloadData: JSON.parse(response.OLSKDownloadData),
     	}), {
     		OLSKDownloadName: `${ browser.window.location.hostname }-${ date }.json`,
-    		OLSKDownloadData: JSON.parse(json.pop()),
+    		OLSKDownloadData: json,
     	});
     });
 
 	});
 
-	describe('EMLBrowseLauncherItemExport', function test_EMLBrowseLauncherItemExport() {
+	describe('EMLTrackLauncherItemExportSelectedJSON', function test_EMLTrackLauncherItemExportSelectedJSON() {
 
 		const EMLJournalName = Math.random().toString();
 
-		before(function () {
-			return browser.pressButton('.EMLBrowseListToolbarCloseButton');
+		before(function() {
+			return browser.OLSKVisit(kDefaultRoute);
 		});
 
 		before(function () {
@@ -111,7 +117,7 @@ describe('EMLTrack_Transport', function () {
 		});
 
 		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'EMLBrowseLauncherItemExport');
+			return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_AlertFakeExportSelectedSerialized');
 		});
 
 		it('exports file', async function() {
@@ -120,15 +126,18 @@ describe('EMLTrack_Transport', function () {
     	}));
 
     	const date = response.OLSKDownloadName.split('-').pop().split('.').shift();
-    	const item = JSON.parse(response.OLSKDownloadData).pop();
+    	const item = JSON.parse(response.OLSKDownloadData).EMLJournal.shift();
 
     	browser.assert.deepEqual(Object.assign(response, {
     		OLSKDownloadData: JSON.parse(response.OLSKDownloadData),
     	}), {
     		OLSKDownloadName: `${ browser.window.location.hostname }-${ date }.json`,
-    		OLSKDownloadData: [StubJournalObjectValid(Object.assign(item, {
-    			EMLJournalName,
-    		}))],
+    		OLSKDownloadData: {
+    			EMLJournal: [StubJournalObjectValid(Object.assign(item, {
+    				EMLJournalName,
+    			}))],
+	    		EMLSetting: [],
+    		},
     	});
     });
 

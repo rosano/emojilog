@@ -73,12 +73,12 @@ describe('EMLBrowse_Misc', function () {
 		it('sends EMLBrowseListDispatchCreate', function () {
 			browser.assert.text('#TestEMLBrowseListDispatchCreate', '1');
 			browser.assert.text('#TestEMLBrowseListDispatchCreateData', JSON.stringify([
+				'EMLMemoEventDate',
+				'EMLMemoNotes',
 				'EMLMemoID',
 				'EMLMemoJournalID',
 				'EMLMemoCreationDate',
 				'EMLMemoModificationDate',
-				'EMLMemoEventDate',
-				'EMLMemoNotes',
 			]));
 		});
 
@@ -501,22 +501,6 @@ describe('EMLBrowse_Misc', function () {
 
 		it('sends EMLBrowseListDispatchClose', function () {
 			browser.assert.text('#TestEMLBrowseListDispatchClose', '2');
-		});
-
-	});
-
-	describe('EMLBrowseLauncherItemExport', function test_EMLBrowseLauncherItemExport() {
-
-		before(function () {
-			browser.assert.text('#TestEMLBrowseListDispatchExport', '0')
-		});
-
-		before(function () {
-			return browser.OLSKLauncherRun('EMLBrowseLauncherItemExport');
-		});
-
-		it('sends EMLBrowseListDispatchExport', function () {
-			browser.assert.text('#TestEMLBrowseListDispatchExport', '1');
 		});
 
 	});

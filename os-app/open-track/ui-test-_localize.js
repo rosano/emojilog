@@ -93,7 +93,9 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 						return browser.OLSKPrompt(function () {
 							return browser.click('.LCHLauncherPipeItem');
 						}, function (dialog) {
-							dialog.response = JSON.stringify({});
+							dialog.response = JSON.stringify({
+								[Math.random().toString()]: Math.random().toString(),
+							});
 
 							return dialog;
 						});
@@ -146,6 +148,22 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				browser.pressButton('#TestLCHDebugCloseButton');
 			});
 
+		});
+
+		context('EMLTrackLauncherItemExportSelectedJSON', function test_EMLTrackLauncherItemExportSelectedJSON () {
+			
+			before(function () {
+				return browser.pressButton('.EMLTrackMasterCreateButton');
+			});
+
+			before(function () {
+				return browser.pressButton('.EMLTemplateToolbarDoneButton');
+			});
+
+			it('localizes EMLTrackLauncherItemExportSelectedJSON', function () {
+				return browser.assert.OLSKLauncherItemText('EMLTrackLauncherItemExportSelectedJSON', uLocalized('EMLTrackLauncherItemExportSelectedJSONText'));
+			});
+		
 		});
 
 	});
