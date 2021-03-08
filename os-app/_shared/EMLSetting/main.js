@@ -1,6 +1,6 @@
 const mod = {
 
-	EMLSettingModelErrors (inputData, options = {}) {
+	EMLSettingErrors (inputData, options = {}) {
 		if (typeof inputData !== 'object' || inputData === null) {
 			throw new Error('EMLErrorInputNotValid');
 		}
@@ -44,7 +44,7 @@ const mod = {
 
 export default Object.assign(mod, {
 	ZDRSchemaKey: 'EMLSetting',
-	ZDRSchemaDispatchValidate: mod.EMLSettingModelErrors,
+	ZDRSchemaDispatchValidate: mod.EMLSettingErrors,
 	ZDRSchemaPath: mod.EMLSettingPath,
 	ZDRSchemaStub: mod.EMLSettingStub,
 	ZDRSchemaMethods: {

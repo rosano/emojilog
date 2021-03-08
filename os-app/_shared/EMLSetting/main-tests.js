@@ -2,16 +2,16 @@ const { rejects, throws, deepEqual } = require('assert');
 
 const mod = require('./main.js').default;
 
-describe('EMLSettingModelErrors', function test_EMLSettingModelErrors() {
+describe('EMLSettingErrors', function test_EMLSettingErrors() {
 
 	it('throws error if not object', function() {
 		throws(function() {
-			mod.EMLSettingModelErrors(null);
+			mod.EMLSettingErrors(null);
 		}, /EMLErrorInputNotValid/);
 	});
 
 	it('returns object if EMLSettingKey not string', function() {
-		deepEqual(mod.EMLSettingModelErrors(StubSettingObjectValid({
+		deepEqual(mod.EMLSettingErrors(StubSettingObjectValid({
 			EMLSettingKey: null,
 		})), {
 			EMLSettingKey: [
@@ -21,7 +21,7 @@ describe('EMLSettingModelErrors', function test_EMLSettingModelErrors() {
 	});
 
 	it('returns object if EMLSettingKey not filled', function() {
-		deepEqual(mod.EMLSettingModelErrors(StubSettingObjectValid({
+		deepEqual(mod.EMLSettingErrors(StubSettingObjectValid({
 			EMLSettingKey: ' ',
 		})), {
 			EMLSettingKey: [
@@ -31,7 +31,7 @@ describe('EMLSettingModelErrors', function test_EMLSettingModelErrors() {
 	});
 
 	it('returns object if EMLSettingValue not string', function() {
-		deepEqual(mod.EMLSettingModelErrors(StubSettingObjectValid({
+		deepEqual(mod.EMLSettingErrors(StubSettingObjectValid({
 			EMLSettingValue: null,
 		})), {
 			EMLSettingValue: [
@@ -41,7 +41,7 @@ describe('EMLSettingModelErrors', function test_EMLSettingModelErrors() {
 	});
 
 	it('returns null', function() {
-		deepEqual(mod.EMLSettingModelErrors(StubSettingObjectValid()), null);
+		deepEqual(mod.EMLSettingErrors(StubSettingObjectValid()), null);
 	});
 
 });
@@ -93,7 +93,7 @@ describe('EMLSettingList', function test_EMLSettingActList() {
 describe('ZDRSchemaDispatchValidate', function () {
 
 	it('returns function', function () {
-		deepEqual(mod.ZDRSchemaDispatchValidate, mod.EMLSettingModelErrors);
+		deepEqual(mod.ZDRSchemaDispatchValidate, mod.EMLSettingErrors);
 	});
 
 });
