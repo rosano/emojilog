@@ -1,32 +1,3 @@
-const RemoteStorage = require('remotestoragejs');
-
-const EML_Data = require('./os-app/_shared/EML_Data/main.js').default;
-const EMLJournalStorage = require('./os-app/_shared/EMLJournal/storage.js').default;
-const EMLMemoStorage = require('./os-app/_shared/EMLMemo/storage.js').default;
-
-(function EMLMochaStorage() {
-	if (process.env.OLSK_SPEC_MOCHA_INTERFACE === 'true') {
-		return;
-	}
-
-	const storageModule = EML_Data.EML_DataModule([
-		EMLJournalStorage.EMLJournalStorageBuild,
-		EMLMemoStorage.EMLMemoStorageBuild,
-	], {
-		OLSKOptionIncludeDebug: true,
-	});
-
-	before(function() {
-		global.EMLTestingStorageClient = new RemoteStorage({ modules: [ storageModule ] });
-
-		global.EMLTestingStorageClient.access.claim(storageModule.name, 'rw');
-	});
-
-	beforeEach(function() {
-		return global.EMLTestingStorageClient[storageModule.name].__DEBUG.__OLSKRemoteStorageReset();
-	});
-})();
-
 (function EMLMochaWrap() {
 	if (process.env.OLSK_SPEC_MOCHA_INTERFACE === 'true') {
 		return;
