@@ -161,21 +161,21 @@ const mod = {
 		EMLBrowseListDispatchTouch(item.EMLMemoCreationDate);
 	},
 
-	ControlMemoUpdate(param1, param2) {
-		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueMemoUpdateThrottleMap, param1.EMLMemoID, {
+	ControlMemoUpdate(inputData) {
+		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueMemoUpdateThrottleMap, inputData.EMLMemoID, {
 			OLSKThrottleDuration: OLSK_SPEC_UI() ? 0 : 500,
 			OLSKThrottleCallback () {
-				return EMLBrowseStorageClient.App.EMLMemo.EMLMemoUpdate(param1, param2);
+				return EMLBrowseStorageClient.App.EMLMemo.EMLMemoUpdate(inputData);
 			},
 		});
 	},
 
-	async ControlMemoDiscard (param1, param2) {
+	async ControlMemoDiscard (inputData) {
 		mod.ValueMemosAll(mod._ValueMemosAll.filter(function (e) {
-			return e !== param1;
+			return e !== inputData;
 		}), false);
 
-		await EMLBrowseStorageClient.App.EMLMemo.EMLMemoDelete(param1, param2);
+		await EMLBrowseStorageClient.App.EMLMemo.EMLMemoDelete(inputData);
 
 		mod.ControlMemoSelect(null);
 	},
@@ -239,13 +239,13 @@ const mod = {
 	},
 
 	EMLBrowseInfoDispatchDiscard () {
-		mod.ControlMemoDiscard(mod._ValueMemoSelected, EMLBrowseJournalSelected);
+		mod.ControlMemoDiscard(mod._ValueMemoSelected);
 	},
 
 	EMLBrowseInfoDispatchUpdate () {
 		mod._ValueMemoSelected = mod._ValueMemoSelected; // #purge-svelte-force-update
 
-		mod.ControlMemoUpdate(mod._ValueMemoSelected, EMLBrowseJournalSelected);
+		mod.ControlMemoUpdate(mod._ValueMemoSelected);
 	},
 
 	EMLBrowseInfoDispatchDebug (inputData) {
