@@ -58,6 +58,10 @@ describe('EMLTrack_Access', function () {
 		return browser.assert.OLSKLauncherItems('EMLTrackLauncherItemExportJSON', 1);
 	});
 
+	it('shows ZDRLauncherFakeItemProxy', function () {
+		return browser.assert.OLSKLauncherItems('ZDRLauncherFakeItemProxy', 1);
+	});
+
 	it('shows OLSKRemoteStorageLauncherFakeItemProxy', function () {
 		return browser.assert.OLSKLauncherItems('OLSKRemoteStorageLauncherFakeItemProxy', 1);
 	});
@@ -104,8 +108,8 @@ describe('EMLTrack_Access', function () {
 			browser.assert.elements(EMLTrackStorageToolbar, 1);
 		});
 
-		it('shows OLSKStorageWidget', function () {
-			browser.assert.elements('.OLSKStorageWidget', 1);
+		it('shows OLSKCloud', function () {
+			browser.assert.elements('.OLSKCloud', 1);
 		});
 	
 	});

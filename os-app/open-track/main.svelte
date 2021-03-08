@@ -3,14 +3,14 @@ import { OLSKLocalized } from 'OLSKInternational';
 import OLSKThrottle from 'OLSKThrottle';
 import { OLSK_SPEC_UI } from 'OLSKSpec'
 import OLSKRemoteStorage from 'OLSKRemoteStorage';
+import zerodatawrap from 'zerodatawrap';
 import OLSKServiceWorker from 'OLSKServiceWorker';
-import EML_Data from '../_shared/EML_Data/main.js';
-import EMLJournalStorage from '../_shared/EMLJournal/storage.js';
-import EMLJournalAction from '../_shared/EMLJournal/action.js';
+import EMLJournal from '../_shared/EMLJournal/main.js';
+import EMLMemo from '../_shared/EMLMemo/main.js';
+import EMLSetting from '../_shared/EMLSetting/main.js';
+import EMLTransport from '../_shared/EMLTransport/main.js';
 import RemoteStorage from 'remotestoragejs';
 import EMLTrackLogic from './ui-logic.js';
-import EMLMemoStorage from '../_shared/EMLMemo/storage.js';
-import EMLMemoAction from '../_shared/EMLMemo/action.js';
 import OLSKString from 'OLSKString';
 import OLSKLanguageSwitcher from 'OLSKLanguageSwitcher';
 
@@ -39,8 +39,6 @@ const mod = {
 
 	_ValueStorageToolbarHidden: true,
 
-	_ValueFooterStorageStatus: '',
-
 	_ValueSaveThrottleMap: {},
 
 	// DATA
@@ -55,8 +53,11 @@ const mod = {
 		};
 	},
 
-	async DataExportJSON () {
-		return JSON.stringify(await EML_Data.EML_DataExport(mod._ValueOLSKRemoteStorage, mod._ValueJournalsAll));
+	async DataExportJSON (EMLJournal) {
+		return JSON.stringify(await mod._ValueZDRWrap.App.EMLTransport.EMLTransportExport({
+			EMLJournal,
+			EMLSetting: await mod._ValueZDRWrap.App.EMLSetting.EMLSettingList(),
+		}));
 	},
 
 	DataExportBasename () {
@@ -87,13 +88,21 @@ const mod = {
 			},
 		];
 
-		items.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes({
-			ParamWindow: window,
-			ParamStorage: mod._ValueOLSKRemoteStorage,
-			OLSKLocalized: OLSKLocalized,
+		items.push(...zerodatawrap.ZDRRecipes({
 			ParamMod: mod,
 			ParamSpecUI: OLSK_SPEC_UI(),
 		}));
+
+		if (mod._ValueZDRWrap.ZDRStorageProtocol === zerodatawrap.ZDRProtocolRemoteStorage()) {
+			items.push(...OLSKRemoteStorage.OLSKRemoteStorageRecipes({
+				ParamWindow: window,
+				ParamStorage: mod._ValueZDRWrap.ZDRStorageClient(),
+				OLSKLocalized: OLSKLocalized,
+				ParamMod: mod,
+				ParamSpecUI: OLSK_SPEC_UI(),
+			}));
+		}
+
 		items.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_SPEC_UI()));
 
 		if (mod._EMLTrackMaster) {
@@ -117,7 +126,16 @@ const mod = {
 					LCHRecipeCallback: async function EMLTrackLauncherItemDebug_AlertFakeExportSerialized () {
 						return window.alert(JSON.stringify({
 							OLSKDownloadName: mod.DataExportJSONFilename(),
-							OLSKDownloadData: await mod.DataExportJSON(),
+							OLSKDownloadData: await mod.DataExportJSON(mod._ValueJournalsAll),
+						}));
+					},
+				},
+				{
+					LCHRecipeName: 'EMLTrackLauncherItemDebug_AlertFakeExportSelectedSerialized',
+					LCHRecipeCallback: async function EMLTrackLauncherItemDebug_AlertFakeExportSelectedSerialized () {
+						return window.alert(JSON.stringify({
+							OLSKDownloadName: mod.DataExportJSONFilename(),
+							OLSKDownloadData: await mod.DataExportJSON([mod._ValueJournalSelected]),
 						}));
 					},
 				},
@@ -133,7 +151,7 @@ const mod = {
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueSaveThrottleMap, inputData.EMLJournalID, {
 			OLSKThrottleDuration: 500,
 			async OLSKThrottleCallback () {
-				await EMLJournalAction.EMLJournalActionUpdate(mod._ValueOLSKRemoteStorage, inputData);
+				await mod._ValueZDRWrap.App.EMLJournal.EMLJournalUpdate(inputData);
 			},
 		});
 
@@ -143,7 +161,7 @@ const mod = {
 	},
 
 	async ControlJournalCreate() {
-		const item = await EMLJournalAction.EMLJournalActionCreate(mod._ValueOLSKRemoteStorage, {
+		const item = await mod._ValueZDRWrap.App.EMLJournal.EMLJournalCreate({
 			EMLJournalName: '',
 			EMLJournalModificationDate: new Date(),
 		});
@@ -164,7 +182,7 @@ const mod = {
 			return e !== inputData;
 		}))
 
-		await EMLJournalAction.EMLJournalActionDelete(mod._ValueOLSKRemoteStorage, inputData);
+		await mod._ValueZDRWrap.App.EMLJournal.EMLJournalDelete(inputData);
 
 		mod.ControlJournalSelect(null);
 
@@ -177,7 +195,7 @@ const mod = {
 		}
 
 		try {
-			await EML_Data.EML_DataImport(mod._ValueOLSKRemoteStorage, OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
+			await mod._ValueZDRWrap.App.EMLTransport.EMLTransportImport(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
 			await mod.SetupValueJournalsAll();
 		} catch (e) {
 			window.alert(OLSKLocalized('EMLTrackLauncherItemImportJSONErrorNotValidAlertText'));
@@ -190,11 +208,11 @@ const mod = {
 				if (OLSK_SPEC_UI()) {
 					return window.alert(JSON.stringify({
 						OLSKDownloadName: mod.DataExportJSONFilename(),
-						OLSKDownloadData: JSON.stringify(await EML_Data.EML_DataExport(mod._ValueOLSKRemoteStorage, inputData)),
+						OLSKDownloadData: JSON.stringify(await mod.DataExportJSON(inputData)),
 					}));
 				};
 
-				return this.api.LCHSaveFile(JSON.stringify(await EML_Data.EML_DataExport(mod._ValueOLSKRemoteStorage, inputData)), mod.DataExportJSONFilename())
+				return this.api.LCHSaveFile(JSON.stringify(await mod.DataExportJSON(inputData)), mod.DataExportJSONFilename())
 			},
 			LCHRecipeURLFilter: '*',
 		  LCHRecipeIsAutomatic: true,
@@ -260,7 +278,7 @@ const mod = {
 	},
 
 	async EMLTrackMasterDispatchSelect (inputData) {
-		mod.ValueBrowseMemos(await EMLMemoAction.EMLMemoActionList(mod._ValueOLSKRemoteStorage, inputData));
+		mod.ValueBrowseMemos(await mod._ValueZDRWrap.App.EMLMemo.EMLMemoList(inputData));
 		
 		mod.ControlJournalSelect(inputData);
 	},
@@ -329,99 +347,110 @@ const mod = {
 	// 	}), false);
 	// },
 
-	OLSKRemoteStorageLauncherItemFakeFlipConnectedDidFinish () {
-		mod._ValueOLSKRemoteStorage = mod._ValueOLSKRemoteStorage; // #purge-svelte-force-update
+	async OLSKCloudFormDispatchSubmit (inputData) {
+		const protocol = zerodatawrap.ZDRPreferenceProtocolConnect(inputData);
+		(zerodatawrap.ZDRPreferenceProtocolMigrate() ? await mod.DataStorageClient(protocol) : mod._ValueZDRWrap).ZDRCloudConnect(inputData);
+	},
+
+	OLSKCloudDispatchRenew () {
+		mod._ValueZDRWrap.ZDRCloudReconnect(mod._ValueCloudIdentity);
+	},
+
+	OLSKCloudStatusDispatchDisconnect () {
+		mod._ValueZDRWrap.ZDRCloudDisconnect();
+
+		mod._ValueCloudIdentity = null;
+
+		zerodatawrap.ZDRPreferenceProtocolClear();
+	},
+
+	ZDRParamDispatchError (error) {
+		mod._ValueCloudErrorText = error.toString();
+	},
+
+	ZDRParamDispatchConnected (identity, token) {
+		mod._ValueCloudIdentity = identity;
+		mod._ValueCloudToken = token;
+	},
+
+	ZDRParamDispatchOnline () {
+		mod._ValueCloudIsOffline = false;
+	},
+
+	ZDRParamDispatchOffline () {
+		mod._ValueCloudIsOffline = true;
+	},
+
+	ZDRParamDispatchSyncDidStart () {
+		mod._ValueIsSyncing = true;
+	},
+
+	ZDRParamDispatchSyncDidStop () {
+		mod._ValueIsSyncing = false;
+	},
+
+	OLSKCloudStatusDispatchSyncStart () {
+		if (mod._ValueZDRWrap.ZDRStorageProtocol !== zerodatawrap.ZDRProtocolRemoteStorage()) {
+			return;
+		}
+
+		mod._ValueZDRWrap.ZDRStorageClient().startSync();
+
+		mod.ZDRParamDispatchSyncDidStart();
+	},
+
+	OLSKCloudStatusDispatchSyncStop () {
+		if (mod._ValueZDRWrap.ZDRStorageProtocol !== zerodatawrap.ZDRProtocolRemoteStorage()) {
+			return;
+		}
+
+		mod._ValueZDRWrap.ZDRStorageClient().stopSync();
 	},
 
 	// SETUP
 
 	async SetupEverything () {
-		mod.SetupStorageClient();
-
-		mod.SetupStorageStatus();
-
-		await mod.SetupStorageNotifications();
+		await mod.SetupStorageClient();
 
 		await mod.SetupValueJournalsAll();
 
 		mod._ValueIsLoading = false;
 	},
 
-	SetupStorageClient() {
-		const storageModule = EML_Data.EML_DataModule([
-			Object.assign(EMLJournalStorage.EMLJournalStorageBuild, {
-				// OLSKChangeDelegate: {
-				// 	OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateJournal,
-				// 	OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateJournal,
-				// 	OLSKChangeDelegateDelete: mod.OLSKChangeDelegateDeleteJournal,
-				// },
-			}),
-			Object.assign(EMLMemoStorage.EMLMemoStorageBuild, {
-				// OLSKChangeDelegate: {
-				// 	OLSKChangeDelegateCreate: mod.OLSKChangeDelegateCreateMemo,
-				// 	OLSKChangeDelegateUpdate: mod.OLSKChangeDelegateUpdateMemo,
-				// 	OLSKChangeDelegateDelete: mod.OLSKChangeDelegateDeleteMemo,
-				// },
-			}),
-			]);
-		
-		mod._ValueOLSKRemoteStorage = new RemoteStorage({ modules: [ storageModule ] });
+	DataStorageClient (inputData) {
+		return zerodatawrap.ZDRWrap({
+			ZDRParamLibrary: (function() {
+				if (inputData === zerodatawrap.ZDRProtocolFission()) {
+					return webnative;
+				}
 
-		mod._ValueOLSKRemoteStorage.access.claim(storageModule.name, 'rw');
-
-		mod._ValueOLSKRemoteStorage.caching.enable(`/${ storageModule.name }/`);
+				return RemoteStorage;
+			})(),
+			ZDRParamScopes: [{
+				ZDRScopeKey: 'App',
+				ZDRScopeDirectory: 'emojilog',
+				ZDRScopeCreatorDirectory: 'rCreativ',
+				ZDRScopeSchemas: [
+					EMLJournal,
+					EMLMemo,
+					EMLSetting,
+					EMLTransport,
+					],
+			}],
+			ZDRParamDispatchError: mod.ZDRParamDispatchError,
+			ZDRParamDispatchConnected: mod.ZDRParamDispatchConnected,
+			ZDRParamDispatchOnline: mod.ZDRParamDispatchOnline,
+			ZDRParamDispatchOffline: mod.ZDRParamDispatchOffline,
+			_ZDRParamDispatchJSONPostParse: OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse,
+		})
 	},
 
-	SetupStorageStatus () {
-		OLSKRemoteStorage.OLSKRemoteStorageStatus(mod._ValueOLSKRemoteStorage, function (inputData) {
-			mod._ValueFooterStorageStatus = inputData;
-		}, OLSKLocalized)
-	},
-
-	async SetupStorageNotifications () {
-		mod._ValueOLSKRemoteStorage.on('sync-done', () => {
-			if (!OLSK_SPEC_UI()) {
-				console.debug('sync-done', arguments);
-			}
-		});
-
-		let isOffline;
-
-		mod._ValueOLSKRemoteStorage.on('network-offline', () => {
-			if (!OLSK_SPEC_UI()) {
-				console.debug('network-offline', arguments);
-			}
-
-			isOffline = true;
-		});
-
-		mod._ValueOLSKRemoteStorage.on('network-online', () => {
-			if (!OLSK_SPEC_UI()) {
-				console.debug('network-online', arguments);
-			}
-			
-			isOffline = false;
-		});
-
-		mod._ValueOLSKRemoteStorage.on('error', (error) => {
-			if (isOffline && inputData.message === 'Sync failed: Network request failed.') {
-				return;
-			};
-
-			if (!OLSK_SPEC_UI()) {
-				console.debug('error', error);
-			}
-		});
-
-		return new Promise(function (res, rej) {
-			return mod._ValueOLSKRemoteStorage.on('ready', res);
-		});
+	async SetupStorageClient() {
+		mod._ValueZDRWrap = await mod.DataStorageClient(zerodatawrap.ZDRPreferenceProtocol(zerodatawrap.ZDRProtocolRemoteStorage()));
 	},
 
 	async SetupValueJournalsAll() {
-		mod.ValueJournalsAll((await EMLJournalAction.EMLJournalActionList(mod._ValueOLSKRemoteStorage)).filter(function (e) {
-			return typeof e === 'object'; // #patch-remotestorage-true
-		}));
+		mod.ValueJournalsAll(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalList());
 	},
 
 	// LIFECYCLE
@@ -440,7 +469,7 @@ import EMLTemplate from '../sub-template/main.svelte';
 import EMLBrowse from '../sub-browse/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorkerView from '../_shared/__external/OLSKServiceWorker/main.svelte';
-import OLSKStorageWidget from 'OLSKStorageWidget';
+import OLSKCloud from 'OLSKCloud';
 import OLSKModalView from 'OLSKModalView';
 import OLSKApropos from 'OLSKApropos';
 </script>
@@ -459,7 +488,7 @@ import OLSKApropos from 'OLSKApropos';
 
 	{#if mod._ValueJournalSelected && !mod._ValueFormVisible }
 		<EMLBrowse
-			EMLBrowseStorageClient={ mod._ValueOLSKRemoteStorage }
+			EMLBrowseStorageClient={ mod._ValueZDRWrap }
 			EMLBrowseJournalSelected={ mod._ValueJournalSelected }
 			EMLBrowseJournalMemos={ mod._ValueBrowseMemos }
 			EMLBrowseListDispatchCreate={ mod.EMLBrowseListDispatchCreate }
@@ -488,7 +517,16 @@ import OLSKApropos from 'OLSKApropos';
 			</div>
 
 			<div class="OLSKToolbarElementGroup">
-				<OLSKStorageWidget StorageClient={ mod._ValueOLSKRemoteStorage } />
+				<OLSKCloud
+					OLSKCloudErrorText={ mod._ValueCloudErrorText }
+					OLSKCloudDispatchRenew={ mod.OLSKCloudDispatchRenew }
+					OLSKCloudFormDispatchSubmit={ mod.OLSKCloudFormDispatchSubmit }
+					OLSKCloudStatusIdentityText={ mod._ValueCloudIdentity }
+					OLSKCloudStatusIsSyncing={ mod._ValueIsSyncing }
+					OLSKCloudStatusDispatchSyncStart={ mod.OLSKCloudStatusDispatchSyncStart }
+					OLSKCloudStatusDispatchSyncStop={ mod.OLSKCloudStatusDispatchSyncStop }
+					OLSKCloudStatusDispatchDisconnect={ mod.OLSKCloudStatusDispatchDisconnect }
+					/>
 			</div>
 		</div>
 	{/if}
@@ -496,7 +534,9 @@ import OLSKApropos from 'OLSKApropos';
 	<OLSKAppToolbar
 		OLSKAppToolbarDispatchApropos={ mod.OLSKAppToolbarDispatchApropos }
 		OLSKAppToolbarDispatchTongue={ mod.OLSKAppToolbarDispatchTongue }
-		OLSKAppToolbarCloudStatus={ mod._ValueFooterStorageStatus }
+		OLSKAppToolbarCloudConnected={ !!mod._ValueCloudIdentity }
+		OLSKAppToolbarCloudOffline={ mod._ValueCloudIsOffline }
+		OLSKAppToolbarCloudError={ !!mod._ValueCloudErrorText }
 		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
 		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
 		/>

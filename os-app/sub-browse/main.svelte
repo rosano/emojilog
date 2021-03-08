@@ -8,6 +8,7 @@ export let EMLBrowseListDispatchForm;
 export let EMLBrowseListDispatchClose;
 export let EMLBrowseListDispatchExport;
 export let EMLBrowseListDispatchTouch;
+export let EMLBrowse_DEBUG = false;
 
 export const modPublic = {
 
@@ -33,8 +34,7 @@ import { OLSKLocalized } from 'OLSKInternational';
 import { OLSK_SPEC_UI } from 'OLSKSpec';
 import OLSKThrottle from 'OLSKThrottle';
 import EMLBrowseLogic from './ui-logic.js';
-import EMLMemoAction from '../_shared/EMLMemo/action.js';
-import EMLMemoStorage from '../_shared/EMLMemo/storage.js';
+import EMLMemo from '../_shared/EMLMemo/main.js';
 
 const mod = {
 
@@ -150,7 +150,7 @@ const mod = {
 	// CONTROL
 
 	async ControlMemoCreate(inputData) {
-		const item = await EMLMemoAction.EMLMemoActionCreate(EMLBrowseStorageClient, mod.DataMemoObjectTemplate(), inputData);
+		const item = await EMLBrowseStorageClient.App.EMLMemo.EMLMemoCreate(mod.DataMemoObjectTemplate(), inputData);
 
 		mod.ValueMemosAll(mod._ValueMemosAll.concat(item));
 
@@ -165,7 +165,7 @@ const mod = {
 		OLSKThrottle.OLSKThrottleMappedTimeout(mod._ValueMemoUpdateThrottleMap, param1.EMLMemoID, {
 			OLSKThrottleDuration: OLSK_SPEC_UI() ? 0 : 500,
 			OLSKThrottleCallback () {
-				return EMLMemoAction.EMLMemoActionUpdate(EMLBrowseStorageClient, param1, param2);
+				return EMLBrowseStorageClient.App.EMLMemo.EMLMemoUpdate(param1, param2);
 			},
 		});
 	},
@@ -175,7 +175,7 @@ const mod = {
 			return e !== param1;
 		}), false);
 
-		await EMLMemoAction.EMLMemoActionDelete(EMLBrowseStorageClient, param1, param2);
+		await EMLBrowseStorageClient.App.EMLMemo.EMLMemoDelete(param1, param2);
 
 		mod.ControlMemoSelect(null);
 	},
@@ -249,7 +249,7 @@ const mod = {
 	},
 
 	EMLBrowseInfoDispatchDebug (inputData) {
-		const url = `https://inspektor.5apps.com/?path=emojilog%2F${ encodeURIComponent(EMLMemoStorage.EMLMemoStorageFolderPath(inputData, EMLBrowseJournalSelected)) }`;
+		const url = `https://inspektor.5apps.com/?path=emojilog%2F${ encodeURIComponent(EMLMemo.EMLMemoFolderPath(inputData)) }`;
 
 		if (OLSK_SPEC_UI()) {
 			window.FakeWindowOpen = url;
@@ -357,6 +357,6 @@ import EMLBrowseInfo from './submodules/EMLBrowseInfo/main.svelte';
 	bind:this={ mod._EMLBrowseInfo }
 	/>
 
-{#if OLSK_SPEC_UI() && EMLBrowseStorageClient.FakeStorageClient }
+{#if OLSK_SPEC_UI() && EMLBrowse_DEBUG }
 	 <button class="OLSKAppToolbarLauncherButton" on:click={ mod._OLSKAppToolbarDispatchLauncher }></button>
 {/if}
