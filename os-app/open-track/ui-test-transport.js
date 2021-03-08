@@ -31,14 +31,10 @@ describe('EMLTrack_Transport', function () {
 						EMLJournalName,
 						EMLJournalID,
 						$EMLJournalMemos: [StubMemoObjectValid({
-							EMLMemoID: Math.random().toString(),
 							EMLMemoJournalID: EMLJournalID,
 						})],
 					})],
-					EMLSetting: [StubSettingObjectValid({
-						EMLSettingKey: Math.random().toString(),
-						EMLSettingValue: Math.random().toString(),
-					})],
+					EMLSetting: [StubSettingObjectValid()],
 				});
 
 				Object.assign(json, JSON.parse(dialog.response));

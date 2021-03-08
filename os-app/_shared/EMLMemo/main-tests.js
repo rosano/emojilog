@@ -109,11 +109,7 @@ describe('EMLMemoDirectory', function test_EMLMemoDirectory() {
 describe('EMLMemoFolderPath', function test_EMLMemoFolderPath() {
 
 	it('returns string', function() {
-		const item = {
-			EMLMemoID: Math.random().toString(),
-			EMLMemoJournalID: Math.random().toString(),
-			EMLMemoCreationDate: new Date(),
-		};
+		const item = StubMemoObjectValid();
 		deepEqual(mod.EMLMemoFolderPath(item), [
 			EMLJournal.EMLJournalFolderPath({
 				EMLJournalID: item.EMLMemoJournalID,
