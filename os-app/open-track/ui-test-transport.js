@@ -72,7 +72,7 @@ describe('EMLTrack_Transport', function () {
 		});
 
 		it('exports file', async function() {
-			const response = JSON.parse(await browser.OLSKAlertTextAsync(function () {
+			const response = JSON.parse(await browser.OLSKAlertAsync(function () {
     		return browser.click('.LCHLauncherPipeItem');
     	}));
 
@@ -117,7 +117,7 @@ describe('EMLTrack_Transport', function () {
 		});
 
 		it('exports file', async function() {
-			const response = JSON.parse(await browser.OLSKAlertTextAsync(function () {
+			const response = JSON.parse(await browser.OLSKAlertAsync(function () {
     		return browser.click('.LCHLauncherPipeItem');
     	}));
 
