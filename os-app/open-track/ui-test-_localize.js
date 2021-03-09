@@ -89,7 +89,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				});
 
 				it('alerts if not valid', function () {
-					return browser.assert.OLSKAlertText(function () {
+					return browser.assert.OLSKAlertTextAsync(function () {
 						return browser.OLSKPrompt(function () {
 							return browser.click('.LCHLauncherPipeItem');
 						}, function (dialog) {
