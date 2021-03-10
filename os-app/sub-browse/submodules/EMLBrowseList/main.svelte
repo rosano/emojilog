@@ -30,7 +30,7 @@ import EMLBrowseListItem from '../EMLBrowseListItem/main.svelte';
 	OLSKMasterListDispatchArrow={ EMLBrowseListDispatchArrow }
 	OLSKMasterListDispatchFilter={ EMLBrowseListDispatchFilter }
 	let:OLSKResultsListItem={ item }
-	OLSKMasterListItemAccessibilitySummaryFor={ (inputData) => EMLBrowseListLogic.EMLBrowseListItemAccessibilitySummary(inputData, OLSKLocalized) }	
+	OLSKMasterListItemAccessibilitySummaryFunction={ (inputData) => EMLBrowseListLogic.EMLBrowseListItemAccessibilitySummary(inputData, OLSKLocalized) }	
 	OLSKMasterListClass={ 'EMLBrowseList' }
 	OLSKMobileViewInactive={ OLSKMobileViewInactive }
 	>
