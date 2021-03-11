@@ -38,7 +38,7 @@ const mod = {
 		mod._ValueBrowseMemos = inputData;
 	},
 
-	_ValueStorageToolbarHidden: true,
+	_ValueCloudToolbarHidden: true,
 
 	_ValueSaveThrottleMap: {},
 
@@ -269,7 +269,7 @@ const mod = {
 	},
 
 	OLSKAppToolbarDispatchStorage () {
-		mod._ValueStorageToolbarHidden = !mod._ValueStorageToolbarHidden;
+		mod._ValueCloudToolbarHidden = !mod._ValueCloudToolbarHidden;
 	},
 
 	OLSKAppToolbarDispatchLauncher () {
@@ -529,7 +529,7 @@ import OLSKApropos from 'OLSKApropos';
 </div>
 
 <footer class="EMLTrackViewportFooter OLSKMobileViewFooter">
-	{#if !mod._ValueStorageToolbarHidden }
+	{#if !mod._ValueCloudToolbarHidden }
 		<div class="EMLTrackStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeTop OLSKStorageToolbar">
 			<div class="OLSKToolbarElementGroup">
 			</div>
