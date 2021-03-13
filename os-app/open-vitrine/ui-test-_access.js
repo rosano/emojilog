@@ -11,6 +11,8 @@ Object.entries({
 
 	EMLVitrineSupportHeading: '.EMLVitrineSupportHeading',
 	EMLVitrineSupportBlurb: '.EMLVitrineSupportBlurb',
+
+	EMLVitrineGazetteHeading: '.EMLVitrineGazetteHeading',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -59,6 +61,14 @@ describe('EMLVitrine_Access', function () {
 
 	it('shows EMLVitrineSupportBlurb', function () {
 		browser.assert.elements(EMLVitrineSupportBlurb, 1);
+	});
+
+	it('shows EMLVitrineGazetteHeading', function () {
+		browser.assert.elements(EMLVitrineGazetteHeading, 1);
+	});
+
+	it('shows OLSKGazette', function () {
+		browser.assert.elements('.OLSKGazette', 1);
 	});
 
 	it('shows ROCORootLink', function() {

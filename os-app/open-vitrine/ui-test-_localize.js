@@ -38,6 +38,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(EMLVitrineSupportBlurb, uLocalized('OLSKWordingFeedbackBlurb'));
 		});
 
+		it('localizes EMLVitrineGazetteHeading', function () {
+			browser.assert.text(EMLVitrineGazetteHeading, uLocalized('OLSKGazetteHeadingText'));
+		});
+
 		context('OLSKLanding', function test_OLSKLanding () {
 
 			it('localizes OLSKLandingHeadingText', function () {
