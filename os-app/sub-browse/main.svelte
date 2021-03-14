@@ -44,10 +44,6 @@ const mod = {
 
 	// DATA
 
-	DataIsMobile () {
-		return window.innerWidth <= 760;
-	},
-
 	DataMemoObjectTemplate (inputData = {}) {
 		return Object.assign({
 			EMLMemoEventDate: new Date(),
@@ -153,7 +149,7 @@ const mod = {
 	async ControlMemoCreate(inputData) {
 		const item = await EMLBrowseStorageClient.App.EMLMemo.EMLMemoCreate(mod.DataMemoObjectTemplate(), inputData);
 
-		mod.ControlMemoSelect(mod._OLSKCatalog.modPublic.OLSKCatalogInsert(item));
+		mod.ControlMemoActivate(mod._OLSKCatalog.modPublic.OLSKCatalogInsert(item));
 
 		EMLBrowseListDispatchCreate(item);
 		
@@ -170,10 +166,7 @@ const mod = {
 	},
 
 	async ControlMemoDiscard (inputData) {
-		mod._OLSKCatalog.modPublic.OLSKCatalogRemove(inputData);
-		await EMLBrowseStorageClient.App.EMLMemo.EMLMemoDelete(inputData);
-
-		mod.ControlMemoSelect(null);
+		mod._OLSKCatalog.modPublic.OLSKCatalogRemove(await EMLBrowseStorageClient.App.EMLMemo.EMLMemoDelete(inputData));
 	},
 
 	ControlFocusMaster () {
@@ -184,12 +177,8 @@ const mod = {
 		document.querySelector('.EMLBrowseInfoFormNotesField').focus();
 	},
 
-	ControlMemoSelect(inputData) {
+	ControlMemoActivate(inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
-
-		if (!inputData) {
-			return !mod.DataIsMobile() && mod.ControlFocusMaster();
-		}
 
 		mod._OLSKCatalog.modPublic.OLSKCatalogFocusDetail();
 
@@ -207,7 +196,7 @@ const mod = {
 	},
 
 	OLSKCatalogDispatchClick (inputData) {
-		mod.ControlMemoSelect(inputData);
+		mod.ControlMemoActivate(inputData);
 	},
 
 	OLSKCatalogDispatchArrow (inputData) {

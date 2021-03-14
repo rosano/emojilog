@@ -44,10 +44,6 @@ const mod = {
 
 	// DATA
 
-	DataIsMobile () {
-		return window.innerWidth <= 760;
-	},
-
 	DataNavigator () {
 		return navigator.serviceWorker ? navigator : {
 			serviceWorker: {},
