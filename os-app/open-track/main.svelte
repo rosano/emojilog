@@ -123,7 +123,7 @@ const mod = {
 				LCHRecipeSignature: 'EMLTrackLauncherItemExportSelectedJSON',
 				LCHRecipeName: OLSKLocalized('EMLTrackLauncherItemExportSelectedJSONText'),
 				LCHRecipeCallback: async function EMLTrackLauncherItemExportSelectedJSON () {
-					return this.api.LCHSaveFile(await mod.DataExportJSON(mod._ValueJournalSelected), mod.DataExportJSONFilename());
+					return this.api.LCHSaveFile(await mod.DataExportJSON([mod._ValueJournalSelected]), mod.DataExportJSONFilename());
 				},
 			});
 		}
