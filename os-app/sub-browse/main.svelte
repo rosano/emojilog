@@ -362,7 +362,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	</div>
 
 	<div class="OLSKToolbarElementGroup" slot="OLSKMasterListToolbarTail">
-		<button class="EMLBrowseListToolbarFormButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseListToolbarFormButtonText') } on:click={ () => EMLBrowseListDispatchForm() } accesskey="f">
+		<button class="EMLBrowseListToolbarFormButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseListToolbarFormButtonText') } on:click={ EMLBrowseListDispatchForm } accesskey="f">
 			<div class="EMLBrowseListToolbarFormButtonImage">{@html OLSKUIAssets._OLSKSharedEdit }</div>
 		</button>
 

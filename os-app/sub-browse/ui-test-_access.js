@@ -1,30 +1,52 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-Object.entries({}).map(function (e) {
+Object.entries({
+	EMLBrowseListToolbarCloseButton: '.EMLBrowseListToolbarCloseButton',
+	EMLBrowseListToolbarCloseButtonImage: '.EMLBrowseListToolbarCloseButtonImage',
+
+	EMLBrowseListToolbarFormButton: '.EMLBrowseListToolbarFormButton',
+	EMLBrowseListToolbarFormButtonImage: '.EMLBrowseListToolbarFormButtonImage',
+
+	EMLBrowseListToolbarCreateButton: '.EMLBrowseListToolbarCreateButton',
+	EMLBrowseListToolbarCreateButtonImage: '.EMLBrowseListToolbarCreateButtonImage',
+}).map(function (e) {
 	return global[e.shift()] = e.pop();
 });
-
-const kTesting = {
-	StubJournalObjectValid() {
-		return {
-			EMLJournalID: 'alfa',
-			EMLJournalName: '',
-			EMLJournalCreationDate: new Date('2019-02-23T13:56:36Z'),
-			EMLJournalModificationDate: new Date('2019-02-23T13:56:36Z'),
-		};
-	},
-};
 
 describe('EMLBrowse_Access', function () {
 
 	before(function () {
 		return browser.OLSKVisit(kDefaultRoute, {
-			EMLBrowseJournalSelected: JSON.stringify(kTesting.StubJournalObjectValid()),
+			EMLBrowseJournalSelected: JSON.stringify(StubJournalObjectValid()),
 		});
 	});
 
 	it('shows OLSKCatalog', function () {
 		browser.assert.elements('.OLSKCatalog', 1);
+	});
+
+	it('shows EMLBrowseListToolbarCloseButton', function () {
+		browser.assert.elements(EMLBrowseListToolbarCloseButton, 1);
+	});
+
+	it('shows EMLBrowseListToolbarCloseButtonImage', function () {
+		browser.assert.elements(EMLBrowseListToolbarCloseButtonImage, 1);
+	});
+
+	it('shows EMLBrowseListToolbarFormButton', function () {
+		browser.assert.elements(EMLBrowseListToolbarFormButton, 1);
+	});
+
+	it('shows EMLBrowseListToolbarFormButtonImage', function () {
+		browser.assert.elements(EMLBrowseListToolbarFormButtonImage, 1);
+	});
+
+	it('shows EMLBrowseListToolbarCreateButton', function () {
+		browser.assert.elements(EMLBrowseListToolbarCreateButton, 1);
+	});
+
+	it('shows EMLBrowseListToolbarCreateButtonImage', function () {
+		browser.assert.elements(EMLBrowseListToolbarCreateButtonImage, 1);
 	});
 
 	it('hides EMLBrowseListItem', function () {
