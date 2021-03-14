@@ -262,7 +262,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 
 	OLSKCatalogSortFunction={ EMLBrowseLogic.EMLBrowseSortFunction }
 	OLSKCatalogFilterFunction={ EMLBrowseLogic.EMLBrowseFilterFunction }
-	OLSKCatalogExactFunction={ EMLBrowseLogic.EMLBrowseExactFunction }
+	OLSKCatalogMatchIsExact={ EMLBrowseLogic.EMLBrowseMatchIsExact }
 
 	_OLSKCatalogDispatchKey={ mod._OLSKCatalogDispatchKey }
 

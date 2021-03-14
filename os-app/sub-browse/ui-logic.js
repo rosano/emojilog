@@ -28,7 +28,7 @@ const mod = {
 		}).length;
 	},
 
-	EMLBrowseExactFunction (param1, param2) {
+	EMLBrowseMatchIsExact (param1, param2) {
 		if (typeof param2 !== 'string') {
 			throw new Error('EMLErrorInputNotValid');
 		}

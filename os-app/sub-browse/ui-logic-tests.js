@@ -55,30 +55,30 @@ describe('EMLBrowseFilterFunction', function test_EMLBrowseFilterFunction() {
 
 });
 
-describe('EMLBrowseExactFunction', function test_EMLBrowseExactFunction() {
+describe('EMLBrowseMatchIsExact', function test_EMLBrowseMatchIsExact() {
 
 	it('throws error if param2 not string', function() {
 		throws(function() {
-			mod.EMLBrowseExactFunction({}, null);
+			mod.EMLBrowseMatchIsExact({}, null);
 		}, /EMLErrorInputNotValid/);
 	});
 
 	it('returns false if not starting with input', function() {
 		const item = Math.random().toString();
-		deepEqual(mod.EMLBrowseExactFunction({
+		deepEqual(mod.EMLBrowseMatchIsExact({
 			EMLMemoNotes: Math.random().toString() + item,
 		}, item), false);
 	});
 
 	it('returns true', function() {
 		const item = Math.random().toString();
-		deepEqual(mod.EMLBrowseExactFunction({
+		deepEqual(mod.EMLBrowseMatchIsExact({
 			EMLMemoNotes: item + Math.random().toString(),
 		}, item), true);
 	});
 
 	it('matches OLSKStringMatch', function() {
-		deepEqual(mod.EMLBrowseExactFunction({
+		deepEqual(mod.EMLBrowseMatchIsExact({
 			EMLMemoNotes: uRandomElement('alfa', 'álfa'),
 		}, uRandomElement('alf', 'alfa', 'ALF')), true);
 	});
