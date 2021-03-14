@@ -2,54 +2,13 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('EMLBrowseInfo_Misc', function () {
 
-	describe('EMLBrowseInfo', function test_EMLBrowseInfo() {
-
-		before(function () {
-			return browser.OLSKVisit(kDefaultRoute, {
-				EMLBrowseInfoItem: JSON.stringify({}),
-			});
+	before(function () {
+		return browser.OLSKVisit(kDefaultRoute, {
+			EMLBrowseInfoItem: JSON.stringify({}),
 		});
-
-		it('classes OLSKViewportDetail', function () {
-			browser.assert.hasClass(EMLBrowseInfo, 'OLSKViewportDetail');
-		});
-
-		context('OLSKMobileViewInactive', function () {
-
-			before(function () {
-				browser.assert.hasNoClass(EMLBrowseInfo, 'OLSKMobileViewInactive');
-			});
-
-			before(function () {
-				browser.assert.attribute(EMLBrowseInfo, 'aria-hidden', null);
-			});
-
-			before(function () {
-				return browser.OLSKVisit(kDefaultRoute, {
-					EMLBrowseInfoItem: JSON.stringify({}),
-					OLSKMobileViewInactive: true,
-				});
-			});
-
-			it('classes OLSKMobileViewInactive', function () {
-				browser.assert.hasClass(EMLBrowseInfo, 'OLSKMobileViewInactive');
-			});
-
-			it('sets aria-hidden', function () {
-				browser.assert.attribute(EMLBrowseInfo, 'aria-hidden', 'true');
-			});
-
-		});
-
 	});
 
 	describe('EMLBrowseInfoToolbar', function test_EMLBrowseInfoToolbar() {
-
-		before(function () {
-			return browser.OLSKVisit(kDefaultRoute, {
-				EMLBrowseInfoItem: JSON.stringify({}),
-			});
-		});
 
 		it('classes OLSKMobileViewHeader', function () {
 			browser.assert.hasClass(EMLBrowseInfoToolbar, 'OLSKMobileViewHeader');

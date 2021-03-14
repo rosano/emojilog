@@ -53,17 +53,11 @@ const mod = {
 	_ValueMemoSelected: undefined,
 	ValueMemoSelected (inputData) {
 		mod._ValueMemoSelected = inputData;
-
-		if (!inputData) {
-			mod.OLSKMobileViewInactive = false;	
-		}
 	},
 	
 	_ValueFilterText: '',
 
 	_ValueMemoUpdateThrottleMap: {},
-
-	OLSKMobileViewInactive: false,
 
 	// DATA
 

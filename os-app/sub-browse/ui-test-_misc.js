@@ -160,18 +160,6 @@ describe('EMLBrowse_Misc', function () {
 
 	});
 
-	context('back', function test_back() {
-
-		before(function () {
-			return browser.pressButton('.EMLBrowseInfoToolbarBackButton');
-		});
-
-		it('sets EMLBrowseInfoItem', function () {
-			browser.assert.elements('.OLSKDetailPlaceholder', 0);
-		});
-
-	});
-
 	context.skip('tab', function test_tab() {
 
 		context('master focused', function () {
@@ -314,10 +302,6 @@ describe('EMLBrowse_Misc', function () {
 
 		it('sets OLSKResultsListItemSelected', function () {
 			browser.assert.elements('.OLSKResultsListItemSelected', 1);
-		});
-
-		it('classes OLSKMobileViewInactive', function () {
-			browser.assert.hasNoClass('.EMLBrowseInfo', 'OLSKMobileViewInactive');
 		});
 
 		it('sets EMLBrowseInfoItem', function () {
