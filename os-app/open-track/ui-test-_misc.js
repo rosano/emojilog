@@ -87,7 +87,7 @@ describe('EMLTrack_Misc', function () {
 			});
 
 			before(function () {
-				return browser.pressButton('.EMLBrowseListToolbarCloseButton');
+				return browser.pressButton('.EMLBrowseCloseButton');
 			});
 
 			it('classes OLSKDecorButtonNoStyle', function() {

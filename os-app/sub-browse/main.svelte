@@ -39,31 +39,7 @@ const mod = {
 
 	// VALUE
 
-	_ValueMemosAll: EMLBrowseJournalMemos,
-	ValueMemosAll (inputData, shouldSort = true) {
-		mod.ValueMemosVisible(mod._ValueMemosAll = inputData, shouldSort);
-	},
-
-	_ValueMemosVisible: [],
-	ValueMemosVisible (inputData, shouldSort = true) {
-		const items = !mod._ValueFilterText ? inputData : inputData.filter(EMLBrowseLogic.EMLBrowseFilterFunction(mod._ValueFilterText));
-		mod._ValueMemosVisible = shouldSort ? items.sort(EMLBrowseLogic.EMLBrowseSort) : items;
-	},
-	
-	_ValueMemoSelected: undefined,
-	ValueMemoSelected (inputData) {
-		mod._ValueMemoSelected = inputData;
-
-		if (!inputData) {
-			mod.OLSKMobileViewInactive = false;	
-		}
-	},
-	
-	_ValueFilterText: '',
-
 	_ValueMemoUpdateThrottleMap: {},
-
-	OLSKMobileViewInactive: false,
 
 	// DATA
 
@@ -84,12 +60,6 @@ const mod = {
 		if (OLSK_SPEC_UI()) {
 			items.push(...[
 				{
-					LCHRecipeName: 'FakeEscapeWithoutSort',
-					LCHRecipeCallback: function FakeEscapeWithoutSort () {
-						mod.ControlMemoSelect(null);
-					},
-				},
-				{
 					LCHRecipeName: 'EMLBrowseLauncherFakeItemProxy',
 					LCHRecipeCallback: function EMLBrowseLauncherFakeItemProxy () {},
 				},
@@ -105,25 +75,18 @@ const mod = {
 
 	// INTERFACE	
 
+	InterfaceCreateButtonDidClick () {
+		mod.ControlMemoCreate(EMLBrowseJournalSelected);
+	},
+
 	InterfaceWindowDidKeydown (event) {
 		if (document.querySelector('.LCHLauncher')) { // #spec
 			return;
 		}
 
 		const handlerFunctions = {
-			Escape () {
-				if (document.activeElement === document.querySelector('.OLSKMasterListFilterField') && !mod._ValueFilterText) {
-					return EMLBrowseListDispatchClose();
-				}
-
-				mod.ControlFilter('');
-
-				if (!OLSK_SPEC_UI()) {
-					document.querySelector('.OLSKMasterListBody').scrollTo(0, 0);
-				}
-			},
 			Tab () {
-				if (document.activeElement === document.querySelector('.OLSKMasterListFilterField') && mod._ValueMemoSelected) {
+				if (document.activeElement === document.querySelector('.OLSKMasterListFilterField') && mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected()) {
 					mod.ControlFocusDetail();
 
 					return event.preventDefault();
@@ -145,9 +108,7 @@ const mod = {
 	async ControlMemoCreate(inputData) {
 		const item = await EMLBrowseStorageClient.App.EMLMemo.EMLMemoCreate(mod.DataMemoObjectTemplate(), inputData);
 
-		mod.ValueMemosAll(mod._ValueMemosAll.concat(item));
-
-		mod.ControlMemoSelect(item);
+		mod.ControlMemoSelect(mod._OLSKCatalog.modPublic.OLSKCatalogInsert(item));
 
 		EMLBrowseListDispatchCreate(item);
 		
@@ -164,10 +125,7 @@ const mod = {
 	},
 
 	async ControlMemoDiscard (inputData) {
-		mod.ValueMemosAll(mod._ValueMemosAll.filter(function (e) {
-			return e !== inputData;
-		}), false);
-
+		mod._OLSKCatalog.modPublic.OLSKCatalogRemove(inputData);
 		await EMLBrowseStorageClient.App.EMLMemo.EMLMemoDelete(inputData);
 
 		mod.ControlMemoSelect(null);
@@ -182,63 +140,47 @@ const mod = {
 	},
 
 	ControlMemoSelect(inputData) {
-		mod.ValueMemoSelected(inputData);
+		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
 
 		if (!inputData) {
 			return !mod.DataIsMobile() && mod.ControlFocusMaster();
 		}
 
-		mod.OLSKMobileViewInactive = true;
+		mod._OLSKCatalog.modPublic.OLSKCatalogFocusDetail();
 
 		setTimeout(mod.ControlFocusDetail);
-	},
-	
-	ControlFilter(inputData) {
-		mod._ValueFilterText = inputData;
-
-		mod.ValueMemosVisible(mod._ValueMemosAll);
-
-		if (!inputData) {
-			return mod.ControlMemoSelect(null);
-		}
-
-		if (!mod._ValueMemosVisible.length) {
-			return mod.ControlMemoSelect(null);
-		}
-
-		mod.ValueMemoSelected(EMLBrowseLogic.EMLBrowseExactMatchFirst(inputData, mod._ValueMemosVisible).shift());
 	},
 
 	// MESSAGE
 
-	EMLBrowseListDispatchCreate () {
-		mod.ControlMemoCreate(EMLBrowseJournalSelected);
+	OLSKMasterListItemAccessibilitySummaryFunction (inputData) {
+		EMLBrowseLogic.EMLBrowseAccessibilitySummary(inputData, OLSKLocalized);
 	},
 
-	EMLBrowseListDispatchClick (inputData) {
+	_OLSKCatalogDispatchKey (inputData) {
+		return inputData.EMLMemoID;
+	},
+
+	OLSKCatalogDispatchClick (inputData) {
 		mod.ControlMemoSelect(inputData);
 	},
 
-	EMLBrowseListDispatchArrow (inputData) {
-		mod.ValueMemoSelected(inputData);
+	OLSKCatalogDispatchArrow (inputData) {
+		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
 	},
 
-	EMLBrowseListDispatchFilter (inputData) {
-		mod.ControlFilter(inputData);
-	},
+	OLSKCatalogDispatchQuantity (inputData) {},
 
 	EMLBrowseInfoDispatchBack () {
-		mod.OLSKMobileViewInactive = false;
+		mod._OLSKCatalog.modPublic.OLSKCatalogFocusMaster();
 	},
 
 	EMLBrowseInfoDispatchDiscard () {
-		mod.ControlMemoDiscard(mod._ValueMemoSelected);
+		mod.ControlMemoDiscard(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 	},
 
 	EMLBrowseInfoDispatchUpdate () {
-		mod._ValueMemoSelected = mod._ValueMemoSelected; // #purge-svelte-force-update
-
-		mod.ControlMemoUpdate(mod._ValueMemoSelected);
+		mod.ControlMemoUpdate(mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected()));
 	},
 
 	EMLBrowseInfoDispatchDebug (inputData) {
@@ -259,39 +201,15 @@ const mod = {
 	},
 
 	ChangeDelegateCreateMemo (inputData) {
-		mod.ValueMemosAll([inputData].concat(mod._ValueMemosAll), !mod._ValueMemoSelected);
+		mod._OLSKCatalog.modPublic.OLSKCatalogInsert(inputData);
 	},
 
 	ChangeDelegateUpdateMemo (inputData) {
-		if (mod._ValueMemoSelected && mod._ValueMemoSelected.EMLMemoID === inputData.EMLMemoID) {
-			mod.ControlMemoSelect(inputData);
-		}
-
-		mod.ValueMemosAll(mod._ValueMemosAll.map(function (e) {
-			return e.EMLMemoID === inputData.EMLMemoID ? inputData : e;
-		}), !mod._ValueMemoSelected);
+		mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(inputData);
 	},
 
 	ChangeDelegateDeleteMemo (inputData) {
-		if (mod._ValueMemoSelected && (mod._ValueMemoSelected.EMLMemoID === inputData.EMLMemoID)) {
-			mod.ControlMemoSelect(null);
-		}
-
-		mod.ValueMemosAll(mod._ValueMemosAll.filter(function (e) {
-			return e.EMLMemoID !== inputData.EMLMemoID;
-		}), false);
-	},
-
-	// REACT
-
-	ReactMemoSelected () {
-		if (!mod._ValueMemoSelected) {
-			return;
-		}
-
-		mod._ValueMemoSelected = mod._ValueMemosVisible.filter(function (e) {
-			return e.EMLMemoID === mod._ValueMemoSelected.EMLMemoID;
-		}).pop();
+		mod._OLSKCatalog.modPublic.OLSKCatalogRemove(inputData);
 	},
 
 	// SETUP
@@ -302,7 +220,7 @@ const mod = {
 	},
 
 	SetupValueMemosAll() {
-		mod.ValueMemosAll(mod._ValueMemosAll);
+		EMLBrowseJournalMemos.map(mod._OLSKCatalog.modPublic.OLSKCatalogInsert);
 	},
 
 	SetupFocus() {
@@ -322,33 +240,71 @@ const mod = {
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
-import EMLBrowseList from './submodules/EMLBrowseList/main.svelte';
+import OLSKCatalog from 'OLSKCatalog';
+import EMLBrowseListItem from './submodules/EMLBrowseListItem/main.svelte';
 import EMLBrowseInfo from './submodules/EMLBrowseInfo/main.svelte';
+import OLSKUIAssets from 'OLSKUIAssets';
 </script>
 <svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
 
-<EMLBrowseList
-	EMLBrowseListItems={ mod._ValueMemosVisible }
-	EMLBrowseListItemSelected={ mod._ValueMemoSelected }
-	EMLBrowseListFilterText={ mod._ValueFilterText }
-	EMLBrowseListDispatchForm={ EMLBrowseListDispatchForm }
-	EMLBrowseListDispatchClose={ EMLBrowseListDispatchClose }
-	EMLBrowseListDispatchCreate={ mod.EMLBrowseListDispatchCreate }
-	EMLBrowseListDispatchClick={ mod.EMLBrowseListDispatchClick }
-	EMLBrowseListDispatchArrow={ mod.EMLBrowseListDispatchArrow }
-	EMLBrowseListDispatchFilter={ mod.EMLBrowseListDispatchFilter }
-	OLSKMobileViewInactive={ !!mod.OLSKMobileViewInactive }
-	/>
+<OLSKCatalog
+	bind:this={ mod._OLSKCatalog }
 
-<EMLBrowseInfo
-	EMLBrowseInfoItem={ mod._ValueMemoSelected }
-	EMLBrowseInfoDispatchBack={ mod.EMLBrowseInfoDispatchBack }
-	EMLBrowseInfoDispatchDiscard={ mod.EMLBrowseInfoDispatchDiscard }
-	EMLBrowseInfoDispatchUpdate={ mod.EMLBrowseInfoDispatchUpdate }
-	OLSKMobileViewInactive={ !mod.OLSKMobileViewInactive }
-	EMLBrowseInfoDispatchDebug={ mod.EMLBrowseInfoDispatchDebug }
-	bind:this={ mod._EMLBrowseInfo }
-	/>
+	OLSKMasterListItemAccessibilitySummaryFunction={ mod.OLSKMasterListItemAccessibilitySummaryFunction }
+
+	OLSKCatalogSortFunction={ EMLBrowseLogic.EMLBrowseSortFunction }
+	OLSKCatalogFilterFunction={ EMLBrowseLogic.EMLBrowseFilterFunction }
+	OLSKCatalogExactFunction={ EMLBrowseLogic.EMLBrowseExactFunction }
+
+	_OLSKCatalogDispatchKey={ mod._OLSKCatalogDispatchKey }
+
+	OLSKCatalogDispatchClick={ mod.OLSKCatalogDispatchClick }
+	OLSKCatalogDispatchArrow={ mod.OLSKCatalogDispatchArrow }
+	OLSKCatalogDispatchFilterSubmit={ mod.OLSKCatalogDispatchFilterSubmit }
+	OLSKCatalogDispatchQuantity={ mod.OLSKCatalogDispatchQuantity }
+	OLSKCatalogDispatchEscapeOnEmpty={ EMLBrowseListDispatchClose }
+
+	let:OLSKResultsListItem
+	>
+
+	<!-- MASTER -->
+	
+	<div class="OLSKToolbarElementGroup" slot="OLSKMasterListToolbarHead">
+		<button class="EMLBrowseCloseButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseCloseButtonText') } on:click={ EMLBrowseListDispatchClose }>
+			<div class="EMLBrowseCloseButtonImage">{@html OLSKUIAssets._OLSKSharedBack }</div>
+		</button>
+	</div>
+
+	<div class="OLSKToolbarElementGroup" slot="OLSKMasterListToolbarTail">
+		<button class="EMLBrowseFormButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseFormButtonText') } on:click={ EMLBrowseListDispatchForm } accesskey="f">
+			<div class="EMLBrowseFormButtonImage">{@html OLSKUIAssets._OLSKSharedEdit }</div>
+		</button>
+
+		<button class="EMLBrowseCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseCreateButtonText') } on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n">
+			<div class="EMLBrowseCreateButtonImage">{@html OLSKUIAssets._OLSKSharedCreate }</div>
+		</button>
+	</div>
+
+	<!-- LIST ITEM -->
+
+	<div slot="OLSKMasterListItem">
+		<EMLBrowseListItem EMLBrowseListItemObject={ OLSKResultsListItem } />
+	</div>
+
+	<!-- DETAIL -->
+	
+	<div class="EMLBrowseDetailContainer" slot="OLSKCatalogDetailContent" let:OLSKCatalogItemSelected>
+		<EMLBrowseInfo
+			EMLBrowseInfoItem={ OLSKCatalogItemSelected }
+			EMLBrowseInfoDispatchBack={ mod.EMLBrowseInfoDispatchBack }
+			EMLBrowseInfoDispatchDiscard={ mod.EMLBrowseInfoDispatchDiscard }
+			EMLBrowseInfoDispatchUpdate={ mod.EMLBrowseInfoDispatchUpdate }
+			EMLBrowseInfoDispatchDebug={ mod.EMLBrowseInfoDispatchDebug }
+			bind:this={ mod._EMLBrowseInfo }
+			/>
+	</div>
+
+</OLSKCatalog>
 
 {#if OLSK_SPEC_UI() && EMLBrowse_DEBUG }
 	 <button class="OLSKAppToolbarLauncherButton" on:click={ mod._OLSKAppToolbarDispatchLauncher }></button>

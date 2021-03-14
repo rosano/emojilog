@@ -2,89 +2,85 @@ const { throws, deepEqual } = require('assert');
 
 const mod = require('./ui-logic.js').default;
 
-describe('EMLBrowseSort', function test_EMLBrowseSort() {
+describe('EMLBrowseAccessibilitySummary', function test_EMLBrowseAccessibilitySummary() {
 
-	const item1 = {
-		EMLMemoEventDate: new Date(0),
-	};
-	const item2 = {
-		EMLMemoEventDate: new Date(1),
-	};
+	it('throws if not object', function () {
+		throws(function () {
+			mod.EMLBrowseAccessibilitySummary(null);
+		}, /EMLErrorInputNotValid/);
+	});
 
-	it('sorts by EMLMemoEventDate descending', function () {
-		deepEqual([item1, item2].sort(mod.EMLBrowseSort), [item2, item1]);
+	it('returns string', function() {
+		const EMLMemoEventDate = new Date();
+		deepEqual(mod.EMLBrowseAccessibilitySummary(StubMemoObjectValid({
+			EMLMemoEventDate,
+		})), EMLMemoEventDate.toLocaleString());
+	});
+
+});
+
+describe('EMLBrowseSortFunction', function test_EMLBrowseSortFunction() {
+	
+	it('sorts by EMLMemoEventDate descending', function() {
+		const item1 = {
+			EMLMemoEventDate: new Date(0),
+		};
+		const item2 = {
+			EMLMemoEventDate: new Date(1),
+		};
+		deepEqual([item1, item2].sort(mod.EMLBrowseSortFunction), [item2, item1]);
 	});
 
 });
 
 describe('EMLBrowseFilterFunction', function test_EMLBrowseFilterFunction() {
 
-	it('throws error if not string', function () {
-		throws(function () {
-			mod.EMLBrowseFilterFunction(null);
+	it('throws error param2 if not string', function() {
+		throws(function() {
+			mod.EMLBrowseFilterFunction({}, null);
 		}, /EMLErrorInputNotValid/);
 	});
 
-	it('returns function', function () {
-		deepEqual(typeof mod.EMLBrowseFilterFunction('alfa'), 'function');
+	it('returns false if no match', function() {
+		deepEqual(mod.EMLBrowseFilterFunction({
+			EMLMemoNotes: 'alfa',
+		}, 'bravo'), false);
 	});
 
-	context('function', function () {
-
-		context('EMLMemoNotes', function () {
-
-			it('returns false if not OLSKStringMatch', function () {
-				deepEqual(mod.EMLBrowseFilterFunction('alfa')(StubMemoObjectValid({
-					EMLMemoNotes: 'bravo',
-				})), false);
-			});
-
-			it('returns true', function () {
-				deepEqual(mod.EMLBrowseFilterFunction('alf')(StubMemoObjectValid({
-					EMLMemoNotes: 'álfa',
-				})), true);
-			});
-
-		});
-
+	it('matches OLSKStringMatch', function() {
+		deepEqual(mod.EMLBrowseFilterFunction({
+			EMLMemoNotes: uRandomElement('alfa', 'álfa'),
+		}, uRandomElement('alf', 'alfa', 'ALF')), true);
 	});
 
 });
 
-describe('EMLBrowseExactMatchFirst', function test_EMLBrowseExactMatchFirst() {
+describe('EMLBrowseExactFunction', function test_EMLBrowseExactFunction() {
 
-	it('throws error if param1 not string', function () {
-		throws(function () {
-			mod.EMLBrowseExactMatchFirst(null, []);
+	it('throws error if param2 not string', function() {
+		throws(function() {
+			mod.EMLBrowseExactFunction({}, null);
 		}, /EMLErrorInputNotValid/);
 	});
 
-	it('throws error if param2 not array', function () {
-		throws(function () {
-			mod.EMLBrowseExactMatchFirst('', null);
-		}, /EMLErrorInputNotValid/);
+	it('returns false if not starting with input', function() {
+		const item = Math.random().toString();
+		deepEqual(mod.EMLBrowseExactFunction({
+			EMLMemoNotes: Math.random().toString() + item,
+		}, item), false);
 	});
 
-	it('returns array', function () {
-		deepEqual(mod.EMLBrowseExactMatchFirst('alfa', []), []);
+	it('returns true', function() {
+		const item = Math.random().toString();
+		deepEqual(mod.EMLBrowseExactFunction({
+			EMLMemoNotes: item + Math.random().toString(),
+		}, item), true);
 	});
 
-	it('creates copy', function () {
-		const item = [];
-		deepEqual(mod.EMLBrowseExactMatchFirst('alfa', item) !== item, true);
-	});
-
-	context('EMLMemoNotes', function () {
-
-		it('orders exact OLSKStringMatch first', function () {
-			const items = [StubMemoObjectValid({
-				EMLMemoNotes: 'álfa',
-			}), StubMemoObjectValid({
-				EMLMemoNotes: 'álf',
-			})];
-			deepEqual(mod.EMLBrowseExactMatchFirst('alf', items), items.reverse());
-		});
-
+	it('matches OLSKStringMatch', function() {
+		deepEqual(mod.EMLBrowseExactFunction({
+			EMLMemoNotes: uRandomElement('alfa', 'álfa'),
+		}, uRandomElement('alf', 'alfa', 'ALF')), true);
 	});
 
 });

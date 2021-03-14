@@ -1,38 +1,56 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
-Object.entries({}).map(function (e) {
+Object.entries({
+	EMLBrowseCloseButton: '.EMLBrowseCloseButton',
+	EMLBrowseCloseButtonImage: '.EMLBrowseCloseButtonImage',
+
+	EMLBrowseFormButton: '.EMLBrowseFormButton',
+	EMLBrowseFormButtonImage: '.EMLBrowseFormButtonImage',
+
+	EMLBrowseCreateButton: '.EMLBrowseCreateButton',
+	EMLBrowseCreateButtonImage: '.EMLBrowseCreateButtonImage',
+}).map(function (e) {
 	return global[e.shift()] = e.pop();
 });
-
-const kTesting = {
-	StubJournalObjectValid() {
-		return {
-			EMLJournalID: 'alfa',
-			EMLJournalName: '',
-			EMLJournalCreationDate: new Date('2019-02-23T13:56:36Z'),
-			EMLJournalModificationDate: new Date('2019-02-23T13:56:36Z'),
-		};
-	},
-};
 
 describe('EMLBrowse_Access', function () {
 
 	before(function () {
 		return browser.OLSKVisit(kDefaultRoute, {
-			EMLBrowseJournalSelected: JSON.stringify(kTesting.StubJournalObjectValid()),
+			EMLBrowseJournalSelected: JSON.stringify(StubJournalObjectValid()),
 		});
 	});
 
-	it('shows EMLBrowseList', function () {
-		browser.assert.elements('.EMLBrowseList', 1);
+	it('shows OLSKCatalog', function () {
+		browser.assert.elements('.OLSKCatalog', 1);
+	});
+
+	it('shows EMLBrowseCloseButton', function () {
+		browser.assert.elements(EMLBrowseCloseButton, 1);
+	});
+
+	it('shows EMLBrowseCloseButtonImage', function () {
+		browser.assert.elements(EMLBrowseCloseButtonImage, 1);
+	});
+
+	it('shows EMLBrowseFormButton', function () {
+		browser.assert.elements(EMLBrowseFormButton, 1);
+	});
+
+	it('shows EMLBrowseFormButtonImage', function () {
+		browser.assert.elements(EMLBrowseFormButtonImage, 1);
+	});
+
+	it('shows EMLBrowseCreateButton', function () {
+		browser.assert.elements(EMLBrowseCreateButton, 1);
+	});
+
+	it('shows EMLBrowseCreateButtonImage', function () {
+		browser.assert.elements(EMLBrowseCreateButtonImage, 1);
 	});
 
 	it('hides EMLBrowseListItem', function () {
 		browser.assert.elements('.EMLBrowseListItem', 0);
-	});
-
-	it('shows EMLBrowseInfo', function () {
-		browser.assert.elements('.EMLBrowseInfo', 1);
 	});
 
 	it('shows OLSKDetailPlaceholder', function () {
@@ -50,7 +68,7 @@ describe('EMLBrowse_Access', function () {
 	context('create', function test_create() {
 
 		before(function () {
-			return browser.pressButton('.EMLBrowseListToolbarCreateButton');
+			return browser.pressButton('.EMLBrowseCreateButton');
 		});
 
 		it('shows EMLBrowseListItem', function () {

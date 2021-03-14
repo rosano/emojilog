@@ -4,7 +4,6 @@ export let EMLBrowseInfoDispatchBack;
 export let EMLBrowseInfoDispatchUpdate;
 export let EMLBrowseInfoDispatchDiscard;
 export let EMLBrowseInfoDispatchDebug;
-export let OLSKMobileViewInactive = false;
 export let EMLBrowseInfo_DebugShowLauncherButton = false;
 
 export const modPublic = {
@@ -97,7 +96,7 @@ import _OLSKSharedDiscard from '../../../_shared/__external/OLSKUIAssets/_OLSKSh
 import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedClone.svg';
 </script>
 
-<div class="EMLBrowseInfo OLSKViewportDetail" class:OLSKMobileViewInactive={ OLSKMobileViewInactive } aria-hidden={ OLSKMobileViewInactive ? true : null }>
+<div class="EMLBrowseInfo">
 
 {#if !EMLBrowseInfoItem}
 <OLSKDetailPlaceholder />
