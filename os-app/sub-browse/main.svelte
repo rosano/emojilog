@@ -39,24 +39,6 @@ const mod = {
 
 	// VALUE
 
-	_ValueMemosAll: EMLBrowseJournalMemos,
-	ValueMemosAll (inputData, shouldSort = true) {
-		mod.ValueMemosVisible(mod._ValueMemosAll = inputData, shouldSort);
-	},
-
-	_ValueMemosVisible: [],
-	ValueMemosVisible (inputData, shouldSort = true) {
-		const items = !mod._ValueFilterText ? inputData : inputData.filter(EMLBrowseLogic.EMLBrowseFilterFunction(mod._ValueFilterText));
-		mod._ValueMemosVisible = shouldSort ? items.sort(EMLBrowseLogic.EMLBrowseSort) : items;
-	},
-	
-	_ValueMemoSelected: undefined,
-	ValueMemoSelected (inputData) {
-		mod._ValueMemoSelected = inputData;
-	},
-	
-	_ValueFilterText: '',
-
 	_ValueMemoUpdateThrottleMap: {},
 
 	// DATA
@@ -77,12 +59,6 @@ const mod = {
 
 		if (OLSK_SPEC_UI()) {
 			items.push(...[
-				{
-					LCHRecipeName: 'FakeEscapeWithoutSort',
-					LCHRecipeCallback: function FakeEscapeWithoutSort () {
-						mod.ControlMemoSelect(null);
-					},
-				},
 				{
 					LCHRecipeName: 'EMLBrowseLauncherFakeItemProxy',
 					LCHRecipeCallback: function EMLBrowseLauncherFakeItemProxy () {},
@@ -110,7 +86,7 @@ const mod = {
 
 		const handlerFunctions = {
 			Tab () {
-				if (document.activeElement === document.querySelector('.OLSKMasterListFilterField') && mod._ValueMemoSelected) {
+				if (document.activeElement === document.querySelector('.OLSKMasterListFilterField') && mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected()) {
 					mod.ControlFocusDetail();
 
 					return event.preventDefault();
@@ -174,22 +150,6 @@ const mod = {
 
 		setTimeout(mod.ControlFocusDetail);
 	},
-	
-	ControlFilter(inputData) {
-		mod._ValueFilterText = inputData;
-
-		mod.ValueMemosVisible(mod._ValueMemosAll);
-
-		if (!inputData) {
-			return mod.ControlMemoSelect(null);
-		}
-
-		if (!mod._ValueMemosVisible.length) {
-			return mod.ControlMemoSelect(null);
-		}
-
-		mod.ValueMemoSelected(EMLBrowseLogic.EMLBrowseExactMatchFirst(inputData, mod._ValueMemosVisible).shift());
-	},
 
 	// MESSAGE
 
@@ -219,22 +179,6 @@ const mod = {
 		mod.ControlMemoDiscard(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected());
 	},
 
-	EMLBrowseListDispatchCreate () {
-		mod.ControlMemoCreate(EMLBrowseJournalSelected);
-	},
-
-	EMLBrowseListDispatchClick (inputData) {
-		mod.ControlMemoSelect(inputData);
-	},
-
-	EMLBrowseListDispatchArrow (inputData) {
-		mod.ValueMemoSelected(inputData);
-	},
-
-	EMLBrowseListDispatchFilter (inputData) {
-		mod.ControlFilter(inputData);
-	},
-
 	EMLBrowseInfoDispatchUpdate () {
 		mod.ControlMemoUpdate(mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected()));
 	},
@@ -257,39 +201,15 @@ const mod = {
 	},
 
 	ChangeDelegateCreateMemo (inputData) {
-		mod.ValueMemosAll([inputData].concat(mod._ValueMemosAll), !mod._ValueMemoSelected);
+		mod._OLSKCatalog.modPublic.OLSKCatalogInsert(inputData);
 	},
 
 	ChangeDelegateUpdateMemo (inputData) {
-		if (mod._ValueMemoSelected && mod._ValueMemoSelected.EMLMemoID === inputData.EMLMemoID) {
-			mod.ControlMemoSelect(inputData);
-		}
-
-		mod.ValueMemosAll(mod._ValueMemosAll.map(function (e) {
-			return e.EMLMemoID === inputData.EMLMemoID ? inputData : e;
-		}), !mod._ValueMemoSelected);
+		mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(inputData);
 	},
 
 	ChangeDelegateDeleteMemo (inputData) {
-		if (mod._ValueMemoSelected && (mod._ValueMemoSelected.EMLMemoID === inputData.EMLMemoID)) {
-			mod.ControlMemoSelect(null);
-		}
-
-		mod.ValueMemosAll(mod._ValueMemosAll.filter(function (e) {
-			return e.EMLMemoID !== inputData.EMLMemoID;
-		}), false);
-	},
-
-	// REACT
-
-	ReactMemoSelected () {
-		if (!mod._ValueMemoSelected) {
-			return;
-		}
-
-		mod._ValueMemoSelected = mod._ValueMemosVisible.filter(function (e) {
-			return e.EMLMemoID === mod._ValueMemoSelected.EMLMemoID;
-		}).pop();
+		mod._OLSKCatalog.modPublic.OLSKCatalogRemove(inputData);
 	},
 
 	// SETUP
@@ -300,7 +220,7 @@ const mod = {
 	},
 
 	SetupValueMemosAll() {
-		mod.ValueMemosAll(mod._ValueMemosAll);
+		EMLBrowseJournalMemos.map(mod._OLSKCatalog.modPublic.OLSKCatalogInsert);
 	},
 
 	SetupFocus() {
