@@ -15,16 +15,16 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			});
 		});
 
-		it('localizes EMLBrowseListToolbarCloseButton', function () {
-			browser.assert.attribute(EMLBrowseListToolbarCloseButton, 'title', uLocalized('EMLBrowseListToolbarCloseButtonText'));
+		it('localizes EMLBrowseCloseButton', function () {
+			browser.assert.attribute(EMLBrowseCloseButton, 'title', uLocalized('EMLBrowseCloseButtonText'));
 		});
 
-		it('localizes EMLBrowseListToolbarFormButton', function () {
-			browser.assert.attribute(EMLBrowseListToolbarFormButton, 'title', uLocalized('EMLBrowseListToolbarFormButtonText'));
+		it('localizes EMLBrowseFormButton', function () {
+			browser.assert.attribute(EMLBrowseFormButton, 'title', uLocalized('EMLBrowseFormButtonText'));
 		});
 
-		it('localizes EMLBrowseListToolbarCreateButton', function () {
-			browser.assert.attribute(EMLBrowseListToolbarCreateButton, 'title', uLocalized('EMLBrowseListToolbarCreateButtonText'));
+		it('localizes EMLBrowseCreateButton', function () {
+			browser.assert.attribute(EMLBrowseCreateButton, 'title', uLocalized('EMLBrowseCreateButtonText'));
 		});
 
 	});

@@ -270,18 +270,18 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	<!-- MASTER -->
 	
 	<div class="OLSKToolbarElementGroup" slot="OLSKMasterListToolbarHead">
-		<button class="EMLBrowseListToolbarCloseButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseListToolbarCloseButtonText') } on:click={ EMLBrowseListDispatchClose }>
-			<div class="EMLBrowseListToolbarCloseButtonImage">{@html OLSKUIAssets._OLSKSharedBack }</div>
+		<button class="EMLBrowseCloseButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseCloseButtonText') } on:click={ EMLBrowseListDispatchClose }>
+			<div class="EMLBrowseCloseButtonImage">{@html OLSKUIAssets._OLSKSharedBack }</div>
 		</button>
 	</div>
 
 	<div class="OLSKToolbarElementGroup" slot="OLSKMasterListToolbarTail">
-		<button class="EMLBrowseListToolbarFormButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseListToolbarFormButtonText') } on:click={ EMLBrowseListDispatchForm } accesskey="f">
-			<div class="EMLBrowseListToolbarFormButtonImage">{@html OLSKUIAssets._OLSKSharedEdit }</div>
+		<button class="EMLBrowseFormButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseFormButtonText') } on:click={ EMLBrowseListDispatchForm } accesskey="f">
+			<div class="EMLBrowseFormButtonImage">{@html OLSKUIAssets._OLSKSharedEdit }</div>
 		</button>
 
-		<button class="EMLBrowseListToolbarCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseListToolbarCreateButtonText') } on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n">
-			<div class="EMLBrowseListToolbarCreateButtonImage">{@html OLSKUIAssets._OLSKSharedCreate }</div>
+		<button class="EMLBrowseCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseCreateButtonText') } on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n">
+			<div class="EMLBrowseCreateButtonImage">{@html OLSKUIAssets._OLSKSharedCreate }</div>
 		</button>
 	</div>
 

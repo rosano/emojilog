@@ -11,7 +11,7 @@ describe('EMLBrowse_Catalog', function () {
 	context('create', function test_create () {
 		
 		before(function () {
-			return browser.pressButton('.EMLBrowseListToolbarCreateButton');
+			return browser.pressButton('.EMLBrowseCreateButton');
 		});
 
 		it('adds item', function () {
@@ -91,11 +91,11 @@ describe('EMLBrowse_Catalog', function () {
 	context('OLSKCatalogDispatchArrow', function test_OLSKCatalogDispatchArrow () {
 		
 		before(function () {
-			return browser.pressButton('.EMLBrowseListToolbarCreateButton');
+			return browser.pressButton('.EMLBrowseCreateButton');
 		});
 
 		before(function () {
-			return browser.pressButton('.EMLBrowseListToolbarCreateButton');
+			return browser.pressButton('.EMLBrowseCreateButton');
 		});
 
 		before(function () {

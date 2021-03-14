@@ -183,7 +183,7 @@ describe('EMLTrack_Access', function () {
 	context('close', function () {
 		
 		before(function () {
-			return browser.pressButton('.EMLBrowseListToolbarCloseButton');
+			return browser.pressButton('.EMLBrowseCloseButton');
 		});
 
 		it('hides EMLBrowseList', function () {
@@ -207,7 +207,7 @@ describe('EMLTrack_Access', function () {
 		});
 
 		before(function () {
-			return browser.pressButton('.EMLBrowseListToolbarFormButton');
+			return browser.pressButton('.EMLBrowseFormButton');
 		});
 
 		context('cancel', function () {
@@ -289,7 +289,7 @@ describe('EMLTrack_Access', function () {
 		context('form', function () {
 
 			before(function () {
-				return browser.pressButton('.EMLBrowseListToolbarFormButton');
+				return browser.pressButton('.EMLBrowseFormButton');
 			});
 			
 			it('hides EMLBrowseList', function () {
@@ -309,7 +309,7 @@ describe('EMLTrack_Access', function () {
 			});
 
 			before(function () {
-				return browser.pressButton('.EMLBrowseListToolbarCloseButton');
+				return browser.pressButton('.EMLBrowseCloseButton');
 			});
 
 			it('shows EMLTrackMaster', function () {

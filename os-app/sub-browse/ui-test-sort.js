@@ -9,7 +9,7 @@ describe('EMLBrowse_Sort', function () {
 	});
 
 	before(function () {
-		return browser.pressButton('.EMLBrowseListToolbarCreateButton');
+		return browser.pressButton('.EMLBrowseCreateButton');
 	});
 
 	before(function () {
@@ -17,7 +17,7 @@ describe('EMLBrowse_Sort', function () {
 	});
 
 	before(function () {
-		return browser.pressButton('.EMLBrowseListToolbarCreateButton');
+		return browser.pressButton('.EMLBrowseCreateButton');
 	});
 
 	before(function () {
@@ -25,7 +25,7 @@ describe('EMLBrowse_Sort', function () {
 	});
 
 	before(function () {
-		return browser.pressButton('.EMLBrowseListToolbarCreateButton');
+		return browser.pressButton('.EMLBrowseCreateButton');
 	});
 
 	before(function () {

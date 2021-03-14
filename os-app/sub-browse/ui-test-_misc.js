@@ -8,18 +8,18 @@ describe('EMLBrowse_Misc', function () {
 		});
 	});
 
-	describe('EMLBrowseListToolbarCloseButton', function test_EMLBrowseListToolbarCloseButton() {
+	describe('EMLBrowseCloseButton', function test_EMLBrowseCloseButton() {
 
 		it('classes OLSKDecorButtonNoStyle', function () {
-			browser.assert.hasClass(EMLBrowseListToolbarCloseButton, 'OLSKDecorButtonNoStyle');
+			browser.assert.hasClass(EMLBrowseCloseButton, 'OLSKDecorButtonNoStyle');
 		});
 
 		it('classes OLSKDecorTappable', function () {
-			browser.assert.hasClass(EMLBrowseListToolbarCloseButton, 'OLSKDecorTappable');
+			browser.assert.hasClass(EMLBrowseCloseButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {
-			browser.assert.hasClass(EMLBrowseListToolbarCloseButton, 'OLSKToolbarButton');
+			browser.assert.hasClass(EMLBrowseCloseButton, 'OLSKToolbarButton');
 		});
 
 		context('click', function () {
@@ -29,7 +29,7 @@ describe('EMLBrowse_Misc', function () {
 			});
 
 			before(function () {
-				return browser.pressButton(EMLBrowseListToolbarCloseButton);
+				return browser.pressButton(EMLBrowseCloseButton);
 			});
 
 			it('sends EMLBrowseListDispatchClose', function () {
@@ -40,30 +40,30 @@ describe('EMLBrowse_Misc', function () {
 
 	});
 
-	describe('EMLBrowseListToolbarCloseButtonImage', function test_EMLBrowseListToolbarCloseButtonImage() {
+	describe('EMLBrowseCloseButtonImage', function test_EMLBrowseCloseButtonImage() {
 
 		it('sets src', function () {
-			browser.assert.elements(`${ EMLBrowseListToolbarCloseButtonImage } #_OLSKSharedBack`, 1);
+			browser.assert.elements(`${ EMLBrowseCloseButtonImage } #_OLSKSharedBack`, 1);
 		});
 
 	});
 
-	describe('EMLBrowseListToolbarFormButton', function test_EMLBrowseListToolbarFormButton() {
+	describe('EMLBrowseFormButton', function test_EMLBrowseFormButton() {
 
 		it('classes OLSKDecorButtonNoStyle', function () {
-			browser.assert.hasClass(EMLBrowseListToolbarFormButton, 'OLSKDecorButtonNoStyle');
+			browser.assert.hasClass(EMLBrowseFormButton, 'OLSKDecorButtonNoStyle');
 		});
 
 		it('classes OLSKDecorTappable', function () {
-			browser.assert.hasClass(EMLBrowseListToolbarFormButton, 'OLSKDecorTappable');
+			browser.assert.hasClass(EMLBrowseFormButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {
-			browser.assert.hasClass(EMLBrowseListToolbarFormButton, 'OLSKToolbarButton');
+			browser.assert.hasClass(EMLBrowseFormButton, 'OLSKToolbarButton');
 		});
 
 		it('sets accesskey', function () {
-			browser.assert.attribute(EMLBrowseListToolbarFormButton, 'accesskey', 'f');
+			browser.assert.attribute(EMLBrowseFormButton, 'accesskey', 'f');
 		});
 
 		context('click', function () {
@@ -73,7 +73,7 @@ describe('EMLBrowse_Misc', function () {
 			});
 
 			before(function () {
-				return browser.pressButton(EMLBrowseListToolbarFormButton);
+				return browser.pressButton(EMLBrowseFormButton);
 			});
 
 			it('sends EMLBrowseListDispatchForm', function () {
@@ -84,38 +84,38 @@ describe('EMLBrowse_Misc', function () {
 
 	});
 
-	describe('EMLBrowseListToolbarFormButtonImage', function test_EMLBrowseListToolbarFormButtonImage() {
+	describe('EMLBrowseFormButtonImage', function test_EMLBrowseFormButtonImage() {
 
 		it('sets src', function () {
-			browser.assert.elements(`${ EMLBrowseListToolbarFormButtonImage } #_OLSKSharedEdit`, 1);
+			browser.assert.elements(`${ EMLBrowseFormButtonImage } #_OLSKSharedEdit`, 1);
 		});
 
 	});
 
-	describe('EMLBrowseListToolbarCreateButton', function test_EMLBrowseListToolbarCreateButton() {
+	describe('EMLBrowseCreateButton', function test_EMLBrowseCreateButton() {
 
 		it('classes OLSKDecorButtonNoStyle', function () {
-			browser.assert.hasClass(EMLBrowseListToolbarCreateButton, 'OLSKDecorButtonNoStyle');
+			browser.assert.hasClass(EMLBrowseCreateButton, 'OLSKDecorButtonNoStyle');
 		});
 
 		it('classes OLSKDecorTappable', function () {
-			browser.assert.hasClass(EMLBrowseListToolbarCreateButton, 'OLSKDecorTappable');
+			browser.assert.hasClass(EMLBrowseCreateButton, 'OLSKDecorTappable');
 		});
 
 		it('classes OLSKToolbarButton', function () {
-			browser.assert.hasClass(EMLBrowseListToolbarCreateButton, 'OLSKToolbarButton');
+			browser.assert.hasClass(EMLBrowseCreateButton, 'OLSKToolbarButton');
 		});
 
 		it('sets accesskey', function () {
-			browser.assert.attribute(EMLBrowseListToolbarCreateButton, 'accesskey', 'n');
+			browser.assert.attribute(EMLBrowseCreateButton, 'accesskey', 'n');
 		});
 
 	});
 
-	describe('EMLBrowseListToolbarCreateButtonImage', function test_EMLBrowseListToolbarCreateButtonImage() {
+	describe('EMLBrowseCreateButtonImage', function test_EMLBrowseCreateButtonImage() {
 
 		it('sets src', function () {
-			browser.assert.elements(`${ EMLBrowseListToolbarCreateButtonImage } #_OLSKSharedCreate`, 1);
+			browser.assert.elements(`${ EMLBrowseCreateButtonImage } #_OLSKSharedCreate`, 1);
 		});
 
 	});
@@ -134,7 +134,7 @@ describe('EMLBrowse_Misc', function () {
 		});
 
 		before(function () {
-			return browser.pressButton('.EMLBrowseListToolbarCreateButton');
+			return browser.pressButton('.EMLBrowseCreateButton');
 		});
 
 		it('focuses EMLBrowseInfoFormNotesField', function () {

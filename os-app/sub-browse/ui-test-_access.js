@@ -1,14 +1,14 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 Object.entries({
-	EMLBrowseListToolbarCloseButton: '.EMLBrowseListToolbarCloseButton',
-	EMLBrowseListToolbarCloseButtonImage: '.EMLBrowseListToolbarCloseButtonImage',
+	EMLBrowseCloseButton: '.EMLBrowseCloseButton',
+	EMLBrowseCloseButtonImage: '.EMLBrowseCloseButtonImage',
 
-	EMLBrowseListToolbarFormButton: '.EMLBrowseListToolbarFormButton',
-	EMLBrowseListToolbarFormButtonImage: '.EMLBrowseListToolbarFormButtonImage',
+	EMLBrowseFormButton: '.EMLBrowseFormButton',
+	EMLBrowseFormButtonImage: '.EMLBrowseFormButtonImage',
 
-	EMLBrowseListToolbarCreateButton: '.EMLBrowseListToolbarCreateButton',
-	EMLBrowseListToolbarCreateButtonImage: '.EMLBrowseListToolbarCreateButtonImage',
+	EMLBrowseCreateButton: '.EMLBrowseCreateButton',
+	EMLBrowseCreateButtonImage: '.EMLBrowseCreateButtonImage',
 }).map(function (e) {
 	return global[e.shift()] = e.pop();
 });
@@ -25,28 +25,28 @@ describe('EMLBrowse_Access', function () {
 		browser.assert.elements('.OLSKCatalog', 1);
 	});
 
-	it('shows EMLBrowseListToolbarCloseButton', function () {
-		browser.assert.elements(EMLBrowseListToolbarCloseButton, 1);
+	it('shows EMLBrowseCloseButton', function () {
+		browser.assert.elements(EMLBrowseCloseButton, 1);
 	});
 
-	it('shows EMLBrowseListToolbarCloseButtonImage', function () {
-		browser.assert.elements(EMLBrowseListToolbarCloseButtonImage, 1);
+	it('shows EMLBrowseCloseButtonImage', function () {
+		browser.assert.elements(EMLBrowseCloseButtonImage, 1);
 	});
 
-	it('shows EMLBrowseListToolbarFormButton', function () {
-		browser.assert.elements(EMLBrowseListToolbarFormButton, 1);
+	it('shows EMLBrowseFormButton', function () {
+		browser.assert.elements(EMLBrowseFormButton, 1);
 	});
 
-	it('shows EMLBrowseListToolbarFormButtonImage', function () {
-		browser.assert.elements(EMLBrowseListToolbarFormButtonImage, 1);
+	it('shows EMLBrowseFormButtonImage', function () {
+		browser.assert.elements(EMLBrowseFormButtonImage, 1);
 	});
 
-	it('shows EMLBrowseListToolbarCreateButton', function () {
-		browser.assert.elements(EMLBrowseListToolbarCreateButton, 1);
+	it('shows EMLBrowseCreateButton', function () {
+		browser.assert.elements(EMLBrowseCreateButton, 1);
 	});
 
-	it('shows EMLBrowseListToolbarCreateButtonImage', function () {
-		browser.assert.elements(EMLBrowseListToolbarCreateButtonImage, 1);
+	it('shows EMLBrowseCreateButtonImage', function () {
+		browser.assert.elements(EMLBrowseCreateButtonImage, 1);
 	});
 
 	it('hides EMLBrowseListItem', function () {
@@ -68,7 +68,7 @@ describe('EMLBrowse_Access', function () {
 	context('create', function test_create() {
 
 		before(function () {
-			return browser.pressButton('.EMLBrowseListToolbarCreateButton');
+			return browser.pressButton('.EMLBrowseCreateButton');
 		});
 
 		it('shows EMLBrowseListItem', function () {
