@@ -26,8 +26,8 @@ describe('EMLTrack_Access', function () {
 		browser.assert.elements('.EMLTemplate', 0);
 	});
 
-	it('hides EMLBrowseList', function () {
-		browser.assert.elements('.EMLBrowseList', 0);
+	it('hides OLSKCatalog', function () {
+		browser.assert.elements('.OLSKCatalog', 0);
 	});
 
 	it('shows EMLTrackViewportFooter', function () {
@@ -154,8 +154,8 @@ describe('EMLTrack_Access', function () {
 			browser.assert.elements('.EMLTrackMaster', 0);
 		});
 
-		it('hides EMLBrowseList', function () {
-			browser.assert.elements('.EMLBrowseList', 0);
+		it('hides OLSKCatalog', function () {
+			browser.assert.elements('.OLSKCatalog', 0);
 		});
 
 		it('shows EMLTemplate', function () {
@@ -174,8 +174,8 @@ describe('EMLTrack_Access', function () {
 			browser.assert.elements('.EMLTemplate', 0);
 		});
 
-		it('shows EMLBrowseList', function () {
-			browser.assert.elements('.EMLBrowseList', 1);
+		it('shows OLSKCatalog', function () {
+			browser.assert.elements('.OLSKCatalog', 1);
 		});
 	
 	});
@@ -186,8 +186,8 @@ describe('EMLTrack_Access', function () {
 			return browser.pressButton('.EMLBrowseCloseButton');
 		});
 
-		it('hides EMLBrowseList', function () {
-			browser.assert.elements('.EMLBrowseList', 0);
+		it('hides OLSKCatalog', function () {
+			browser.assert.elements('.OLSKCatalog', 0);
 		});
 
 		it('shows EMLTrackMaster', function () {
@@ -240,8 +240,8 @@ describe('EMLTrack_Access', function () {
 				browser.assert.elements('.EMLTrackMasterListItem', 0);
 			});
 
-			it('hides EMLBrowseList', function () {
-				browser.assert.elements('.EMLBrowseList', 0);
+			it('hides OLSKCatalog', function () {
+				browser.assert.elements('.OLSKCatalog', 0);
 			});
 
 			it('hides EMLTemplate', function () {
@@ -274,8 +274,8 @@ describe('EMLTrack_Access', function () {
 			browser.assert.elements('.EMLTemplate', 0);
 		});
 
-		it('shows EMLBrowseList', function () {
-			browser.assert.elements('.EMLBrowseList', 1);
+		it('shows OLSKCatalog', function () {
+			browser.assert.elements('.OLSKCatalog', 1);
 		});
 
 		it('shows EMLTrackLauncherItemExportSelectedJSON', function () {
@@ -292,8 +292,8 @@ describe('EMLTrack_Access', function () {
 				return browser.pressButton('.EMLBrowseFormButton');
 			});
 			
-			it('hides EMLBrowseList', function () {
-				browser.assert.elements('.EMLBrowseList', 0);
+			it('hides OLSKCatalog', function () {
+				browser.assert.elements('.OLSKCatalog', 0);
 			});
 
 			it('shows EMLTemplate', function () {
@@ -320,8 +320,8 @@ describe('EMLTrack_Access', function () {
 				browser.assert.elements('.EMLTemplate', 0);
 			});
 
-			it('hides EMLBrowseList', function () {
-				browser.assert.elements('.EMLBrowseList', 0);
+			it('hides OLSKCatalog', function () {
+				browser.assert.elements('.OLSKCatalog', 0);
 			});
 
 		});
