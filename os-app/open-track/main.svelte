@@ -397,6 +397,22 @@ const mod = {
 		}, OLSK_SPEC_UI() ? 0 : 500);
 	},
 
+	ZDRSchemaDispatchSyncCreateMemo (inputData) {
+		mod._EMLBrowse && mod._EMLBrowse.modPublic.EMLBrowseSyncCreateMemo(inputData);
+	},
+
+	ZDRSchemaDispatchSyncUpdateMemo (inputData) {
+		mod._EMLBrowse && mod._EMLBrowse.modPublic.EMLBrowseSyncUpdateMemo(inputData);
+	},
+
+	ZDRSchemaDispatchSyncDeleteMemo (inputData) {
+		mod._EMLBrowse && mod._EMLBrowse.modPublic.EMLBrowseSyncDeleteMemo(inputData);
+	},
+
+	ZDRSchemaDispatchSyncConflictMemo (inputData) {
+		mod._EMLBrowse && mod._EMLBrowse.modPublic.EMLBrowseSyncConflictMemo(inputData);
+	},
+
 	async OLSKCloudFormDispatchSubmit (inputData) {
 		const protocol = zerodatawrap.ZDRPreferenceProtocolConnect(inputData);
 		(zerodatawrap.ZDRPreferenceProtocolMigrate() ? await mod.DataStorageClient(protocol) : mod._ValueZDRWrap).ZDRCloudConnect(inputData);
@@ -487,7 +503,12 @@ const mod = {
 						ZDRSchemaDispatchSyncDelete: mod.ZDRSchemaDispatchSyncDeleteJournal,
 						ZDRSchemaDispatchSyncConflict: mod.ZDRSchemaDispatchSyncConflictJournal,
 					}),
-					EMLMemo,
+					Object.assign(EMLMemo, {
+						ZDRSchemaDispatchSyncCreate: mod.ZDRSchemaDispatchSyncCreateMemo,
+						ZDRSchemaDispatchSyncUpdate: mod.ZDRSchemaDispatchSyncUpdateMemo,
+						ZDRSchemaDispatchSyncDelete: mod.ZDRSchemaDispatchSyncDeleteMemo,
+						ZDRSchemaDispatchSyncConflict: mod.ZDRSchemaDispatchSyncConflictMemo,
+					}),
 					EMLSetting,
 					EMLTransport,
 					],

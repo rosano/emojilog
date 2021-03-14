@@ -11,16 +11,16 @@ export let EMLBrowse_DEBUG = false;
 
 export const modPublic = {
 
-	EMLBrowseChangeDelegateCreateMemo () {
-		mod.ChangeDelegateCreateMemo(...arguments);
+	EMLBrowseSyncCreateMemo () {
+		mod.SyncCreateMemo(...arguments);
 	},
 
-	EMLBrowseChangeDelegateUpdateMemo () {
-		mod.ChangeDelegateUpdateMemo(...arguments);
+	EMLBrowseSyncUpdateMemo () {
+		mod.SyncUpdateMemo(...arguments);
 	},
 
-	EMLBrowseChangeDelegateDeleteMemo () {
-		mod.ChangeDelegateDeleteMemo(...arguments);
+	EMLBrowseSyncDeleteMemo () {
+		mod.SyncDeleteMemo(...arguments);
 	},
 
 	EMLBrowseRecipes () {
@@ -31,6 +31,7 @@ export const modPublic = {
 
 import { OLSKLocalized } from 'OLSKInternational';
 import { OLSK_SPEC_UI } from 'OLSKSpec';
+import OLSKRemoteStorage from 'OLSKRemoteStorage';
 import OLSKThrottle from 'OLSKThrottle';
 import EMLBrowseLogic from './ui-logic.js';
 import EMLMemo from '../_shared/EMLMemo/main.js';
@@ -62,6 +63,50 @@ const mod = {
 				{
 					LCHRecipeName: 'EMLBrowseLauncherFakeItemProxy',
 					LCHRecipeCallback: function EMLBrowseLauncherFakeItemProxy () {},
+				},
+				{
+					LCHRecipeName: 'FakeSyncCreateMemo',
+					LCHRecipeCallback: async function FakeSyncCreateMemo () {
+						return mod.SyncCreateMemo(await EMLBrowseStorageClient.App.EMLMemo.EMLMemoCreate(mod.DataMemoObjectTemplate({
+							EMLMemoNotes: 'FakeSyncCreateMemo',
+						}), EMLBrowseJournalSelected));
+					},
+				},
+				{
+					LCHRecipeName: 'FakeSyncUpdateMemo',
+					LCHRecipeCallback: async function FakeSyncUpdateMemo () {
+						return mod.SyncUpdateMemo(await EMLBrowseStorageClient.App.EMLMemo.EMLMemoUpdate(Object.assign(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(function (e) {
+							return e.EMLMemoNotes.match('FakeSync');
+						}).pop(), {
+							EMLMemoNotes: 'FakeSyncUpdateMemo',
+						})));
+					},
+				},
+				{
+					LCHRecipeName: 'FakeSyncDeleteMemo',
+					LCHRecipeCallback: async function FakeSyncDeleteMemo () {
+						return mod.SyncDeleteMemo(await EMLBrowseStorageClient.App.EMLMemo.EMLMemoDelete(mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(function (e) {
+							return e.EMLMemoNotes.match('FakeSync');
+						}).pop()));
+					},
+				},
+				{
+					LCHRecipeName: 'FakeSyncConflictMemo',
+					LCHRecipeCallback: async function FakeSyncConflictMemo () {
+						const item = mod._OLSKCatalog.modPublic._OLSKCatalogDataItemsAll().filter(function (e) {
+							return e.EMLMemoNotes.match('FakeSyncConflictMemo');
+						}).pop();
+						
+						return mod.SyncConflictMemo({
+							origin: 'conflict',
+							oldValue: JSON.parse(JSON.stringify(await EMLBrowseStorageClient.App.EMLMemo.EMLMemoUpdate(Object.assign({}, item, {
+								EMLMemoNotes: item.EMLMemoNotes + '-local',
+							})))),
+							newValue: JSON.parse(JSON.stringify(Object.assign({}, item, {
+								EMLMemoNotes: item.EMLMemoNotes + '-remote',
+							}))),
+						});
+					},
 				},
 			]);
 		}
@@ -200,16 +245,22 @@ const mod = {
 		});
 	},
 
-	ChangeDelegateCreateMemo (inputData) {
+	SyncCreateMemo (inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogInsert(inputData);
 	},
 
-	ChangeDelegateUpdateMemo (inputData) {
+	SyncUpdateMemo (inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(inputData);
 	},
 
-	ChangeDelegateDeleteMemo (inputData) {
+	SyncDeleteMemo (inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogRemove(inputData);
+	},
+
+	async SyncConflictMemo (inputData) {
+		setTimeout(async function () {
+			mod.SyncUpdateMemo(await EMLBrowseStorageClient.App.EMLMemo.EMLMemoUpdate(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData))));
+		}, OLSK_SPEC_UI() ? 0 : 500);
 	},
 
 	// SETUP
