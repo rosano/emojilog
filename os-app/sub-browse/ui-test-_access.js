@@ -23,16 +23,12 @@ describe('EMLBrowse_Access', function () {
 		});
 	});
 
-	it('shows EMLBrowseList', function () {
-		browser.assert.elements('.EMLBrowseList', 1);
+	it('shows OLSKCatalog', function () {
+		browser.assert.elements('.OLSKCatalog', 1);
 	});
 
 	it('hides EMLBrowseListItem', function () {
 		browser.assert.elements('.EMLBrowseListItem', 0);
-	});
-
-	it('shows EMLBrowseInfo', function () {
-		browser.assert.elements('.EMLBrowseInfo', 1);
 	});
 
 	it('shows OLSKDetailPlaceholder', function () {

@@ -19,23 +19,6 @@ describe('EMLBrowse_Misc', function () {
 		});
 	});
 
-	it('classes OLSKMobileViewInactive', function () {
-		browser.assert.hasNoClass('.EMLBrowseList', 'OLSKMobileViewInactive');
-		browser.assert.hasClass('.EMLBrowseInfo', 'OLSKMobileViewInactive');
-	});
-
-	it('classes OLSKMasterListFocused', function () {
-		browser.assert.hasClass('.EMLBrowseList', 'OLSKMasterListFocused');
-	});
-
-	it('sets OLSKResultsListItemSelected', function () {
-		browser.assert.elements('.OLSKResultsListItemSelected', 0);
-	});
-
-	it('focuses OLSKMasterListFilterField', function () {
-		browser.assert.hasFocus('.OLSKMasterListFilterField');
-	});
-
 	context('create', function test_create() {
 
 		before(function () {
@@ -51,19 +34,6 @@ describe('EMLBrowse_Misc', function () {
 
 		before(function () {
 			return browser.pressButton('.EMLBrowseListToolbarCreateButton');
-		});
-
-		it('classes OLSKMobileViewInactive', function () {
-			browser.assert.hasClass('.EMLBrowseList', 'OLSKMobileViewInactive');
-			browser.assert.hasNoClass('.EMLBrowseInfo', 'OLSKMobileViewInactive');
-		});
-
-		it('sets OLSKResultsListItemSelected', function () {
-			browser.assert.elements('.OLSKResultsListItemSelected', 1);
-		});
-
-		it('sets EMLBrowseInfoItem', function () {
-			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
 
 		it('focuses EMLBrowseInfoFormNotesField', function () {
@@ -95,68 +65,26 @@ describe('EMLBrowse_Misc', function () {
 			return browser.pressButton('.EMLBrowseInfoToolbarBackButton');
 		});
 
-		it('classes OLSKMobileViewInactive', function () {
-			browser.assert.hasNoClass('.EMLBrowseList', 'OLSKMobileViewInactive');
-			browser.assert.hasClass('.EMLBrowseInfo', 'OLSKMobileViewInactive');
-		});
-
-		it('sets OLSKResultsListItemSelected', function () {
-			browser.assert.elements('.OLSKResultsListItemSelected', 1);
-		});
-
 		it('sets EMLBrowseInfoItem', function () {
 			browser.assert.elements('.OLSKDetailPlaceholder', 0);
 		});
 
 	});
 
-	context('arrow', function test_arrow() { // #pendext
-
-		before(function () {
-			return browser.focus('.OLSKMasterListFilterField');
-		});
-
-		before(function () {
-			return browser.OLSKFireKeyboardEvent(browser.window, 'ArrowDown');
-		});
-
-		it('classes OLSKMasterListFocused', function () {
-			browser.assert.hasClass('.EMLBrowseList', 'OLSKMasterListFocused');
-		});
-
-		it('classes OLSKMobileViewInactive', function () {
-			browser.assert.hasNoClass('.EMLBrowseList', 'OLSKMobileViewInactive');
-			browser.assert.hasClass('.EMLBrowseInfo', 'OLSKMobileViewInactive');
-		});
-
-		it('sets OLSKResultsListItemSelected', function () {
-			browser.assert.elements('.OLSKResultsListItemSelected', 1);
-		});
-
-		it('sets EMLBrowseInfoItem', function () {
-			browser.assert.elements('.OLSKDetailPlaceholder', 0);
-		});
-
-	});
-
-	context('tab', function test_tab() {
+	context.skip('tab', function test_tab() {
 
 		context('master focused', function () {
+
+			before(function () {
+				browser.focus('.OLSKMasterListFilterField');
+			});
 
 			before(function () {
 				browser.assert.hasFocus('.OLSKMasterListFilterField');
 			});
 
 			before(function () {
-				browser.assert.hasClass('.EMLBrowseList', 'OLSKMasterListFocused');
-			});
-
-			before(function () {
 				return browser.OLSKFireKeyboardEvent(browser.window, 'Tab');
-			});
-
-			it('classes OLSKMasterListFocused', function () {
-				browser.assert.hasNoClass('.EMLBrowseList', 'OLSKMasterListFocused');
 			});
 
 			it('focuses EMLBrowseInfoFormNotesField', function () {
@@ -208,10 +136,6 @@ describe('EMLBrowse_Misc', function () {
 				});
 
 				before(function () {
-					browser.assert.hasNoClass('.EMLBrowseList', 'OLSKMasterListFocused');
-				});
-
-				before(function () {
 					return browser.OLSKFireKeyboardEvent(browser.window, 'Tab', {
 						shiftKey: true,
 					});
@@ -219,10 +143,6 @@ describe('EMLBrowse_Misc', function () {
 
 				it('focuses OLSKMasterListFilterField', function () {
 					browser.assert.hasFocus('.OLSKMasterListFilterField');
-				});
-
-				it('classes OLSKMasterListFocused', function () {
-					browser.assert.hasClass('.EMLBrowseList', 'OLSKMasterListFocused');
 				});
 
 			});
@@ -234,17 +154,9 @@ describe('EMLBrowse_Misc', function () {
 				});
 
 				before(function () {
-					browser.assert.hasClass('.EMLBrowseList', 'OLSKMasterListFocused');
-				});
-
-				before(function () {
 					return browser.OLSKFireKeyboardEvent(browser.window, 'Tab', {
 						shiftKey: true,
 					});
-				});
-
-				it('classes OLSKMasterListFocused', function () {
-					browser.assert.hasNoClass('.EMLBrowseList', 'OLSKMasterListFocused');
 				});
 
 				it('focuses EMLBrowseInfoFormNotesField', function () {
@@ -313,14 +225,6 @@ describe('EMLBrowse_Misc', function () {
 
 		before(function () {
 			return browser.click('.EMLBrowseListItem');
-		});
-
-		it('classes OLSKMasterListFocused', function () {
-			browser.assert.hasNoClass('.EMLBrowseList', 'OLSKMasterListFocused');
-		});
-
-		it('classes OLSKMobileViewInactive', function () {
-			browser.assert.hasClass('.EMLBrowseList', 'OLSKMobileViewInactive');
 		});
 
 		it('sets OLSKResultsListItemSelected', function () {

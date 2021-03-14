@@ -115,17 +115,6 @@ const mod = {
 		}
 
 		const handlerFunctions = {
-			Escape () {
-				if (document.activeElement === document.querySelector('.OLSKMasterListFilterField') && !mod._ValueFilterText) {
-					return EMLBrowseListDispatchClose();
-				}
-
-				mod.ControlFilter('');
-
-				if (!OLSK_SPEC_UI()) {
-					document.querySelector('.OLSKMasterListBody').scrollTo(0, 0);
-				}
-			},
 			Tab () {
 				if (document.activeElement === document.querySelector('.OLSKMasterListFilterField') && mod._ValueMemoSelected) {
 					mod.ControlFocusDetail();
@@ -253,9 +242,7 @@ const mod = {
 	},
 
 	EMLBrowseInfoDispatchUpdate () {
-		mod._ValueMemoSelected = mod._ValueMemoSelected; // #purge-svelte-force-update
-
-		mod.ControlMemoUpdate(mod._ValueMemoSelected);
+		mod.ControlMemoUpdate(mod._OLSKCatalog.modPublic.OLSKCatalogUpdate(mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected()));
 	},
 
 	EMLBrowseInfoDispatchDebug (inputData) {
@@ -340,7 +327,6 @@ import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
 import OLSKCatalog from 'OLSKCatalog';
-import EMLBrowseList from './submodules/EMLBrowseList/main.svelte';
 import EMLBrowseListItem from './submodules/EMLBrowseListItem/main.svelte';
 import EMLBrowseInfo from './submodules/EMLBrowseInfo/main.svelte';
 import OLSKUIAssets from 'OLSKUIAssets';
@@ -376,6 +362,10 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	</div>
 
 	<div class="OLSKToolbarElementGroup" slot="OLSKMasterListToolbarTail">
+		<button class="EMLBrowseListToolbarFormButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseListToolbarFormButtonText') } on:click={ () => EMLBrowseListDispatchForm() } accesskey="f">
+			<div class="EMLBrowseListToolbarFormButtonImage">{@html OLSKUIAssets._OLSKSharedEdit }</div>
+		</button>
+
 		<button class="EMLBrowseListToolbarCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseListToolbarCreateButtonText') } on:click={ mod.InterfaceCreateButtonDidClick } accesskey="n">
 			<div class="EMLBrowseListToolbarCreateButtonImage">{@html OLSKUIAssets._OLSKSharedCreate }</div>
 		</button>
@@ -401,19 +391,6 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	</div>
 
 </OLSKCatalog>
-
-<EMLBrowseList
-	EMLBrowseListItems={ mod._ValueMemosVisible }
-	EMLBrowseListItemSelected={ mod._ValueMemoSelected }
-	EMLBrowseListFilterText={ mod._ValueFilterText }
-	EMLBrowseListDispatchForm={ EMLBrowseListDispatchForm }
-	EMLBrowseListDispatchClose={ EMLBrowseListDispatchClose }
-	EMLBrowseListDispatchCreate={ mod.EMLBrowseListDispatchCreate }
-	EMLBrowseListDispatchClick={ mod.EMLBrowseListDispatchClick }
-	EMLBrowseListDispatchArrow={ mod.EMLBrowseListDispatchArrow }
-	EMLBrowseListDispatchFilter={ mod.EMLBrowseListDispatchFilter }
-	OLSKMobileViewInactive={ !!mod.OLSKMobileViewInactive }
-	/>
 
 {#if OLSK_SPEC_UI() && EMLBrowse_DEBUG }
 	 <button class="OLSKAppToolbarLauncherButton" on:click={ mod._OLSKAppToolbarDispatchLauncher }></button>
