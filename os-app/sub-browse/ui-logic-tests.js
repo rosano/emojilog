@@ -33,22 +33,22 @@ describe('EMLBrowseSortFunction', function test_EMLBrowseSortFunction() {
 
 });
 
-describe('EMLBrowseFilterFunction', function test_EMLBrowseFilterFunction() {
+describe('EMLBrowseMatchIsResult', function test_EMLBrowseMatchIsResult() {
 
 	it('throws error param2 if not string', function() {
 		throws(function() {
-			mod.EMLBrowseFilterFunction({}, null);
+			mod.EMLBrowseMatchIsResult({}, null);
 		}, /EMLErrorInputNotValid/);
 	});
 
 	it('returns false if no match', function() {
-		deepEqual(mod.EMLBrowseFilterFunction({
+		deepEqual(mod.EMLBrowseMatchIsResult({
 			EMLMemoNotes: 'alfa',
 		}, 'bravo'), false);
 	});
 
 	it('matches OLSKStringMatch', function() {
-		deepEqual(mod.EMLBrowseFilterFunction({
+		deepEqual(mod.EMLBrowseMatchIsResult({
 			EMLMemoNotes: uRandomElement('alfa', 'álfa'),
 		}, uRandomElement('alf', 'alfa', 'ALF')), true);
 	});

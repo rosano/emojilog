@@ -261,7 +261,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	OLSKMasterListItemAccessibilitySummaryFunction={ mod.OLSKMasterListItemAccessibilitySummaryFunction }
 
 	OLSKCatalogSortFunction={ EMLBrowseLogic.EMLBrowseSortFunction }
-	OLSKCatalogFilterFunction={ EMLBrowseLogic.EMLBrowseFilterFunction }
+	OLSKCatalogMatchIsResult={ EMLBrowseLogic.EMLBrowseMatchIsResult }
 	OLSKCatalogMatchIsExact={ EMLBrowseLogic.EMLBrowseMatchIsExact }
 
 	_OLSKCatalogDispatchKey={ mod._OLSKCatalogDispatchKey }

@@ -14,7 +14,7 @@ const mod = {
 		return b.EMLMemoEventDate - a.EMLMemoEventDate;
 	},
 
-	EMLBrowseFilterFunction (param1, param2) {
+	EMLBrowseMatchIsResult (param1, param2) {
 		if (typeof param2 !== 'string') {
 			throw new Error('EMLErrorInputNotValid');
 		}
