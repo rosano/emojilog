@@ -54,6 +54,12 @@ const mod = {
 		};
 	},
 
+	DataJournalObjectTemplate (inputData = {}) {
+		return Object.assign({
+			EMLJournalName: '',
+		}, inputData);
+	},
+
 	async DataExportJSON (EMLJournal) {
 		return JSON.stringify(await mod._ValueZDRWrap.App.EMLTransport.EMLTransportExport({
 			EMLJournal,
@@ -125,6 +131,50 @@ const mod = {
 		if (OLSK_SPEC_UI()) {
 			items.push(...[
 				{
+					LCHRecipeName: 'FakeZDRSchemaDispatchSyncCreateJournal',
+					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncCreateJournal () {
+						return mod.ZDRSchemaDispatchSyncCreateJournal(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalCreate(mod.DataJournalObjectTemplate({
+							EMLJournalName: 'FakeZDRSchemaDispatchSyncCreateJournal',
+						})));
+					},
+				},
+				{
+					LCHRecipeName: 'FakeZDRSchemaDispatchSyncUpdateJournal',
+					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncUpdateJournal () {
+						return mod.ZDRSchemaDispatchSyncUpdateJournal(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalUpdate(Object.assign(mod._ValueJournalsAll.filter(function (e) {
+							return e.EMLJournalName.match('FakeZDRSchemaDispatchSync');
+						}).pop(), {
+							EMLJournalName: 'FakeZDRSchemaDispatchSyncUpdateJournal',
+						})));
+					},
+				},
+				{
+					LCHRecipeName: 'FakeZDRSchemaDispatchSyncDeleteJournal',
+					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncDeleteJournal () {
+						return mod.ZDRSchemaDispatchSyncDeleteJournal(await mod._ValueZDRWrap.App.EMLJournal.ZDRModelDeleteObject(mod._ValueJournalsAll.filter(function (e) {
+							return e.EMLJournalName.match('FakeZDRSchemaDispatchSync');
+						}).pop()));
+					},
+				},
+				{
+					LCHRecipeName: 'FakeZDRSchemaDispatchSyncConflictJournal',
+					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncConflictJournal () {
+						const item = mod._ValueJournalsAll.filter(function (e) {
+							return e.EMLJournalName.match('FakeZDRSchemaDispatchSyncConflictJournal');
+						}).pop();
+						
+						return mod.ZDRSchemaDispatchSyncConflictJournal({
+							origin: 'conflict',
+							oldValue: JSON.parse(JSON.stringify(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalUpdate(Object.assign({}, item, {
+								EMLJournalName: item.EMLJournalName + '-local',
+							})))),
+							newValue: JSON.parse(JSON.stringify(Object.assign(Object.assign({}, item), {
+								EMLJournalName: item.EMLJournalName + '-remote',
+							}))),
+						});
+					},
+				},
+				{
 					LCHRecipeName: 'EMLTrackLauncherItemDebug_PromptFakeImportSerialized',
 					LCHRecipeCallback: function EMLTrackLauncherItemDebug_PromptFakeImportSerialized () {
 						return mod.ControlJournalsImportJSON(window.prompt());
@@ -170,10 +220,7 @@ const mod = {
 	},
 
 	async ControlJournalCreate() {
-		const item = await mod._ValueZDRWrap.App.EMLJournal.EMLJournalCreate({
-			EMLJournalName: '',
-			EMLJournalModificationDate: new Date(),
-		});
+		const item = await mod._ValueZDRWrap.App.EMLJournal.EMLJournalCreate(mod.DataJournalObjectTemplate());
 
 		mod.ValueJournalsAll(mod._ValueJournalsAll.concat(item));
 
@@ -320,35 +367,35 @@ const mod = {
 		}));
 	},
 
-	// OLSKChangeDelegateCreate (inputData) {
-	// 	// console.log('OLSKChangeDelegateCreate', inputData);
+	ZDRSchemaDispatchSyncCreateJournal (inputData) {
+		mod.ValueJournalsAll([inputData].concat(mod._ValueJournalsAll));
+	},
 
-	// 	mod.ValueJournalsAll(mod._ValueJournalsAll.filter(function (e) {
-	// 		return e.EMLJournalID !== inputData.EMLJournalID; // @Hotfix Dropbox sending DelegateAdd
-	// 	}).concat(inputData));
-	// },
-	// OLSKChangeDelegateUpdate (inputData) {
-	// 	// console.log('OLSKChangeDelegateUpdate', inputData);
+	ZDRSchemaDispatchSyncUpdateJournal (inputData) {
+		if (mod._ValueJournalSelected && mod._ValueJournalSelected.EMLJournalID === inputData.EMLJournalID) {
+			mod.ControlJournalSelect(inputData);
+		}
 
-	// 	if (mod._ValueJournalSelected && mod._ValueJournalSelected.EMLJournalID === inputData.EMLJournalID) {
-	// 		mod.ControlJournalSelect(inputData);
-	// 	}
+		mod.ValueJournalsAll(mod._ValueJournalsAll.map(function (e) {
+			return Object.assign(e, e.EMLJournalID === inputData.EMLJournalID ? inputData : {});
+		}), false);
+	},
 
-	// 	mod.ValueJournalsAll(mod._ValueJournalsAll.map(function (e) {
-	// 		return Object.assign(e, e.EMLJournalID === inputData.EMLJournalID ? inputData : {});
-	// 	}), false);
-	// },
-	// OLSKChangeDelegateDelete (inputData) {
-	// 	// console.log('OLSKChangeDelegateDelete', inputData);
+	ZDRSchemaDispatchSyncDeleteJournal (inputData) {
+		if (mod._ValueJournalSelected && (mod._ValueJournalSelected.EMLJournalID === inputData.EMLJournalID)) {
+			mod.ControlJournalSelect(null);
+		}
 
-	// 	if (mod._ValueJournalSelected && (mod._ValueJournalSelected.EMLJournalID === inputData.EMLJournalID)) {
-	// 		mod.ControlJournalSelect(null);
-	// 	}
+		mod.ValueJournalsAll(mod._ValueJournalsAll.filter(function (e) {
+			return e.EMLJournalID !== inputData.EMLJournalID;
+		}), false);
+	},
 
-	// 	mod.ValueJournalsAll(mod._ValueJournalsAll.filter(function (e) {
-	// 		return e.EMLJournalID !== inputData.EMLJournalID;
-	// 	}), false);
-	// },
+	async ZDRSchemaDispatchSyncConflictJournal (inputData) {
+		return setTimeout(async function () {
+			mod.ZDRSchemaDispatchSyncUpdateJournal(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalUpdate(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(OLSKRemoteStorage.OLSKRemoteStorageChangeDelegateConflictSelectRecent(inputData))));
+		}, OLSK_SPEC_UI() ? 0 : 500);
+	},
 
 	async OLSKCloudFormDispatchSubmit (inputData) {
 		const protocol = zerodatawrap.ZDRPreferenceProtocolConnect(inputData);
@@ -434,7 +481,12 @@ const mod = {
 				ZDRScopeDirectory: 'emojilog',
 				ZDRScopeCreatorDirectory: 'rCreativ',
 				ZDRScopeSchemas: [
-					EMLJournal,
+					Object.assign(EMLJournal, {
+						ZDRSchemaDispatchSyncCreate: mod.ZDRSchemaDispatchSyncCreateJournal,
+						ZDRSchemaDispatchSyncUpdate: mod.ZDRSchemaDispatchSyncUpdateJournal,
+						ZDRSchemaDispatchSyncDelete: mod.ZDRSchemaDispatchSyncDeleteJournal,
+						ZDRSchemaDispatchSyncConflict: mod.ZDRSchemaDispatchSyncConflictJournal,
+					}),
 					EMLMemo,
 					EMLSetting,
 					EMLTransport,
