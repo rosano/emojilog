@@ -120,30 +120,6 @@ const mod = {
 		mod.ControlMemoCreate(EMLBrowseJournalSelected);
 	},
 
-	InterfaceWindowDidKeydown (event) {
-		if (document.querySelector('.LCHLauncher')) { // #spec
-			return;
-		}
-
-		const handlerFunctions = {
-			Tab () {
-				if (document.activeElement === document.querySelector('.OLSKMasterListFilterField') && mod._OLSKCatalog.modPublic.OLSKCatalogDataItemSelected()) {
-					mod.ControlFocusDetail();
-
-					return event.preventDefault();
-				}
-
-				if (document.activeElement === document.querySelector('.EMLBrowseInfoFormNotesField') && event.shiftKey) {
-					mod.ControlFocusMaster();
-
-					return event.preventDefault();
-				}
-			},
-		};
-
-		handlerFunctions[event.key] && handlerFunctions[event.key]();
-	},
-
 	// CONTROL
 
 	async ControlMemoCreate(inputData) {
@@ -169,20 +145,12 @@ const mod = {
 		mod._OLSKCatalog.modPublic.OLSKCatalogRemove(await EMLBrowseStorageClient.App.EMLMemo.EMLMemoDelete(inputData));
 	},
 
-	ControlFocusMaster () {
-		document.querySelector('.OLSKMasterListFilterField').focus();
-	},
-
-	ControlFocusDetail () {
-		document.querySelector('.EMLBrowseInfoFormNotesField').focus();
-	},
-
 	ControlMemoActivate(inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
 
 		mod._OLSKCatalog.modPublic.OLSKCatalogFocusDetail();
-
-		setTimeout(mod.ControlFocusDetail);
+		
+		mod._OLSKCatalog.modPublic.OLSKCatalogActivateDetail();
 	},
 
 	// MESSAGE
@@ -201,6 +169,14 @@ const mod = {
 
 	OLSKCatalogDispatchArrow (inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
+	},
+
+	OLSKCatalogDispatchDetailActivate () {
+		document.querySelector('.EMLBrowseInfoFormNotesField').focus();
+	},
+
+	OLSKCatalogDispatchMasterShouldActivate () {
+		return document.activeElement === document.querySelector('.EMLBrowseInfoFormNotesField');
 	},
 
 	OLSKCatalogDispatchQuantity (inputData) {},
@@ -256,17 +232,10 @@ const mod = {
 
 	SetupEverything() {
 		mod.SetupValueMemosAll();
-		mod.SetupFocus();
 	},
 
 	SetupValueMemosAll() {
 		EMLBrowseJournalMemos.map(mod._OLSKCatalog.modPublic.OLSKCatalogInsert);
-	},
-
-	SetupFocus() {
-		setTimeout(function () {
-			mod.ControlFocusMaster();
-		});
 	},
 
 	// LIFECYCLE
@@ -285,7 +254,6 @@ import EMLBrowseListItem from './submodules/EMLBrowseListItem/main.svelte';
 import EMLBrowseInfo from './submodules/EMLBrowseInfo/main.svelte';
 import OLSKUIAssets from 'OLSKUIAssets';
 </script>
-<svelte:window on:keydown={ mod.InterfaceWindowDidKeydown } />
 
 <OLSKCatalog
 	bind:this={ mod._OLSKCatalog }
@@ -300,6 +268,8 @@ import OLSKUIAssets from 'OLSKUIAssets';
 
 	OLSKCatalogDispatchClick={ mod.OLSKCatalogDispatchClick }
 	OLSKCatalogDispatchArrow={ mod.OLSKCatalogDispatchArrow }
+	OLSKCatalogDispatchDetailActivate={ mod.OLSKCatalogDispatchDetailActivate }
+	OLSKCatalogDispatchMasterShouldActivate={ mod.OLSKCatalogDispatchMasterShouldActivate }
 	OLSKCatalogDispatchFilterSubmit={ mod.OLSKCatalogDispatchFilterSubmit }
 	OLSKCatalogDispatchQuantity={ mod.OLSKCatalogDispatchQuantity }
 	OLSKCatalogDispatchEscapeOnEmpty={ EMLBrowseListDispatchClose }
