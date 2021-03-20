@@ -555,6 +555,7 @@ import EMLTemplate from '../sub-template/main.svelte';
 import EMLBrowse from '../sub-browse/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorkerView from '../_shared/__external/OLSKServiceWorker/main.svelte';
+import OLSKInstall from 'OLSKInstall';
 import OLSKCloud from 'OLSKCloud';
 import OLSKModalView from 'OLSKModalView';
 import OLSKApropos from 'OLSKApropos';
@@ -629,6 +630,8 @@ import OLSKApropos from 'OLSKApropos';
 		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
 		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
 		/>
+
+	<OLSKInstall />
 </footer>
 
 <OLSKModalView OLSKModalViewTitleText={ OLSKLocalized('OLSKAproposHeadingText') } bind:this={ mod._OLSKModalView } OLSKModalViewIsCapped={ true }>
