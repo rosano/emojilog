@@ -561,10 +561,6 @@ import OLSKModalView from 'OLSKModalView';
 import OLSKApropos from 'OLSKApropos';
 </script>
 
-{#if !OLSK_SPEC_UI()}
-	<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonical('EMLServiceWorkerRoute') } />
-{/if}
-
 <div class="EMLTrack OLSKViewport" class:OLSKIsLoading={ mod._ValueIsLoading }>
 
 <div class="OLSKViewportContent">
@@ -632,6 +628,10 @@ import OLSKApropos from 'OLSKApropos';
 		/>
 
 	<OLSKInstall />
+
+	{#if !OLSK_SPEC_UI()}
+		<OLSKServiceWorkerView OLSKServiceWorkerRegistrationRoute={ window.OLSKCanonical('EMLServiceWorkerRoute') } />
+	{/if}
 </footer>
 
 <OLSKModalView OLSKModalViewTitleText={ OLSKLocalized('OLSKAproposHeadingText') } bind:this={ mod._OLSKModalView } OLSKModalViewIsCapped={ true }>
