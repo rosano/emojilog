@@ -6,6 +6,10 @@ describe('EMLVitrine_Misc', function () {
 		return browser.visit(kDefaultRoute.OLSKRoutePath);
 	});
 
+	it('sets manifest', function () {
+		browser.assert.attribute('link[rel="manifest"]', 'href', require('../tech-manifest/controller.js').OLSKControllerRoutes().shift().OLSKRoutePath);
+	});
+
 	describe('EMLVitrine', function () {
 		
 		it('classes OLSKDecor', function () {
