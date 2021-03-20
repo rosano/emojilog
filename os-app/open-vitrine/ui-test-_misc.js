@@ -50,4 +50,12 @@ describe('EMLVitrine_Misc', function () {
 	
 	});
 
+	context('OLSKAppFeaturesList', function test_OLSKAppFeaturesList () {
+
+		it('shows OLSKAppFeatureOpenSource', function () {
+			browser.assert.attribute('.OLSKAppFeatureListItemOpenSource a', 'href', process.env.OLSK_REPO_URL);
+		});
+	
+	});
+
 });

@@ -35,7 +35,9 @@ locals.OLSKPagePublicConstants = {
 
 <h1 class="EMLVitrineFeaturesHeading"><%= OLSKLocalized('OLSKWordingFeatures') %></h1>
 
-<%- include('../../node_modules/OLSKAppFeatureList/main.ejs').replace(/node_modules/g, '_shared/__external') %>
+<%- include('../../node_modules/OLSKAppFeatureList/main.ejs', {
+	OLSKAppFeatureListRepoURL: process.env.OLSK_REPO_URL,
+}).replace(/node_modules/g, '_shared/__external') %>
 
 <h1 class="EMLVitrineSupportHeading"><%= OLSKLocalized('OLSKWordingFeedbackHeading') %></h1>
 <p class="EMLVitrineSupportBlurb"><%= OLSKLocalized('OLSKWordingFeedbackBlurb') %></p>
