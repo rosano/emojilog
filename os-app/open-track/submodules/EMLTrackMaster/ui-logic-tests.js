@@ -32,6 +32,13 @@ describe('EMLTrackMasterSymbol', function test_EMLTrackMasterSymbol() {
 		}), EMLJournalName);
 	});
 
+	it('splits if space', function() {
+		const item = Math.random().toString();
+		deepEqual(mod.EMLTrackMasterSymbol({
+			EMLJournalName: item + ' ' + Math.random().toString(),
+		}), item);
+	});
+
 	it('returns alternate', function() {
 		deepEqual(mod.EMLTrackMasterSymbol({
 			EMLJournalName: '',

@@ -5,7 +5,7 @@ const mod = {
 	},
 
 	EMLTrackMasterSymbol (inputData) {
-		return inputData.EMLJournalName || '?';
+		return (inputData.EMLJournalName || '?').split(' ').shift();
 	},
 
 };
