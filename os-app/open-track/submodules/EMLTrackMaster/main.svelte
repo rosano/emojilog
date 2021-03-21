@@ -63,7 +63,7 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 
 <div>
 	{#each EMLTrackMasterListItems as e}
-		<button class="EMLTrackMasterListItem OLSKDecorButtonNoStyle OLSKDecorTappable OLSKCommonEdgeBottom" on:click={ () => EMLTrackMasterDispatchSelect(e) } >
+		<button class="EMLTrackMasterListItem OLSKDecorButtonNoStyle OLSKDecorTappable OLSKCommonEdgeBottom" aria-label={ EMLTrackMasterLogic.EMLTrackMasterAccessibilitySummary(e, OLSKLocalized) } on:click={ () => EMLTrackMasterDispatchSelect(e) }>
 			<strong class="EMLTrackMasterListItemName">{ EMLTrackMasterLogic.EMLTrackMasterSymbol(e) }</strong>
 			<span class="EMLTrackMasterListItemDate">{ e.EMLJournalTouchDate ? e.EMLJournalTouchDate.toDateString() : '' }</span>
 		</button>

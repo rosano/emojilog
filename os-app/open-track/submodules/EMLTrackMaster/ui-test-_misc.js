@@ -1,5 +1,7 @@
 const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
+const EMLTrackMasterLogic = require('./ui-logic.js');
+
 describe('EMLTrackMaster_Misc', function () {
 
 	before(function() {
@@ -83,6 +85,10 @@ describe('EMLTrackMaster_Misc', function () {
 
 		it('classes OLSKCommonEdgeBottom', function () {
 			browser.assert.hasClass(EMLTrackMasterListItem, 'OLSKCommonEdgeBottom');
+		});
+
+		it('sets aria-label', function () {
+			browser.assert.attribute(EMLTrackMasterListItem, 'aria-label', EMLTrackMasterLogic.EMLTrackMasterAccessibilitySummary(item))
 		});
 
 		it('binds EMLJournalName', function () {
