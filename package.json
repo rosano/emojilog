@@ -59,6 +59,10 @@
     "// FRONTEND INSTALL": null,
     "OLSKInstall": "olsk/OLSKInstall",
 
+    "// TRACK": null,
+    "OLSKSundial": "olsk/OLSKSundial",
+    "OLSKProgressRing": "olsk/OLSKProgressRing",
+
     "// FRONTEND THROTTLE": null,
     "OLSKThrottle": "olsk/OLSKThrottle",
 
