@@ -44,7 +44,7 @@ describe('EMLTrack_Transport', function () {
 		});
 
 		it('creates journal', function () {
-			browser.assert.text('.EMLTrackMasterListItemName', EMLJournalName);
+			browser.assert.text('.EMLTrackTimerLabel', EMLJournalName);
 		});
 
 		context('click', function () {

@@ -8,8 +8,6 @@ Object.entries({
 	EMLTrackMasterCreateButtonImage: '.EMLTrackMasterCreateButtonImage',
 
 	EMLTrackMasterListItem: '.EMLTrackMasterListItem',
-	EMLTrackMasterListItemName: '.EMLTrackMasterListItemName',
-	EMLTrackMasterListItemDate: '.EMLTrackMasterListItemDate',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -45,7 +43,7 @@ describe('EMLTrackMaster_Access', function () {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				EMLTrackMasterListItems: JSON.stringify([{
-					EMLJournalName: 'alfa',
+					EMLJournalName: Math.random().toString(),
 					EMLJournalTouchDate: new Date(),
 				}]),
 			});
@@ -55,8 +53,8 @@ describe('EMLTrackMaster_Access', function () {
 			browser.assert.elements(EMLTrackMasterListItem, 1);
 		});
 
-		it('shows EMLTrackMasterListItemDate', function () {
-			browser.assert.elements(EMLTrackMasterListItemDate, 1);
+		it('shows EMLTrackTimer', function () {
+			browser.assert.elements('.EMLTrackTimer', 1);
 		});
 		
 	});

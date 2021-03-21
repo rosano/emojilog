@@ -73,27 +73,32 @@ import OLSKProgressRing from 'OLSKProgressRing';
 
 <style>
 .EMLTrackTimer {
+	height: 100px;
+	width: 100px;
+
 	position: relative;
 
 	--OLSKSundialStrokeColor: #777;
+
+	/* EMLTrackTimerFlexbox:Parent */
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.EMLTrackTimer :global(svg), .EMLTrackTimerLabel {
+.EMLTrackTimer :global(svg) {
 	position: absolute;
 	top: 0;
 	left: 0;
 }
 
 .EMLTrackTimerLabel {
-	width: 100px;
-	height: 100px;
-	padding-top: 3px;
+	max-width: 60px;
+	padding-top: 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 
 	font-size: 40px;
-
-	/* EMLTrackTimerLabelFlexbox:Parent */
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	white-space: nowrap;
 }
 </style>

@@ -45,6 +45,7 @@ const mod = {
 };
 
 import OLSKStandardView from 'OLSKStandardView';
+import EMLTrackTimer from '../EMLTrackTimer/main.svelte';
 import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedCreate.svg';
 </script>
 
@@ -61,13 +62,17 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 	</div>
 </div>
 
-<div>
-	{#each EMLTrackMasterListItems as e}
-		<button class="EMLTrackMasterListItem OLSKDecorButtonNoStyle OLSKDecorTappable OLSKCommonEdgeBottom" aria-label={ EMLTrackMasterLogic.EMLTrackMasterAccessibilitySummary(e, OLSKLocalized) } on:click={ () => EMLTrackMasterDispatchSelect(e) }>
-			<strong class="EMLTrackMasterListItemName">{ EMLTrackMasterLogic.EMLTrackMasterSymbol(e) }</strong>
-			<span class="EMLTrackMasterListItemDate">{ e.EMLJournalTouchDate ? e.EMLJournalTouchDate.toDateString() : '' }</span>
-		</button>
-	{/each}
+<div class="EMLTrackMasterList">
+{#each EMLTrackMasterListItems as e}
+
+<button class="EMLTrackMasterListItem OLSKDecorButtonNoStyle OLSKDecorTappable" aria-label={ EMLTrackMasterLogic.EMLTrackMasterAccessibilitySummary(e, OLSKLocalized) } on:click={ () => EMLTrackMasterDispatchSelect(e) }>
+	<EMLTrackTimer
+		EMLTrackTimerEventDate={ e.EMLJournalTouchDate }
+		EMLTrackTimerText={ EMLTrackMasterLogic.EMLTrackMasterSymbol(e) }
+		/>
+</button>
+
+{/each}
 </div>
 
 </OLSKStandardView>
@@ -81,17 +86,11 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 <style>
 .EMLTrackMaster {
 	width: 100%;
-
-	/* EMLTrackMasterFlexbox:Parent */
-	display: flex;
-	flex-direction: column;
 }
 
-.EMLTrackMasterListItem {
-	min-height: 80px;
-	width: 100%;
-	padding: 5px;
-
-	text-align: left;
+.EMLTrackMasterList {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 </style>

@@ -83,20 +83,12 @@ describe('EMLTrackMaster_Misc', function () {
 			});
 		});
 
-		it('classes OLSKCommonEdgeBottom', function () {
-			browser.assert.hasClass(EMLTrackMasterListItem, 'OLSKCommonEdgeBottom');
-		});
-
 		it('sets aria-label', function () {
 			browser.assert.attribute(EMLTrackMasterListItem, 'aria-label', EMLTrackMasterLogic.EMLTrackMasterAccessibilitySummary(item))
 		});
 
 		it('binds EMLJournalName', function () {
-			browser.assert.text(EMLTrackMasterListItemName, 'bravo');
-		});
-
-		it('binds EMLJournalTouchDate', function () {
-			browser.assert.text(EMLTrackMasterListItemDate, EMLJournalTouchDate.toDateString());
+			browser.assert.text('.EMLTrackTimerLabel', 'bravo');
 		});
 
 		context('click', function () {
