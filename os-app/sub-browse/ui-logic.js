@@ -1,5 +1,9 @@
 import OLSKString from 'OLSKString';
 
+const uDescending = function (a, b) {
+  return (a > b) ? -1 : ((a < b) ? 1 : 0);
+};
+
 const mod = {
 
 	EMLBrowseAccessibilitySummary (inputData) {
@@ -11,7 +15,7 @@ const mod = {
 	},
 
 	EMLBrowseSortFunction (a, b) {
-		return b.EMLMemoEventDate - a.EMLMemoEventDate;
+		return uDescending(a.EMLMemoEventDate, b.EMLMemoEventDate);
 	},
 
 	EMLBrowseMatchIsResult (param1, param2) {
