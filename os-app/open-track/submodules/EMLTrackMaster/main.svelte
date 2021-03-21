@@ -15,6 +15,8 @@ export const modPublic = {
 import { OLSKLocalized } from 'OLSKInternational';
 import { OLSK_SPEC_UI } from 'OLSKSpec';
 
+import EMLTrackMasterLogic from './ui-logic.js';
+
 const mod = {
 
 	// DATA
@@ -62,7 +64,7 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 <div>
 	{#each EMLTrackMasterListItems as e}
 		<button class="EMLTrackMasterListItem OLSKDecorButtonNoStyle OLSKDecorTappable OLSKCommonEdgeBottom" on:click={ () => EMLTrackMasterDispatchSelect(e) } >
-			<strong class="EMLTrackMasterListItemName">{ e.EMLJournalName || e.EMLJournalID }</strong>
+			<strong class="EMLTrackMasterListItemName">{ EMLTrackMasterLogic.EMLTrackMasterSymbol(e) }</strong>
 			<span class="EMLTrackMasterListItemDate">{ e.EMLJournalTouchDate ? e.EMLJournalTouchDate.toDateString() : '' }</span>
 		</button>
 	{/each}
