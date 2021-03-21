@@ -18,7 +18,7 @@ const mod = {
 		return uDescending(a.EMLMemoEventDate, b.EMLMemoEventDate);
 	},
 
-	EMLBrowseMatchIsResult (param1, param2) {
+	EMLBrowseIsMatch (param1, param2) {
 		if (typeof param2 !== 'string') {
 			throw new Error('EMLErrorInputNotValid');
 		}
@@ -32,18 +32,12 @@ const mod = {
 		}).length;
 	},
 
-	EMLBrowseMatchIsExact (param1, param2) {
-		if (typeof param2 !== 'string') {
+	EMLBrowseExactSortFunction (needle, a, b) {
+		if (typeof needle !== 'string') {
 			throw new Error('EMLErrorInputNotValid');
 		}
 
-		return [param1.EMLMemoNotes].filter(function (e) {
-			if (!e) {
-				return false;
-			}
-
-			return OLSKString.OLSKStringMatch(param2, e, 'startsWith');
-		}).length;
+		return 0;
 	},
 
 };

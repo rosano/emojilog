@@ -33,54 +33,38 @@ describe('EMLBrowseSortFunction', function test_EMLBrowseSortFunction() {
 
 });
 
-describe('EMLBrowseMatchIsResult', function test_EMLBrowseMatchIsResult() {
+describe('EMLBrowseIsMatch', function test_EMLBrowseIsMatch() {
 
 	it('throws error param2 if not string', function() {
 		throws(function() {
-			mod.EMLBrowseMatchIsResult({}, null);
+			mod.EMLBrowseIsMatch({}, null);
 		}, /EMLErrorInputNotValid/);
 	});
 
 	it('returns false if no match', function() {
-		deepEqual(mod.EMLBrowseMatchIsResult({
+		deepEqual(mod.EMLBrowseIsMatch({
 			EMLMemoNotes: 'alfa',
 		}, 'bravo'), false);
 	});
 
 	it('matches OLSKStringMatch', function() {
-		deepEqual(mod.EMLBrowseMatchIsResult({
+		deepEqual(mod.EMLBrowseIsMatch({
 			EMLMemoNotes: uRandomElement('alfa', 'álfa'),
 		}, uRandomElement('alf', 'alfa', 'ALF')), true);
 	});
 
 });
 
-describe('EMLBrowseMatchIsExact', function test_EMLBrowseMatchIsExact() {
+describe('EMLBrowseExactSortFunction', function test_EMLBrowseExactSortFunction() {
 
-	it('throws error if param2 not string', function() {
-		throws(function() {
-			mod.EMLBrowseMatchIsExact({}, null);
+	it('throws if param1 not string', function () {
+		throws(function () {
+			mod.EMLBrowseExactSortFunction(null, Math.random().toString(), Math.random().toString());
 		}, /EMLErrorInputNotValid/);
 	});
 
-	it('returns false if not starting with input', function() {
-		const item = Math.random().toString();
-		deepEqual(mod.EMLBrowseMatchIsExact({
-			EMLMemoNotes: Math.random().toString() + item,
-		}, item), false);
-	});
-
-	it('returns true', function() {
-		const item = Math.random().toString();
-		deepEqual(mod.EMLBrowseMatchIsExact({
-			EMLMemoNotes: item + Math.random().toString(),
-		}, item), true);
-	});
-
-	it('matches OLSKStringMatch', function() {
-		deepEqual(mod.EMLBrowseMatchIsExact({
-			EMLMemoNotes: uRandomElement('alfa', 'álfa'),
-		}, uRandomElement('alf', 'alfa', 'ALF')), true);
+	it('returns 0', function() {
+		deepEqual(mod.EMLBrowseExactSortFunction(Math.random().toString(), {}, {}), 0);
 	});
 
 });
