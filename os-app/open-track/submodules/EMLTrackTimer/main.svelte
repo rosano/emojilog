@@ -1,5 +1,5 @@
 <script>
-export let EMLTrackTimerEventDate;
+export let EMLTrackTimerEventDate = null;
 export let EMLTrackTimerText;
 
 import { OLSK_SPEC_UI } from 'OLSKSpec'
@@ -19,6 +19,10 @@ const mod = {
 	// REACT
 
 	ReactUpdate () {
+		if (!EMLTrackTimerEventDate) {
+			return;
+		}
+
 		mod._ValueCurrentFrame = EMLTrackTimerLogic.EMLTrackTimerFrame(EMLTrackTimerEventDate, mod._ValueCurrentTime = new Date());
 	},
 
@@ -50,15 +54,17 @@ import OLSKProgressRing from 'OLSKProgressRing';
 
 <div class="EMLTrackTimer">
 
-<OLSKSundial
-	OLSKSundialBaseSize={ kBaseSize }
-	OLSKSundialLineSize={ kLineSize }
-	OLSKSundialLineCount={ EMLTrackTimerLogic.EMLTrackTimerLines()[mod._ValueCurrentFrame] }
-	/>
-<OLSKProgressRing
-	OLSKProgressRingBaseSize={ kBaseSize + 1.75 }
-	OLSKProgressRingValue={ (mod._ValueCurrentTime - EMLTrackTimerEventDate) / mod._ValueCurrentFrame }
-	/>
+{#if EMLTrackTimerEventDate }
+	<OLSKSundial
+		OLSKSundialBaseSize={ kBaseSize }
+		OLSKSundialLineSize={ kLineSize }
+		OLSKSundialLineCount={ EMLTrackTimerLogic.EMLTrackTimerLines()[mod._ValueCurrentFrame] }
+		/>
+	<OLSKProgressRing
+		OLSKProgressRingBaseSize={ kBaseSize + 1.75 }
+		OLSKProgressRingValue={ (mod._ValueCurrentTime - EMLTrackTimerEventDate) / mod._ValueCurrentFrame }
+		/>
+{/if}
 <div class="EMLTrackTimerLabel">
 	<span>{ EMLTrackTimerText }</span>
 </div>
