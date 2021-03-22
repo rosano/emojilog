@@ -569,7 +569,7 @@ import OLSKApropos from 'OLSKApropos';
 		<EMLBrowse
 			EMLBrowseStorageClient={ mod._ValueZDRWrap }
 			EMLBrowseJournal={ mod._ValueJournalSelected }
-			EMLBrowseJournalMemos={ mod._ValueBrowseMemos }
+			EMLBrowseMemos={ mod._ValueBrowseMemos }
 			EMLBrowseListDispatchCreate={ mod.EMLBrowseListDispatchCreate }
 			EMLBrowseListDispatchForm={ mod.EMLBrowseListDispatchForm }
 			EMLBrowseListDispatchClose={ mod.EMLBrowseListDispatchClose }

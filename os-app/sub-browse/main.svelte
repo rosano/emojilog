@@ -2,7 +2,7 @@
 export let EMLBrowseStorageClient;
 
 export let EMLBrowseJournal;
-export let EMLBrowseJournalMemos;
+export let EMLBrowseMemos;
 export let EMLBrowseListDispatchCreate;
 export let EMLBrowseListDispatchForm;
 export let EMLBrowseListDispatchClose;
@@ -235,7 +235,7 @@ const mod = {
 	},
 
 	SetupValueMemosAll() {
-		EMLBrowseJournalMemos.map(mod._OLSKCatalog.modPublic.OLSKCatalogInsert);
+		EMLBrowseMemos.map(mod._OLSKCatalog.modPublic.OLSKCatalogInsert);
 	},
 
 	// LIFECYCLE

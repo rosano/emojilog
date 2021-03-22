@@ -33,7 +33,7 @@ import zerodatawrap from 'zerodatawrap';
 				window.TestEMLBrowseListDispatchTouch.innerHTML = parseInt(window.TestEMLBrowseListDispatchTouch.innerHTML) + 1;
 				window.TestEMLBrowseListDispatchTouchData.innerHTML = inputData.toJSON().slice(0, 13);
 			}),
-			EMLBrowseJournalMemos: [],
+			EMLBrowseMemos: [],
 			EMLBrowse_DEBUG: true,
 		}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e, index, coll) {
 			if (['EMLBrowseJournal', 'EMLBrowseItemSelected'].includes(e[0])) {
