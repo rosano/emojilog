@@ -6,8 +6,8 @@ import { OLSK_SPEC_UI } from 'OLSKSpec'
 
 import EMLTrackTimerLogic from './ui-logic.js';
 
-const kBaseSize = 30;
-const kLineSize = 5;
+const kBaseSize = 32;
+const kLineSize = 2;
 
 const mod = {
 
@@ -78,7 +78,8 @@ import OLSKProgressRing from 'OLSKProgressRing';
 
 	position: relative;
 
-	--OLSKSundialStrokeColor: #777;
+	--OLSKSundialStrokeColor: #bbb;
+	--OLSKSundialStrokeWidth: 1.5;
 
 	/* EMLTrackTimerFlexbox:Parent */
 	display: flex;
@@ -94,11 +95,18 @@ import OLSKProgressRing from 'OLSKProgressRing';
 
 .EMLTrackTimerLabel {
 	max-width: 60px;
-	padding-top: 5px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 
-	font-size: 40px;
+	font-size: 28px;
 	white-space: nowrap;
+}
+
+@media screen and (min-width: 760px) {
+
+.EMLTrackTimerLabel {
+	padding-top: 5px;
+}
+
 }
 </style>
