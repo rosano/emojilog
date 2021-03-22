@@ -66,22 +66,6 @@ describe('EMLBrowse_Misc', function () {
 			browser.assert.attribute(EMLBrowseFormButton, 'accesskey', 'f');
 		});
 
-		context('click', function () {
-
-			before(function () {
-				browser.assert.text('#TestEMLBrowseListDispatchForm', '0');
-			});
-
-			before(function () {
-				return browser.pressButton(EMLBrowseFormButton);
-			});
-
-			it('sends EMLBrowseListDispatchForm', function () {
-				browser.assert.text('#TestEMLBrowseListDispatchForm', '1');
-			});
-
-		});
-
 	});
 
 	describe('EMLBrowseFormButtonImage', function test_EMLBrowseFormButtonImage() {

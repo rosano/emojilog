@@ -47,7 +47,7 @@ describe('EMLTrack_Sync', function () {
 			});
 
 			before(function () {
-				return browser.fill('.EMLTemplateFormNameField', 'FakeZDRSchemaDispatchSyncCreateJournal');
+				return browser.fill('.EMLTemplateNameField', 'FakeZDRSchemaDispatchSyncCreateJournal');
 			});
 
 			before(function () {
@@ -55,7 +55,7 @@ describe('EMLTrack_Sync', function () {
 			});
 
 			it('updates detail', function () {
-				browser.assert.input('.EMLTemplateFormNameField', 'FakeZDRSchemaDispatchSyncUpdateJournal');
+				browser.assert.input('.EMLTemplateNameField', 'FakeZDRSchemaDispatchSyncUpdateJournal');
 			});
 
 		});
@@ -101,7 +101,7 @@ describe('EMLTrack_Sync', function () {
 		});
 
 		before(function () {
-			return browser.fill('.EMLTemplateFormNameField', 'FakeZDRSchemaDispatchSyncConflictJournal');
+			return browser.fill('.EMLTemplateNameField', 'FakeZDRSchemaDispatchSyncConflictJournal');
 		});
 
 		before(function () {
@@ -109,7 +109,7 @@ describe('EMLTrack_Sync', function () {
 		});
 
 		it('selects local', function () {
-			browser.assert.input('.EMLTemplateFormNameField', 'FakeZDRSchemaDispatchSyncConflictJournal-local');
+			browser.assert.input('.EMLTemplateNameField', 'FakeZDRSchemaDispatchSyncConflictJournal-local');
 		});
 
 	});

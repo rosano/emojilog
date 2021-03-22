@@ -23,9 +23,8 @@ import zerodatawrap from 'zerodatawrap';
 				window.TestEMLBrowseListDispatchCreate.innerHTML = parseInt(window.TestEMLBrowseListDispatchCreate.innerHTML) + 1;
 				window.TestEMLBrowseListDispatchCreateData.innerHTML = JSON.stringify(Object.keys(inputData));
 			}),
-			EMLBrowseListDispatchForm: (function () {
-				window.TestEMLBrowseListDispatchForm.innerHTML = parseInt(window.TestEMLBrowseListDispatchForm.innerHTML) + 1;
-			}),
+			EMLTemplateDispatchUpdate: (function () {}),
+			EMLTemplateDispatchDiscard: (function () {}),
 			EMLBrowseListDispatchClose: (function () {
 				window.TestEMLBrowseListDispatchClose.innerHTML = parseInt(window.TestEMLBrowseListDispatchClose.innerHTML) + 1;
 			}),

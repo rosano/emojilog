@@ -3,10 +3,12 @@ export let EMLBrowseStorageClient;
 
 export let EMLBrowseJournal;
 export let EMLBrowseMemos;
+export let EMLBrowseShowTemplateForm = false;
 export let EMLBrowseListDispatchCreate;
-export let EMLBrowseListDispatchForm;
 export let EMLBrowseListDispatchClose;
 export let EMLBrowseListDispatchTouch;
+export let EMLTemplateDispatchUpdate;
+export let EMLTemplateDispatchDiscard;
 export let EMLBrowse_DEBUG = false;
 
 export const modPublic = {
@@ -232,10 +234,20 @@ const mod = {
 
 	SetupEverything() {
 		mod.SetupValueMemosAll();
+
+		mod.SetupTemplateForm();
 	},
 
 	SetupValueMemosAll() {
 		EMLBrowseMemos.map(mod._OLSKCatalog.modPublic.OLSKCatalogInsert);
+	},
+
+	SetupTemplateForm () {
+		if (!EMLBrowseShowTemplateForm) {
+			return;
+		}
+
+		setTimeout(mod._OLSKModalView.modPublic.OLSKModalViewShow);
 	},
 
 	// LIFECYCLE
@@ -253,6 +265,8 @@ import OLSKCatalog from 'OLSKCatalog';
 import EMLBrowseListItem from './submodules/EMLBrowseListItem/main.svelte';
 import EMLBrowseInfo from './submodules/EMLBrowseInfo/main.svelte';
 import OLSKUIAssets from 'OLSKUIAssets';
+import OLSKModalView from 'OLSKModalView';
+import EMLTemplate from '../sub-template/main.svelte';
 </script>
 
 <OLSKCatalog
@@ -286,7 +300,7 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	</div>
 
 	<div class="OLSKToolbarElementGroup" slot="OLSKMasterListToolbarTail">
-		<button class="EMLBrowseFormButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseFormButtonText') } on:click={ EMLBrowseListDispatchForm } accesskey="f">
+		<button class="EMLBrowseFormButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseFormButtonText') } on:click={ mod._OLSKModalView.modPublic.OLSKModalViewShow } accesskey="f">
 			<div class="EMLBrowseFormButtonImage">{@html OLSKUIAssets._OLSKSharedEdit }</div>
 		</button>
 
@@ -315,6 +329,14 @@ import OLSKUIAssets from 'OLSKUIAssets';
 	</div>
 
 </OLSKCatalog>
+
+<OLSKModalView OLSKModalViewTitleText={ OLSKLocalized('EMLBrowseFormButtonText') } bind:this={ mod._OLSKModalView }>
+	<EMLTemplate
+		EMLTemplateItem={ EMLBrowseJournal }
+		EMLTemplateDispatchUpdate={ EMLTemplateDispatchUpdate }
+		EMLTemplateDispatchDiscard={ EMLTemplateDispatchDiscard }
+		/>
+</OLSKModalView>
 
 {#if OLSK_SPEC_UI() && EMLBrowse_DEBUG }
 	 <button class="OLSKAppToolbarLauncherButton" on:click={ mod._OLSKAppToolbarDispatchLauncher }></button>

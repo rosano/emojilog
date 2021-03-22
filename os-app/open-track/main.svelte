@@ -25,8 +25,6 @@ const mod = {
 		mod._ValueJournalSelected = inputData
 	},
 	
-	_ValueFormVisible: false,
-	
 	_ValueBrowseMemos: [],
 	ValueBrowseMemos (inputData) {
 		mod._ValueBrowseMemos = inputData;
@@ -214,8 +212,6 @@ const mod = {
 
 		mod._EMLTrackMaster.modPublic.OLSKCollectionInsert(item);
 
-		mod._ValueFormVisible = true;
-
 		mod.ControlJournalSelect(item);
 	},
 	
@@ -227,8 +223,6 @@ const mod = {
 		await mod._ValueZDRWrap.App.EMLJournal.EMLJournalDelete(inputData);
 
 		mod.ControlJournalSelect(null);
-
-		mod._ValueFormVisible = false;
 
 		mod.SetupValueJournalsAll();
 	},
@@ -299,34 +293,20 @@ const mod = {
 	},
 
 	EMLTrackMasterDispatchCreate () {
+		mod._ValueShowTemplateForm = true;
+
 		mod.ControlJournalCreate();
 	},
 
 	async OLSKCollectionDispatchClick (inputData) {
+		mod._ValueShowTemplateForm = false;
+		
 		mod.ValueBrowseMemos(await mod._ValueZDRWrap.App.EMLMemo.EMLMemoList(inputData));
 		
 		mod.ControlJournalSelect(inputData);
 	},
 
-	EMLTemplateDispatchDone () {
-		mod._ValueFormVisible = false;
-	},
-
-	EMLTemplateDispatchDiscard (inputData) {
-		mod.ControlJournalDiscard(inputData);
-	},
-
-	EMLTemplateDispatchUpdate () {
-		mod._ValueJournalSelected = mod._ValueJournalSelected; // #purge-svelte-force-update
-		
-		mod.ControlJournalSave(mod._ValueJournalSelected);
-	},
-
 	EMLBrowseListDispatchCreate () {},
-
-	EMLBrowseListDispatchForm () {
-		mod._ValueFormVisible = true;
-	},
 
 	EMLBrowseListDispatchClose () {
 		mod.ControlJournalSelect(null);
@@ -338,6 +318,16 @@ const mod = {
 		mod.ControlJournalSave(Object.assign(mod._ValueJournalSelected, {
 			EMLJournalTouchDate: inputData,
 		}));
+	},
+
+	EMLTemplateDispatchUpdate () {
+		mod._ValueJournalSelected = mod._ValueJournalSelected; // #purge-svelte-force-update
+		
+		mod.ControlJournalSave(mod._ValueJournalSelected);
+	},
+
+	EMLTemplateDispatchDiscard (inputData) {
+		mod.ControlJournalDiscard(inputData);
 	},
 
 	ZDRSchemaDispatchSyncCreateJournal (inputData) {
@@ -544,7 +534,6 @@ import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
 import EMLTrackMaster from './submodules/EMLTrackMaster/main.svelte';
-import EMLTemplate from '../sub-template/main.svelte';
 import EMLBrowse from '../sub-browse/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorkerView from '../_shared/__external/OLSKServiceWorker/main.svelte';
@@ -563,27 +552,18 @@ import OLSKApropos from 'OLSKApropos';
 			OLSKCollectionDispatchClick={ mod.OLSKCollectionDispatchClick }
 			bind:this={ mod._EMLTrackMaster }
 			/>
-	{/if}
-
-	{#if mod._ValueJournalSelected && !mod._ValueFormVisible }
+	{:else}
 		<EMLBrowse
 			EMLBrowseStorageClient={ mod._ValueZDRWrap }
 			EMLBrowseJournal={ mod._ValueJournalSelected }
 			EMLBrowseMemos={ mod._ValueBrowseMemos }
+			EMLBrowseShowTemplateForm={ mod._ValueShowTemplateForm }
 			EMLBrowseListDispatchCreate={ mod.EMLBrowseListDispatchCreate }
-			EMLBrowseListDispatchForm={ mod.EMLBrowseListDispatchForm }
 			EMLBrowseListDispatchClose={ mod.EMLBrowseListDispatchClose }
 			EMLBrowseListDispatchTouch={ mod.EMLBrowseListDispatchTouch }
-			bind:this={ mod._EMLBrowse }
-			/>
-	{/if}
-
-	{#if mod._ValueJournalSelected && mod._ValueFormVisible }
-		<EMLTemplate
-			EMLTemplateItem={ mod._ValueJournalSelected }
-			EMLTemplateDispatchDone={ mod.EMLTemplateDispatchDone }
 			EMLTemplateDispatchDiscard={ mod.EMLTemplateDispatchDiscard }
 			EMLTemplateDispatchUpdate={ mod.EMLTemplateDispatchUpdate }
+			bind:this={ mod._EMLBrowse }
 			/>
 	{/if}
 </div>

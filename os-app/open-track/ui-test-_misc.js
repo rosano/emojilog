@@ -76,14 +76,14 @@ describe('EMLTrack_Misc', function () {
 			return browser.pressButton(EMLTrackMasterCreateButton);
 		});
 
-		it('focuses EMLTemplateFormNameField', function() {
-			browser.assert.hasFocus('.EMLTemplateFormNameField');
+		it('focuses EMLTemplateNameField', function() {
+			browser.assert.hasFocus('.EMLTemplateNameField');
 		});
 
 		describe('EMLTrackMasterListItem', function test_EMLTrackMasterListItem () {
 
 			before(function () {
-				return browser.pressButton('.EMLTemplateToolbarDoneButton');
+				return browser.pressButton('.OLSKModalViewCloseButton');
 			});
 
 			before(function () {

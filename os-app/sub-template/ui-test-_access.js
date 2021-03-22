@@ -3,12 +3,9 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 Object.entries({
 	EMLTemplate: '.EMLTemplate',
 
-	EMLTemplateToolbar: '.EMLTemplateToolbar',
-	EMLTemplateToolbarDoneButton: '.EMLTemplateToolbarDoneButton',
-	EMLTemplateToolbarDiscardButton: '.EMLTemplateToolbarDiscardButton',
+	EMLTemplateNameField: '.EMLTemplateNameField',
 	
-	EMLTemplateForm: '.EMLTemplateForm',
-	EMLTemplateFormNameField: '.EMLTemplateFormNameField',
+	EMLTemplateDiscardButton: '.EMLTemplateDiscardButton',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -27,24 +24,12 @@ describe('EMLTemplate_Access', function () {
 		browser.assert.elements(EMLTemplate, 1);
 	});
 
-	it('shows EMLTemplateToolbar', function () {
-		browser.assert.elements(EMLTemplateToolbar, 1);
+	it('shows EMLTemplateDiscardButton', function () {
+		browser.assert.elements(EMLTemplateDiscardButton, 1);
 	});
 
-	it('shows EMLTemplateToolbarDoneButton', function () {
-		browser.assert.elements(EMLTemplateToolbarDoneButton, 1);
-	});
-
-	it('shows EMLTemplateToolbarDiscardButton', function () {
-		browser.assert.elements(EMLTemplateToolbarDiscardButton, 1);
-	});
-
-	it('shows EMLTemplateForm', function () {
-		browser.assert.elements(EMLTemplateForm, 1);
-	});
-
-	it('shows EMLTemplateFormNameField', function () {
-		browser.assert.elements(EMLTemplateFormNameField, 1);
+	it('shows EMLTemplateNameField', function () {
+		browser.assert.elements(EMLTemplateNameField, 1);
 	});
 
 });

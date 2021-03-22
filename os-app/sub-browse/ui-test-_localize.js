@@ -27,6 +27,22 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.attribute(EMLBrowseCreateButton, 'title', uLocalized('EMLBrowseCreateButtonText'));
 		});
 
+		describe('OLSKModalView', function test_OLSKModalView() {
+
+			before(function () {
+				return browser.pressButton(EMLBrowseFormButton);
+			});
+
+			it('sets OLSKModalViewTitleText', function () {
+				browser.assert.text('.OLSKModalViewTitle', uLocalized('EMLBrowseFormButtonText'));
+			});
+
+			after(function () {
+				return browser.pressButton('.OLSKModalViewCloseButton');
+			});
+
+		});
+
 	});
 
 });

@@ -1,48 +1,38 @@
 <script>
 export let EMLTemplateItem;
-export let EMLTemplateDispatchDone;
-export let EMLTemplateDispatchDiscard;
 export let EMLTemplateDispatchUpdate;
+export let EMLTemplateDispatchDiscard;
 
 import { OLSKLocalized } from 'OLSKInternational';
 </script>
-<div class="EMLTemplate OLSKViewportDetail">
 
-<header class="EMLTemplateToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeBottom">
-	<div class="OLSKToolbarElementGroup">
-		<button class="EMLTemplateToolbarDoneButton OLSKDecorButtonNoStyle OLSKDecorTappable" on:click={ EMLTemplateDispatchDone }>{ OLSKLocalized('EMLTemplateToolbarDoneButtonText') }</button>
-	</div>
+<div class="EMLTemplate OLSKDecor OLSKDecorBigForm">
 
-	<div class="OLSKToolbarElementGroup">
-		<button class="EMLTemplateToolbarDiscardButton OLSKDecorButtonNoStyle OLSKDecorTappable" on:click={ () => window.confirm(OLSKLocalized('EMLTemplateDiscardConfirmText')) && EMLTemplateDispatchDiscard(EMLTemplateItem) }>{ OLSKLocalized('EMLTemplateToolbarDiscardButtonText') }</button>
-	</div>
-</header>
+<p>
+	<input type="text" class="EMLTemplateNameField" bind:value={ EMLTemplateItem.EMLJournalName } on:input={ EMLTemplateDispatchUpdate } placeholder="{ OLSKLocalized('EMLTemplateNameFieldPlaceholderText') }" autofocus />
+</p>
 
-<div class="EMLTemplateForm">
-	<p>
-		<input type="text" class="EMLTemplateFormNameField" bind:value={ EMLTemplateItem.EMLJournalName } on:input={ EMLTemplateDispatchUpdate } placeholder="{ OLSKLocalized('EMLTemplateFormNameFieldPlaceholderText') }" autofocus />
-	</p>
-</div>
+<hr role="presentation" />
+
+<p>
+	<button class="EMLTemplateDiscardButton OLSKDecorPress OLSKDecorPressDestroy" on:click={ () => window.confirm(OLSKLocalized('EMLTemplateDiscardConfirmText')) && EMLTemplateDispatchDiscard(EMLTemplateItem) }>{ OLSKLocalized('EMLTemplateDiscardButtonText') }</button>
+</p>
 
 </div>
 
 <style>
 .EMLTemplate {
+	--OLSKCommonFontSize: 9pt;
+
+	background: var(--OLSKCommonBackground);
+	
 	/* EMLTemplateFlexbox:Parent */
 	display: flex;
 	flex-direction: column;
 }
 
-.EMLTemplateForm {
-	padding: 5px;
 
-	overflow-y: scroll;
-}
-
-.EMLTemplateForm input[type=text] {
-	width: 50%;
-	border: var(--OLSKCommonEdgeBorder);
-	border-radius: 5px;
-	padding: 5px;
+.EMLTemplate input[type=text] {
+	max-width: 25%;
 }
 </style>

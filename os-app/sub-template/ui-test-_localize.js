@@ -16,23 +16,19 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			});
 		});
 
-		it('localizes EMLTemplateToolbarDoneButton', function () {
-			browser.assert.text(EMLTemplateToolbarDoneButton, uLocalized('EMLTemplateToolbarDoneButtonText'));
-		});
-
-		it('localizes EMLTemplateToolbarDiscardButton', function () {
-			browser.assert.text(EMLTemplateToolbarDiscardButton, uLocalized('EMLTemplateToolbarDiscardButtonText'));
+		it('localizes EMLTemplateDiscardButton', function () {
+			browser.assert.text(EMLTemplateDiscardButton, uLocalized('EMLTemplateDiscardButtonText'));
 		});
 		
-		it('localizes EMLTemplateFormNameField', function () {
-			browser.assert.attribute(EMLTemplateFormNameField, 'placeholder', uLocalized('EMLTemplateFormNameFieldPlaceholderText'));
+		it('localizes EMLTemplateNameField', function () {
+			browser.assert.attribute(EMLTemplateNameField, 'placeholder', uLocalized('EMLTemplateNameFieldPlaceholderText'));
 		});
 
 		context('on discard', function () {
 		
 			it('localizes EMLTemplateDiscardConfirm', function() {
 				browser.assert.OLSKConfirmQuestion(function () {
-					return browser.pressButton(EMLTemplateToolbarDiscardButton);
+					return browser.pressButton(EMLTemplateDiscardButton);
 				}, uLocalized('EMLTemplateDiscardConfirmText'));
 			});
 		

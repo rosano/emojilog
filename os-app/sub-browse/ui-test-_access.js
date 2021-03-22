@@ -61,6 +61,10 @@ describe('EMLBrowse_Access', function () {
 		browser.assert.elements('.EMLBrowseInfoForm', 0);
 	});
 
+	it('hides EMLTemplate', function () {
+		browser.assert.elements('.EMLTemplate', 0);
+	});
+
 	it('hides EMLBrowseInfoLauncherFakeItemProxy', function () {
 		return browser.assert.OLSKLauncherItems('EMLBrowseInfoLauncherFakeItemProxy', 0);
 	});
@@ -109,6 +113,31 @@ describe('EMLBrowse_Access', function () {
 
 		it('hides EMLBrowseInfoForm', function () {
 			browser.assert.elements('.EMLBrowseInfoForm', 0);
+		});
+
+	});
+
+	context('form', function test_form() {
+
+		before(function () {
+			return browser.pressButton('.EMLBrowseFormButton');
+		});
+
+		it('shows EMLTemplate', function () {
+			browser.assert.elements('.OLSKModalView .EMLTemplate', 1);
+		});
+
+
+		context('close', function close () {
+
+			before(function () {
+				return browser.pressButton('.OLSKModalViewCloseButton');
+			});
+			
+			it('hides EMLTemplate', function () {
+				browser.assert.elements('.EMLTemplate', 0);
+			});
+		
 		});
 
 	});

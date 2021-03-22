@@ -1,4 +1,3 @@
-EMLTemplateToolbarDoneButtonText: Done
-EMLTemplateToolbarDiscardButtonText: Discard
+EMLTemplateDiscardButtonText: Delete journal and all entries
 EMLTemplateDiscardConfirmText: Are you sure?
-EMLTemplateFormNameFieldPlaceholderText: Name
+EMLTemplateNameFieldPlaceholderText: Name

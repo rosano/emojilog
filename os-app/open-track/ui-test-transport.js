@@ -101,11 +101,11 @@ describe('EMLTrack_Transport', function () {
 		});
 
 		before(function () {
-			return browser.fill('.EMLTemplateFormNameField', EMLJournalName);
+			return browser.fill('.EMLTemplateNameField', EMLJournalName);
 		});
 
 		before(function () {
-			return browser.pressButton('.EMLTemplateToolbarDoneButton');
+			return browser.pressButton('.OLSKModalViewCloseButton');
 		});
 
 		before(function () {

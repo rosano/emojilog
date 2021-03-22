@@ -22,10 +22,6 @@ describe('EMLTrack_Access', function () {
 		browser.assert.elements('.EMLTrackMasterListItem', 0);
 	});
 
-	it('hides EMLTemplate', function () {
-		browser.assert.elements('.EMLTemplate', 0);
-	});
-
 	it('hides OLSKCatalog', function () {
 		browser.assert.elements('.OLSKCatalog', 0);
 	});
@@ -158,8 +154,8 @@ describe('EMLTrack_Access', function () {
 			browser.assert.elements('.EMLTrackMaster', 0);
 		});
 
-		it('hides OLSKCatalog', function () {
-			browser.assert.elements('.OLSKCatalog', 0);
+		it('show OLSKCatalog', function () {
+			browser.assert.elements('.OLSKCatalog', 1);
 		});
 
 		it('shows EMLTemplate', function () {
@@ -168,24 +164,12 @@ describe('EMLTrack_Access', function () {
 	
 	});
 
-	context('done', function test_done () {
-		
-		before(function () {
-			return browser.pressButton('.EMLTemplateToolbarDoneButton');
-		});
-
-		it('hides EMLTemplate', function () {
-			browser.assert.elements('.EMLTemplate', 0);
-		});
-
-		it('shows OLSKCatalog', function () {
-			browser.assert.elements('.OLSKCatalog', 1);
-		});
-	
-	});
-
 	context('close', function test_close () {
 		
+		before(function () {
+			return browser.pressButton('.OLSKModalViewCloseButton');
+		});
+
 		before(function () {
 			return browser.pressButton('.EMLBrowseCloseButton');
 		});
@@ -214,48 +198,22 @@ describe('EMLTrack_Access', function () {
 			return browser.pressButton('.EMLBrowseFormButton');
 		});
 
-		context('cancel', function () {
-			
-			before(async function () {
-				return browser.OLSKConfirm(function () {
-					browser.pressButton('.EMLTemplateToolbarDiscardButton');
-				}, function (dialog) {
-					dialog.response = false;
-
-					return dialog;
-				});
+		before(function () {
+			return browser.OLSKConfirm(function () {
+				return browser.pressButton('.EMLTemplateDiscardButton');
 			});
-
-			it('shows EMLTemplate', function () {
-				browser.assert.elements('.EMLTemplate', 1);
-			});
-		
 		});
 
-		context('confirm', function () {
-			
-			before(async function () {
-				return browser.OLSKConfirm(function () {
-					return browser.pressButton('.EMLTemplateToolbarDiscardButton');
-				});
-			});
+		it('hides EMLTrackMasterListItem', function () {
+			browser.assert.elements('.EMLTrackMasterListItem', 0);
+		});
 
-			it('hides EMLTrackMasterListItem', function () {
-				browser.assert.elements('.EMLTrackMasterListItem', 0);
-			});
+		it('hides OLSKCatalog', function () {
+			browser.assert.elements('.OLSKCatalog', 0);
+		});
 
-			it('hides OLSKCatalog', function () {
-				browser.assert.elements('.OLSKCatalog', 0);
-			});
-
-			it('hides EMLTemplate', function () {
-				browser.assert.elements('.EMLTemplate', 0);
-			});
-
-			it('shows EMLTrackMaster', function () {
-				browser.assert.elements('.EMLTrackMaster', 1);
-			});
-		
+		it('shows EMLTrackMaster', function () {
+			browser.assert.elements('.EMLTrackMaster', 1);
 		});
 		
 	});
@@ -267,15 +225,11 @@ describe('EMLTrack_Access', function () {
 		});
 
 		before(function () {
-			return browser.pressButton('.EMLTemplateToolbarDoneButton');
+			return browser.pressButton('.OLSKModalViewCloseButton');
 		});
 
 		it('hides EMLTrackMaster', function () {
 			browser.assert.elements('.EMLTrackMaster', 0);
-		});
-
-		it('hides EMLTemplate', function () {
-			browser.assert.elements('.EMLTemplate', 0);
 		});
 
 		it('shows OLSKCatalog', function () {
@@ -290,27 +244,7 @@ describe('EMLTrack_Access', function () {
 			return browser.assert.OLSKLauncherItems('EMLBrowseLauncherFakeItemProxy', 1);
 		});
 
-		context('form', function () {
-
-			before(function () {
-				return browser.pressButton('.EMLBrowseFormButton');
-			});
-			
-			it('hides OLSKCatalog', function () {
-				browser.assert.elements('.OLSKCatalog', 0);
-			});
-
-			it('shows EMLTemplate', function () {
-				browser.assert.elements('.EMLTemplate', 1);
-			});
-		
-		});
-
 		context('close', function () {
-
-			before(function () {
-				return browser.pressButton('.EMLTemplateToolbarDoneButton');
-			});
 
 			before(function () {
 				return browser.pressButton('.EMLBrowseCloseButton');
@@ -318,10 +252,6 @@ describe('EMLTrack_Access', function () {
 
 			it('shows EMLTrackMaster', function () {
 				browser.assert.elements('.EMLTrackMaster', 1);
-			});
-
-			it('hides EMLTemplate', function () {
-				browser.assert.elements('.EMLTemplate', 0);
 			});
 
 			it('hides OLSKCatalog', function () {

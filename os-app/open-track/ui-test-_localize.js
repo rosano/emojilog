@@ -157,7 +157,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			});
 
 			before(function () {
-				return browser.pressButton('.EMLTemplateToolbarDoneButton');
+				return browser.pressButton('.OLSKModalViewCloseButton');
 			});
 
 			it('localizes EMLTrackLauncherItemExportSelectedJSON', function () {
