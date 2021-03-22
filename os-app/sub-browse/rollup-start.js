@@ -36,11 +36,11 @@ import zerodatawrap from 'zerodatawrap';
 			EMLBrowseJournalMemos: [],
 			EMLBrowse_DEBUG: true,
 		}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e, index, coll) {
-			if (['EMLBrowseJournalSelected', 'EMLBrowseItemSelected'].includes(e[0])) {
+			if (['EMLBrowseJournal', 'EMLBrowseItemSelected'].includes(e[0])) {
 				e[1] = JSON.parse(e[1]);
 			}
 
-			if (['EMLBrowseJournalSelected'].includes(e[0])) {
+			if (['EMLBrowseJournal'].includes(e[0])) {
 				e[1] = OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(e[1]);
 			}
 

@@ -1,7 +1,7 @@
 <script>
 export let EMLBrowseStorageClient;
 
-export let EMLBrowseJournalSelected;
+export let EMLBrowseJournal;
 export let EMLBrowseJournalMemos;
 export let EMLBrowseListDispatchCreate;
 export let EMLBrowseListDispatchForm;
@@ -65,7 +65,7 @@ const mod = {
 					LCHRecipeCallback: async function FakeSyncCreateMemo () {
 						return mod.SyncCreateMemo(await EMLBrowseStorageClient.App.EMLMemo.EMLMemoCreate(mod.DataMemoObjectTemplate({
 							EMLMemoNotes: 'FakeSyncCreateMemo',
-						}), EMLBrowseJournalSelected));
+						}), EMLBrowseJournal));
 					},
 				},
 				{
@@ -117,7 +117,7 @@ const mod = {
 	// INTERFACE	
 
 	InterfaceCreateButtonDidClick () {
-		mod.ControlMemoCreate(EMLBrowseJournalSelected);
+		mod.ControlMemoCreate(EMLBrowseJournal);
 	},
 
 	// CONTROL

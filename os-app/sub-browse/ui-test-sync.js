@@ -4,7 +4,7 @@ describe('EMLBrowse_Sync', function () {
 
 	before(function() {
 		return browser.OLSKVisit(kDefaultRoute, {
-			EMLBrowseJournalSelected: JSON.stringify(StubJournalObjectValid()),
+			EMLBrowseJournal: JSON.stringify(StubJournalObjectValid()),
 		});
 	});
 

@@ -568,7 +568,7 @@ import OLSKApropos from 'OLSKApropos';
 	{#if mod._ValueJournalSelected && !mod._ValueFormVisible }
 		<EMLBrowse
 			EMLBrowseStorageClient={ mod._ValueZDRWrap }
-			EMLBrowseJournalSelected={ mod._ValueJournalSelected }
+			EMLBrowseJournal={ mod._ValueJournalSelected }
 			EMLBrowseJournalMemos={ mod._ValueBrowseMemos }
 			EMLBrowseListDispatchCreate={ mod.EMLBrowseListDispatchCreate }
 			EMLBrowseListDispatchForm={ mod.EMLBrowseListDispatchForm }

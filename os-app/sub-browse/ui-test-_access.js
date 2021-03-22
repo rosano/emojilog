@@ -17,7 +17,7 @@ describe('EMLBrowse_Access', function () {
 
 	before(function () {
 		return browser.OLSKVisit(kDefaultRoute, {
-			EMLBrowseJournalSelected: JSON.stringify(StubJournalObjectValid()),
+			EMLBrowseJournal: JSON.stringify(StubJournalObjectValid()),
 		});
 	});
 
