@@ -254,23 +254,6 @@ const mod = {
 		}
 	},
 
-	ControlExportData (inputData) {
-		Launchlet.LCHTasksRun([{
-			async LCHRecipeCallback () {
-				if (OLSK_SPEC_UI()) {
-					return window.alert(JSON.stringify({
-						OLSKDownloadName: mod.DataExportJSONFilename(),
-						OLSKDownloadData: JSON.stringify(await mod.DataExportJSON(inputData)),
-					}));
-				};
-
-				return this.api.LCHSaveFile(JSON.stringify(await mod.DataExportJSON(inputData)), mod.DataExportJSONFilename())
-			},
-			LCHRecipeURLFilter: '*',
-		  LCHRecipeIsAutomatic: true,
-		}]);
-	},
-
 	// MESSAGE
 
 	OLSKAppToolbarDispatchApropos () {
