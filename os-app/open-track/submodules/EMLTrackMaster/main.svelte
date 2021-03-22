@@ -1,7 +1,6 @@
 <script>
-export let EMLTrackMasterListItems;
 export let EMLTrackMasterDispatchCreate;
-export let EMLTrackMasterDispatchSelect;
+export let OLSKCollectionDispatchClick;
 export let EMLTrackMaster_DebugShowLauncherButton = false;
 
 export const modPublic = {
@@ -36,15 +35,43 @@ const mod = {
 
 	// MESSAGES
 
+	_OLSKCollectionDispatchKey (inputData) {
+		return inputData.EMLJournalID;
+	},
+
+	OLSKCollectionGroupFunction (inputData) {
+		return EMLTrackMasterLogic.EMLTrackMasterGroupFunction(inputData, OLSKLocalized);
+	},
+
+	OLSKCollectionItemAccessibilitySummaryFunction (inputData) {
+		return EMLTrackMasterLogic.EMLTrackMasterAccessibilitySummary(inputData, OLSKLocalized)
+	},
+
 	_OLSKAppToolbarDispatchLauncher () {
 		window.Launchlet.LCHSingletonCreate({
 			LCHOptionRecipes: mod.DataTrackMasterRecipes(),
 		});
 	},
 
+	// SETUP
+
+	SetupEverything() {
+		Object.assign(modPublic, mod._OLSKCollection.modPublic);
+	},
+
+	// LIFECYCLE
+
+	LifecycleModuleWillMount() {
+		mod.SetupEverything();
+	},
+
 };
 
+import { onMount } from 'svelte';
+onMount(mod.LifecycleModuleWillMount);
+
 import OLSKStandardView from 'OLSKStandardView';
+import OLSKCollection from 'OLSKCollection';
 import EMLTrackTimer from '../EMLTrackTimer/main.svelte';
 import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedCreate.svg';
 </script>
@@ -62,18 +89,26 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 	</div>
 </div>
 
-<div class="EMLTrackMasterList">
-{#each EMLTrackMasterListItems as e}
+<OLSKCollection
+	bind:this={ mod._OLSKCollection }
+	
+	OLSKCollectionSortFunction={ EMLTrackMasterLogic.EMLTrackMasterSort }
+	_OLSKCollectionDispatchKey={ mod._OLSKCollectionDispatchKey }
 
-<button class="EMLTrackMasterListItem OLSKDecorButtonNoStyle OLSKDecorTappable" aria-label={ EMLTrackMasterLogic.EMLTrackMasterAccessibilitySummary(e, OLSKLocalized) } on:click={ () => EMLTrackMasterDispatchSelect(e) }>
-	<EMLTrackTimer
-		EMLTrackTimerEventDate={ e.EMLJournalTouchDate }
-		EMLTrackTimerText={ EMLTrackMasterLogic.EMLTrackMasterSymbol(e) }
-		/>
-</button>
+	OLSKCollectionGroupFunction={ mod.OLSKCollectionGroupFunction }
+	
+	OLSKCollectionItemAccessibilitySummaryFunction={ mod.OLSKCollectionItemAccessibilitySummaryFunction }
+	OLSKCollectionDispatchClick={ OLSKCollectionDispatchClick }
 
-{/each}
-</div>
+	let:OLSKCollectionItem
+	>
+	<div slot="OLSKCollectionItem" class="EMLTrackMasterListItem OLSKDecorTappable" >
+		<EMLTrackTimer
+			EMLTrackTimerEventDate={ OLSKCollectionItem.EMLJournalTouchDate }
+			EMLTrackTimerText={ EMLTrackMasterLogic.EMLTrackMasterSymbol(OLSKCollectionItem) }
+			/>
+	</div>
+</OLSKCollection>
 
 </OLSKStandardView>
 
@@ -88,9 +123,23 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 	width: 100%;
 }
 
-.EMLTrackMasterList {
+.EMLTrackMaster :global(.OLSKCollection, .OLSKCollectionGroup, .OLSKCollectionGroupItems) {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+}
+
+.EMLTrackMaster :global(.OLSKCollectionGroupHeading) {
+	padding: 6px;
+	border-bottom: 1px solid #cccccc;
+
+	font-weight: bold;
+	background: #e6e6e6;
+}
+
+.EMLTrackMaster :global(.OLSKCollectionGroupItems) {
+	padding: 10px;
+	
+	flex-direction: unset;
 	flex-wrap: wrap;
 }
 </style>

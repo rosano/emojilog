@@ -148,7 +148,7 @@ describe('EMLTrack_Access', function () {
 
 	});
 
-	context('create', function () {
+	context('create', function test_create () {
 		
 		before(function () {
 			return browser.pressButton('.EMLTrackMasterCreateButton');
@@ -168,7 +168,7 @@ describe('EMLTrack_Access', function () {
 	
 	});
 
-	context('done', function () {
+	context('done', function test_done () {
 		
 		before(function () {
 			return browser.pressButton('.EMLTemplateToolbarDoneButton');
@@ -184,7 +184,7 @@ describe('EMLTrack_Access', function () {
 	
 	});
 
-	context('close', function () {
+	context('close', function test_close () {
 		
 		before(function () {
 			return browser.pressButton('.EMLBrowseCloseButton');
@@ -207,7 +207,7 @@ describe('EMLTrack_Access', function () {
 	context('delete', function test_delete () {
 
 		before(function () {
-			return browser.pressButton('.EMLTrackMasterListItem');
+			return browser.click('.EMLTrackMasterListItem');
 		});
 
 		before(function () {

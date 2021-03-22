@@ -34,6 +34,10 @@ describe('EMLTrackMaster_Access', function () {
 		browser.assert.elements(EMLTrackMasterCreateButtonImage, 1);
 	});
 
+	it('shows OLSKCollection', function () {
+		browser.assert.elements('.OLSKCollection', 1);
+	});
+
 	it('hides EMLTrackMasterListItem', function () {
 		browser.assert.elements(EMLTrackMasterListItem, 0);
 	});
@@ -42,10 +46,7 @@ describe('EMLTrackMaster_Access', function () {
 		
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				EMLTrackMasterListItems: JSON.stringify([{
-					EMLJournalName: Math.random().toString(),
-					EMLJournalTouchDate: new Date(),
-				}]),
+				EMLTrackMasterListItems: JSON.stringify([StubJournalObjectValid()]),
 			});
 		});
 

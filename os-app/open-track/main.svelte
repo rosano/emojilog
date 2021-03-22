@@ -11,7 +11,6 @@ import EMLMemo from '../_shared/EMLMemo/main.js';
 import EMLSetting from '../_shared/EMLSetting/main.js';
 import EMLTransport from '../_shared/EMLTransport/main.js';
 import RemoteStorage from 'remotestoragejs';
-import EMLTrackLogic from './ui-logic.js';
 import OLSKString from 'OLSKString';
 import OLSKLanguageSwitcher from 'OLSKLanguageSwitcher';
 
@@ -21,11 +20,6 @@ const mod = {
 
 	_ValueIsLoading: true,
 
-	_ValueJournalsAll: [],
-	ValueJournalsAll (inputData, shouldSort = true) {
-		mod._ValueJournalsAll = shouldSort ? inputData.sort(EMLTrackLogic.EMLTrackSort) : inputData;
-	},
-	
 	_ValueJournalSelected: undefined,
 	ValueJournalSelected (inputData) {
 		mod._ValueJournalSelected = inputData
@@ -86,7 +80,7 @@ const mod = {
 				LCHRecipeSignature: 'EMLTrackLauncherItemExportJSON',
 				LCHRecipeName: OLSKLocalized('EMLTrackLauncherItemExportJSONText'),
 				LCHRecipeCallback: async function EMLTrackLauncherItemExportJSON () {
-					return this.api.LCHSaveFile(await mod.DataExportJSON(mod._ValueJournalsAll), mod.DataExportJSONFilename());
+					return this.api.LCHSaveFile(await mod.DataExportJSON(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalList()), mod.DataExportJSONFilename());
 				},
 			},
 		];
@@ -137,7 +131,7 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncUpdateJournal',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncUpdateJournal () {
-						return mod.ZDRSchemaDispatchSyncUpdateJournal(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalUpdate(Object.assign(mod._ValueJournalsAll.filter(function (e) {
+						return mod.ZDRSchemaDispatchSyncUpdateJournal(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalUpdate(Object.assign(mod._ValueJournalSelected || mod._EMLTrackMaster.modPublic._OLSKCollectionDataItemsAll().filter(function (e) {
 							return e.EMLJournalName.match('FakeZDRSchemaDispatchSync');
 						}).pop(), {
 							EMLJournalName: 'FakeZDRSchemaDispatchSyncUpdateJournal',
@@ -147,7 +141,7 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncDeleteJournal',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncDeleteJournal () {
-						return mod.ZDRSchemaDispatchSyncDeleteJournal(await mod._ValueZDRWrap.App.EMLJournal.ZDRModelDeleteObject(mod._ValueJournalsAll.filter(function (e) {
+						return mod.ZDRSchemaDispatchSyncDeleteJournal(await mod._ValueZDRWrap.App.EMLJournal.ZDRModelDeleteObject(mod._ValueJournalSelected || mod._EMLTrackMaster.modPublic._OLSKCollectionDataItemsAll().filter(function (e) {
 							return e.EMLJournalName.match('FakeZDRSchemaDispatchSync');
 						}).pop()));
 					},
@@ -155,7 +149,7 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncConflictJournal',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncConflictJournal () {
-						const item = mod._ValueJournalsAll.filter(function (e) {
+						const item = mod._ValueJournalSelected || mod._EMLTrackMaster.modPublic._OLSKCollectionDataItemsAll().filter(function (e) {
 							return e.EMLJournalName.match('FakeZDRSchemaDispatchSyncConflictJournal');
 						}).pop();
 						
@@ -181,7 +175,7 @@ const mod = {
 					LCHRecipeCallback: async function EMLTrackLauncherItemDebug_AlertFakeExportSerialized () {
 						return window.alert(JSON.stringify({
 							OLSKDownloadName: mod.DataExportJSONFilename(),
-							OLSKDownloadData: await mod.DataExportJSON(mod._ValueJournalsAll),
+							OLSKDownloadData: await mod.DataExportJSON(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalList()),
 						}));
 					},
 				},
@@ -218,7 +212,7 @@ const mod = {
 	async ControlJournalCreate() {
 		const item = await mod._ValueZDRWrap.App.EMLJournal.EMLJournalCreate(mod.DataJournalObjectTemplate());
 
-		mod.ValueJournalsAll(mod._ValueJournalsAll.concat(item));
+		mod._EMLTrackMaster.modPublic.OLSKCollectionInsert(item);
 
 		mod._ValueFormVisible = true;
 
@@ -230,15 +224,13 @@ const mod = {
 	},
 	
 	async ControlJournalDiscard (inputData) {
-		mod.ValueJournalsAll(mod._ValueJournalsAll.filter(function (e) {
-			return e !== inputData;
-		}))
-
 		await mod._ValueZDRWrap.App.EMLJournal.EMLJournalDelete(inputData);
 
 		mod.ControlJournalSelect(null);
 
 		mod._ValueFormVisible = false;
+
+		mod.SetupValueJournalsAll();
 	},
 
 	async ControlJournalsImportJSON (inputData) {
@@ -310,7 +302,7 @@ const mod = {
 		mod.ControlJournalCreate();
 	},
 
-	async EMLTrackMasterDispatchSelect (inputData) {
+	async OLSKCollectionDispatchClick (inputData) {
 		mod.ValueBrowseMemos(await mod._ValueZDRWrap.App.EMLMemo.EMLMemoList(inputData));
 		
 		mod.ControlJournalSelect(inputData);
@@ -338,6 +330,8 @@ const mod = {
 
 	EMLBrowseListDispatchClose () {
 		mod.ControlJournalSelect(null);
+
+		mod.SetupValueJournalsAll();
 	},
 	
 	EMLBrowseListDispatchTouch (inputData) {
@@ -347,7 +341,13 @@ const mod = {
 	},
 
 	ZDRSchemaDispatchSyncCreateJournal (inputData) {
-		mod.ValueJournalsAll([inputData].concat(mod._ValueJournalsAll));
+		if (!mod._EMLTrackMaster) {
+			return;
+		}
+
+		mod._EMLTrackMaster.modPublic.OLSKCollectionInsert(inputData);
+
+		mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
 	},
 
 	ZDRSchemaDispatchSyncUpdateJournal (inputData) {
@@ -355,9 +355,13 @@ const mod = {
 			mod.ControlJournalSelect(inputData);
 		}
 
-		mod.ValueJournalsAll(mod._ValueJournalsAll.map(function (e) {
-			return Object.assign(e, e.EMLJournalID === inputData.EMLJournalID ? inputData : {});
-		}), false);
+		if (!mod._EMLTrackMaster) {
+			return;
+		}
+
+		mod._EMLTrackMaster.modPublic.OLSKCollectionUpdate(inputData);
+		
+		mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
 	},
 
 	ZDRSchemaDispatchSyncDeleteJournal (inputData) {
@@ -365,9 +369,13 @@ const mod = {
 			mod.ControlJournalSelect(null);
 		}
 
-		mod.ValueJournalsAll(mod._ValueJournalsAll.filter(function (e) {
-			return e.EMLJournalID !== inputData.EMLJournalID;
-		}), false);
+		if (!mod._EMLTrackMaster) {
+			return;
+		}
+
+		mod._EMLTrackMaster.modPublic.OLSKCollectionRemove(inputData);
+		
+		mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
 	},
 
 	async ZDRSchemaDispatchSyncConflictJournal (inputData) {
@@ -519,7 +527,9 @@ const mod = {
 			client.ZDRCloudDisconnect();
 		};
 
-		mod.ValueJournalsAll(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalList());
+		(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalList()).map(mod._EMLTrackMaster.modPublic.OLSKCollectionInsert);
+		
+		mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
 	},
 
 	// LIFECYCLE
@@ -549,9 +559,8 @@ import OLSKApropos from 'OLSKApropos';
 <div class="OLSKViewportContent">
 	{#if !mod._ValueJournalSelected }
 		<EMLTrackMaster
-			EMLTrackMasterListItems={ mod._ValueJournalsAll }
 			EMLTrackMasterDispatchCreate={ mod.EMLTrackMasterDispatchCreate }
-			EMLTrackMasterDispatchSelect={ mod.EMLTrackMasterDispatchSelect }
+			OLSKCollectionDispatchClick={ mod.OLSKCollectionDispatchClick }
 			bind:this={ mod._EMLTrackMaster }
 			/>
 	{/if}

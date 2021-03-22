@@ -90,10 +90,6 @@ describe('EMLTrack_Misc', function () {
 				return browser.pressButton('.EMLBrowseCloseButton');
 			});
 
-			it('classes OLSKDecorButtonNoStyle', function() {
-				browser.assert.hasClass('.EMLTrackMasterListItem', 'OLSKDecorButtonNoStyle');
-			});
-
 			it('classes OLSKDecorTappable', function() {
 				browser.assert.hasClass('.EMLTrackMasterListItem', 'OLSKDecorTappable');
 			});

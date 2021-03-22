@@ -68,7 +68,7 @@ describe('EMLTrackMaster_Misc', function () {
 
 	});
 
-	describe('EMLTrackMasterListItem', function() {
+	describe('OLSKCollection', function test_OLSKCollection () {
 
 		const EMLJournalTouchDate = new Date();
 		const item = {
@@ -83,30 +83,12 @@ describe('EMLTrackMaster_Misc', function () {
 			});
 		});
 
-		it('sets aria-label', function () {
-			browser.assert.attribute(EMLTrackMasterListItem, 'aria-label', EMLTrackMasterLogic.EMLTrackMasterAccessibilitySummary(item))
+		it('sets OLSKCollectionGroupFunction', function () {
+			browser.assert.elements('.OLSKCollectionGroupHeading', 1);
 		});
 
 		it('binds EMLJournalName', function () {
 			browser.assert.text('.EMLTrackTimerLabel', 'bravo');
-		});
-
-		context('click', function () {
-			
-			before(function () {
-				browser.assert.text('#TestEMLTrackMasterDispatchSelect', '0');
-				browser.assert.text('#TestEMLTrackMasterDispatchSelectData', 'undefined');
-			});
-			
-			before(function () {
-				return browser.click(EMLTrackMasterListItem);
-			});
-
-			it('sends EMLTrackMasterDispatchSelect', function () {
-				browser.assert.text('#TestEMLTrackMasterDispatchSelect', '1');
-				browser.assert.text('#TestEMLTrackMasterDispatchSelectData', JSON.stringify(item));
-			});
-		
 		});
 		
 	});

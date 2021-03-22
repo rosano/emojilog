@@ -1,2 +1,7 @@
 EMLTrackMasterCreateButtonText: Create
 EMLTrackMasterListItemUntitledText: Untitled
+EMLTrackMasterGroupReadyText: Ready
+EMLTrackMasterGroupTodayText: Today
+EMLTrackMasterGroupEarlierText: Earlier
+EMLTrackMasterGroupOverMonthText: Over a month
+EMLTrackMasterGroupOverYearText: Over a year

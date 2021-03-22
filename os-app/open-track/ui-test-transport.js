@@ -50,7 +50,7 @@ describe('EMLTrack_Transport', function () {
 		context('click', function () {
 
 			before(function () {
-				return browser.pressButton('.EMLTrackMasterListItem');
+				return browser.click('.EMLTrackMasterListItem');
 			});
 			
 			it('creates memo', function () {
