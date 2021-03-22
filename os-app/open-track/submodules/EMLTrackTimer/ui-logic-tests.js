@@ -37,7 +37,7 @@ describe('EMLTrackTimerFrameWeek', function test_EMLTrackTimerFrameWeek() {
 describe('EMLTrackTimerFrameMonth', function test_EMLTrackTimerFrameMonth() {
 
 	it('returns number', function () {
-		deepEqual(mod.EMLTrackTimerFrameMonth(), mod.EMLTrackTimerFrameWeek() * 365 / 12.0);
+		deepEqual(mod.EMLTrackTimerFrameMonth(), mod.EMLTrackTimerFrameDay() * 365 / 12.0);
 	});
 
 });
@@ -45,7 +45,7 @@ describe('EMLTrackTimerFrameMonth', function test_EMLTrackTimerFrameMonth() {
 describe('EMLTrackTimerFrameYear', function test_EMLTrackTimerFrameYear() {
 
 	it('returns number', function () {
-		deepEqual(mod.EMLTrackTimerFrameYear(), mod.EMLTrackTimerFrameWeek() * 365);
+		deepEqual(mod.EMLTrackTimerFrameYear(), mod.EMLTrackTimerFrameDay() * 365);
 	});
 
 });

@@ -21,11 +21,11 @@ const mod = {
 	},
 
 	EMLTrackTimerFrameMonth () {
-		return mod.EMLTrackTimerFrameWeek() * 365 / 12.0;
+		return mod.EMLTrackTimerFrameDay() * 365 / 12.0;
 	},
 
 	EMLTrackTimerFrameYear () {
-		return mod.EMLTrackTimerFrameWeek() * 365;
+		return mod.EMLTrackTimerFrameDay() * 365;
 	},
 
 	EMLTrackTimerFrameInfinity () {
