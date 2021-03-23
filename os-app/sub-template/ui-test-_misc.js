@@ -49,6 +49,44 @@ describe('EMLTemplate_Misc', function  test_EMLTemplate_Misc () {
 		});
 
 	});
+	
+	describe('OLSKEmojiPicker', function test_OLSKEmojiPicker () {
+
+		const item = Math.random().toString();
+		
+		context('input single', function () {
+
+			before(function () {
+				// browser.pressButton(item);
+			});
+			
+			it.skip('sets OLSKEmojiPickerDispatchSelect', function () {
+				browser.assert.input(EMLTemplateNameField, item);
+			});
+
+			it.skip('sends EMLTemplateDispatchUpdate', function () {
+				browser.assert.text('#TestEMLTemplateDispatchUpdate', '2');
+			});
+
+		});
+		
+		context('input multiple', function () {
+
+			before(function () {
+				// browser.pressButton(item);
+			});
+			
+			it.skip('sets OLSKEmojiPickerDispatchSelect', function () {
+				browser.assert.input(EMLTemplateNameField, item + ' ' + item);
+			});
+
+			it.skip('sends EMLTemplateDispatchUpdate', function () {
+				browser.assert.text('#TestEMLTemplateDispatchUpdate', '3');
+			});
+
+		});
+
+	});
 
 	describe('EMLTemplateDiscardButton', function  test_EMLTemplateDiscardButton () {
 		

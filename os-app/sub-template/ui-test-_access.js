@@ -28,6 +28,10 @@ describe('EMLTemplate_Access', function () {
 		browser.assert.elements(EMLTemplateNameField, 1);
 	});
 
+	it('shows OLSKEmojiPicker', function () {
+		browser.assert.elements('.OLSKEmojiPicker', 1);
+	});
+
 	it('shows EMLTemplateDiscardButton', function () {
 		browser.assert.elements(EMLTemplateDiscardButton, 1);
 	});
