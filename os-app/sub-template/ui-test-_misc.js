@@ -112,6 +112,8 @@ describe('EMLTemplate_Misc', function  test_EMLTemplate_Misc () {
 	});
 
 	describe('EMLTemplateParamForm', function test_EMLTemplateParamForm () {
+
+		const item = Math.random().toString();
 		
 		before(function () {
 			return browser.pressButton(EMLTemplateEditParamButton);
@@ -122,11 +124,23 @@ describe('EMLTemplate_Misc', function  test_EMLTemplate_Misc () {
 		});
 
 		before(function () {
-			browser.fill('.EMLTemplateParamFormNameField', Math.random().toString());
+			browser.fill('.EMLTemplateParamFormNameField', item);
 		});
 
 		it('sends EMLTemplateDispatchUpdate', function () {
 			browser.assert.text('#TestEMLTemplateDispatchUpdate', '3');
+		});
+
+		context('save', function () {
+			
+			before(function () {
+				return browser.pressButton('.EMLTemplateParamFormDoneButton');
+			});
+
+			it('localizes EMLTemplateEditParamButton', function () {
+				browser.assert.text(EMLTemplateEditParamButton, item);
+			});
+
 		});
 
 	});
