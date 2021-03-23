@@ -130,10 +130,10 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 
 .EMLTrackMaster :global(.OLSKCollectionGroupHeading) {
 	padding: 6px;
-	border-bottom: 1px solid #cccccc;
+	outline: #cccccc solid 1px;
 
 	font-weight: bold;
-	background: #e6e6e6;
+	background: #e9e9e9;
 }
 
 .EMLTrackMaster :global(.OLSKCollectionGroupItems) {
