@@ -2,9 +2,14 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('EMLBrowseInfo_Misc', function () {
 
+	const EMLBrowseInfoItem = {
+		EMLMemoNotes: Math.random().toString(),
+		EMLMemoEventDate: new Date(),
+	};
+
 	before(function () {
 		return browser.OLSKVisit(kDefaultRoute, {
-			EMLBrowseInfoItem: JSON.stringify({}),
+			EMLBrowseInfoItem: JSON.stringify(EMLBrowseInfoItem),
 		});
 	});
 
@@ -99,7 +104,7 @@ describe('EMLBrowseInfo_Misc', function () {
 
 			it('sends EMLBrowseInfoDispatchDiscard', function () {
 				browser.assert.text('#TestEMLBrowseInfoDispatchDiscard', '1');
-				browser.assert.text('#TestEMLBrowseInfoDispatchDiscardData', JSON.stringify({}));
+				browser.assert.text('#TestEMLBrowseInfoDispatchDiscardData', JSON.stringify(EMLBrowseInfoItem));
 			});
 
 		});
@@ -128,28 +133,20 @@ describe('EMLBrowseInfo_Misc', function () {
 
 	describe('EMLBrowseInfoFormNotesField', function test_EMLBrowseInfoFormNotesField() {
 
-		before(function () {
-			return browser.OLSKVisit(kDefaultRoute, {
-				EMLBrowseInfoItem: JSON.stringify({
-					EMLMemoNotes: 'alfa',
-				}),
-			});
-		});
+		const EMLMemoNotes = Math.random().toString();
 
 		it('classes OLSKMobileSafariRemoveDefaultInputStyle', function () {
 			browser.assert.hasClass(EMLBrowseInfoFormNotesField, 'OLSKMobileSafariRemoveDefaultInputStyle');
 		});
 
 		it('binds EMLMemoNotes', function () {
-			browser.assert.input(EMLBrowseInfoFormNotesField, 'alfa');
+			browser.assert.input(EMLBrowseInfoFormNotesField, EMLBrowseInfoItem.EMLMemoNotes);
 		});
 
 		context('input', function () {
 
 			before(function () {
-				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify({
-					EMLMemoNotes: 'alfa',
-				}));
+				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(EMLBrowseInfoItem));
 			});
 
 			before(function () {
@@ -157,13 +154,13 @@ describe('EMLBrowseInfo_Misc', function () {
 			});
 
 			before(function () {
-				browser.fill(EMLBrowseInfoFormNotesField, 'bravo');
+				browser.fill(EMLBrowseInfoFormNotesField, EMLMemoNotes);
 			});
 
 			it('updates EMLBrowseInfoItem', function () {
-				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify({
-					EMLMemoNotes: 'bravo',
-				}));
+				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(Object.assign(EMLBrowseInfoItem, {
+					EMLMemoNotes,
+				})));
 			});
 
 			it('sends EMLBrowseInfoDispatchUpdate', function () {
@@ -175,17 +172,6 @@ describe('EMLBrowseInfo_Misc', function () {
 	});
 
 	describe('EMLBrowseInfoFormDateField', function test_EMLBrowseInfoFormDateField() {
-
-		const EMLMemoEventDate = new Date();
-		const item = StubMemoObjectValid({
-			EMLMemoEventDate,
-		});
-
-		before(function () {
-			return browser.OLSKVisit(kDefaultRoute, {
-				EMLBrowseInfoItem: JSON.stringify(item),
-			});
-		});
 
 		before(function () {
 			return browser.pressButton(EMLBrowseInfoFormDateButton);
@@ -200,7 +186,7 @@ describe('EMLBrowseInfo_Misc', function () {
 		});
 
 		it('binds EMLMemoEventDate', function () {
-			browser.assert.input(EMLBrowseInfoFormDateField, EMLMemoEventDate.toJSON());
+			browser.assert.input(EMLBrowseInfoFormDateField, EMLBrowseInfoItem.EMLMemoEventDate.toJSON());
 		});
 
 		context('save not valid', function () {
@@ -210,11 +196,11 @@ describe('EMLBrowseInfo_Misc', function () {
 			});
 
 			before(function () {
-				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(item));
+				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(EMLBrowseInfoItem));
 			});
 
 			before(function () {
-				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '0');
+				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '1');
 			});
 
 			before(function () {
@@ -222,11 +208,11 @@ describe('EMLBrowseInfo_Misc', function () {
 			});
 
 			it('updates no EMLBrowseInfoItem', function () {
-				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(item));
+				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(EMLBrowseInfoItem));
 			});
 
 			it('sends no EMLBrowseInfoDispatchUpdate', function () {
-				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '0');
+				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '1');
 			});
 
 		});
@@ -244,11 +230,11 @@ describe('EMLBrowseInfo_Misc', function () {
 			});
 
 			before(function () {
-				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(item));
+				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(EMLBrowseInfoItem));
 			});
 
 			before(function () {
-				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '0');
+				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '1');
 			});
 
 			before(function () {
@@ -256,13 +242,13 @@ describe('EMLBrowseInfo_Misc', function () {
 			});
 
 			it('updates EMLBrowseInfoItem', function () {
-				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(Object.assign(item, {
+				browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(Object.assign(EMLBrowseInfoItem, {
 					EMLMemoEventDate,
 				})));
 			});
 
 			it('sends EMLBrowseInfoDispatchUpdate', function () {
-				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '1');
+				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '2');
 			});
 
 		});
@@ -284,7 +270,7 @@ describe('EMLBrowseInfo_Misc', function () {
 			});
 
 			it('sends EMLBrowseInfoDispatchUpdate', function () {
-				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '2');
+				browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '3');
 			});
 
 		});
