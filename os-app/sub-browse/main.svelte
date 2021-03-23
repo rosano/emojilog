@@ -174,7 +174,7 @@ const mod = {
 	},
 
 	OLSKCatalogDispatchDetailActivate () {
-		document.querySelector('.EMLBrowseInfoFormNotesField').focus();
+		document.querySelector('.EMLBrowseInfoForm input, .EMLBrowseInfoForm textarea').focus();
 	},
 
 	OLSKCatalogDispatchMasterShouldActivate () {
