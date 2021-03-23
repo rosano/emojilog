@@ -142,4 +142,16 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 	flex-direction: unset;
 	flex-wrap: wrap;
 }
+
+.EMLTrackMaster :global(.OLSKCollectionGroup:nth-child(3)) {
+	opacity: 0.7;
+}
+
+.EMLTrackMaster :global(.OLSKCollectionGroup:nth-child(4)) {
+	opacity: 0.5;
+}
+
+.EMLTrackMaster :global(.OLSKCollectionGroup:nth-child(5)) {
+	opacity: 0.3;
+}
 </style>

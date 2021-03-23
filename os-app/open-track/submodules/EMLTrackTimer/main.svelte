@@ -7,7 +7,7 @@ import { OLSK_SPEC_UI } from 'OLSKSpec'
 import EMLTrackTimerLogic from './ui-logic.js';
 
 const kBaseSize = 32;
-const kLineSize = 2;
+const kLineSize = 3;
 
 const mod = {
 
@@ -78,6 +78,8 @@ import OLSKProgressRing from 'OLSKProgressRing';
 
 	position: relative;
 
+	--OLSKProgressRingStrokeColor: rgba(90, 90, 90, 0.95);
+	--OLSKProgressRingStrokeWidth: 4.25;
 	--OLSKSundialStrokeColor: #bbb;
 	--OLSKSundialStrokeWidth: 1.5;
 
