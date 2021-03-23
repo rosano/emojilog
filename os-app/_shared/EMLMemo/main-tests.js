@@ -96,6 +96,16 @@ describe('EMLMemoErrors', function test_EMLMemoErrors() {
 		deepEqual(mod.EMLMemoErrors(StubMemoObjectValid()), null);
 	});
 
+	it('returns object if EMLMemoCustomData not object', function () {
+		deepEqual(mod.EMLMemoErrors(StubMemoObjectValid({
+			EMLMemoCustomData: null,
+		})), {
+			EMLMemoCustomData: [
+				'EMLErrorNotObject',
+			],
+		});
+	});
+
 });
 
 describe('EMLMemoDirectory', function test_EMLMemoDirectory() {

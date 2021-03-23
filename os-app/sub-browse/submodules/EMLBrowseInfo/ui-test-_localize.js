@@ -13,7 +13,12 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			before(function () {
 				return browser.OLSKVisit(kDefaultRoute, {
 					OLSKRoutingLanguage,
-					EMLBrowseInfoItem: JSON.stringify(StubMemoObjectValid()),
+					EMLBrowseInfoItem: JSON.stringify(StubMemoObjectValid({
+						EMLMemoCustomData: {},
+					})),
+					EMLBrowseInfoFields: JSON.stringify([StubFieldObjectValid({
+						EMLFieldName: '',
+					})]),
 				});
 			});
 
@@ -23,6 +28,10 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 
 			it('localizes EMLBrowseInfoToolbarDiscardButton', function () {
 				browser.assert.attribute(EMLBrowseInfoToolbarDiscardButton, 'title', uLocalized('EMLBrowseInfoToolbarDiscardButtonText'));
+			});
+
+			it('localizes EMLBrowseInfoFormCustomField', function () {
+				browser.assert.attribute(EMLBrowseInfoFormCustomField, 'placeholder', uLocalized('EMLParamUntitledText'));
 			});
 
 			it('localizes EMLBrowseInfoFormNotesField', function () {

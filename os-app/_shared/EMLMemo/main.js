@@ -57,6 +57,14 @@ const mod = {
 			];
 		}
 
+		if (typeof inputData.EMLMemoCustomData !== 'undefined') {
+			if (typeof inputData.EMLMemoCustomData !== 'object' || inputData.EMLMemoCustomData === null) {
+				errors.EMLMemoCustomData = [
+					'EMLErrorNotObject',
+				];
+			}
+		}
+
 		return Object.entries(errors).length ? errors : null;
 	},
 

@@ -319,6 +319,7 @@ import EMLTemplate from '../sub-template/main.svelte';
 	
 	<div class="EMLBrowseDetailContainer" slot="OLSKCatalogDetailContent" let:OLSKCatalogItemSelected>
 		<EMLBrowseInfo
+			EMLBrowseInfoFields={ EMLBrowseJournal.EMLJournalFields || [] }
 			EMLBrowseInfoItem={ OLSKCatalogItemSelected }
 			EMLBrowseInfoDispatchBack={ mod.EMLBrowseInfoDispatchBack }
 			EMLBrowseInfoDispatchDiscard={ mod.EMLBrowseInfoDispatchDiscard }

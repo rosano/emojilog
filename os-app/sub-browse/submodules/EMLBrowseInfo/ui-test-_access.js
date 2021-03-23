@@ -11,6 +11,8 @@ Object.entries({
 
 	EMLBrowseInfoForm: '.EMLBrowseInfoForm',
 
+	EMLBrowseInfoFormCustomField: '.EMLBrowseInfoFormCustomField',
+
 	EMLBrowseInfoFormNotesField: '.EMLBrowseInfoFormNotesField',
 
 	EMLBrowseInfoFormDateButton: '.EMLBrowseInfoFormDateButton',
@@ -85,6 +87,10 @@ describe('EMLBrowseInfo_Access', function () {
 			browser.assert.elements(EMLBrowseInfoForm, 1);
 		});
 
+		it('hides EMLBrowseInfoFormCustomField', function () {
+			browser.assert.elements(EMLBrowseInfoFormCustomField, 0);
+		});
+
 		it('shows EMLBrowseInfoFormNotesField', function () {
 			browser.assert.elements(EMLBrowseInfoFormNotesField, 1);
 		});
@@ -155,6 +161,23 @@ describe('EMLBrowseInfo_Access', function () {
 				browser.assert.elements(EMLBrowseInfoFormDateSaveButton, 0);
 			});
 		
+		});
+
+		context('EMLBrowseInfoFields', function () {
+
+			before(function () {
+				return browser.OLSKVisit(kDefaultRoute, {
+					EMLBrowseInfoItem: JSON.stringify(StubMemoObjectValid({
+						EMLMemoCustomData: {},
+					})),
+					EMLBrowseInfoFields: JSON.stringify([StubFieldObjectValid()]),
+				});
+			});
+
+			it('shows EMLBrowseInfoFormCustomField', function () {
+				browser.assert.elements(EMLBrowseInfoFormCustomField, 1);
+			});
+
 		});
 
 	});

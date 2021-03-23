@@ -1,4 +1,5 @@
 <script>
+export let EMLBrowseInfoFields = [];
 export let EMLBrowseInfoItem;
 export let EMLBrowseInfoDispatchBack;
 export let EMLBrowseInfoDispatchUpdate;
@@ -49,6 +50,16 @@ const mod = {
 	},
 
 	// INTERFACE
+
+	InterfaceCustomFieldDidInput (field, event) {
+		Object.assign(EMLBrowseInfoItem, {
+			EMLMemoCustomData: Object.assign(EMLBrowseInfoItem.EMLMemoCustomData || {}, {
+				[field.EMLFieldID]: event.target.value,
+			})
+		});
+
+		EMLBrowseInfoDispatchUpdate();
+	},
 
 	InterfaceDateButtonDidClick () {
 		mod._ValueDateFieldIsVisible = true;
@@ -118,6 +129,12 @@ import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 </header>
 
 <div class="EMLBrowseInfoForm OLSKDecor OLSKDecorBigForm">
+
+{#each EMLBrowseInfoFields as item }
+<p>
+	<input class="EMLBrowseInfoFormCustomField" placeholder={ item.EMLFieldName || OLSKLocalized('EMLParamUntitledText') } type="text" value={ (EMLBrowseInfoItem.EMLMemoCustomData || {})[item.EMLFieldID] || '' } on:input={ (event) => mod.InterfaceCustomFieldDidInput(item, event) } />
+</p>
+{/each}
 
 <p>
 	<textarea class="EMLBrowseInfoFormNotesField OLSKMobileSafariRemoveDefaultInputStyle" placeholder="{ OLSKLocalized('EMLBrowseInfoFormNotesFieldText') }" bind:value={ EMLBrowseInfoItem.EMLMemoNotes } on:input={ EMLBrowseInfoDispatchUpdate }></textarea>

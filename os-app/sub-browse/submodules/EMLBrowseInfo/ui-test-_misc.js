@@ -305,4 +305,68 @@ describe('EMLBrowseInfo_Misc', function () {
 
 	});
 
+	context('EMLBrowseInfoFields', function () {
+
+		const field = StubFieldObjectValid();
+		const memo = StubMemoObjectValid({
+			EMLMemoCustomData: {
+				[field.EMLFieldID]: Math.random().toString(),
+			},
+		});
+		
+		before(function () {
+			return browser.OLSKVisit(kDefaultRoute, {
+				EMLBrowseInfoFields: JSON.stringify([field]),
+				EMLBrowseInfoItem: JSON.stringify(memo),
+			});
+		});
+
+		describe('EMLBrowseInfoFormCustomField', function test_EMLBrowseInfoFormCustomField () {
+
+			it('sets type', function () {
+				browser.assert.attribute(EMLBrowseInfoFormCustomField, 'type', 'text');
+			});
+
+			it('sets placeholder', function () {
+				browser.assert.attribute(EMLBrowseInfoFormCustomField, 'placeholder', field.EMLFieldName);
+			});
+
+			it('binds EMLMemoCustomData', function () {
+				browser.assert.input(EMLBrowseInfoFormCustomField, memo.EMLMemoCustomData[field.EMLFieldID]);
+			});
+
+			context('input', function () {
+
+				const item = Math.random().toString();
+
+				before(function () {
+					browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(memo));
+				});
+
+				before(function () {
+					browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '0');
+				});
+
+				before(function () {
+					browser.fill(EMLBrowseInfoFormCustomField, item);
+				});
+
+				it('updates EMLBrowseInfoItem', function () {
+					browser.assert.text('#TestEMLBrowseInfoItem', JSON.stringify(Object.assign(memo, {
+						EMLMemoCustomData: Object.assign(memo.EMLMemoCustomData, {
+							[field.EMLFieldID]: item,
+						}),
+					})));
+				});
+
+				it('sends EMLBrowseInfoDispatchUpdate', function () {
+					browser.assert.text('#TestEMLBrowseInfoDispatchUpdate', '1');
+				});
+
+			});
+
+		});
+
+	});
+
 });
