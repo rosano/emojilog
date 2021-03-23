@@ -3,6 +3,8 @@ const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().shif
 Object.entries({
 	EMLVitrine: '.EMLVitrine',
 	
+	EMLVitrineToolbar: '.EMLVitrineToolbar',
+	
 	EMLVitrineCrown: '.EMLVitrineCrown',
 	EMLVitrineCrownIcon: '.EMLVitrineCrownIcon',
 	EMLVitrineCrownName: '.EMLVitrineCrownName',

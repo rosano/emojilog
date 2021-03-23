@@ -22,6 +22,26 @@ describe('EMLVitrine_Misc', function () {
 	
 	});
 
+	describe('EMLVitrineToolbar', function () {
+		
+		it('classes OLSKToolbar', function () {
+			browser.assert.hasClass(EMLVitrineToolbar, 'OLSKToolbar');
+		});
+
+		it('classes OLSKToolbarJustify', function () {
+			browser.assert.hasClass(EMLVitrineToolbar, 'OLSKToolbarJustify');
+		});
+
+		it('classes OLSKStickyHeader', function () {
+			browser.assert.hasClass(EMLVitrineToolbar, 'OLSKStickyHeader');
+		});
+
+		it('classes OLSKCommonEdgeBottom', function () {
+			browser.assert.hasClass(EMLVitrineToolbar, 'OLSKCommonEdgeBottom');
+		});
+	
+	});
+
 	describe('EMLVitrineCrown', function test_EMLVitrineCrown() {
 
 		it('classes OLSKCommonCard', function () {
