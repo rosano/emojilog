@@ -6,7 +6,7 @@ export let EMLTemplateParamFormDispatchDone;
 import { OLSKLocalized } from 'OLSKInternational';
 </script>
 
-<div class="EMLTemplateParamForm">
+<form class="EMLTemplateParamForm" on:submit={ (event) => [event.preventDefault(), EMLTemplateParamFormDispatchDone()] }>
 
 <p>
 	<input type="text" class="EMLTemplateParamFormNameField OLSKMobileSafariRemoveDefaultInputStyle" bind:value={ EMLTemplateParamFormItem.EMLFieldName } on:input={ EMLTemplateParamFormDispatchUpdate } placeholder="{ OLSKLocalized('EMLTemplateParamFormNameFieldText') }" autofocus />
@@ -16,7 +16,7 @@ import { OLSKLocalized } from 'OLSKInternational';
 <hr role="presentation" />
 
 <p>
-	<button class="EMLTemplateParamFormDoneButton" on:click={ EMLTemplateParamFormDispatchDone }>{ OLSKLocalized('EMLTemplateParamFormDoneButtonText') }</button>
+	<button class="EMLTemplateParamFormDoneButton">{ OLSKLocalized('EMLTemplateParamFormDoneButtonText') }</button>
 </p>
 
-</div>
+</form>

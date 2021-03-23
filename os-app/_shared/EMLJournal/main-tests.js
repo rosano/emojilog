@@ -86,6 +86,125 @@ describe('EMLJournalErrors', function test_EMLJournalErrors() {
 
 	});
 
+	context('EMLJournalFields', function () {
+
+		it('returns object if not array', function () {
+			deepEqual(mod.EMLJournalErrors(StubJournalObjectValid({
+				EMLJournalFields: null,
+			})), {
+				EMLJournalFields: [
+					'EMLErrorNotArray',
+				],
+			});
+		});
+
+		it('returns null', function () {
+			deepEqual(mod.EMLJournalErrors(StubJournalObjectValid({
+				EMLJournalFields: [],
+			})), null);
+		});
+
+		it('throws if not valid', function () {
+			throws(function () {
+				mod.EMLJournalErrors(StubJournalObjectValid({
+					EMLJournalFields: [{}],
+				}))
+			}, /EMLErrorInputNotValid/);
+		});
+
+	});
+
+});
+
+describe('EMLFieldErrors', function test_EMLFieldErrors() {
+
+	it('throws error if not object', function() {
+		throws(function() {
+			mod.EMLFieldErrors(null);
+		}, /EMLErrorInputNotValid/);
+	});
+
+	it('returns object if EMLFieldID not string', function() {
+		deepEqual(mod.EMLFieldErrors(StubFieldObjectValid({
+			EMLFieldID: null,
+		})), {
+			EMLFieldID: [
+				'EMLErrorNotString',
+			],
+		});
+	});
+
+	it('returns object if EMLFieldID not filled', function() {
+		deepEqual(mod.EMLFieldErrors(StubFieldObjectValid({
+			EMLFieldID: ' ',
+		})), {
+			EMLFieldID: [
+				'EMLErrorNotFilled',
+			],
+		});
+	});
+
+	it('returns object if EMLFieldName not string', function() {
+		deepEqual(mod.EMLFieldErrors(StubFieldObjectValid({
+			EMLFieldName: null,
+		})), {
+			EMLFieldName: [
+				'EMLErrorNotString',
+			],
+		});
+	});
+
+	it('returns object if EMLFieldCreationDate not date', function() {
+		deepEqual(mod.EMLFieldErrors(StubFieldObjectValid({
+			EMLFieldCreationDate: new Date('alfa'),
+		})), {
+			EMLFieldCreationDate: [
+				'EMLErrorNotDate',
+			],
+		});
+	});
+
+	it('returns object if EMLFieldModificationDate not date', function() {
+		deepEqual(mod.EMLFieldErrors(StubFieldObjectValid({
+			EMLFieldModificationDate: new Date('alfa'),
+		})), {
+			EMLFieldModificationDate: [
+				'EMLErrorNotDate',
+			],
+		});
+	});
+
+	it('returns null', function() {
+		deepEqual(mod.EMLFieldErrors(StubFieldObjectValid()), null);
+	});
+
+});
+
+describe('EMLFieldGenerate', function test_EMLFieldGenerate() {
+
+	it('returns object', function() {
+		strictEqual(typeof mod.EMLFieldGenerate(), 'object');
+	});
+
+	it('sets EMLFieldID to unique value', function() {
+		const items = Array.from(Array(10)).map(function (e) {
+			return mod.EMLFieldGenerate().EMLFieldID;
+		});
+		deepEqual([...(new Set(items))], items);
+	});
+
+	it('sets EMLFieldName', function() {
+		deepEqual(mod.EMLFieldGenerate().EMLFieldName, '');
+	});
+
+	it('sets EMLFieldCreationDate', function() {
+		deepEqual(new Date() - mod.EMLFieldGenerate().EMLFieldCreationDate < 100, true);
+	});
+
+	it('sets EMLFieldModificationDate', function() {
+		deepEqual(new Date() - mod.EMLFieldGenerate().EMLFieldModificationDate < 100, true);
+	});
+
 });
 
 describe('EMLJournalDirectory', function test_EMLJournalDirectory() {

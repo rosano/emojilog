@@ -8,7 +8,7 @@ const EMLTemplate = new RollupStart({
 		}),
 		EMLTemplateDispatchDiscard: (function (inputData) {
 			window.TestEMLTemplateDispatchDiscard.innerHTML = parseInt(window.TestEMLTemplateDispatchDiscard.innerHTML) + 1;
-			window.TestEMLTemplateDispatchDiscardData.innerHTML = JSON.stringify(inputData);
+			window.TestEMLTemplateDispatchDiscardData.innerHTML = inputData.EMLJournalName;
 		}),
 	}, Object.fromEntries(Array.from((new window.URLSearchParams(window.location.search)).entries()).map(function (e) {
 		if (['EMLTemplateItem'].includes(e[0])) {

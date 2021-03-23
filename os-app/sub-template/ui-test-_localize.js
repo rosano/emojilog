@@ -15,13 +15,28 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				}),
 			});
 		});
+		
 		it('localizes EMLTemplateNameField', function () {
 			browser.assert.attribute(EMLTemplateNameField, 'placeholder', uLocalized('EMLTemplateNameFieldPlaceholderText'));
+		});
+
+		it('localizes EMLTemplateCreateParamButton', function () {
+			browser.assert.text(EMLTemplateCreateParamButton, uLocalized('EMLTemplateCreateParamButtonText'));
 		});
 
 		it('localizes EMLTemplateDiscardButton', function () {
 			browser.assert.text(EMLTemplateDiscardButton, uLocalized('EMLTemplateDiscardButtonText'));
 		});
+
+		context('add param', function () {
+			
+			before(function () {
+				return browser.pressButton(EMLTemplateCreateParamButton);
+			});
+
+			it('localizes EMLTemplateEditParamButton', function () {
+				browser.assert.text(EMLTemplateEditParamButton, uLocalized('EMLParamUntitledText'));
+			});
 		
 		});
 

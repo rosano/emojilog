@@ -42,6 +42,20 @@
 			}, inputData));
 		},
 
+		StubFieldObject(inputData) {
+			return Object.assign({
+				EMLFieldName: Math.random().toString(),
+			}, inputData);
+		},
+
+		StubFieldObjectValid(inputData) {
+			return StubFieldObject(Object.assign({
+				EMLFieldID: Math.random().toString(),
+				EMLFieldCreationDate: new Date(),
+				EMLFieldModificationDate: new Date(),
+			}, inputData));
+		},
+
 		StubMemoObject(inputData) {
 			return Object.assign({
 				EMLMemoEventDate: new Date(),

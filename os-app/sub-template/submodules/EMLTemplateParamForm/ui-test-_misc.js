@@ -43,6 +43,22 @@ describe('EMLTemplateParamForm_Misc', function  test_EMLTemplateParamForm_Misc (
 		
 		});
 
+		context('submit', function () {
+
+			before(function () {
+				browser.assert.text('#TestEMLTemplateParamFormDispatchDone', '0');
+			});
+
+			before(function () {
+				return browser.fire(EMLTemplateParamForm, 'submit');
+			});
+
+			it('sends EMLTemplateParamFormDispatchUpdate', function () {
+				browser.assert.text('#TestEMLTemplateParamFormDispatchDone', '1');
+			});
+		
+		});
+
 	});
 	
 	describe('EMLTemplateParamFormDoneButton', function test_EMLTemplateParamFormDoneButton () {
@@ -50,7 +66,7 @@ describe('EMLTemplateParamForm_Misc', function  test_EMLTemplateParamForm_Misc (
 		context('click', function () {
 
 			before(function () {
-				browser.assert.text('#TestEMLTemplateParamFormDispatchDone', '0');
+				browser.assert.text('#TestEMLTemplateParamFormDispatchDone', '1');
 			});
 
 			before(function () {
@@ -58,7 +74,7 @@ describe('EMLTemplateParamForm_Misc', function  test_EMLTemplateParamForm_Misc (
 			});
 
 			it('sends EMLTemplateParamFormDispatchDone', function () {
-				browser.assert.text('#TestEMLTemplateParamFormDispatchDone', '1');
+				browser.assert.text('#TestEMLTemplateParamFormDispatchDone', '3');
 			});
 		
 		});

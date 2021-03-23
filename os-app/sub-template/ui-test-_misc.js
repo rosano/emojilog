@@ -2,17 +2,16 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 
 describe('EMLTemplate_Misc', function  test_EMLTemplate_Misc () {
 
-	const uItem = function () {
-		return {
-			EMLJournalName: 'alfa',
-		};
-	};
+	const EMLJournalName = Math.random().toString();
+	const item = Math.random().toString();
 
 	describe('EMLTemplate', function  test_EMLTemplate () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
-				EMLTemplateItem: JSON.stringify(uItem()),
+				EMLTemplateItem: JSON.stringify({
+					EMLJournalName,
+				}),
 			});
 		});
 		
@@ -37,13 +36,17 @@ describe('EMLTemplate_Misc', function  test_EMLTemplate_Misc () {
 		});
 		
 		it('binds EMLJournalName', function () {
-			browser.assert.input(EMLTemplateNameField, uItem().EMLJournalName);
+			browser.assert.input(EMLTemplateNameField, EMLJournalName);
 		});
 
 		context('input', function () {
 
 			before(function () {
-				browser.fill(EMLTemplateNameField, 'alfa');
+				browser.assert.text('#TestEMLTemplateDispatchUpdate', '0');
+			});
+
+			before(function () {
+				browser.fill(EMLTemplateNameField, item);
 			});
 
 			it('sends EMLTemplateDispatchUpdate', function () {
@@ -91,6 +94,42 @@ describe('EMLTemplate_Misc', function  test_EMLTemplate_Misc () {
 		});
 
 	});
+	
+	describe('EMLTemplateCreateParamButton', function test_EMLTemplateCreateParamButton () {
+
+		context('click', function () {
+
+			before(function () {
+				browser.pressButton(EMLTemplateCreateParamButton);
+			});
+
+			it('sends EMLTemplateDispatchUpdate', function () {
+				browser.assert.text('#TestEMLTemplateDispatchUpdate', '2');
+			});
+		
+		});
+
+	});
+
+	describe('EMLTemplateParamForm', function test_EMLTemplateParamForm () {
+		
+		before(function () {
+			return browser.pressButton(EMLTemplateEditParamButton);
+		});
+
+		before(function () {
+			browser.assert.text('#TestEMLTemplateDispatchUpdate', '2');
+		});
+
+		before(function () {
+			browser.fill('.EMLTemplateParamFormNameField', Math.random().toString());
+		});
+
+		it('sends EMLTemplateDispatchUpdate', function () {
+			browser.assert.text('#TestEMLTemplateDispatchUpdate', '3');
+		});
+
+	});
 
 	describe('EMLTemplateDiscardButton', function  test_EMLTemplateDiscardButton () {
 		
@@ -135,7 +174,7 @@ describe('EMLTemplate_Misc', function  test_EMLTemplate_Misc () {
 
 			it('sends EMLTemplateDispatchDiscard', function () {
 				browser.assert.text('#TestEMLTemplateDispatchDiscard', '1');
-				browser.assert.text('#TestEMLTemplateDispatchDiscardData', JSON.stringify(uItem()));
+				browser.assert.text('#TestEMLTemplateDispatchDiscardData', item);
 			});
 		
 		});

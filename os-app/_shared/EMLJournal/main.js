@@ -37,7 +37,7 @@ const mod = {
 			errors.EMLJournalModificationDate = [
 				'EMLErrorNotDate',
 			];
-		}		
+		}
 
 		if (typeof inputData.EMLJournalTouchDate !== 'undefined') {
 			if (!(inputData.EMLJournalTouchDate instanceof Date) || Number.isNaN(inputData.EMLJournalTouchDate.getTime())) {
@@ -47,7 +47,70 @@ const mod = {
 			}
 		}
 
+		if (typeof inputData.EMLJournalFields !== 'undefined') {
+			if (!Array.isArray(inputData.EMLJournalFields)) {
+				errors.EMLJournalFields = [
+					'EMLErrorNotArray',
+				];
+			} else {
+				inputData.EMLJournalFields.map(function (e) {
+					if (mod.EMLFieldErrors(e)) {
+						throw new Error('EMLErrorInputNotValid');
+					}
+				});
+			}
+		}
+
 		return Object.entries(errors).length ? errors : null;
+	},
+
+	EMLFieldErrors (inputData, options = {}) {
+		if (typeof inputData !== 'object' || inputData === null) {
+			throw new Error('EMLErrorInputNotValid');
+		}
+
+		const errors = {};
+
+		if (typeof inputData.EMLFieldID !== 'string') {
+			errors.EMLFieldID = [
+				'EMLErrorNotString',
+			];
+		} else if (!inputData.EMLFieldID.trim()) {
+			errors.EMLFieldID = [
+				'EMLErrorNotFilled',
+			];
+		}
+
+		if (typeof inputData.EMLFieldName !== 'string') {
+			errors.EMLFieldName = [
+				'EMLErrorNotString',
+			];
+		}
+
+		if (!(inputData.EMLFieldCreationDate instanceof Date) || Number.isNaN(inputData.EMLFieldCreationDate.getTime())) {
+			errors.EMLFieldCreationDate = [
+				'EMLErrorNotDate',
+			];
+		}
+
+		if (!(inputData.EMLFieldModificationDate instanceof Date) || Number.isNaN(inputData.EMLFieldModificationDate.getTime())) {
+			errors.EMLFieldModificationDate = [
+				'EMLErrorNotDate',
+			];
+		}		
+
+		return Object.entries(errors).length ? errors : null;
+	},
+
+	EMLFieldGenerate () {
+		const EMLFieldCreationDate = new Date();
+
+		return {
+			EMLFieldID: uniqueID(),
+			EMLFieldName: '',
+			EMLFieldCreationDate,
+			EMLFieldModificationDate: EMLFieldCreationDate,
+		};
 	},
 	
 	EMLJournalDirectory () {
