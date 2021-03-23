@@ -27,6 +27,10 @@ describe('EMLTemplate_Misc', function  test_EMLTemplate_Misc () {
 	});
 	
 	describe('EMLTemplateNameField', function test_EMLTemplateNameField () {
+
+		it('classes OLSKMobileSafariRemoveDefaultInputStyle', function () {
+			browser.assert.hasClass(EMLTemplateNameField, 'OLSKMobileSafariRemoveDefaultInputStyle');
+		});
 		
 		it('sets autofocus', function () {
 			browser.assert.attribute(EMLTemplateNameField, 'autofocus', '');

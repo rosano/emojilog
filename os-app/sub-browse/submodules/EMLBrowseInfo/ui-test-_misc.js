@@ -136,6 +136,10 @@ describe('EMLBrowseInfo_Misc', function () {
 			});
 		});
 
+		it('classes OLSKMobileSafariRemoveDefaultInputStyle', function () {
+			browser.assert.hasClass(EMLBrowseInfoFormNotesField, 'OLSKMobileSafariRemoveDefaultInputStyle');
+		});
+
 		it('binds EMLMemoNotes', function () {
 			browser.assert.input(EMLBrowseInfoFormNotesField, 'alfa');
 		});

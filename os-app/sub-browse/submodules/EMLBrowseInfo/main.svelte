@@ -120,7 +120,7 @@ import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 <div class="EMLBrowseInfoForm OLSKDecor OLSKDecorBigForm">
 
 <p>
-	<textarea class="EMLBrowseInfoFormNotesField" placeholder="{ OLSKLocalized('EMLBrowseInfoFormNotesFieldText') }" bind:value={ EMLBrowseInfoItem.EMLMemoNotes } on:input={ EMLBrowseInfoDispatchUpdate }></textarea>
+	<textarea class="EMLBrowseInfoFormNotesField OLSKMobileSafariRemoveDefaultInputStyle" placeholder="{ OLSKLocalized('EMLBrowseInfoFormNotesFieldText') }" bind:value={ EMLBrowseInfoItem.EMLMemoNotes } on:input={ EMLBrowseInfoDispatchUpdate }></textarea>
 </p>
 
 <hr role="presentation" />
