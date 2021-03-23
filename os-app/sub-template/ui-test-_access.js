@@ -24,12 +24,12 @@ describe('EMLTemplate_Access', function () {
 		browser.assert.elements(EMLTemplate, 1);
 	});
 
-	it('shows EMLTemplateDiscardButton', function () {
-		browser.assert.elements(EMLTemplateDiscardButton, 1);
-	});
-
 	it('shows EMLTemplateNameField', function () {
 		browser.assert.elements(EMLTemplateNameField, 1);
+	});
+
+	it('shows EMLTemplateDiscardButton', function () {
+		browser.assert.elements(EMLTemplateDiscardButton, 1);
 	});
 
 });
