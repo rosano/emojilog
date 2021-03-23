@@ -126,7 +126,7 @@ describe('EMLTrackMasterGroupFunction', function test_EMLTrackMasterGroupFunctio
 
 	it('groups if same day', function() {
 		const item = {
-			EMLJournalTouchDate: new Date(mod._EMLTrackMasterGroupingDate(new Date()).valueOf() + uRandomElement(EMLTrackTimerLogic.EMLTrackTimerFrameMinute(), EMLTrackTimerLogic.EMLTrackTimerFrameHour(), EMLTrackTimerLogic.EMLTrackTimerFrameDay()) - 1),
+			EMLJournalTouchDate: new Date(mod._EMLTrackMasterGroupingDate(new Date()).valueOf() + uRandomElement(EMLTrackTimerLogic.EMLTrackTimerFrameMinute(), EMLTrackTimerLogic.EMLTrackTimerFrameHour(), EMLTrackTimerLogic.EMLTrackTimerFrameDay()) * Math.random()),
 		};
 		deepEqual(mod.EMLTrackMasterGroupFunction([item], uLocalized), {
 			[uLocalized('EMLTrackMasterGroupTodayText')]: [item],
@@ -135,9 +135,7 @@ describe('EMLTrackMasterGroupFunction', function test_EMLTrackMasterGroupFunctio
 
 	it('groups if under month', function() {
 		const item = {
-			EMLJournalTouchDate: new Date(mod._EMLTrackMasterGroupingDate(new Date()) - uRandomElement(EMLTrackTimerLogic.EMLTrackTimerFrames().filter(function (e) {
-				return e < EMLTrackTimerLogic.EMLTrackTimerFrameMonth();
-			})) + 1),
+			EMLJournalTouchDate: new Date(mod._EMLTrackMasterGroupingDate(new Date()) - Math.max(EMLTrackTimerLogic.EMLTrackTimerFrameDay(), Math.min(EMLTrackTimerLogic.EMLTrackTimerFrameMonth(), uRandomElement(EMLTrackTimerLogic.EMLTrackTimerFrames()) * Math.random())) + 1),
 		};
 		deepEqual(mod.EMLTrackMasterGroupFunction([item], uLocalized), {
 			[uLocalized('EMLTrackMasterGroupEarlierText')]: [item],
@@ -146,7 +144,7 @@ describe('EMLTrackMasterGroupFunction', function test_EMLTrackMasterGroupFunctio
 
 	it('groups if over month', function() {
 		const item = {
-			EMLJournalTouchDate: new Date(mod._EMLTrackMasterGroupingDate(new Date()) - uRandomElement(EMLTrackTimerLogic.EMLTrackTimerFrameMonth(), EMLTrackTimerLogic.EMLTrackTimerFrameYear()) + 1),
+			EMLJournalTouchDate: new Date(mod._EMLTrackMasterGroupingDate(new Date()) - Math.max(EMLTrackTimerLogic.EMLTrackTimerFrameMonth(), EMLTrackTimerLogic.EMLTrackTimerFrameYear() * Math.random())),
 		};
 		deepEqual(mod.EMLTrackMasterGroupFunction([item], uLocalized), {
 			[uLocalized('EMLTrackMasterGroupOverMonthText')]: [item],
@@ -155,7 +153,7 @@ describe('EMLTrackMasterGroupFunction', function test_EMLTrackMasterGroupFunctio
 
 	it('groups if over year', function() {
 		const item = {
-			EMLJournalTouchDate: new Date(mod._EMLTrackMasterGroupingDate(new Date()) - EMLTrackTimerLogic.EMLTrackTimerFrameYear()),
+			EMLJournalTouchDate: new Date(mod._EMLTrackMasterGroupingDate(new Date()) - EMLTrackTimerLogic.EMLTrackTimerFrameYear() - 1),
 		};
 		deepEqual(mod.EMLTrackMasterGroupFunction([item], uLocalized), {
 			[uLocalized('EMLTrackMasterGroupOverYearText')]: [item],

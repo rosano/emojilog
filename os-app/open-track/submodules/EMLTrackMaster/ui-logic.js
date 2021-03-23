@@ -49,13 +49,13 @@ const mod = {
 			return 'EMLTrackMasterGroupTodayText';
 		}
 
-		const frame = EMLTrackTimerLogic.EMLTrackTimerFrame(inputData.EMLJournalTouchDate, groupingDate);
+		const delta = groupingDate - inputData.EMLJournalTouchDate;
 
-		if (frame < EMLTrackTimerLogic.EMLTrackTimerFrameMonth()) {
+		if (delta < EMLTrackTimerLogic.EMLTrackTimerFrameMonth()) {
 			return 'EMLTrackMasterGroupEarlierText';
 		}
 
-		if (frame <= EMLTrackTimerLogic.EMLTrackTimerFrameYear()) {
+		if (delta <= EMLTrackTimerLogic.EMLTrackTimerFrameYear()) {
 			return 'EMLTrackMasterGroupOverMonthText';
 		}
 
