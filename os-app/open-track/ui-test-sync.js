@@ -65,6 +65,10 @@ describe('EMLTrack_Sync', function () {
 	describe('ZDRSchemaDispatchSyncDeleteJournal', function test_ZDRSchemaDispatchSyncDeleteJournal () {
 
 		before(function () {
+			return browser.pressButton('.EMLBrowseCloseButton');
+		});
+
+		before(function () {
 			return browser.OLSKLauncherRun('FakeZDRSchemaDispatchSyncDeleteJournal');
 		});
 
