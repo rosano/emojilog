@@ -126,6 +126,8 @@ import EMLTemplateParamForm from './submodules/EMLTemplateParamForm/main.svelte'
 
 input[type=text] {
 	max-width: calc(var(--EMLTemplateFormWidth) - 36px);
+
+	font-size: 230%;
 }
 
 .EMLTemplate :global(emoji-picker) {
