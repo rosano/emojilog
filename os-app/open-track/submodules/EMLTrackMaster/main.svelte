@@ -1,5 +1,6 @@
 <script>
 export let EMLTrackMasterDispatchCreate;
+export let OLSKCollectionItems;
 export let OLSKCollectionDispatchClick;
 export let EMLTrackMaster_DebugShowLauncherButton = false;
 
@@ -99,6 +100,8 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 	
 	OLSKCollectionItemAccessibilitySummaryFunction={ mod.OLSKCollectionItemAccessibilitySummaryFunction }
 	OLSKCollectionDispatchClick={ OLSKCollectionDispatchClick }
+	
+	OLSKCollectionItems={ OLSKCollectionItems }
 
 	let:OLSKCollectionItem
 	>

@@ -5,6 +5,7 @@ import OLSKRemoteStorage from 'OLSKRemoteStorage';
 const EMLTrackMaster = new RollupStart({
 	target: document.body,
 	props: Object.assign({
+		OLSKCollectionItems: [],
 		EMLTrackMasterDispatchCreate: (function () {
 			window.TestEMLTrackMasterDispatchCreate.innerHTML = parseInt(window.TestEMLTrackMasterDispatchCreate.innerHTML) + 1;
 		}),
