@@ -1,9 +1,4 @@
-:root {
-	--OLSKCommonBackground: var(--EMLCommonBackground);
-	--OLSKCommonForeground: var(--EMLCommonForeground);
-}
-
 body {
-	background: var(--EMLCommonBackground);
-	color: var(--EMLCommonForeground);
+	background: var(--OLSKCommonBackground);
+	color: var(--OLSKCommonForeground);
 }

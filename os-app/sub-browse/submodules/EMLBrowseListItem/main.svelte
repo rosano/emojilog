@@ -26,5 +26,4 @@ import OLSKString from 'OLSKString';
 	word-break: break-word;
 	hyphens: auto;
 }
-
 </style>
