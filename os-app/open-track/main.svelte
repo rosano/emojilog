@@ -13,12 +13,21 @@ import EMLTransport from '../_shared/EMLTransport/main.js';
 import RemoteStorage from 'remotestoragejs';
 import OLSKString from 'OLSKString';
 import OLSKLanguageSwitcher from 'OLSKLanguageSwitcher';
+import OLSKFund from 'OLSKFund';
+import OLSKPact from 'OLSKPact';
+import EMLTrackLogic from './ui-logic.js';
+import EMLTrackMasterLogic from './submodules/EMLTrackMaster/ui-logic.js';
+import OLSKChain from 'OLSKChain';
+
+import OLSKCollectionLogic from 'OLSKCollection/logic';
 
 const mod = {
 
 	// VALUE
 
 	_ValueIsLoading: true,
+
+	_ValueJournalsAll: [],
 
 	_ValueJournalSelected: undefined,
 	ValueJournalSelected (inputData) {
@@ -34,6 +43,10 @@ const mod = {
 
 	_ValueSaveThrottleMap: {},
 
+	_ValueOLSKFundProgress: false,
+
+	_ValueDocumentRemainder: '',
+
 	// DATA
 
 	DataNavigator () {
@@ -45,7 +58,24 @@ const mod = {
 	DataJournalObjectTemplate (inputData = {}) {
 		return Object.assign({
 			EMLJournalName: '',
+			EMLJournalChildCount: 0,
 		}, inputData);
+	},
+
+	async DataSettingValue (inputData) {
+		return ((await mod._ValueZDRWrap.App.EMLSetting.EMLSettingList()).filter(function (e) {
+			return e.EMLSettingKey === inputData;
+		}).pop() || {}).EMLSettingValue;
+	},
+
+	DataIsEligible (inputData = {}) {
+		return OLSKFund.OLSKFundIsEligible(Object.assign({
+			ParamMinimumTier: 1,
+			ParamCurrentProject: 'RP_007',
+			ParamBundleProjects: ['FakeBundleProject'],
+			ParamGrantTier: OLSKFund.OLSKFundTier('OLSK_FUND_PRICING_STRING_SWAP_TOKEN', mod._ValueOLSKFundGrant),
+			ParamGrantProject: mod._ValueOLSKFundGrant ? mod._ValueOLSKFundGrant.OLSKPactGrantProject : '',
+		}, inputData));
 	},
 
 	async DataExportJSON (EMLJournal) {
@@ -78,10 +108,21 @@ const mod = {
 				LCHRecipeSignature: 'EMLTrackLauncherItemExportJSON',
 				LCHRecipeName: OLSKLocalized('EMLTrackLauncherItemExportJSONText'),
 				LCHRecipeCallback: async function EMLTrackLauncherItemExportJSON () {
-					return this.api.LCHSaveFile(await mod.DataExportJSON(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalList()), mod.DataExportJSONFilename());
+					return this.api.LCHSaveFile(await mod.DataExportJSON(mod._ValueJournalsAll), mod.DataExportJSONFilename());
 				},
 			},
 		];
+
+		items.push(...OLSKFund.OLSKFundRecipes({
+			ParamWindow: window,
+			OLSKLocalized: OLSKLocalized,
+			ParamConnected: !!mod._ValueCloudIdentity,
+			ParamAuthorized: !!mod._ValueFundClue,
+			OLSKFundDispatchGrant: mod.OLSKFundDispatchGrant,
+			OLSKFundDispatchPersist: mod.OLSKFundDispatchPersist,
+			ParamMod: mod,
+			ParamSpecUI: OLSK_SPEC_UI(),
+		}));
 
 		items.push(...zerodatawrap.ZDRRecipes({
 			ParamMod: mod,
@@ -129,7 +170,7 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncUpdateJournal',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncUpdateJournal () {
-						return mod.ZDRSchemaDispatchSyncUpdateJournal(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalUpdate(Object.assign(mod._ValueJournalSelected || mod._EMLTrackMaster.modPublic._OLSKCollectionDataItemsAll().filter(function (e) {
+						return mod.ZDRSchemaDispatchSyncUpdateJournal(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalUpdate(Object.assign(mod._ValueJournalSelected || mod._EMLTrackMaster.modPublic.OLSKCollectionDataItemsAll().filter(function (e) {
 							return e.EMLJournalName.match('FakeZDRSchemaDispatchSync');
 						}).pop(), {
 							EMLJournalName: 'FakeZDRSchemaDispatchSyncUpdateJournal',
@@ -139,7 +180,7 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncDeleteJournal',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncDeleteJournal () {
-						return mod.ZDRSchemaDispatchSyncDeleteJournal(await mod._ValueZDRWrap.App.EMLJournal.ZDRModelDeleteObject(mod._ValueJournalSelected || mod._EMLTrackMaster.modPublic._OLSKCollectionDataItemsAll().filter(function (e) {
+						return mod.ZDRSchemaDispatchSyncDeleteJournal(await mod._ValueZDRWrap.App.EMLJournal.ZDRModelDeleteObject(mod._ValueJournalSelected || mod._EMLTrackMaster.modPublic.OLSKCollectionDataItemsAll().filter(function (e) {
 							return e.EMLJournalName.match('FakeZDRSchemaDispatchSync');
 						}).pop()));
 					},
@@ -147,7 +188,7 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncConflictJournal',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncConflictJournal () {
-						const item = mod._ValueJournalSelected || mod._EMLTrackMaster.modPublic._OLSKCollectionDataItemsAll().filter(function (e) {
+						const item = mod._ValueJournalSelected || mod._EMLTrackMaster.modPublic.OLSKCollectionDataItemsAll().filter(function (e) {
 							return e.EMLJournalName.match('FakeZDRSchemaDispatchSyncConflictJournal');
 						}).pop();
 						
@@ -173,7 +214,7 @@ const mod = {
 					LCHRecipeCallback: async function EMLTrackLauncherItemDebug_AlertFakeExportSerialized () {
 						return window.alert(JSON.stringify({
 							OLSKDownloadName: mod.DataExportJSONFilename(),
-							OLSKDownloadData: await mod.DataExportJSON(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalList()),
+							OLSKDownloadData: await mod.DataExportJSON(mod._ValueJournalsAll),
 						}));
 					},
 				},
@@ -184,6 +225,17 @@ const mod = {
 							OLSKDownloadName: mod.DataExportJSONFilename(),
 							OLSKDownloadData: await mod.DataExportJSON([mod._ValueJournalSelected]),
 						}));
+					},
+				},
+				{
+					LCHRecipeName: 'FakeFundDocumentLimit',
+					LCHRecipeCallback: async function FakeFundDocumentLimit () {
+						await mod._ValueZDRWrap.App.EMLJournal.EMLJournalCreate({
+							EMLJournalName: Math.random().toString(),
+							EMLJournalChildCount: mod._ValueDocumentRemainder,
+						});
+
+						return mod.SetupValueJournalsAll();
 					},
 				},
 			]);
@@ -207,6 +259,14 @@ const mod = {
 		};
 	},
 
+	ControlFundGate () {
+		if (!window.confirm(OLSKLocalized('OLSKFundGateText'))) {
+			return;
+		}
+
+		mod.OLSKAppToolbarDispatchFund();
+	},
+
 	async ControlJournalCreate() {
 		const item = await mod._ValueZDRWrap.App.EMLJournal.EMLJournalCreate(mod.DataJournalObjectTemplate());
 
@@ -222,9 +282,9 @@ const mod = {
 	async ControlJournalDiscard (inputData) {
 		await mod._ValueZDRWrap.App.EMLJournal.EMLJournalDelete(inputData);
 
-		mod.ControlJournalSelect(null);
+		mod._ValueCollectionAPI.OLSKCollectionRemove(inputData);
 
-		mod.SetupValueJournalsAll();
+		mod.ControlJournalSelect(null);
 	},
 
 	async ControlJournalsImportJSON (inputData) {
@@ -306,19 +366,31 @@ const mod = {
 		mod.ControlJournalSelect(inputData);
 	},
 
+	KOMBrowseDispatchEligible () {
+		if (mod._ValueDocumentRemainder < 1 && !mod.DataIsEligible()) {
+			return mod.ControlFundGate();
+		}
+
+		return true;
+	},
+
 	EMLBrowseListDispatchClose () {
 		mod.ControlJournalSelect(null);
-
-		mod.SetupValueJournalsAll();
 	},
 	
-	EMLBrowseListDispatchTouch (inputData) {
+	EMLBrowseListDispatchTouch (EMLJournalTouchDate) {
 		mod.ControlJournalSave(Object.assign(mod._ValueJournalSelected, {
-			EMLJournalTouchDate: inputData,
+			EMLJournalTouchDate,
 		}));
 	},
 
-	OLSKCatalogDispatchQuantity (inputData) {},
+	OLSKCatalogDispatchQuantity (EMLJournalChildCount) {
+		mod.ControlJournalSave(Object.assign(mod._ValueJournalSelected, {
+			EMLJournalChildCount,
+		}));
+
+		mod.ReactDocumentRemainder();
+	},
 
 	EMLTemplateDispatchUpdate () {
 		mod._ValueJournalSelected = mod._ValueJournalSelected; // #purge-svelte-force-update
@@ -331,41 +403,26 @@ const mod = {
 	},
 
 	ZDRSchemaDispatchSyncCreateJournal (inputData) {
-		if (!mod._EMLTrackMaster) {
-			return;
-		}
-
-		mod._EMLTrackMaster.modPublic.OLSKCollectionInsert(inputData);
-
-		mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
+		OLSKChain.OLSKChainGather(mod._EMLTrackMaster ? mod._EMLTrackMaster.modPublic : mod._ValueCollectionAPI).OLSKCollectionInsert(inputData).OLSKCollectionSort()
+			.OLSKChainExecute();
 	},
 
 	ZDRSchemaDispatchSyncUpdateJournal (inputData) {
-		if (mod._ValueJournalSelected && mod._ValueJournalSelected.EMLJournalID === inputData.EMLJournalID) {
+		if ((mod._ValueJournalSelected || {}).EMLJournalID === inputData.EMLJournalID) {
 			mod.ControlJournalSelect(inputData);
 		}
 
-		if (!mod._EMLTrackMaster) {
-			return;
-		}
-
-		mod._EMLTrackMaster.modPublic.OLSKCollectionUpdate(inputData);
-		
-		mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
+		OLSKChain.OLSKChainGather(mod._EMLTrackMaster ? mod._EMLTrackMaster.modPublic : mod._ValueCollectionAPI).OLSKCollectionUpdate(inputData).OLSKCollectionSort()
+			.OLSKChainExecute();
 	},
 
 	ZDRSchemaDispatchSyncDeleteJournal (inputData) {
-		if (mod._ValueJournalSelected && (mod._ValueJournalSelected.EMLJournalID === inputData.EMLJournalID)) {
+		if ((mod._ValueJournalSelected || {}).EMLJournalID === inputData.EMLJournalID) {
 			mod.ControlJournalSelect(null);
 		}
 
-		if (!mod._EMLTrackMaster) {
-			return;
-		}
-
-		mod._EMLTrackMaster.modPublic.OLSKCollectionRemove(inputData);
-		
-		mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
+		OLSKChain.OLSKChainGather(mod._EMLTrackMaster ? mod._EMLTrackMaster.modPublic : mod._ValueCollectionAPI).OLSKCollectionRemove(inputData).OLSKCollectionSort()
+			.OLSKChainExecute();
 	},
 
 	async ZDRSchemaDispatchSyncConflictJournal (inputData) {
@@ -450,12 +507,89 @@ const mod = {
 		mod._ValueZDRWrap.ZDRStorageClient().stopSync();
 	},
 
+	OLSKFundDispatchReceive (inputData) {
+		mod._OLSKWebView.modPublic.OLSKModalViewClose();
+
+		return mod.OLSKFundDispatchPersist(inputData);
+	},
+
+	OLSKFundDispatchPersist (inputData) {
+		mod._ValueFundClue = inputData;
+
+		if (!inputData) {
+			return mod._ValueZDRWrap.App.EMLSetting.ZDRModelDeleteObject({
+				EMLSettingKey: 'EMLSettingFundClue',
+			});
+		}
+
+		return mod._ValueZDRWrap.App.EMLSetting.ZDRModelWriteObject({
+			EMLSettingKey: 'EMLSettingFundClue',
+			EMLSettingValue: inputData,
+		}).then(function () {
+			if (OLSK_SPEC_UI()) {
+				return;
+			}
+
+			window.location.reload();
+		});
+	},
+
+	OLSKFundDispatchProgress (inputData) {
+		mod._ValueOLSKFundProgress = inputData;
+	},
+
+	OLSKFundDispatchFail () {
+		mod.OLSKFundDispatchPersist(null);
+	},
+
+	OLSKFundDispatchGrant (inputData) {
+		mod._ValueOLSKFundGrant = OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
+	},
+
+	OLSKAppToolbarDispatchFund () {
+		if (!mod._ValueCloudIdentity) {
+			return mod._OLSKAppToolbarDispatchFundNotConnected();
+		}
+
+		mod._ValueFundURL = OLSKFund.OLSKFundURL({
+			ParamFormURL: 'OLSK_FUND_FORM_URL_SWAP_TOKEN',
+			ParamProject: 'RP_007',
+			ParamIdentity: mod._ValueCloudIdentity,
+			ParamHomeURL: window.location.origin + window.location.pathname,
+		});
+
+		mod._OLSKWebView.modPublic.OLSKModalViewShow();
+
+		OLSKFund.OLSKFundListen({
+			ParamWindow: window,
+			OLSKFundDispatchReceive: mod.OLSKFundDispatchReceive,
+		});
+	},
+
+	_OLSKAppToolbarDispatchFundNotConnected () {
+		if (!window.confirm(OLSKLocalized('OLSKRemoteStorageConnectConfirmText'))) {
+			return;
+		}
+
+		mod._ValueCloudToolbarHidden = false;
+	},
+
+	// REACT
+
+	ReactDocumentRemainder () {
+		mod._ValueDocumentRemainder = OLSKFund.OLSKFundRemainder(EMLTrackLogic.EMLTrackDocumentCount(mod._ValueJournalsAll), parseInt('EML_FUND_DOCUMENT_LIMIT_SWAP_TOKEN'));
+	},
+
 	// SETUP
 
 	async SetupEverything () {
 		await mod.SetupStorageClient();
 
 		await mod.SetupValueJournalsAll();
+
+		mod.SetupCollectionAPI();
+
+		mod.SetupFund();
 
 		mod._ValueIsLoading = false;
 	},
@@ -517,9 +651,70 @@ const mod = {
 			client.ZDRCloudDisconnect();
 		};
 
-		(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalList()).map(mod._EMLTrackMaster.modPublic.OLSKCollectionInsert);
+		(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalList()).map(function (e) {
+			return mod._ValueJournalsAll.push(e);
+		});
 		
 		mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
+
+		mod.ReactDocumentRemainder();
+	},
+
+	SetupCollectionAPI () {
+		mod._ValueCollectionAPI = OLSKCollectionLogic.OLSKCollectionAPI({
+			OLSKCollectionItems: mod._ValueJournalsAll,
+
+			_OLSKCollectionKeyFunction: (function (inputData) {
+				return inputData.EMLJournalID;
+			}),
+			OLSKCollectionSortFunction: EMLTrackMasterLogic.EMLTrackMasterSort,
+		});
+	},
+
+	async SetupFund () {
+		if (OLSK_SPEC_UI() && window.location.search.match('FakeOLSKFundResponseIsPresent=true')) {
+			OLSKFund._OLSKFundFakeGrantResponseRandom();
+		}
+
+		mod._ValueFundClue = await mod.DataSettingValue('EMLSettingFundClue');
+
+		await OLSKFund.OLSKFundSetupPostPay({
+			ParamWindow: window,
+			ParamExistingClue: mod._ValueFundClue || null,
+			OLSKFundDispatchPersist: mod.OLSKFundDispatchPersist,
+		});
+
+		if (!mod._ValueCloudIdentity) {
+			return;
+		}
+
+		if (!mod._ValueFundClue) {
+			return;
+		}
+
+		const item = {
+			OLSK_CRYPTO_PAIR_RECEIVER_PRIVATE: `OLSK_CRYPTO_PAIR_RECEIVER_PRIVATE_SWAP_TOKEN${ '' }`, // #purge
+			OLSK_CRYPTO_PAIR_SENDER_PUBLIC: 'OLSK_CRYPTO_PAIR_SENDER_PUBLIC_SWAP_TOKEN',
+			ParamWindow: window,
+			OLSK_FUND_API_URL: 'OLSK_FUND_API_URL_SWAP_TOKEN',
+			ParamBody: {
+				OLSKPactAuthType: OLSKPact.OLSKPactAuthTypeRemoteStorage(),
+				OLSKPactAuthIdentity: mod._ValueCloudIdentity,
+				OLSKPactAuthProof: mod._ValueCloudToken,
+				OLSKPactAuthMetadata: {
+					OLSKPactAuthMetadataModuleName: 'emojilog',
+					OLSKPactAuthMetadataFolderPath: EMLJournal.EMLJournalDirectory() + '/',
+				},
+				OLSKPactPayIdentity: mod._ValueCloudIdentity,
+				OLSKPactPayClue: mod._ValueFundClue,
+			},
+			OLSKLocalized,
+			OLSKFundDispatchProgress: mod.OLSKFundDispatchProgress,
+			OLSKFundDispatchFail: mod.OLSKFundDispatchFail,
+			OLSKFundDispatchGrant: mod.OLSKFundDispatchGrant,
+		};
+
+		return OLSKFund.OLSKFundSetupGrant(item);
 	},
 
 	// LIFECYCLE
@@ -539,6 +734,7 @@ import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorkerView from '../_shared/__external/OLSKServiceWorker/main.svelte';
 import OLSKInstall from 'OLSKInstall';
 import OLSKCloud from 'OLSKCloud';
+import OLSKWebView from 'OLSKWebView';
 import OLSKModalView from 'OLSKModalView';
 import OLSKApropos from 'OLSKApropos';
 </script>
@@ -549,6 +745,7 @@ import OLSKApropos from 'OLSKApropos';
 	{#if !mod._ValueJournalSelected }
 		<EMLTrackMaster
 			EMLTrackMasterDispatchCreate={ mod.EMLTrackMasterDispatchCreate }
+			OLSKCollectionItems={ mod._ValueJournalsAll }
 			OLSKCollectionDispatchClick={ mod.OLSKCollectionDispatchClick }
 			bind:this={ mod._EMLTrackMaster }
 			/>
@@ -560,6 +757,7 @@ import OLSKApropos from 'OLSKApropos';
 			EMLBrowseShowTemplateForm={ mod._ValueShowTemplateForm }
 			EMLBrowseListDispatchClose={ mod.EMLBrowseListDispatchClose }
 			EMLBrowseListDispatchTouch={ mod.EMLBrowseListDispatchTouch }
+			KOMBrowseDispatchEligible={ mod.KOMBrowseDispatchEligible }
 			OLSKCatalogDispatchQuantity={ mod.OLSKCatalogDispatchQuantity }
 			EMLTemplateDispatchDiscard={ mod.EMLTemplateDispatchDiscard }
 			EMLTemplateDispatchUpdate={ mod.EMLTemplateDispatchUpdate }
@@ -592,6 +790,9 @@ import OLSKApropos from 'OLSKApropos';
 	<OLSKAppToolbar
 		OLSKAppToolbarDispatchApropos={ mod.OLSKAppToolbarDispatchApropos }
 		OLSKAppToolbarDispatchTongue={ mod.OLSKAppToolbarDispatchTongue }
+		OLSKAppToolbarFundShowProgress={ mod._ValueOLSKFundProgress }
+		OLSKAppToolbarFundLimitText={ mod._ValueDocumentRemainder }
+		OLSKAppToolbarDispatchFund={ mod._ValueOLSKFundGrant || OLSKFund.OLSKFundResponseIsPresent() ? null : mod.OLSKAppToolbarDispatchFund }
 		OLSKAppToolbarCloudConnected={ !!mod._ValueCloudIdentity }
 		OLSKAppToolbarCloudOffline={ mod._ValueCloudIsOffline }
 		OLSKAppToolbarCloudError={ !!mod._ValueCloudErrorText }
@@ -606,9 +807,13 @@ import OLSKApropos from 'OLSKApropos';
 	{/if}
 </footer>
 
+{#if !!mod._ValueCloudIdentity }
+	<OLSKWebView OLSKModalViewTitleText={ OLSKLocalized('OLSKFundWebViewTitleText') } OLSKWebViewURL={ mod._ValueFundURL } bind:this={ mod._OLSKWebView } DEBUG_OLSKWebViewDataSource={ OLSK_SPEC_UI() } />
+{/if}
+
 <OLSKModalView OLSKModalViewTitleText={ OLSKLocalized('OLSKAproposHeadingText') } bind:this={ mod._OLSKModalView } OLSKModalViewIsCapped={ true }>
 	<OLSKApropos
-		OLSKAproposFeedbackValue={ `javascript:window.location.href = window.atob('${ window.btoa(OLSKString.OLSKStringFormatted(window.atob('OLSK_APROPOS_FEEDBACK_EMAIL_SWAP_TOKEN'), 'RP_X' + (mod._ValueFundClue ? '+' + mod._ValueFundClue : ''))) }')` }
+		OLSKAproposFeedbackValue={ `javascript:window.location.href = window.atob('${ window.btoa(OLSKString.OLSKStringFormatted(window.atob('OLSK_APROPOS_FEEDBACK_EMAIL_SWAP_TOKEN'), 'RP_007' + (mod._ValueFundClue ? '+' + mod._ValueFundClue : ''))) }')` }
 		/>
 </OLSKModalView>
 

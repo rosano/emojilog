@@ -46,6 +46,14 @@ describe('EMLTrack_Access', function () {
 		browser.assert.elements('.OLSKAppToolbarLanguageButton', 1);
 	});
 
+	it('shows OLSKAppToolbarFundButton', function () {
+		browser.assert.elements('.OLSKAppToolbarFundButton', 1);
+	});
+
+	it('shows OLSKAppToolbarFundLimit', function () {
+		browser.assert.elements('.OLSKAppToolbarFundLimit', 1);
+	});
+
 	it('shows OLSKAppToolbarLauncherButton', function () {
 		browser.assert.elements('.OLSKAppToolbarLauncherButton', 1);
 	});
@@ -76,6 +84,10 @@ describe('EMLTrack_Access', function () {
 
 	it('shows OLSKServiceWorkerLauncherFakeItemProxy', function () {
 		return browser.assert.OLSKLauncherItems('OLSKServiceWorkerLauncherFakeItemProxy', 1);
+	});
+
+	it('shows OLSKFundLauncherFakeItemProxy', function () {
+		return browser.assert.OLSKLauncherItems('OLSKFundLauncherFakeItemProxy', 1);
 	});
 
 	it('shows EMLTrackMasterLauncherFakeItemProxy', function () {

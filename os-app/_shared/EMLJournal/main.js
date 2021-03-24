@@ -61,6 +61,14 @@ const mod = {
 			}
 		}
 
+		if (typeof inputData.EMLJournalChildCount !== 'undefined') {
+			if (typeof inputData.EMLJournalChildCount !== 'number' || (parseInt(inputData.EMLJournalChildCount) !== inputData.EMLJournalChildCount)) {
+				errors.EMLJournalChildCount = [
+					'EMLErrorNotInteger',
+				];
+			}
+		}
+
 		return Object.entries(errors).length ? errors : null;
 	},
 

@@ -114,6 +114,26 @@ describe('EMLJournalErrors', function test_EMLJournalErrors() {
 
 	});
 
+	context('EMLJournalChildCount', function () {
+
+		it('returns object if not integer', function () {
+			deepEqual(mod.EMLJournalErrors(StubJournalObjectValid({
+				EMLJournalChildCount: Math.random(),
+			})), {
+				EMLJournalChildCount: [
+					'EMLErrorNotInteger',
+				],
+			});
+		});
+
+		it('returns null', function () {
+			deepEqual(mod.EMLJournalErrors(StubJournalObjectValid({
+				EMLJournalChildCount: Date.now(),
+			})), null);
+		});
+
+	});
+
 });
 
 describe('EMLFieldErrors', function test_EMLFieldErrors() {

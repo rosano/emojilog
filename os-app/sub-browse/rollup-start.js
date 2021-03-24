@@ -19,6 +19,10 @@ import zerodatawrap from 'zerodatawrap';
 						],
 				}],
 			}),
+			KOMBrowseDispatchEligible: (function () {
+				return true;
+			}),
+			OLSKCatalogDispatchQuantity: (function () {}),
 			EMLTemplateDispatchUpdate: (function () {}),
 			EMLTemplateDispatchDiscard: (function () {}),
 			EMLBrowseListDispatchClose: (function () {

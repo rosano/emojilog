@@ -65,6 +65,13 @@
     "OLSKSundial": "olsk/OLSKSundial",
     "OLSKProgressRing": "olsk/OLSKProgressRing",
 
+    "// CHAIN": null,
+    "OLSKChain": "olsk/OLSKChain",
+
+    "// FUND": null,
+    "OLSKFund": "olsk/OLSKFund",
+    "OLSKWebView": "olsk/OLSKWebView",
+
     "// FRONTEND THROTTLE": null,
     "OLSKThrottle": "olsk/OLSKThrottle",
 
