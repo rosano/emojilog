@@ -800,6 +800,7 @@ import OLSKApropos from 'OLSKApropos';
 	<OLSKAppToolbar
 		OLSKAppToolbarDispatchApropos={ mod.OLSKAppToolbarDispatchApropos }
 		OLSKAppToolbarDispatchTongue={ mod.OLSKAppToolbarDispatchTongue }
+		OLSKAppToolbarGuideURL={ window.OLSKCanonical('EMLGuideRoute') }
 		OLSKAppToolbarFundShowProgress={ mod._ValueOLSKFundProgress }
 		OLSKAppToolbarFundLimitText={ mod._ValueDocumentRemainder }
 		OLSKAppToolbarDispatchFund={ mod._ValueOLSKFundGrant || OLSKFund.OLSKFundResponseIsPresent() ? null : mod.OLSKAppToolbarDispatchFund }
