@@ -13,6 +13,8 @@ Object.entries({
 
 	EMLVitrineFeaturesHeading: '.EMLVitrineFeaturesHeading',
 
+	EMLVitrineGuideButton: '.EMLVitrineGuideButton',
+
 	EMLVitrineSupportHeading: '.EMLVitrineSupportHeading',
 	EMLVitrineSupportBlurb: '.EMLVitrineSupportBlurb',
 
@@ -65,6 +67,10 @@ describe('EMLVitrine_Access', function () {
 
 	it('shows OLSKAppFeatureOpenSource', function () {
 		browser.assert.elements('.OLSKAppFeatureListItemOpenSource', 1);
+	});
+
+	it('shows EMLVitrineGuideButton', function () {
+		browser.assert.elements(EMLVitrineGuideButton, 1);
 	});
 
 	it('shows EMLVitrineSupportHeading', function () {

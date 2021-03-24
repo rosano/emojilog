@@ -94,4 +94,20 @@ describe('EMLVitrine_Misc', function () {
 	
 	});
 
+	describe('EMLVitrineGuideButton', function test_EMLVitrineGuideButton () {
+
+		it('classes OLSKDecorPress', function () {
+			browser.assert.hasClass(EMLVitrineGuideButton, 'OLSKDecorPress');
+		});
+		
+		it('classes OLSKDecorPressCall', function () {
+			browser.assert.hasClass(EMLVitrineGuideButton, 'OLSKDecorPressCall');
+		});
+		
+		it('sets href', function () {
+			browser.assert.attribute(EMLVitrineGuideButton, 'href', OLSKTestingCanonical(require('../open-guide/controller.js').OLSKControllerRoutes().shift()));
+		});
+	
+	});
+
 });
