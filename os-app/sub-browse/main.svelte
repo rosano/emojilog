@@ -229,13 +229,7 @@ const mod = {
 	// SETUP
 
 	SetupEverything() {
-		mod.SetupValueMemosAll();
-
 		mod.SetupTemplateForm();
-	},
-
-	SetupValueMemosAll() {
-		EMLBrowseMemos.map(mod._OLSKCatalog.modPublic.OLSKCatalogInsert);
 	},
 
 	SetupTemplateForm () {
@@ -283,6 +277,8 @@ import EMLTemplate from '../sub-template/main.svelte';
 	OLSKCatalogDispatchFilterSubmit={ mod.OLSKCatalogDispatchFilterSubmit }
 	OLSKCatalogDispatchQuantity={ OLSKCatalogDispatchQuantity }
 	OLSKCatalogDispatchEscapeOnEmpty={ EMLBrowseListDispatchClose }
+
+	OLSKCatalogItems={ EMLBrowseMemos }
 
 	let:OLSKResultsListItem
 	>
