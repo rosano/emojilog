@@ -1,0 +1,29 @@
+<%
+locals.OLSKPageTitle = OLSKLocalized('EMLGuideTitle');
+locals.OLSKPageDescription = OLSKLocalized('EMLGuideDescription');
+locals.OLSKPageAssets = [
+	'/_shared/__external/normalize.css/normalize.css',
+	'/_shared/__external/OLSKDecor/ui-style.css',
+	'/_shared/common/ui-style.css',
+	'ui-style.css',
+];
+locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
+%>
+
+<div class="EMLGuide OLSKDecor OLSKDecorCapped">
+
+<div class="EMLGuideCrown OLSKCommonCard OLSKCommonCrownCard">
+	<section>
+		<span class="EMLGuideCrownName"><%= OLSKLocalized('EMLGuideTitle') %></span>
+	</section>
+</div>
+
+<div class="EMLGuideContent">
+<%- EMLGuideContent %>
+</div>
+
+<hr role="presentation" />
+
+<%- include('../_shared/EMLRootLink/main.ejs') %>
+
+</div>
