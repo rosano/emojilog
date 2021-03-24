@@ -19,10 +19,6 @@ import zerodatawrap from 'zerodatawrap';
 						],
 				}],
 			}),
-			EMLBrowseListDispatchCreate: (function (inputData) {
-				window.TestEMLBrowseListDispatchCreate.innerHTML = parseInt(window.TestEMLBrowseListDispatchCreate.innerHTML) + 1;
-				window.TestEMLBrowseListDispatchCreateData.innerHTML = JSON.stringify(Object.keys(inputData));
-			}),
 			EMLTemplateDispatchUpdate: (function () {}),
 			EMLTemplateDispatchDiscard: (function () {}),
 			EMLBrowseListDispatchClose: (function () {

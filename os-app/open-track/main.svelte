@@ -306,8 +306,6 @@ const mod = {
 		mod.ControlJournalSelect(inputData);
 	},
 
-	EMLBrowseListDispatchCreate () {},
-
 	EMLBrowseListDispatchClose () {
 		mod.ControlJournalSelect(null);
 
@@ -319,6 +317,8 @@ const mod = {
 			EMLJournalTouchDate: inputData,
 		}));
 	},
+
+	OLSKCatalogDispatchQuantity (inputData) {},
 
 	EMLTemplateDispatchUpdate () {
 		mod._ValueJournalSelected = mod._ValueJournalSelected; // #purge-svelte-force-update
@@ -558,9 +558,9 @@ import OLSKApropos from 'OLSKApropos';
 			EMLBrowseJournal={ mod._ValueJournalSelected }
 			EMLBrowseMemos={ mod._ValueBrowseMemos }
 			EMLBrowseShowTemplateForm={ mod._ValueShowTemplateForm }
-			EMLBrowseListDispatchCreate={ mod.EMLBrowseListDispatchCreate }
 			EMLBrowseListDispatchClose={ mod.EMLBrowseListDispatchClose }
 			EMLBrowseListDispatchTouch={ mod.EMLBrowseListDispatchTouch }
+			OLSKCatalogDispatchQuantity={ mod.OLSKCatalogDispatchQuantity }
 			EMLTemplateDispatchDiscard={ mod.EMLTemplateDispatchDiscard }
 			EMLTemplateDispatchUpdate={ mod.EMLTemplateDispatchUpdate }
 			bind:this={ mod._EMLBrowse }

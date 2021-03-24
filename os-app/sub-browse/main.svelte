@@ -4,7 +4,7 @@ export let EMLBrowseStorageClient;
 export let EMLBrowseJournal;
 export let EMLBrowseMemos;
 export let EMLBrowseShowTemplateForm = false;
-export let EMLBrowseListDispatchCreate;
+export let OLSKCatalogDispatchQuantity;
 export let EMLBrowseListDispatchClose;
 export let EMLBrowseListDispatchTouch;
 export let EMLTemplateDispatchUpdate;
@@ -128,8 +128,6 @@ const mod = {
 		const item = await EMLBrowseStorageClient.App.EMLMemo.EMLMemoCreate(mod.DataMemoObjectTemplate(), inputData);
 
 		mod.ControlMemoActivate(mod._OLSKCatalog.modPublic.OLSKCatalogInsert(item));
-
-		EMLBrowseListDispatchCreate(item);
 		
 		EMLBrowseListDispatchTouch(item.EMLMemoCreationDate);
 	},
@@ -180,8 +178,6 @@ const mod = {
 	OLSKCatalogDispatchMasterShouldActivate () {
 		return document.activeElement === document.querySelector('.EMLBrowseInfoFormNotesField');
 	},
-
-	OLSKCatalogDispatchQuantity (inputData) {},
 
 	EMLBrowseInfoDispatchBack () {
 		mod._OLSKCatalog.modPublic.OLSKCatalogFocusMaster();
@@ -285,7 +281,7 @@ import EMLTemplate from '../sub-template/main.svelte';
 	OLSKCatalogDispatchDetailActivate={ mod.OLSKCatalogDispatchDetailActivate }
 	OLSKCatalogDispatchMasterShouldActivate={ mod.OLSKCatalogDispatchMasterShouldActivate }
 	OLSKCatalogDispatchFilterSubmit={ mod.OLSKCatalogDispatchFilterSubmit }
-	OLSKCatalogDispatchQuantity={ mod.OLSKCatalogDispatchQuantity }
+	OLSKCatalogDispatchQuantity={ OLSKCatalogDispatchQuantity }
 	OLSKCatalogDispatchEscapeOnEmpty={ EMLBrowseListDispatchClose }
 
 	let:OLSKResultsListItem

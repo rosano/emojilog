@@ -111,8 +111,6 @@ describe('EMLBrowse_Misc', function () {
 		});
 
 		before(function () {
-			browser.assert.text('#TestEMLBrowseListDispatchCreate', '0');
-			browser.assert.text('#TestEMLBrowseListDispatchCreateData', 'undefined');
 			browser.assert.text('#TestEMLBrowseListDispatchTouch', '0');
 			browser.assert.text('#TestEMLBrowseListDispatchTouchData', 'undefined');
 		});
@@ -123,18 +121,6 @@ describe('EMLBrowse_Misc', function () {
 
 		it('focuses EMLBrowseInfoFormNotesField', function () {
 			browser.assert.hasFocus('.EMLBrowseInfoFormNotesField');
-		});
-
-		it('sends EMLBrowseListDispatchCreate', function () {
-			browser.assert.text('#TestEMLBrowseListDispatchCreate', '1');
-			browser.assert.text('#TestEMLBrowseListDispatchCreateData', JSON.stringify([
-				'EMLMemoEventDate',
-				'EMLMemoNotes',
-				'EMLMemoID',
-				'EMLMemoJournalID',
-				'EMLMemoCreationDate',
-				'EMLMemoModificationDate',
-			]));
 		});
 
 		it('sends EMLBrowseListDispatchTouch', function () {
