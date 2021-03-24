@@ -13,6 +13,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				EMLTemplateItem: JSON.stringify({
 					EMLJournalName: 'alfa',
 				}),
+				OLSKRoutingLanguage
 			});
 		});
 		

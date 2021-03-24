@@ -11,8 +11,9 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
 				EMLTemplateParamFormItem: JSON.stringify({
-					EMLJournalName: 'alfa',
+					EMLJournalName: Math.random().toString(),
 				}),
+				OLSKRoutingLanguage,
 			});
 		});
 
