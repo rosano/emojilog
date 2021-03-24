@@ -74,14 +74,6 @@ describe('EMLVitrine_Misc', function () {
 	
 	});
 
-	describe('OLSKAppFeaturesList', function test_OLSKAppFeaturesList () {
-
-		it('shows OLSKAppFeatureOpenSource', function () {
-			browser.assert.attribute('.OLSKAppFeatureListItemOpenSource a', 'href', process.env.OLSK_REPO_URL);
-		});
-	
-	});
-
 	describe('EMLVitrineVideo', function () {
 
 		it('sets src', function () {
@@ -92,6 +84,14 @@ describe('EMLVitrine_Misc', function () {
 			browser.assert.attribute(EMLVitrineVideo, 'allowfullscreen', '');
 		});
 
+	});
+
+	describe('OLSKAppFeaturesList', function test_OLSKAppFeaturesList () {
+
+		it('shows OLSKAppFeatureOpenSource', function () {
+			browser.assert.attribute('.OLSKAppFeatureListItemOpenSource a', 'href', process.env.OLSK_REPO_URL);
+		});
+	
 	});
 
 });
