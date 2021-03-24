@@ -82,4 +82,16 @@ describe('EMLVitrine_Misc', function () {
 	
 	});
 
+	describe('EMLVitrineVideo', function () {
+
+		it('sets src', function () {
+			browser.assert.attribute(EMLVitrineVideo, 'src', process.env.EML_VITRINE_VIDEO_URL);
+		});
+
+		it('sets allowfullscreen', function () {
+			browser.assert.attribute(EMLVitrineVideo, 'allowfullscreen', '');
+		});
+
+	});
+
 });

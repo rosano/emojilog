@@ -40,6 +40,14 @@ locals.OLSKPagePublicConstants = {
 	OLSKAppFeatureListRepoURL: process.env.OLSK_REPO_URL,
 }).replace(/node_modules/g, '_shared/__external') %>
 
+<h1 class="EMLVitrineVideoHeading"><%= OLSKLocalized('OLSKWordingVideo') %></h1>
+
+<div class="OLSKCommonVideoList">
+	<p class="EMLVitrineVideo OLSKCommonVideoListItem">
+		<iframe src="<%= process.env.EML_VITRINE_VIDEO_URL %>" allowfullscreen></iframe>
+	</p>
+</div>
+
 <h1 class="EMLVitrineSupportHeading"><%= OLSKLocalized('OLSKWordingFeedbackHeading') %></h1>
 <p class="EMLVitrineSupportBlurb"><%= OLSKLocalized('OLSKWordingFeedbackBlurb') %></p>
 

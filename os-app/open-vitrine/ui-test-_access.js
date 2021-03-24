@@ -11,6 +11,9 @@ Object.entries({
 
 	EMLVitrineFeaturesHeading: '.EMLVitrineFeaturesHeading',
 
+	EMLVitrineVideoHeading: '.EMLVitrineVideoHeading',
+	EMLVitrineVideo: '.OLSKCommonVideoList .OLSKCommonVideoListItem.EMLVitrineVideo iframe',
+
 	EMLVitrineSupportHeading: '.EMLVitrineSupportHeading',
 	EMLVitrineSupportBlurb: '.EMLVitrineSupportBlurb',
 
@@ -59,6 +62,14 @@ describe('EMLVitrine_Access', function () {
 
 	it('shows OLSKAppFeatureOpenSource', function () {
 		browser.assert.elements('.OLSKAppFeatureListItemOpenSource', 1);
+	});
+
+	it('shows EMLVitrineVideoHeading', function () {
+		browser.assert.elements(EMLVitrineVideoHeading, 1);
+	});
+
+	it('shows EMLVitrineVideo', function () {
+		browser.assert.elements(EMLVitrineVideo, 1);
 	});
 
 	it('shows EMLVitrineSupportHeading', function () {
