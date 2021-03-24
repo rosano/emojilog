@@ -32,6 +32,12 @@ const mod = {
 	_ValueJournalSelected: undefined,
 	ValueJournalSelected (inputData) {
 		mod._ValueJournalSelected = inputData
+
+		if (mod._ValueJournalSelected) {
+			return;
+		}
+
+		mod._ValueBrowseMemos = [];
 	},
 	
 	_ValueBrowseMemos: [],
