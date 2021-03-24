@@ -382,6 +382,10 @@ const mod = {
 
 	EMLBrowseListDispatchClose () {
 		mod.ControlJournalSelect(null);
+
+		setTimeout(function () {
+			mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
+		});
 	},
 	
 	EMLBrowseListDispatchTouch (EMLJournalTouchDate) {
