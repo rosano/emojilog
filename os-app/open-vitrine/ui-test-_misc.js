@@ -66,7 +66,7 @@ describe('EMLVitrine_Misc', function () {
 
 	});
 
-	context('OLSKLanding', function test_OLSKLanding () {
+	describe('OLSKLanding', function test_OLSKLanding () {
 
 		it('sets OLSKLandingActionHref', function () {
 			browser.assert.attribute('.OLSKLandingAction', 'href', OLSKTestingCanonical(require('../open-track/controller.js').OLSKControllerRoutes().shift()));
@@ -74,7 +74,7 @@ describe('EMLVitrine_Misc', function () {
 	
 	});
 
-	context('OLSKAppFeaturesList', function test_OLSKAppFeaturesList () {
+	describe('OLSKAppFeaturesList', function test_OLSKAppFeaturesList () {
 
 		it('shows OLSKAppFeatureOpenSource', function () {
 			browser.assert.attribute('.OLSKAppFeatureListItemOpenSource a', 'href', process.env.OLSK_REPO_URL);
