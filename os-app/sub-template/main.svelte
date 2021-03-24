@@ -64,7 +64,7 @@ import EMLTemplateParamForm from './submodules/EMLTemplateParamForm/main.svelte'
 <div class="EMLTemplate OLSKDecor OLSKDecorBigForm">
 
 <p>
-	<input type="text" class="EMLTemplateNameField OLSKMobileSafariRemoveDefaultInputStyle" bind:value={ EMLTemplateItem.EMLJournalName } on:input={ EMLTemplateDispatchUpdate } placeholder="{ OLSKLocalized('EMLTemplateNameFieldPlaceholderText') }" autofocus />
+	<input type="text" class="EMLTemplateNameField" bind:value={ EMLTemplateItem.EMLJournalName } on:input={ EMLTemplateDispatchUpdate } placeholder="{ OLSKLocalized('EMLTemplateNameFieldPlaceholderText') }" autofocus />
 	<br />
 	<OLSKEmojiPicker OLSKEmojiPickerDispatchSelect={ mod.OLSKEmojiPickerDispatchSelect } />
 </p>

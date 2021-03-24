@@ -135,10 +135,6 @@ describe('EMLBrowseInfo_Misc', function () {
 
 		const EMLMemoNotes = Math.random().toString();
 
-		it('classes OLSKMobileSafariRemoveDefaultInputStyle', function () {
-			browser.assert.hasClass(EMLBrowseInfoFormNotesField, 'OLSKMobileSafariRemoveDefaultInputStyle');
-		});
-
 		it('binds EMLMemoNotes', function () {
 			browser.assert.input(EMLBrowseInfoFormNotesField, EMLBrowseInfoItem.EMLMemoNotes);
 		});

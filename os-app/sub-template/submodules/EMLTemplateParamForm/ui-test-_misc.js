@@ -15,10 +15,6 @@ describe('EMLTemplateParamForm_Misc', function  test_EMLTemplateParamForm_Misc (
 	
 	describe('EMLTemplateParamFormNameField', function test_EMLTemplateParamFormNameField () {
 
-		it('classes OLSKMobileSafariRemoveDefaultInputStyle', function () {
-			browser.assert.hasClass(EMLTemplateParamFormNameField, 'OLSKMobileSafariRemoveDefaultInputStyle');
-		});
-		
 		it('sets autofocus', function () {
 			browser.assert.attribute(EMLTemplateParamFormNameField, 'autofocus', '');
 		});

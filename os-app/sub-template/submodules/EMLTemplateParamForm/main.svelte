@@ -9,7 +9,7 @@ import { OLSKLocalized } from 'OLSKInternational';
 <form class="EMLTemplateParamForm" on:submit={ (event) => [event.preventDefault(), EMLTemplateParamFormDispatchDone()] }>
 
 <p>
-	<input type="text" class="EMLTemplateParamFormNameField OLSKMobileSafariRemoveDefaultInputStyle" bind:value={ EMLTemplateParamFormItem.EMLFieldName } on:input={ EMLTemplateParamFormDispatchUpdate } placeholder="{ OLSKLocalized('EMLTemplateParamFormNameFieldText') }" autofocus />
+	<input type="text" class="EMLTemplateParamFormNameField" bind:value={ EMLTemplateParamFormItem.EMLFieldName } on:input={ EMLTemplateParamFormDispatchUpdate } placeholder="{ OLSKLocalized('EMLTemplateParamFormNameFieldText') }" autofocus />
 	<br />
 </p>
 
