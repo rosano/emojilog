@@ -339,3 +339,19 @@ import EMLTemplate from '../sub-template/main.svelte';
 {#if OLSK_SPEC_UI() && EMLBrowse_DEBUG }
 	 <button class="OLSKAppToolbarLauncherButton" on:click={ mod._OLSKAppToolbarDispatchLauncher }></button>
 {/if}
+
+<style>
+/* #hotfix cannot-scroll-in-modal  */
+:global(.OLSKCatalog+.OLSKModalView .OLSKModalViewContainer) {
+	height: 100vh;
+	background: white;
+}
+
+:global(.OLSKCatalog+.OLSKModalView .OLSKModalViewContainer .OLSKStandardViewBody) {
+	overflow: auto;
+}
+
+:global(.OLSKCatalog+.OLSKModalView .OLSKModalViewContainer .OLSKStandardViewBody, .OLSKCatalog+.OLSKModalView .OLSKModalViewContainer .OLSKStandardViewBody > *) {
+	height: 100%;
+}
+</style>
