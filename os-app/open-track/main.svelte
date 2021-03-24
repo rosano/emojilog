@@ -372,7 +372,7 @@ const mod = {
 		mod.ControlJournalSelect(inputData);
 	},
 
-	KOMBrowseDispatchEligible () {
+	EMLBrowseDispatchEligible () {
 		if (mod._ValueDocumentRemainder < 1 && !mod.DataIsEligible()) {
 			return mod.ControlFundGate();
 		}
@@ -767,7 +767,7 @@ import OLSKApropos from 'OLSKApropos';
 			EMLBrowseShowTemplateForm={ mod._ValueShowTemplateForm }
 			EMLBrowseListDispatchClose={ mod.EMLBrowseListDispatchClose }
 			EMLBrowseListDispatchTouch={ mod.EMLBrowseListDispatchTouch }
-			KOMBrowseDispatchEligible={ mod.KOMBrowseDispatchEligible }
+			EMLBrowseDispatchEligible={ mod.EMLBrowseDispatchEligible }
 			OLSKCatalogDispatchQuantity={ mod.OLSKCatalogDispatchQuantity }
 			EMLTemplateDispatchDiscard={ mod.EMLTemplateDispatchDiscard }
 			EMLTemplateDispatchUpdate={ mod.EMLTemplateDispatchUpdate }

@@ -19,7 +19,7 @@ import zerodatawrap from 'zerodatawrap';
 						],
 				}],
 			}),
-			KOMBrowseDispatchEligible: (function () {
+			EMLBrowseDispatchEligible: (function () {
 				return true;
 			}),
 			OLSKCatalogDispatchQuantity: (function () {}),
