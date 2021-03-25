@@ -15,10 +15,10 @@ Object.entries({
 
 	EMLVitrineGuideButton: '.EMLVitrineGuideButton',
 
+	EMLVitrineGazetteHeading: '.EMLVitrineGazetteHeading',
+
 	EMLVitrineSupportHeading: '.EMLVitrineSupportHeading',
 	EMLVitrineSupportBlurb: '.EMLVitrineSupportBlurb',
-
-	EMLVitrineGazetteHeading: '.EMLVitrineGazetteHeading',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -73,16 +73,16 @@ describe('EMLVitrine_Access', function () {
 		browser.assert.elements(EMLVitrineGuideButton, 1);
 	});
 
+	it('shows EMLVitrineGazetteHeading', function () {
+		browser.assert.elements(EMLVitrineGazetteHeading, 1);
+	});
+
 	it('shows EMLVitrineSupportHeading', function () {
 		browser.assert.elements(EMLVitrineSupportHeading, 1);
 	});
 
 	it('shows EMLVitrineSupportBlurb', function () {
 		browser.assert.elements(EMLVitrineSupportBlurb, 1);
-	});
-
-	it('shows EMLVitrineGazetteHeading', function () {
-		browser.assert.elements(EMLVitrineGazetteHeading, 1);
 	});
 
 	it('shows OLSKGazette', function () {
