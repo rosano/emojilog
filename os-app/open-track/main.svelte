@@ -442,19 +442,23 @@ const mod = {
 	},
 
 	ZDRSchemaDispatchSyncCreateMemo (inputData) {
-		mod._EMLBrowse && mod._EMLBrowse.modPublic.EMLBrowseSyncCreateMemo(inputData);
+		mod._ZDRSchemaDispatchSync(inputData, 'EMLBrowseSyncCreateMemo');
 	},
 
 	ZDRSchemaDispatchSyncUpdateMemo (inputData) {
-		mod._EMLBrowse && mod._EMLBrowse.modPublic.EMLBrowseSyncUpdateMemo(inputData);
+		mod._ZDRSchemaDispatchSync(inputData, 'EMLBrowseSyncUpdateMemo');
 	},
 
 	ZDRSchemaDispatchSyncDeleteMemo (inputData) {
-		mod._EMLBrowse && mod._EMLBrowse.modPublic.EMLBrowseSyncDeleteMemo(inputData);
+		mod._ZDRSchemaDispatchSync(inputData, 'EMLBrowseSyncDeleteMemo');
 	},
 
 	ZDRSchemaDispatchSyncConflictMemo (inputData) {
-		mod._EMLBrowse && mod._EMLBrowse.modPublic.EMLBrowseSyncConflictMemo(inputData);
+		mod._ZDRSchemaDispatchSync(inputData, 'EMLBrowseSyncConflictMemo');
+	},
+
+	_ZDRSchemaDispatchSync (object, method) {
+		mod._EMLBrowse && (object.EMLMemoJournalID === mod._ValueJournalSelected.EMLJournalID) && mod._EMLBrowse.modPublic[method](object);
 	},
 
 	async OLSKCloudFormDispatchSubmit (inputData) {
