@@ -293,7 +293,7 @@ const mod = {
 		mod.ControlJournalSelect(null);
 
 		setTimeout(function () { // #hotfix-force-update
-			mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
+			mod._EMLTrackMaster && mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
 		});
 	},
 
