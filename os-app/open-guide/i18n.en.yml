@@ -1,2 +1,9 @@
 EMLGuideTitle: Emoji Log Guide
 EMLGuideDescription: Documentation for project
+EMLTrackTimerFrameMinuteText: Minute
+EMLTrackTimerFrameHourText: Hour
+EMLTrackTimerFrameDayText: Day
+EMLTrackTimerFrameWeekText: Week
+EMLTrackTimerFrameMonthText: Month
+EMLTrackTimerFrameYearText: Year
+EMLTrackTimerFrameInfinityText: Infinity

@@ -19,7 +19,14 @@ locals.OLSKPageUseLivereload = process.env.NODE_ENV === 'development';
 </div>
 
 <div class="EMLGuideContent">
-<%- EMLGuideContent %>
+<%- EMLGuideContent.match(/(OLSKSundial:\d+)/g).sort().reverse().reduce(function (coll, item) {
+	return coll.split(item).join(include('../../node_modules/OLSKSundial/main.ejs', {
+		OLSKSundialSize: 30,
+		OLSKSundialLineCount: parseInt(item.split(':').pop()),
+		OLSKSundialBaseSize: 10,
+		OLSKSundialLineSize: 2,
+	}));
+}, EMLGuideContent) %>
 </div>
 
 <hr role="presentation" />

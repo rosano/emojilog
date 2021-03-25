@@ -10,3 +10,12 @@ body {
 .EMLGuide table:not(:first-of-type) td:first-child {
 	width: 50%;
 }
+
+.EMLGuideSundialLegendItem {
+	table-layout: fixed;
+}
+
+.OLSKSundial {	
+	--OLSKSundialStrokeColor: #bbb !important;
+	--OLSKSundialStrokeWidth: 1.5 !important;
+}

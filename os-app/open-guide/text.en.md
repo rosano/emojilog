@@ -6,6 +6,32 @@ This document is a work-in-progress. Feel free to reach out on [Mastodon](https:
 
 Emoji Log helps you measure your progress by making it simple to track when meaningful steps are taken.
 
+# Sundials
+
+Time is visually represented in a circle with a divisions based on the duration:
+
+<table class="EMLGuideSundialLegend">
+
+<tr>
+	<td>OLSKSundial:EMLTrackTimerLines:EMLTrackTimerFrameMinute</td>
+	<td>OLSKSundial:EMLTrackTimerLines:EMLTrackTimerFrameHour</td>
+	<td>OLSKSundial:EMLTrackTimerLines:EMLTrackTimerFrameDay</td>
+	<td>OLSKSundial:EMLTrackTimerLines:EMLTrackTimerFrameWeek</td>
+	<td>OLSKSundial:EMLTrackTimerLines:EMLTrackTimerFrameMonth</td>
+	<td>OLSKSundial:EMLTrackTimerLines:EMLTrackTimerFrameYear</td>
+	<td>OLSKSundial:EMLTrackTimerLines:EMLTrackTimerFrameInfinity</td>
+</tr>
+<tr>
+	<td>EMLTrackTimerFrameMinuteText</td>
+	<td>EMLTrackTimerFrameHourText</td>
+	<td>EMLTrackTimerFrameDayText</td>
+	<td>EMLTrackTimerFrameWeekText</td>
+	<td>EMLTrackTimerFrameMonthText</td>
+	<td>EMLTrackTimerFrameYearText</td>
+	<td>EMLTrackTimerFrameInfinityText</td>
+</tr>
+</table>
+
 # Shortcuts
 
 <div class="OLSKDecorNotice">
