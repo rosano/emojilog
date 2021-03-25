@@ -291,6 +291,10 @@ const mod = {
 		mod._ValueCollectionAPI.OLSKCollectionRemove(inputData);
 
 		mod.ControlJournalSelect(null);
+
+		setTimeout(function () { // #hotfix-force-update
+			mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
+		});
 	},
 
 	async ControlJournalsImportJSON (inputData) {
@@ -383,7 +387,7 @@ const mod = {
 	EMLBrowseListDispatchClose () {
 		mod.ControlJournalSelect(null);
 
-		setTimeout(function () {
+		setTimeout(function () { // #hotfix-force-update
 			mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
 		});
 	},
