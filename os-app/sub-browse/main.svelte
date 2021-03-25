@@ -281,7 +281,7 @@ import EMLTemplate from '../sub-template/main.svelte';
 	OLSKCatalogDispatchMasterShouldActivate={ mod.OLSKCatalogDispatchMasterShouldActivate }
 	OLSKCatalogDispatchFilterSubmit={ mod.OLSKCatalogDispatchFilterSubmit }
 	OLSKCatalogDispatchQuantity={ OLSKCatalogDispatchQuantity }
-	OLSKCatalogDispatchEscapeOnEmpty={ EMLBrowseListDispatchClose }
+	OLSKCatalogDispatchEscapeOnEmpty={ () => !mod._OLSKModalView.modPublic._OLSKModalViewIsVisible() && EMLBrowseListDispatchClose() }
 
 	OLSKCatalogItems={ EMLBrowseMemos }
 
