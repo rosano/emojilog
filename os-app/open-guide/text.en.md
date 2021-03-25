@@ -16,8 +16,6 @@ Emoji Log helps you measure your progress by making it simple to track when mean
 
 </div>
 
-
-
 | List of journals ||
 :--- | ---
 | EMLTrackMasterCreateButtonText | `AccessKey+n` |
