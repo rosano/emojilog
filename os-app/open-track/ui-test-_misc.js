@@ -68,10 +68,6 @@ describe('EMLTrack_Misc', function () {
 			browser.assert.hasClass(EMLTrackStorageToolbar, 'OLSKCommonEdgeTop');
 		});
 		
-		it('classes OLSKStorageToolbar', function () {
-			browser.assert.hasClass(EMLTrackStorageToolbar, 'OLSKStorageToolbar');
-		});
-	
 	});
 
 	context('create', function() {
