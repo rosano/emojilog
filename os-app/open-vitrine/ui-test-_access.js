@@ -61,6 +61,10 @@ describe('EMLVitrine_Access', function () {
 		browser.assert.elements(EMLVitrineFeaturesHeading, 1);
 	});
 
+	it('shows EMLFeatureList', function () {
+		browser.assert.elements('.EMLFeatureList', 1);
+	});
+
 	it('shows OLSKAppFeatureList', function () {
 		browser.assert.elements('.OLSKAppFeatureList', 1);
 	});

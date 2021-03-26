@@ -1,0 +1,11 @@
+<div class="EMLFeatureList">
+
+<%- include('../../../../node_modules/OLSKFeatureList/main.ejs', {
+	OLSKFeatureListData: OLSKLocalized('EMLFeatureListArray').map(function (e, i) {
+		return e.concat([
+			'/_shared/__external/OLSKUIAssets/_OLSKSharedFeatureCalm.svg',
+		][i]);
+	}),
+}) %>
+
+</div>
