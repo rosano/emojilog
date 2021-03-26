@@ -6,6 +6,8 @@ This document is a work-in-progress. Feel free to reach out on [Mastodon](https:
 
 Emoji Log helps you measure your progress by making it simple to track when meaningful steps are taken.
 
+It is inspired by a philosophy of taking the smallest step possible, also known as [Kaizen](https://rosano.hmm.garden/01em4bgta0g35sd74nt8p6wkkb).
+
 # Sundials
 
 Time is visually represented in a circle with divisions based on the duration:
