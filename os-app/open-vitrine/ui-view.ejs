@@ -51,7 +51,9 @@ locals.OLSKPagePublicConstants = {
 <a class="EMLVitrineGuideButton OLSKDecorPress OLSKDecorPressCall" href="<%= OLSKCanonical('EMLGuideRoute') %>"><%= OLSKLocalized('OLSKWordingOpenGuide') %></a>
 
 <h1 class="EMLVitrineGazetteHeading"><%= OLSKLocalized('OLSKGazetteHeadingText') %></h1>
-<%- include('../../node_modules/OLSKGazette/main.ejs') %>
+<%- include('../../node_modules/OLSKGazette/main.ejs', {
+	OLSKGazetteProject: 'RP_007',
+}) %>
 
 <h1 class="EMLVitrineSupportHeading"><%= OLSKLocalized('OLSKWordingFeedbackHeading') %></h1>
 <p class="EMLVitrineSupportBlurb"><%= OLSKLocalized('OLSKWordingFeedbackBlurb') %></p>
