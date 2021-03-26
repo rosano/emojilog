@@ -345,6 +345,7 @@ const mod = {
 			  selected && selected();
 			},
 			LCHOptionMode: Launchlet.LCHModePreview,
+			LCHOptionLanguage: window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage'),
 		});
 	},
 
@@ -359,6 +360,7 @@ const mod = {
 
 		window.Launchlet.LCHSingletonCreate({
 			LCHOptionRecipes: mod.DataTrackRecipes(),
+			LCHOptionLanguage: window.OLSKPublicConstants('OLSKSharedPageCurrentLanguage'),
 		});
 	},
 
