@@ -8,7 +8,7 @@ Emoji Log helps you measure your progress by making it simple to track when mean
 
 # Sundials
 
-Time is visually represented in a circle with a divisions based on the duration:
+Time is visually represented in a circle with divisions based on the duration:
 
 <table class="EMLGuideSundialLegend">
 
