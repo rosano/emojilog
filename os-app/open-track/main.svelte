@@ -377,7 +377,7 @@ const mod = {
 		mod._ValueCloudToolbarHidden = false;
 	},
 
-	OLSKAppToolbarDispatchStorage () {
+	OLSKAppToolbarDispatchCloud () {
 		mod._ValueCloudToolbarHidden = !mod._ValueCloudToolbarHidden;
 	},
 
@@ -818,7 +818,7 @@ import OLSKApropos from 'OLSKApropos';
 		OLSKAppToolbarCloudOffline={ mod._ValueCloudIsOffline }
 		OLSKAppToolbarCloudError={ !!mod._ValueCloudErrorText }
 		OLSKAppToolbarDispatchFund={ mod._ValueOLSKFundGrant || OLSKFund.OLSKFundResponseIsPresent() ? null : mod.OLSKAppToolbarDispatchFund }
-		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
+		OLSKAppToolbarDispatchCloud={ mod.OLSKAppToolbarDispatchCloud }
 		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
 		/>
 
