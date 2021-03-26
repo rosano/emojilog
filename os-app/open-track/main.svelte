@@ -349,6 +349,34 @@ const mod = {
 		});
 	},
 
+	OLSKAppToolbarDispatchFund () {
+		if (!mod._ValueCloudIdentity) {
+			return mod._OLSKAppToolbarDispatchFundNotConnected();
+		}
+
+		mod._ValueFundURL = OLSKFund.OLSKFundURL({
+			ParamFormURL: 'OLSK_FUND_FORM_URL_SWAP_TOKEN',
+			ParamProject: 'RP_007',
+			ParamIdentity: mod._ValueCloudIdentity,
+			ParamHomeURL: window.location.origin + window.location.pathname,
+		});
+
+		mod._OLSKWebView.modPublic.OLSKModalViewShow();
+
+		OLSKFund.OLSKFundListen({
+			ParamWindow: window,
+			OLSKFundDispatchReceive: mod.OLSKFundDispatchReceive,
+		});
+	},
+
+	_OLSKAppToolbarDispatchFundNotConnected () {
+		if (!window.confirm(OLSKLocalized('OLSKRemoteStorageConnectConfirmText'))) {
+			return;
+		}
+
+		mod._ValueCloudToolbarHidden = false;
+	},
+
 	OLSKAppToolbarDispatchStorage () {
 		mod._ValueCloudToolbarHidden = !mod._ValueCloudToolbarHidden;
 	},
@@ -565,34 +593,6 @@ const mod = {
 
 	OLSKFundDispatchGrant (inputData) {
 		mod._ValueOLSKFundGrant = OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
-	},
-
-	OLSKAppToolbarDispatchFund () {
-		if (!mod._ValueCloudIdentity) {
-			return mod._OLSKAppToolbarDispatchFundNotConnected();
-		}
-
-		mod._ValueFundURL = OLSKFund.OLSKFundURL({
-			ParamFormURL: 'OLSK_FUND_FORM_URL_SWAP_TOKEN',
-			ParamProject: 'RP_007',
-			ParamIdentity: mod._ValueCloudIdentity,
-			ParamHomeURL: window.location.origin + window.location.pathname,
-		});
-
-		mod._OLSKWebView.modPublic.OLSKModalViewShow();
-
-		OLSKFund.OLSKFundListen({
-			ParamWindow: window,
-			OLSKFundDispatchReceive: mod.OLSKFundDispatchReceive,
-		});
-	},
-
-	_OLSKAppToolbarDispatchFundNotConnected () {
-		if (!window.confirm(OLSKLocalized('OLSKRemoteStorageConnectConfirmText'))) {
-			return;
-		}
-
-		mod._ValueCloudToolbarHidden = false;
 	},
 
 	// REACT
@@ -814,10 +814,10 @@ import OLSKApropos from 'OLSKApropos';
 		OLSKAppToolbarGuideURL={ window.OLSKCanonical('EMLGuideRoute') }
 		OLSKAppToolbarFundShowProgress={ mod._ValueOLSKFundProgress }
 		OLSKAppToolbarFundLimitText={ mod._ValueDocumentRemainder }
-		OLSKAppToolbarDispatchFund={ mod._ValueOLSKFundGrant || OLSKFund.OLSKFundResponseIsPresent() ? null : mod.OLSKAppToolbarDispatchFund }
 		OLSKAppToolbarCloudConnected={ !!mod._ValueCloudIdentity }
 		OLSKAppToolbarCloudOffline={ mod._ValueCloudIsOffline }
 		OLSKAppToolbarCloudError={ !!mod._ValueCloudErrorText }
+		OLSKAppToolbarDispatchFund={ mod._ValueOLSKFundGrant || OLSKFund.OLSKFundResponseIsPresent() ? null : mod.OLSKAppToolbarDispatchFund }
 		OLSKAppToolbarDispatchStorage={ mod.OLSKAppToolbarDispatchStorage }
 		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
 		/>
