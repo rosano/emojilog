@@ -789,7 +789,7 @@ import OLSKApropos from 'OLSKApropos';
 
 <footer class="EMLTrackViewportFooter OLSKMobileViewFooter">
 	{#if !mod._ValueCloudToolbarHidden }
-		<div class="EMLTrackStorageToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeTop">
+		<div class="EMLTrackCloudToolbar OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeTop">
 			<div class="OLSKToolbarElementGroup">
 			</div>
 

@@ -3,7 +3,7 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 Object.entries({
 	EMLTrackViewportFooter: '.EMLTrackViewportFooter',
 
-	EMLTrackStorageToolbar: '.EMLTrackStorageToolbar',
+	EMLTrackCloudToolbar: '.EMLTrackCloudToolbar',
 }).map(function (e) {
 	return global[e.shift()]  = e.pop();
 });
@@ -30,8 +30,8 @@ describe('EMLTrack_Access', function () {
 		browser.assert.elements(EMLTrackViewportFooter, 1);
 	});
 
-	it('hides EMLTrackStorageToolbar', function () {
-		browser.assert.elements(EMLTrackStorageToolbar, 0);
+	it('hides EMLTrackCloudToolbar', function () {
+		browser.assert.elements(EMLTrackCloudToolbar, 0);
 	});
 
 	it('shows OLSKAppToolbar', function () {
@@ -128,8 +128,8 @@ describe('EMLTrack_Access', function () {
 			return browser.pressButton('.OLSKAppToolbarCloudButton');
 		});
 
-		it('shows EMLTrackStorageToolbar', function () {
-			browser.assert.elements(EMLTrackStorageToolbar, 1);
+		it('shows EMLTrackCloudToolbar', function () {
+			browser.assert.elements(EMLTrackCloudToolbar, 1);
 		});
 
 		it('shows OLSKCloud', function () {

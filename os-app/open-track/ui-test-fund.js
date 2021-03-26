@@ -17,7 +17,7 @@ describe('EMLTrack_Fund', function () {
 		context('not connected', function () {
 
 			before(function () {
-				browser.assert.elements('.EMLTrackStorageToolbar', 0);
+				browser.assert.elements('.EMLTrackCloudToolbar', 0);
 			});
 			
 			context('click', function () {
@@ -28,8 +28,8 @@ describe('EMLTrack_Fund', function () {
 					}, uLocalized('OLSKRemoteStorageConnectConfirmText'));
 				});
 
-				it('shows EMLTrackStorageToolbar', function () {
-					browser.assert.elements('.EMLTrackStorageToolbar', 1);
+				it('shows EMLTrackCloudToolbar', function () {
+					browser.assert.elements('.EMLTrackCloudToolbar', 1);
 				});
 
 				context('cancel', function () {
@@ -39,7 +39,7 @@ describe('EMLTrack_Fund', function () {
 					});
 
 					before(function () {
-						browser.assert.elements('.EMLTrackStorageToolbar', 0);
+						browser.assert.elements('.EMLTrackCloudToolbar', 0);
 					});
 					
 					before(function () {
@@ -53,7 +53,7 @@ describe('EMLTrack_Fund', function () {
 					});
 
 					it('does nothing', function () {
-						browser.assert.elements('.EMLTrackStorageToolbar', 0);
+						browser.assert.elements('.EMLTrackCloudToolbar', 0);
 					});
 				
 				});
@@ -335,8 +335,8 @@ describe('EMLTrack_Fund', function () {
 			}, uLocalized('OLSKFundGateText'));
 		});
 
-		it('shows EMLTrackStorageToolbar', function () {
-			browser.assert.elements('.EMLTrackStorageToolbar', 1);
+		it('shows EMLTrackCloudToolbar', function () {
+			browser.assert.elements('.EMLTrackCloudToolbar', 1);
 		});
 
 		context('cancel', function () {
@@ -346,7 +346,7 @@ describe('EMLTrack_Fund', function () {
 			});
 
 			before(function () {
-				browser.assert.elements('.EMLTrackStorageToolbar', 0);
+				browser.assert.elements('.EMLTrackCloudToolbar', 0);
 			});
 			
 			before(function () {
@@ -360,7 +360,7 @@ describe('EMLTrack_Fund', function () {
 			});
 
 			it('does nothing', function () {
-				browser.assert.elements('.EMLTrackStorageToolbar', 0);
+				browser.assert.elements('.EMLTrackCloudToolbar', 0);
 			});
 		
 		});

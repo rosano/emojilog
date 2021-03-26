@@ -50,22 +50,22 @@ describe('EMLTrack_Misc', function () {
 
 	});
 
-	describe('EMLTrackStorageToolbar', function test_EMLTrackStorageToolbar () {
+	describe('EMLTrackCloudToolbar', function test_EMLTrackCloudToolbar () {
 		
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarCloudButton');
 		});
 		
 		it('classes OLSKToolbar', function () {
-			browser.assert.hasClass(EMLTrackStorageToolbar, 'OLSKToolbar');
+			browser.assert.hasClass(EMLTrackCloudToolbar, 'OLSKToolbar');
 		});
 
 		it('classes OLSKToolbarJustify', function () {
-			browser.assert.hasClass(EMLTrackStorageToolbar, 'OLSKToolbarJustify');
+			browser.assert.hasClass(EMLTrackCloudToolbar, 'OLSKToolbarJustify');
 		});
 
 		it('classes OLSKCommonEdgeTop', function () {
-			browser.assert.hasClass(EMLTrackStorageToolbar, 'OLSKCommonEdgeTop');
+			browser.assert.hasClass(EMLTrackCloudToolbar, 'OLSKCommonEdgeTop');
 		});
 		
 	});
