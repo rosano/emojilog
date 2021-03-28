@@ -1,4 +1,4 @@
-<a href="https://emojilog.rosano.ca"><img src="https://rosano.s3.amazonaws.com/public/emojilog/identity.svg" width="64"></a>
+<a href="https://emojilog.rosano.ca"><img alt="Project logo" src="https://rosano.s3.amazonaws.com/public/emojilog/identity.svg" width="64" /></a>
 
 # Emoji Log
 
