@@ -6,7 +6,7 @@ _Measure your progress_
 
 <a href="https://emojilog.rosano.ca">Emoji Log</a> helps you measure your progress by making it simple to track when meaningful steps are taken. Read the <a href="https://emojilog.rosano.ca/guide">guide</a> for more details.
 
-<a href="https://emojilog.rosano.ca/review"><img alt="Open app" src="http://rosano.s3.amazonaws.com/public/_shared/_RCSAppButton.svg" /></a>
+<a href="https://emojilog.rosano.ca/track"><img alt="Open app" src="http://rosano.s3.amazonaws.com/public/_shared/_RCSAppButton.svg" /></a>
 
 ## Architecture
 
