@@ -1,21 +1,12 @@
 exports.OLSKControllerRoutes = function() {
 	return [{
-		OLSKRoutePath: '/stub/EMLRootLinkEJS',
+		OLSKRoutePath: '/stub/EMLRootLink',
 		OLSKRouteMethod: 'get',
 		OLSKRouteFunction (req, res, next) {
-			return res.OLSKExpressLayoutRender(require('path').join(__dirname, 'stub-view'));
+			return res.OLSKExpressLayoutRender(require('path').join(__dirname, 'main'));
 		},
-		OLSKRouteSignature: 'EMLRootLinkEJSStubRoute',
-		OLSKRouteLanguageCodes: ['en', 'fr', 'es', 'pt'],
-		OLSKRouteIsHidden: process.env.NODE_ENV === 'production',
-	}, {
-		OLSKRoutePath: '/stub/EMLRootLinkSvelte',
-		OLSKRouteMethod: 'get',
-		OLSKRouteFunction (req, res, next) {
-			return res.OLSKExpressLayoutRender(require('path').join(__dirname, 'stub-view'));
-		},
-		OLSKRouteSignature: 'EMLRootLinkSvelteStubRoute',
-		OLSKRouteLanguageCodes: ['en', 'fr', 'es'],
+		OLSKRouteSignature: 'EMLRootLinkStubRoute',
+		OLSKRouteLanguageCodes: ['en'],
 		OLSKRouteIsHidden: process.env.NODE_ENV === 'production',
 	}];
 };
