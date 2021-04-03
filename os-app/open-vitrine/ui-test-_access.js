@@ -93,6 +93,10 @@ describe('EMLVitrine_Access', function () {
 		browser.assert.elements('.OLSKGazette', 1);
 	});
 
+	it('shows SWARLink', function () {
+		browser.assert.elements('.SWARLink', 1);
+	});
+
 	it('shows ROCORootLink', function() {
 		browser.assert.elements('.ROCORootLink', 1);
 	});

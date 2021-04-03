@@ -33,6 +33,7 @@
     "OLSKLanding": "olsk/OLSKLanding",
     "OLSKAppFeatureList": "olsk/OLSKAppFeatureList",
     "OLSKGazette": "olsk/OLSKGazette",
+    "SWARLink": "0dataapp/SWARLink",
 
     "// FRONTEND NORMALIZE CSS": null,
     "normalize.css": "latest",
