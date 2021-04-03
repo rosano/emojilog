@@ -1,6 +1,2 @@
 EMLTrackTitle: Track
-EMLTrackLauncherItemImportJSONText: Import JSON (beta)
-EMLTrackLauncherItemImportJSONErrorNotFilledAlertText: Input not filled
-EMLTrackLauncherItemImportJSONErrorNotValidAlertText: Input not valid
-EMLTrackLauncherItemExportJSONText: Export JSON (beta)
 EMLTrackLauncherItemExportSelectedJSONText: Export selected journal (beta)

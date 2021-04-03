@@ -20,12 +20,20 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text('title', uLocalized('EMLTrackTitle'));
 		});
 
-		it('localizes EMLTrackLauncherItemImportJSON', function () {
-			return browser.assert.OLSKLauncherItemText('EMLTrackLauncherItemImportJSON', uLocalized('EMLTrackLauncherItemImportJSONText'));
-		});
+		describe('EMLTrackLauncherItemExportSelectedJSON', function test_EMLTrackLauncherItemExportSelectedJSON () {
+			
+			before(function () {
+				return browser.pressButton('.EMLTrackMasterCreateButton');
+			});
 
-		it('localizes EMLTrackLauncherItemExportJSON', function () {
-			return browser.assert.OLSKLauncherItemText('EMLTrackLauncherItemExportJSON', uLocalized('EMLTrackLauncherItemExportJSONText'));
+			before(function () {
+				return browser.pressButton('.OLSKModalViewCloseButton');
+			});
+
+			it('localizes EMLTrackLauncherItemExportSelectedJSON', function () {
+				return browser.assert.OLSKLauncherItemText('EMLTrackLauncherItemExportSelectedJSON', uLocalized('EMLTrackLauncherItemExportSelectedJSONText'));
+			});
+		
 		});
 
 		describe('OLSKAppToolbarLauncherButton', function test_OLSKAppToolbarLauncherButton () {
@@ -58,84 +66,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				return browser.pressButton('#TestLCHDebugCloseButton');
 			});
 
-		});
-
-		describe('EMLTrackLauncherItemImportJSON', function test_EMLTrackLauncherItemImportJSON() {
-
-			context('not filled', function () {
-				
-				before(function () {
-					return browser.pressButton('.OLSKAppToolbarLauncherButton');
-				});
-
-				before(async function () {
-					return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_PromptFakeImportSerialized');
-				});
-
-				it('alerts if not filled', function () {
-					return browser.assert.OLSKAlertText(function () {
-						return browser.OLSKPrompt(function () {
-							return browser.click('.LCHLauncherPipeItem');
-						}, function (dialog) {
-							dialog.response = ' ';
-
-							return dialog;
-						});
-					}, uLocalized('EMLTrackLauncherItemImportJSONErrorNotFilledAlertText'));
-				});
-			
-			});
-
-			context('not json', function () {
-				
-				before(function () {
-					return browser.pressButton('.OLSKAppToolbarLauncherButton');
-				});
-
-				before(async function () {
-					return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_PromptFakeImportSerialized');
-				});
-
-				it('alerts if not json', function () {
-					return browser.assert.OLSKAlertText(function () {
-						return browser.OLSKPrompt(function () {
-							return browser.click('.LCHLauncherPipeItem');
-						}, function (dialog) {
-							dialog.response = 'alfa';
-
-							return dialog;
-						});
-					}, uLocalized('EMLTrackLauncherItemImportJSONErrorNotValidAlertText'));
-				});
-			
-			});
-
-			context('not valid', function () {
-				
-				before(function () {
-					return browser.pressButton('.OLSKAppToolbarLauncherButton');
-				});
-
-				before(async function () {
-					return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_PromptFakeImportSerialized');
-				});
-
-				it('alerts if not valid', function () {
-					return browser.assert.OLSKAlertTextAsync(function () {
-						return browser.OLSKPrompt(function () {
-							return browser.click('.LCHLauncherPipeItem');
-						}, function (dialog) {
-							dialog.response = JSON.stringify({
-								[Math.random().toString()]: Math.random().toString(),
-							});
-
-							return dialog;
-						});
-					}, uLocalized('EMLTrackLauncherItemImportJSONErrorNotValidAlertText'));
-				});
-			
-			});
-			
 		});
 
 		describe('OLSKApropos', function test_OLSKApropos() {
@@ -180,22 +110,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 				browser.pressButton('#TestLCHDebugCloseButton');
 			});
 
-		});
-
-		context('EMLTrackLauncherItemExportSelectedJSON', function test_EMLTrackLauncherItemExportSelectedJSON () {
-			
-			before(function () {
-				return browser.pressButton('.EMLTrackMasterCreateButton');
-			});
-
-			before(function () {
-				return browser.pressButton('.OLSKModalViewCloseButton');
-			});
-
-			it('localizes EMLTrackLauncherItemExportSelectedJSON', function () {
-				return browser.assert.OLSKLauncherItemText('EMLTrackLauncherItemExportSelectedJSON', uLocalized('EMLTrackLauncherItemExportSelectedJSONText'));
-			});
-		
 		});
 
 	});

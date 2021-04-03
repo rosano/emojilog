@@ -66,20 +66,16 @@ describe('EMLTrack_Access', function () {
 		browser.assert.elements('.OLSKInstall', 1);
 	});
 
-	it('shows EMLTrackLauncherItemImportJSON', function () {
-		return browser.assert.OLSKLauncherItems('EMLTrackLauncherItemImportJSON', 1);
-	});
-
-	it('shows EMLTrackLauncherItemExportJSON', function () {
-		return browser.assert.OLSKLauncherItems('EMLTrackLauncherItemExportJSON', 1);
-	});
-
 	it('hides EMLTrackLauncherItemExportSelectedJSON', function () {
 		return browser.assert.OLSKLauncherItems('EMLTrackLauncherItemExportSelectedJSON', 0);
 	});
 
 	it('shows ZDRLauncherFakeItemProxy', function () {
 		return browser.assert.OLSKLauncherItems('ZDRLauncherFakeItemProxy', 1);
+	});
+
+	it('shows OLSKTransportLauncherFakeItemProxy', function () {
+		return browser.assert.OLSKLauncherItems('OLSKTransportLauncherFakeItemProxy', 1);
 	});
 
 	it('shows OLSKRemoteStorageLauncherFakeItemProxy', function () {

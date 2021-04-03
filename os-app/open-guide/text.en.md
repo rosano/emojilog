@@ -47,8 +47,8 @@ Time is visually represented in a circle with divisions based on the duration:
 | List of journals ||
 :--- | ---
 | EMLTrackMasterCreateButtonText | `AccessKey+n` |
-| `EMLTrackLauncherItemImportJSONText` | Launcher |
-| `EMLTrackLauncherItemExportJSONText` | Launcher |
+| `OLSKTransportLauncherItemImportJSONText` | Launcher |
+| `OLSKTransportLauncherItemExportJSONText` | Launcher |
 
 | List of memos ||
 :--- | ---

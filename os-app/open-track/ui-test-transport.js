@@ -4,7 +4,7 @@ describe('EMLTrack_Transport', function () {
 
 	const json = {};
 
-	describe('EMLTrackLauncherItemImportJSON', function test_EMLTrackLauncherItemImportJSON() {
+	describe('OLSKTransportDispatchImportJSON', function test_OLSKTransportDispatchImportJSON() {
 
 		const EMLJournalName = Math.random().toString();
 
@@ -17,7 +17,7 @@ describe('EMLTrack_Transport', function () {
 		});
 
 		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_PromptFakeImportSerialized');
+			return browser.fill('.LCHLauncherFilterInput', 'OLSKTransportLauncherFakeItemImportSerialized');
 		});
 
 		before(function () {
@@ -61,14 +61,14 @@ describe('EMLTrack_Transport', function () {
 
 	});
 
-	describe('EMLTrackLauncherItemExportJSON', function test_EMLTrackLauncherItemExportJSON() {
+	describe('OLSKTransportDispatchExportInput', function test_OLSKTransportDispatchExportInput() {
 
 		before(function () {
 			return browser.pressButton('.OLSKAppToolbarLauncherButton');
 		});
 
 		before(function () {
-			return browser.fill('.LCHLauncherFilterInput', 'EMLTrackLauncherItemDebug_AlertFakeExportSerialized');
+			return browser.fill('.LCHLauncherFilterInput', 'OLSKTransportLauncherFakeItemExportSerialized');
 		});
 
 		it('exports file', async function() {

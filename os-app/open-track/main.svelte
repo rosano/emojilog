@@ -15,6 +15,7 @@ import OLSKString from 'OLSKString';
 import OLSKLanguageSwitcher from 'OLSKLanguageSwitcher';
 import OLSKFund from 'OLSKFund';
 import OLSKPact from 'OLSKPact';
+import OLSKTransport from 'OLSKTransport';
 import EMLTrackLogic from './ui-logic.js';
 import EMLTrackMasterLogic from './submodules/EMLTrackMaster/ui-logic.js';
 import OLSKChain from 'OLSKChain';
@@ -84,40 +85,8 @@ const mod = {
 		}, inputData));
 	},
 
-	async DataExportJSON (EMLJournal) {
-		return JSON.stringify(await mod._ValueZDRWrap.App.EMLTransport.EMLTransportExport({
-			EMLJournal,
-			EMLSetting: await mod._ValueZDRWrap.App.EMLSetting.EMLSettingList(),
-		}));
-	},
-
-	DataExportBasename () {
-		return `${ window.location.hostname }-${ Date.now() }`;
-	},
-
-	DataExportJSONFilename () {
-		return `${ mod.DataExportBasename() }.json`;
-	},	
-
 	DataTrackRecipes () {
-		const items = [
-			{
-				LCHRecipeSignature: 'EMLTrackLauncherItemImportJSON',
-				LCHRecipeName: OLSKLocalized('EMLTrackLauncherItemImportJSONText'),
-				LCHRecipeCallback: async function EMLTrackLauncherItemImportJSON () {
-					return mod.ControlJournalsImportJSON(await this.api.LCHReadTextFile({
-						accept: '.json',
-					}));
-				},
-			},
-			{
-				LCHRecipeSignature: 'EMLTrackLauncherItemExportJSON',
-				LCHRecipeName: OLSKLocalized('EMLTrackLauncherItemExportJSONText'),
-				LCHRecipeCallback: async function EMLTrackLauncherItemExportJSON () {
-					return this.api.LCHSaveFile(await mod.DataExportJSON(mod._ValueJournalsAll), mod.DataExportJSONFilename());
-				},
-			},
-		];
+		const items = [];
 
 		items.push(...OLSKFund.OLSKFundRecipes({
 			ParamWindow: window,
@@ -132,6 +101,14 @@ const mod = {
 
 		items.push(...zerodatawrap.ZDRRecipes({
 			ParamMod: mod,
+			ParamSpecUI: OLSK_SPEC_UI(),
+		}));
+
+		items.push(...OLSKTransport.OLSKTransportRecipes({
+			ParamWindow: window,
+			OLSKLocalized: OLSKLocalized,
+			OLSKTransportDispatchImportJSON: mod.OLSKTransportDispatchImportJSON,
+			OLSKTransportDispatchExportInput: mod.OLSKTransportDispatchExportInput,
 			ParamSpecUI: OLSK_SPEC_UI(),
 		}));
 
@@ -158,7 +135,7 @@ const mod = {
 				LCHRecipeSignature: 'EMLTrackLauncherItemExportSelectedJSON',
 				LCHRecipeName: OLSKLocalized('EMLTrackLauncherItemExportSelectedJSONText'),
 				LCHRecipeCallback: async function EMLTrackLauncherItemExportSelectedJSON () {
-					return this.api.LCHSaveFile(await mod.DataExportJSON([mod._ValueJournalSelected]), mod.DataExportJSONFilename());
+					return this.api.OLSKTransportLauncherItemExportJSON(await mod._OLSKTransportDispatchExportInput([mod._ValueJournalSelected]))
 				},
 			});
 		}
@@ -210,27 +187,9 @@ const mod = {
 					},
 				},
 				{
-					LCHRecipeName: 'EMLTrackLauncherItemDebug_PromptFakeImportSerialized',
-					LCHRecipeCallback: function EMLTrackLauncherItemDebug_PromptFakeImportSerialized () {
-						return mod.ControlJournalsImportJSON(window.prompt());
-					},
-				},
-				{
-					LCHRecipeName: 'EMLTrackLauncherItemDebug_AlertFakeExportSerialized',
-					LCHRecipeCallback: async function EMLTrackLauncherItemDebug_AlertFakeExportSerialized () {
-						return window.alert(JSON.stringify({
-							OLSKDownloadName: mod.DataExportJSONFilename(),
-							OLSKDownloadData: await mod.DataExportJSON(mod._ValueJournalsAll),
-						}));
-					},
-				},
-				{
 					LCHRecipeName: 'EMLTrackLauncherItemDebug_AlertFakeExportSelectedSerialized',
 					LCHRecipeCallback: async function EMLTrackLauncherItemDebug_AlertFakeExportSelectedSerialized () {
-						return window.alert(JSON.stringify({
-							OLSKDownloadName: mod.DataExportJSONFilename(),
-							OLSKDownloadData: await mod.DataExportJSON([mod._ValueJournalSelected]),
-						}));
+						return this.api.OLSKTransportLauncherFakeItemExportSerialized(await mod._OLSKTransportDispatchExportInput([mod._ValueJournalSelected]));
 					},
 				},
 				{
@@ -295,19 +254,6 @@ const mod = {
 		setTimeout(function () { // #hotfix-force-update
 			mod._EMLTrackMaster && mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
 		});
-	},
-
-	async ControlJournalsImportJSON (inputData) {
-		if (!inputData.trim()) {
-			return window.alert(OLSKLocalized('EMLTrackLauncherItemImportJSONErrorNotFilledAlertText'))
-		}
-
-		try {
-			await mod._ValueZDRWrap.App.EMLTransport.EMLTransportImport(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(JSON.parse(inputData)));
-			await mod.SetupValueJournalsAll();
-		} catch (e) {
-			window.alert(OLSKLocalized('EMLTrackLauncherItemImportJSONErrorNotValidAlertText'));
-		}
 	},
 
 	// MESSAGE
@@ -444,6 +390,22 @@ const mod = {
 
 	EMLTemplateDispatchDiscard (inputData) {
 		mod.ControlJournalDiscard(inputData);
+	},
+
+	async OLSKTransportDispatchImportJSON (inputData) {
+		await mod._ValueZDRWrap.App.EMLTransport.EMLTransportImport(OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData));
+		await mod.SetupValueJournalsAll();
+	},
+
+	async _OLSKTransportDispatchExportInput (EMLJournal) {
+		return mod._ValueZDRWrap.App.EMLTransport.EMLTransportExport({
+			EMLJournal,
+			EMLSetting: await mod._ValueZDRWrap.App.EMLSetting.EMLSettingList(),
+		});
+	},
+
+	OLSKTransportDispatchExportInput () {
+		return mod._OLSKTransportDispatchExportInput(mod._ValueJournalsAll);
 	},
 
 	ZDRSchemaDispatchSyncCreateJournal (inputData) {
