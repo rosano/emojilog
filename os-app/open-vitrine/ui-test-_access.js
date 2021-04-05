@@ -3,12 +3,6 @@ const kDefaultRoutePath = require('./controller.js').OLSKControllerRoutes().shif
 Object.entries({
 	EMLVitrine: '.EMLVitrine',
 	
-	EMLVitrineToolbar: '.EMLVitrineToolbar',
-	
-	EMLVitrineCrown: '.EMLVitrineCrown',
-	EMLVitrineCrownIcon: '.EMLVitrineCrownIcon',
-	EMLVitrineCrownName: '.EMLVitrineCrownName',
-
 	EMLVitrineVideo: '.OLSKCommonVideoList .OLSKCommonVideoListItem.EMLVitrineVideo iframe',
 
 	EMLVitrineFeaturesHeading: '.EMLVitrineFeaturesHeading',
@@ -33,22 +27,10 @@ describe('EMLVitrine_Access', function () {
 		browser.assert.elements(EMLVitrine, 1);
 	});
 	
-	it('shows OLSKLanguageSwitcher', function() {
-		browser.assert.elements('.OLSKLanguageSwitcher', 1);
+	it('shows OLSKCrown', function() {
+		browser.assert.elements('.OLSKCrown', 1);
 	});
 	
-	it('shows EMLVitrineCrown', function() {
-		browser.assert.elements(EMLVitrineCrown, 1);
-	});
-	
-	it('shows EMLVitrineCrownIcon', function() {
-		browser.assert.elements(EMLVitrineCrownIcon, 1);
-	});
-	
-	it('shows EMLVitrineCrownName', function() {
-		browser.assert.elements(EMLVitrineCrownName, 1);
-	});
-
 	it('shows OLSKLanding', function() {
 		browser.assert.elements('.OLSKLanding', 1);
 	});

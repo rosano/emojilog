@@ -16,16 +16,10 @@ locals.OLSKPagePublicConstants = {
 
 <div class="EMLVitrine OLSKDecor OLSKDecorCapped">	
 
-<div class="EMLVitrineToolbar OLSKToolbar OLSKToolbarJustify OLSKStickyHeader OLSKCommonEdgeBottom">
-	<div class="EMLVitrineCrown OLSKCommonCard OLSKCommonCrownCardMini">
-		<img class="EMLVitrineCrownIcon" src="/_shared/EMLRootLink/ui-assets/identity.svg" role="presentation" />
-		<section>
-			<span class="EMLVitrineCrownName"><%= OLSKLocalized('EMLVitrineTitle') %></span>
-		</section>
-	</div>
-
-	<%- include('../_shared/__external/OLSKLanguageSwitcher/main.ejs') %>
-</div>
+<%- include('../../node_modules/OLSKCrown/main.ejs', {
+	OLSKCrownCardImageURL: '/_shared/EMLRootLink/ui-assets/identity.svg',
+	OLSKCrownCardNameText: OLSKLocalized('EMLVitrineTitle'),
+}) %>
 
 <%- include('../../node_modules/OLSKLanding/main.ejs', {
 	OLSKLandingHeadingText: OLSKLocalized('EMLVitrineDescription'),

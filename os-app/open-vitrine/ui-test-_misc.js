@@ -22,48 +22,12 @@ describe('EMLVitrine_Misc', function () {
 	
 	});
 
-	describe('EMLVitrineToolbar', function () {
-		
-		it('classes OLSKToolbar', function () {
-			browser.assert.hasClass(EMLVitrineToolbar, 'OLSKToolbar');
-		});
+	describe('OLSKCrown', function test_OLSKCrown () {
 
-		it('classes OLSKToolbarJustify', function () {
-			browser.assert.hasClass(EMLVitrineToolbar, 'OLSKToolbarJustify');
-		});
-
-		it('classes OLSKStickyHeader', function () {
-			browser.assert.hasClass(EMLVitrineToolbar, 'OLSKStickyHeader');
-		});
-
-		it('classes OLSKCommonEdgeBottom', function () {
-			browser.assert.hasClass(EMLVitrineToolbar, 'OLSKCommonEdgeBottom');
+		it('sets OLSKCrownCardImageURL', function () {
+			browser.assert.attribute('.OLSKCrownCardImage', 'src', '/_shared/EMLRootLink/ui-assets/identity.svg');
 		});
 	
-	});
-
-	describe('EMLVitrineCrown', function test_EMLVitrineCrown() {
-
-		it('classes OLSKCommonCard', function () {
-			browser.assert.hasClass(EMLVitrineCrown, 'OLSKCommonCard');
-		});
-
-		it('classes OLSKCommonCrownCardMini', function () {
-			browser.assert.hasClass(EMLVitrineCrown, 'OLSKCommonCrownCardMini');
-		});
-		
-	});
-
-	describe('EMLVitrineCrownIcon', function () {
-
-		it('sets role', function () {
-			browser.assert.attribute(EMLVitrineCrownIcon, 'role', 'presentation');
-		});
-
-		it('sets src', function () {
-			browser.assert.attribute(EMLVitrineCrownIcon, 'src', '/_shared/EMLRootLink/ui-assets/identity.svg');
-		});
-
 	});
 
 	describe('OLSKLanding', function test_OLSKLanding () {
