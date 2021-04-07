@@ -172,7 +172,7 @@ const mod = {
 		mod.ControlMemoActivate(inputData);
 	},
 
-	OLSKCatalogDispatchArrow (inputData) {
+	OLSKCollectionDispatchArrow (inputData) {
 		mod._OLSKCatalog.modPublic.OLSKCatalogSelect(inputData);
 	},
 
@@ -276,7 +276,7 @@ import EMLTemplate from '../sub-template/main.svelte';
 	_OLSKCatalogDispatchKey={ mod._OLSKCatalogDispatchKey }
 
 	OLSKCollectionDispatchClick={ mod.OLSKCollectionDispatchClick }
-	OLSKCatalogDispatchArrow={ mod.OLSKCatalogDispatchArrow }
+	OLSKCollectionDispatchArrow={ mod.OLSKCollectionDispatchArrow }
 	OLSKCatalogDispatchDetailActivate={ mod.OLSKCatalogDispatchDetailActivate }
 	OLSKCatalogDispatchMasterShouldActivate={ mod.OLSKCatalogDispatchMasterShouldActivate }
 	OLSKCatalogDispatchFilterSubmit={ mod.OLSKCatalogDispatchFilterSubmit }
