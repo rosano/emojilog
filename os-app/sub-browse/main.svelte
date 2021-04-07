@@ -308,7 +308,7 @@ import EMLTemplate from '../sub-template/main.svelte';
 
 	<!-- LIST ITEM -->
 
-	<div slot="OLSKMasterListItem">
+	<div slot="OLSKCollectionItem">
 		<EMLBrowseListItem EMLBrowseListItemObject={ OLSKResultsListItem } />
 	</div>
 
