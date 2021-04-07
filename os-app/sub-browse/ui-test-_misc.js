@@ -193,7 +193,7 @@ describe('EMLBrowse_Misc', function () {
 		});
 
 		it('sets OLSKCollectionItemsLocus', function () {
-			browser.assert.hasClass('.EMLBrowseListItem:first-of-type', 'OLSKCollectionItemLocus');
+			browser.assert.hasClass('.OLSKCollectionItem:first-of-type', 'OLSKCollectionItemLocus');
 		});
 
 		context('arrow', function () {
@@ -207,7 +207,7 @@ describe('EMLBrowse_Misc', function () {
 			});
 
 			it('sets no OLSKCollectionItemLocus', function () {
-				browser.assert.hasClass('.EMLBrowseListItem:first-of-type', 'OLSKCollectionItemLocus');
+				browser.assert.hasClass('.OLSKCollectionItem:first-of-type', 'OLSKCollectionItemLocus');
 			});
 
 		});
