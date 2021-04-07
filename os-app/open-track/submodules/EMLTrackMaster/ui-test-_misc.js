@@ -84,7 +84,7 @@ describe('EMLTrackMaster_Misc', function () {
 		});
 
 		it('sets OLSKCollectionChunkFunction', function () {
-			browser.assert.elements('.OLSKCollectionGroupHeading', 1);
+			browser.assert.elements('.OLSKCollectionChunkHeading', 1);
 		});
 
 		it('binds EMLJournalName', function () {

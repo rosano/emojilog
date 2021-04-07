@@ -126,12 +126,12 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 	width: 100%;
 }
 
-.EMLTrackMaster :global(.OLSKCollection, .OLSKCollectionGroup, .OLSKCollectionGroupItems) {
+.EMLTrackMaster :global(.OLSKCollection, .OLSKCollectionChunk, .OLSKCollectionChunkItems) {
 	display: flex;
 	flex-direction: column;
 }
 
-.EMLTrackMaster :global(.OLSKCollectionGroupHeading) {
+.EMLTrackMaster :global(.OLSKCollectionChunkHeading) {
 	padding: 6px;
 	outline: #cccccc solid 1px;
 
@@ -139,22 +139,22 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 	background: #e9e9e9;
 }
 
-.EMLTrackMaster :global(.OLSKCollectionGroupItems) {
+.EMLTrackMaster :global(.OLSKCollectionChunkItems) {
 	padding: 10px;
 	
 	flex-direction: unset;
 	flex-wrap: wrap;
 }
 
-.EMLTrackMaster :global(.OLSKCollectionGroup:nth-child(3)) {
+.EMLTrackMaster :global(.OLSKCollectionChunk:nth-child(3)) {
 	opacity: 0.7;
 }
 
-.EMLTrackMaster :global(.OLSKCollectionGroup:nth-child(4)) {
+.EMLTrackMaster :global(.OLSKCollectionChunk:nth-child(4)) {
 	opacity: 0.5;
 }
 
-.EMLTrackMaster :global(.OLSKCollectionGroup:nth-child(5)) {
+.EMLTrackMaster :global(.OLSKCollectionChunk:nth-child(5)) {
 	opacity: 0.3;
 }
 </style>
