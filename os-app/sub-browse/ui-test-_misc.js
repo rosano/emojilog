@@ -172,7 +172,7 @@ describe('EMLBrowse_Misc', function () {
 			return browser.click('.EMLBrowseListItem');
 		});
 
-		it('sets OLSKCollectionItemLocus', function () {
+		it('sets OLSKCollectionItemsLocus', function () {
 			browser.assert.elements('.OLSKCollectionItemLocus', 1);
 		});
 
@@ -192,8 +192,8 @@ describe('EMLBrowse_Misc', function () {
 			return browser.click('.EMLBrowseListItem');
 		});
 
-		it('sets OLSKCollectionItemLocus', function () {
-			browser.assert.hasClass('.OLSKResultsListItem:first-of-type', 'OLSKCollectionItemLocus');
+		it('sets OLSKCollectionItemsLocus', function () {
+			browser.assert.hasClass('.EMLBrowseListItem:first-of-type', 'OLSKCollectionItemLocus');
 		});
 
 		context('arrow', function () {
@@ -207,7 +207,7 @@ describe('EMLBrowse_Misc', function () {
 			});
 
 			it('sets no OLSKCollectionItemLocus', function () {
-				browser.assert.hasClass('.OLSKResultsListItem:first-of-type', 'OLSKCollectionItemLocus');
+				browser.assert.hasClass('.EMLBrowseListItem:first-of-type', 'OLSKCollectionItemLocus');
 			});
 
 		});

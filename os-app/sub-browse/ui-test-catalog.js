@@ -107,7 +107,7 @@ describe('EMLBrowse_Catalog', function () {
 		});
 
 		it('binds OLSKCollectionItemsLocus', function () {
-			browser.assert.hasClass('.OLSKResultsListItem:nth-child(2)', 'OLSKCollectionItemLocus');
+			browser.assert.hasClass('.EMLBrowseListItem:nth-child(2)', 'OLSKCollectionItemLocus');
 		});
 	
 	});

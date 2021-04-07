@@ -11,7 +11,7 @@ describe('EMLBrowse_Sync', function () {
 	describe('SyncCreateMemo', function test_SyncCreateMemo () {
 
 		before(function () {
-			browser.assert.elements('.OLSKResultsListItem', 0);
+			browser.assert.elements('.EMLBrowseListItem', 0);
 		});
 
 		before(function () {
@@ -19,7 +19,7 @@ describe('EMLBrowse_Sync', function () {
 		});
 
 		it('adds item', function () {
-			browser.assert.elements('.OLSKResultsListItem', 1);
+			browser.assert.elements('.EMLBrowseListItem', 1);
 		});
 
 	});
@@ -41,7 +41,7 @@ describe('EMLBrowse_Sync', function () {
 		context('selected same', function () {
 			
 			before(function () {
-				return browser.click('.OLSKResultsListItem');
+				return browser.click('.EMLBrowseListItem');
 			});
 
 			before(function () {
@@ -67,7 +67,7 @@ describe('EMLBrowse_Sync', function () {
 		});
 
 		it('removes item', function () {
-			browser.assert.elements('.OLSKResultsListItem', 0);
+			browser.assert.elements('.EMLBrowseListItem', 0);
 		});
 
 		context('selected same', function () {
@@ -77,7 +77,7 @@ describe('EMLBrowse_Sync', function () {
 			});
 
 			before(function () {
-				return browser.click('.OLSKResultsListItem');
+				return browser.click('.EMLBrowseListItem');
 			});
 
 			before(function () {
