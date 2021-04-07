@@ -84,22 +84,6 @@ describe('EMLTrack_Misc', function () {
 			browser.assert.hasFocus('.EMLTemplateNameField');
 		});
 
-		describe('EMLTrackMasterListItem', function test_EMLTrackMasterListItem () {
-
-			before(function () {
-				return browser.pressButton('.OLSKModalViewCloseButton');
-			});
-
-			before(function () {
-				return browser.pressButton('.EMLBrowseCloseButton');
-			});
-
-			it('classes OLSKDecorTappable', function() {
-				browser.assert.hasClass('.EMLTrackMasterListItem', 'OLSKDecorTappable');
-			});
-		
-		});
-
 	});
 
 });

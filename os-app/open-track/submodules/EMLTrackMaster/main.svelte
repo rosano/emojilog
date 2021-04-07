@@ -105,7 +105,7 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 
 	let:OLSKCollectionItem
 	>
-	<div slot="OLSKCollectionItem" class="EMLTrackMasterListItem OLSKDecorTappable" >
+	<div slot="OLSKCollectionItem" class="EMLTrackMasterListItem" >
 		<EMLTrackTimer
 			EMLTrackTimerEventDate={ OLSKCollectionItem.EMLJournalTouchDate }
 			EMLTrackTimerText={ EMLTrackMasterLogic.EMLTrackMasterSymbol(OLSKCollectionItem) }
