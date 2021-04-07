@@ -40,7 +40,7 @@ const mod = {
 		return inputData.EMLJournalID;
 	},
 
-	OLSKCollectionGroupFunction (inputData) {
+	OLSKCollectionChunkFunction (inputData) {
 		return EMLTrackMasterLogic.EMLTrackMasterGroupFunction(inputData, OLSKLocalized);
 	},
 
@@ -96,7 +96,7 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 	OLSKCollectionSortFunction={ EMLTrackMasterLogic.EMLTrackMasterSort }
 	_OLSKCollectionDispatchKey={ mod._OLSKCollectionDispatchKey }
 
-	OLSKCollectionGroupFunction={ mod.OLSKCollectionGroupFunction }
+	OLSKCollectionChunkFunction={ mod.OLSKCollectionChunkFunction }
 	
 	OLSKCollectionItemAccessibilitySummaryFunction={ mod.OLSKCollectionItemAccessibilitySummaryFunction }
 	OLSKCollectionDispatchClick={ OLSKCollectionDispatchClick }

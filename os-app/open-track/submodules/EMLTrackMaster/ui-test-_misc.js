@@ -83,7 +83,7 @@ describe('EMLTrackMaster_Misc', function () {
 			});
 		});
 
-		it('sets OLSKCollectionGroupFunction', function () {
+		it('sets OLSKCollectionChunkFunction', function () {
 			browser.assert.elements('.OLSKCollectionGroupHeading', 1);
 		});
 
