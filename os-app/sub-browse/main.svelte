@@ -160,7 +160,7 @@ const mod = {
 
 	// MESSAGE
 
-	OLSKMasterListItemAccessibilitySummaryFunction (inputData) {
+	OLSKCollectionItemAccessibilitySummaryFunction (inputData) {
 		EMLBrowseLogic.EMLBrowseAccessibilitySummary(inputData, OLSKLocalized);
 	},
 
@@ -267,7 +267,7 @@ import EMLTemplate from '../sub-template/main.svelte';
 <OLSKCatalog
 	bind:this={ mod._OLSKCatalog }
 
-	OLSKMasterListItemAccessibilitySummaryFunction={ mod.OLSKMasterListItemAccessibilitySummaryFunction }
+	OLSKCollectionItemAccessibilitySummaryFunction={ mod.OLSKCollectionItemAccessibilitySummaryFunction }
 
 	OLSKCatalogSortFunction={ EMLBrowseLogic.EMLBrowseSortFunction }
 	OLSKCatalogIsMatch={ EMLBrowseLogic.EMLBrowseIsMatch }
