@@ -45,7 +45,6 @@
     "OLSKCollection": "olsk/OLSKCollection",
     "OLSKCatalog": "olsk/OLSKCatalog",
     "OLSKMasterList": "olsk/OLSKMasterList",
-    "OLSKResults": "olsk/OLSKResults",
     "OLSKDetailPlaceholder": "olsk/OLSKDetailPlaceholder",
     "OLSKUIAssets": "olsk/OLSKUIAssets",
     "OLSKStandardView": "olsk/OLSKStandardView",
