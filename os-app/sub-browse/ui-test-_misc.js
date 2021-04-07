@@ -107,7 +107,7 @@ describe('EMLBrowse_Misc', function () {
 	context('create', function test_create() {
 
 		before(function () {
-			browser.assert.elements('.OLSKResultsListItemSelected', 0);
+			browser.assert.elements('.OLSKCollectionItemLocus', 0);
 		});
 
 		before(function () {
@@ -172,8 +172,8 @@ describe('EMLBrowse_Misc', function () {
 			return browser.click('.EMLBrowseListItem');
 		});
 
-		it('sets OLSKResultsListItemSelected', function () {
-			browser.assert.elements('.OLSKResultsListItemSelected', 1);
+		it('sets OLSKCollectionItemLocus', function () {
+			browser.assert.elements('.OLSKCollectionItemLocus', 1);
 		});
 
 		it('sets EMLBrowseInfoItem', function () {
@@ -192,8 +192,8 @@ describe('EMLBrowse_Misc', function () {
 			return browser.click('.EMLBrowseListItem');
 		});
 
-		it('sets OLSKResultsListItemSelected', function () {
-			browser.assert.hasClass('.OLSKResultsListItem:first-of-type', 'OLSKResultsListItemSelected');
+		it('sets OLSKCollectionItemLocus', function () {
+			browser.assert.hasClass('.OLSKResultsListItem:first-of-type', 'OLSKCollectionItemLocus');
 		});
 
 		context('arrow', function () {
@@ -206,8 +206,8 @@ describe('EMLBrowse_Misc', function () {
 				return browser.OLSKFireKeyboardEvent(browser.window, 'ArrowDown');
 			});
 
-			it('sets no OLSKResultsListItemSelected', function () {
-				browser.assert.hasClass('.OLSKResultsListItem:first-of-type', 'OLSKResultsListItemSelected');
+			it('sets no OLSKCollectionItemLocus', function () {
+				browser.assert.hasClass('.OLSKResultsListItem:first-of-type', 'OLSKCollectionItemLocus');
 			});
 
 		});
