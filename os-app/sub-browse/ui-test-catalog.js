@@ -20,7 +20,7 @@ describe('EMLBrowse_Catalog', function () {
 	
 	});
 
-	context('OLSKCatalogDispatchClick', function test_OLSKCatalogDispatchClick () {
+	context('OLSKCollectionDispatchClick', function test_OLSKCollectionDispatchClick () {
 		
 		before(function () {
 			return browser.OLSKFireKeyboardEvent(browser.window, 'Escape');

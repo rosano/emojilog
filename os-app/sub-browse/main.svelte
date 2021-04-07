@@ -168,7 +168,7 @@ const mod = {
 		return inputData.EMLMemoID;
 	},
 
-	OLSKCatalogDispatchClick (inputData) {
+	OLSKCollectionDispatchClick (inputData) {
 		mod.ControlMemoActivate(inputData);
 	},
 
@@ -275,7 +275,7 @@ import EMLTemplate from '../sub-template/main.svelte';
 
 	_OLSKCatalogDispatchKey={ mod._OLSKCatalogDispatchKey }
 
-	OLSKCatalogDispatchClick={ mod.OLSKCatalogDispatchClick }
+	OLSKCollectionDispatchClick={ mod.OLSKCollectionDispatchClick }
 	OLSKCatalogDispatchArrow={ mod.OLSKCatalogDispatchArrow }
 	OLSKCatalogDispatchDetailActivate={ mod.OLSKCatalogDispatchDetailActivate }
 	OLSKCatalogDispatchMasterShouldActivate={ mod.OLSKCatalogDispatchMasterShouldActivate }
