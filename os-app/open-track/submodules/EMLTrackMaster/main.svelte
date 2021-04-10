@@ -131,14 +131,6 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 	flex-direction: column;
 }
 
-.EMLTrackMaster :global(.OLSKCollectionChunkHeading) {
-	padding: 6px;
-	outline: #cccccc solid 1px;
-
-	font-weight: bold;
-	background: #e9e9e9;
-}
-
 .EMLTrackMaster :global(.OLSKCollectionChunkItems) {
 	padding: 10px;
 	
