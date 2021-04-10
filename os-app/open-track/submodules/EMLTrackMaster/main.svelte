@@ -41,7 +41,7 @@ const mod = {
 	},
 
 	OLSKCollectionChunkFunction (inputData) {
-		return EMLTrackMasterLogic.EMLTrackMasterGroupFunction(inputData, OLSKLocalized);
+		return EMLTrackMasterLogic.EMLTrackMasterChunkFunction(inputData, OLSKLocalized);
 	},
 
 	OLSKCollectionItemAccessibilitySummaryFunction (inputData) {

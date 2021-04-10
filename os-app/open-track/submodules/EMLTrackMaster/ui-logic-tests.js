@@ -57,27 +57,27 @@ describe('EMLTrackMasterSort', function test_EMLTrackMasterSort() {
 
 });
 
-describe('EMLTrackMasterGroupFunction', function test_EMLTrackMasterGroupFunction() {
+describe('EMLTrackMasterChunkFunction', function test_EMLTrackMasterChunkFunction() {
 
-	const _EMLTrackMasterGroupFunction = function (inputData) {
-		return mod.EMLTrackMasterGroupFunction([stub], uLocalized);
+	const _EMLTrackMasterChunkFunction = function (inputData) {
+		return mod.EMLTrackMasterChunkFunction([stub], uLocalized);
 	};
 
 	it('throws if not array', function () {
 		throws(function () {
-			mod.EMLTrackMasterGroupFunction(null);
+			mod.EMLTrackMasterChunkFunction(null);
 		}, /EMLErrorInputNotValid/);
 	});
 
 	it('returns object', function() {
-		deepEqual(mod.EMLTrackMasterGroupFunction([]), {});
+		deepEqual(mod.EMLTrackMasterChunkFunction([]), {});
 	});
 
 	it('groups if no touch', function() {
 		const item = {
 			[Math.random().toString()]: Math.random().toString(),
 		};
-		deepEqual(mod.EMLTrackMasterGroupFunction([item], uLocalized), {
+		deepEqual(mod.EMLTrackMasterChunkFunction([item], uLocalized), {
 			[uLocalized('EMLTrackMasterGroupReadyText')]: [item],
 		});
 	});
@@ -86,7 +86,7 @@ describe('EMLTrackMasterGroupFunction', function test_EMLTrackMasterGroupFunctio
 		const item = {
 			EMLJournalTouchDate: new Date(OLSKMoment.OLSKMomentPerceptionDate(new Date()).valueOf() + uRandomElement(EMLTrackTimerLogic.EMLTrackTimerFrameMinute(), EMLTrackTimerLogic.EMLTrackTimerFrameHour(), EMLTrackTimerLogic.EMLTrackTimerFrameDay()) * Math.random()),
 		};
-		deepEqual(mod.EMLTrackMasterGroupFunction([item], uLocalized), {
+		deepEqual(mod.EMLTrackMasterChunkFunction([item], uLocalized), {
 			[uLocalized('EMLTrackMasterGroupTodayText')]: [item],
 		});
 	});
@@ -95,7 +95,7 @@ describe('EMLTrackMasterGroupFunction', function test_EMLTrackMasterGroupFunctio
 		const item = {
 			EMLJournalTouchDate: new Date(OLSKMoment.OLSKMomentPerceptionDate(new Date()) - Math.max(EMLTrackTimerLogic.EMLTrackTimerFrameDay(), Math.min(EMLTrackTimerLogic.EMLTrackTimerFrameMonth(), uRandomElement(EMLTrackTimerLogic.EMLTrackTimerFrames()) * Math.random())) + 1),
 		};
-		deepEqual(mod.EMLTrackMasterGroupFunction([item], uLocalized), {
+		deepEqual(mod.EMLTrackMasterChunkFunction([item], uLocalized), {
 			[uLocalized('EMLTrackMasterGroupEarlierText')]: [item],
 		});
 	});
@@ -104,7 +104,7 @@ describe('EMLTrackMasterGroupFunction', function test_EMLTrackMasterGroupFunctio
 		const item = {
 			EMLJournalTouchDate: new Date(OLSKMoment.OLSKMomentPerceptionDate(new Date()) - Math.max(EMLTrackTimerLogic.EMLTrackTimerFrameMonth(), EMLTrackTimerLogic.EMLTrackTimerFrameYear() * Math.random())),
 		};
-		deepEqual(mod.EMLTrackMasterGroupFunction([item], uLocalized), {
+		deepEqual(mod.EMLTrackMasterChunkFunction([item], uLocalized), {
 			[uLocalized('EMLTrackMasterGroupOverMonthText')]: [item],
 		});
 	});
@@ -113,7 +113,7 @@ describe('EMLTrackMasterGroupFunction', function test_EMLTrackMasterGroupFunctio
 		const item = {
 			EMLJournalTouchDate: new Date(OLSKMoment.OLSKMomentPerceptionDate(new Date()) - EMLTrackTimerLogic.EMLTrackTimerFrameYear() - 1),
 		};
-		deepEqual(mod.EMLTrackMasterGroupFunction([item], uLocalized), {
+		deepEqual(mod.EMLTrackMasterChunkFunction([item], uLocalized), {
 			[uLocalized('EMLTrackMasterGroupOverYearText')]: [item],
 		});
 	});

@@ -43,7 +43,7 @@ const mod = {
 		return 'EMLTrackMasterGroupOverYearText';
 	},
 
-	EMLTrackMasterGroupFunction (inputData, OLSKLocalized) {
+	EMLTrackMasterChunkFunction (inputData, OLSKLocalized) {
 		if (!Array.isArray(inputData)) {
 			throw new Error('EMLErrorInputNotValid');
 		}
