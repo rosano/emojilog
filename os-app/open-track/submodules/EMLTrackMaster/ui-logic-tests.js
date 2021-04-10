@@ -3,14 +3,11 @@ const { throws, deepEqual } = require('assert');
 const mod = require('./ui-logic.js').default;
 
 const EMLTrackTimerLogic = require('../EMLTrackTimer/ui-logic.js');
+const OLSKMoment = require('OLSKMoment');
 
 const uLocalized = function (inputData) {
 	return inputData + '-LOCALIZED';
 };
-
-const offset = (function (inputData) {
-	return inputData < 10 ? `0${ inputData }` : inputData;
-})((new Date()).getTimezoneOffset() / 60);
 
 describe('EMLTrackMasterSort', function test_EMLTrackMasterSort() {
 
@@ -60,21 +57,6 @@ describe('EMLTrackMasterSort', function test_EMLTrackMasterSort() {
 
 });
 
-describe('_EMLTrackMasterGroupingDate', function test__EMLTrackMasterGroupingDate() {
-
-	it('throws if not valid', function () {
-		throws(function () {
-			mod._EMLTrackMasterGroupingDate(new Date('alfa'));
-		}, /EMLErrorInputNotValid/);
-	});
-
-	it('returns date', function () {
-		const item = new Date();
-		deepEqual(mod._EMLTrackMasterGroupingDate(item), new Date(require('OLSKMoment').OLSKMomentPerceptionDay(item) + `T04:00:00-${ offset }:00`));
-	});
-
-});
-
 describe('EMLTrackMasterGroupFunction', function test_EMLTrackMasterGroupFunction() {
 
 	const _EMLTrackMasterGroupFunction = function (inputData) {
@@ -102,7 +84,7 @@ describe('EMLTrackMasterGroupFunction', function test_EMLTrackMasterGroupFunctio
 
 	it('groups if same day', function() {
 		const item = {
-			EMLJournalTouchDate: new Date(mod._EMLTrackMasterGroupingDate(new Date()).valueOf() + uRandomElement(EMLTrackTimerLogic.EMLTrackTimerFrameMinute(), EMLTrackTimerLogic.EMLTrackTimerFrameHour(), EMLTrackTimerLogic.EMLTrackTimerFrameDay()) * Math.random()),
+			EMLJournalTouchDate: new Date(OLSKMoment.OLSKMomentPerceptionDate(new Date()).valueOf() + uRandomElement(EMLTrackTimerLogic.EMLTrackTimerFrameMinute(), EMLTrackTimerLogic.EMLTrackTimerFrameHour(), EMLTrackTimerLogic.EMLTrackTimerFrameDay()) * Math.random()),
 		};
 		deepEqual(mod.EMLTrackMasterGroupFunction([item], uLocalized), {
 			[uLocalized('EMLTrackMasterGroupTodayText')]: [item],
@@ -111,7 +93,7 @@ describe('EMLTrackMasterGroupFunction', function test_EMLTrackMasterGroupFunctio
 
 	it('groups if under month', function() {
 		const item = {
-			EMLJournalTouchDate: new Date(mod._EMLTrackMasterGroupingDate(new Date()) - Math.max(EMLTrackTimerLogic.EMLTrackTimerFrameDay(), Math.min(EMLTrackTimerLogic.EMLTrackTimerFrameMonth(), uRandomElement(EMLTrackTimerLogic.EMLTrackTimerFrames()) * Math.random())) + 1),
+			EMLJournalTouchDate: new Date(OLSKMoment.OLSKMomentPerceptionDate(new Date()) - Math.max(EMLTrackTimerLogic.EMLTrackTimerFrameDay(), Math.min(EMLTrackTimerLogic.EMLTrackTimerFrameMonth(), uRandomElement(EMLTrackTimerLogic.EMLTrackTimerFrames()) * Math.random())) + 1),
 		};
 		deepEqual(mod.EMLTrackMasterGroupFunction([item], uLocalized), {
 			[uLocalized('EMLTrackMasterGroupEarlierText')]: [item],
@@ -120,7 +102,7 @@ describe('EMLTrackMasterGroupFunction', function test_EMLTrackMasterGroupFunctio
 
 	it('groups if over month', function() {
 		const item = {
-			EMLJournalTouchDate: new Date(mod._EMLTrackMasterGroupingDate(new Date()) - Math.max(EMLTrackTimerLogic.EMLTrackTimerFrameMonth(), EMLTrackTimerLogic.EMLTrackTimerFrameYear() * Math.random())),
+			EMLJournalTouchDate: new Date(OLSKMoment.OLSKMomentPerceptionDate(new Date()) - Math.max(EMLTrackTimerLogic.EMLTrackTimerFrameMonth(), EMLTrackTimerLogic.EMLTrackTimerFrameYear() * Math.random())),
 		};
 		deepEqual(mod.EMLTrackMasterGroupFunction([item], uLocalized), {
 			[uLocalized('EMLTrackMasterGroupOverMonthText')]: [item],
@@ -129,7 +111,7 @@ describe('EMLTrackMasterGroupFunction', function test_EMLTrackMasterGroupFunctio
 
 	it('groups if over year', function() {
 		const item = {
-			EMLJournalTouchDate: new Date(mod._EMLTrackMasterGroupingDate(new Date()) - EMLTrackTimerLogic.EMLTrackTimerFrameYear() - 1),
+			EMLJournalTouchDate: new Date(OLSKMoment.OLSKMomentPerceptionDate(new Date()) - EMLTrackTimerLogic.EMLTrackTimerFrameYear() - 1),
 		};
 		deepEqual(mod.EMLTrackMasterGroupFunction([item], uLocalized), {
 			[uLocalized('EMLTrackMasterGroupOverYearText')]: [item],

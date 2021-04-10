@@ -1,4 +1,5 @@
 import EMLTrackTimerLogic from '../EMLTrackTimer/ui-logic.js';
+import OLSKMoment from 'OLSKMoment';
 
 const uDescending = function (a, b) {
   return (a > b) ? -1 : ((a < b) ? 1 : 0);
@@ -18,22 +19,12 @@ const mod = {
 		}).shift());
 	},
 
-	_EMLTrackMasterGroupingDate(inputData) {
-		if (!(inputData instanceof Date) || Number.isNaN(inputData.getTime())) {
-			throw new Error('EMLErrorInputNotValid');
-		}
-
-		const date = (new Date(inputData.valueOf() - (inputData.getTimezoneOffset() / 60 + 4) * 1000 * 60 * 60)).toJSON().slice(0, 10);
-
-		return new Date(date + `T04:00:00-${ (inputData.getTimezoneOffset() / 60).toString().padStart(2, '0') }:00`);
-	},
-
 	_EMLTrackMasterGroup (inputData) {
 		if (!inputData.EMLJournalTouchDate) {
 			return 'EMLTrackMasterGroupReadyText';
 		}
 
-		const groupingDate = mod._EMLTrackMasterGroupingDate(new Date());
+		const groupingDate = OLSKMoment.OLSKMomentPerceptionDate(new Date());
 
 		if (inputData.EMLJournalTouchDate >= groupingDate) {
 			return 'EMLTrackMasterGroupTodayText';
