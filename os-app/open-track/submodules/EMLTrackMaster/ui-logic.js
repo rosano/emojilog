@@ -19,7 +19,7 @@ const mod = {
 		}).shift());
 	},
 
-	_EMLTrackMasterGroup (inputData) {
+	_EMLTrackMasterChunk (inputData) {
 		if (!inputData.EMLJournalTouchDate) {
 			return 'EMLTrackMasterGroupReadyText';
 		}
@@ -49,7 +49,7 @@ const mod = {
 		}
 
 		return inputData.reduce(function (coll, item) {
-			const group = OLSKLocalized(mod._EMLTrackMasterGroup(item));
+			const group = OLSKLocalized(mod._EMLTrackMasterChunk(item));
 			return Object.assign(coll, {
 				[group]: (coll[group] || []).concat(item),
 			});
