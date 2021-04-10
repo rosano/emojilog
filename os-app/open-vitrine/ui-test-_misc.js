@@ -30,14 +30,6 @@ describe('EMLVitrine_Misc', function () {
 	
 	});
 
-	describe('OLSKLanding', function test_OLSKLanding () {
-
-		it('sets OLSKLandingActionHref', function () {
-			browser.assert.attribute('.OLSKLandingAction', 'href', OLSKTestingCanonical(require('../open-track/controller.js').OLSKControllerRoutes().shift()));
-		});
-	
-	});
-
 	describe('EMLVitrineVideo', function () {
 
 		it('sets src', function () {
