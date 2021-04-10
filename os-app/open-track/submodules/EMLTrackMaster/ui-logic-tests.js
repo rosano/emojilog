@@ -60,30 +60,6 @@ describe('EMLTrackMasterSort', function test_EMLTrackMasterSort() {
 
 });
 
-describe('_EMLTrackMasterGroupingDay', function test__EMLTrackMasterGroupingDay() {
-
-	it('throws if not valid', function () {
-		throws(function () {
-			mod._EMLTrackMasterGroupingDay(new Date('alfa'));
-		}, /EMLErrorInputNotValid/);
-	});
-
-	it('returns day in current timezone', function () {
-		deepEqual(mod._EMLTrackMasterGroupingDay(new Date(`2020-05-02T12:00:00-${ offset }:00`)), '2020-05-02');
-	});
-
-	it('previous day if before 4am', function () {
-		const date = new Date(`2020-05-02T03:59:00-${ offset }:00`);
-		deepEqual(mod._EMLTrackMasterGroupingDay(date), '2020-05-01');
-	});
-
-	it('same day if 4am', function () {
-		const date = new Date(`2020-05-02T04:00:00-${ offset }:00`);
-		deepEqual(mod._EMLTrackMasterGroupingDay(date), '2020-05-02');
-	});
-
-});
-
 describe('_EMLTrackMasterGroupingDate', function test__EMLTrackMasterGroupingDate() {
 
 	it('throws if not valid', function () {
@@ -94,7 +70,7 @@ describe('_EMLTrackMasterGroupingDate', function test__EMLTrackMasterGroupingDat
 
 	it('returns date', function () {
 		const item = new Date();
-		deepEqual(mod._EMLTrackMasterGroupingDate(item), new Date(mod._EMLTrackMasterGroupingDay(item) + `T04:00:00-${ offset }:00`));
+		deepEqual(mod._EMLTrackMasterGroupingDate(item), new Date(require('OLSKMoment').OLSKMomentPerceptionDay(item) + `T04:00:00-${ offset }:00`));
 	});
 
 });
