@@ -10,7 +10,7 @@
 
 @media screen and (min-width: 760px) {
 
-.EMLBrowseInfo > :global(.OLSKDetailPlaceholder) {
+.EMLBrowseInfo > :global(.OLSKPlaceholder) {
 	/* EMLBrowseInfoFlexbox:Child */
 	flex-grow: 1;
 }

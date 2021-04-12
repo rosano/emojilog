@@ -177,7 +177,7 @@ describe('EMLBrowse_Misc', function () {
 		});
 
 		it('sets EMLBrowseInfoItem', function () {
-			browser.assert.elements('.OLSKDetailPlaceholder', 0);
+			browser.assert.elements('.OLSKPlaceholder', 0);
 		});
 
 		it('focus EMLBrowseInfoFormNotesField', function () {

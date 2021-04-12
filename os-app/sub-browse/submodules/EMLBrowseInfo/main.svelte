@@ -101,7 +101,7 @@ const mod = {
 
 };
 
-import OLSKDetailPlaceholder from 'OLSKDetailPlaceholder';
+import OLSKPlaceholder from 'OLSKPlaceholder';
 import _OLSKSharedBack from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedBack.svg';
 import _OLSKSharedDiscard from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedDiscard.svg';
 import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedClone.svg';
@@ -110,7 +110,7 @@ import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 <div class="EMLBrowseInfo">
 
 {#if !EMLBrowseInfoItem}
-<OLSKDetailPlaceholder />
+<OLSKPlaceholder />
 {/if}
 
 {#if EMLBrowseInfoItem}
