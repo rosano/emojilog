@@ -290,13 +290,13 @@ import EMLTemplate from '../sub-template/main.svelte';
 
 	<!-- MASTER -->
 	
-	<div class="OLSKToolbarElementGroup" slot="OLSKMasterListToolbarHead">
+	<div class="OLSKToolbarElementGroup" slot="OLSKNarrowToolbarHead">
 		<button class="EMLBrowseCloseButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseCloseButtonText') } on:click={ EMLBrowseListDispatchClose }>
 			<div class="EMLBrowseCloseButtonImage">{@html OLSKUIAssets._OLSKSharedBack }</div>
 		</button>
 	</div>
 
-	<div class="OLSKToolbarElementGroup" slot="OLSKMasterListToolbarTail">
+	<div class="OLSKToolbarElementGroup" slot="OLSKNarrowToolbarTail">
 		<button class="EMLBrowseFormButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseFormButtonText') } on:click={ mod._OLSKModalView.modPublic.OLSKModalViewShow } accesskey="f">
 			<div class="EMLBrowseFormButtonImage">{@html OLSKUIAssets._OLSKSharedEdit }</div>
 		</button>

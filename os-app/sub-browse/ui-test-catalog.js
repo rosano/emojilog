@@ -99,7 +99,7 @@ describe('EMLBrowse_Catalog', function () {
 		});
 
 		before(function () {
-			return browser.focus('.OLSKMasterListFilterField');
+			return browser.focus('.OLSKNarrowFilterField');
 		});
 
 		before(function () {
