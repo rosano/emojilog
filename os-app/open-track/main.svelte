@@ -50,10 +50,6 @@ const mod = {
 
 	_ValueSaveThrottleMap: {},
 
-	_ValueOLSKFundProgress: false,
-
-	_ValueDocumentRemainder: '',
-
 	// DATA
 
 	DataNavigator () {
@@ -67,6 +63,10 @@ const mod = {
 			EMLJournalName: '',
 			EMLJournalChildCount: 0,
 		}, inputData);
+	},
+
+	DataSetting (inputData) {
+		return mod._ValueSettingsAll[inputData];
 	},
 
 	async DataSettingValue (inputData) {
@@ -221,14 +221,6 @@ const mod = {
 		};
 	},
 
-	ControlFundGate () {
-		if (!window.confirm(OLSKLocalized('OLSKFundGateText'))) {
-			return;
-		}
-
-		mod.OLSKAppToolbarDispatchFund();
-	},
-
 	async ControlJournalCreate() {
 		const item = await mod._ValueZDRWrap.App.EMLJournal.EMLJournalCreate(mod.DataJournalObjectTemplate());
 
@@ -291,33 +283,6 @@ const mod = {
 		});
 	},
 
-	OLSKAppToolbarDispatchFund () {
-		if (!mod._ValueCloudIdentity) {
-			return mod._OLSKAppToolbarDispatchFundNotConnected();
-		}
-
-		mod._ValueFundURL = OLSKFund.OLSKFundURL({
-			ParamFormURL: 'OLSK_FUND_FORM_URL_SWAP_TOKEN',
-			ParamProject: 'RP_007',
-			ParamIdentity: mod._ValueCloudIdentity,
-			ParamHomeURL: window.location.origin + window.location.pathname,
-		});
-
-		mod._OLSKWebView.modPublic.OLSKModalViewShow();
-
-		OLSKFund.OLSKFundListen({
-			OLSKFundDispatchReceive: mod.OLSKFundDispatchReceive,
-		});
-	},
-
-	_OLSKAppToolbarDispatchFundNotConnected () {
-		if (!window.confirm(OLSKLocalized('OLSKRemoteStorageConnectConfirmText'))) {
-			return;
-		}
-
-		mod._ValueCloudToolbarHidden = false;
-	},
-
 	OLSKAppToolbarDispatchCloud () {
 		mod._ValueCloudToolbarHidden = !mod._ValueCloudToolbarHidden;
 	},
@@ -349,7 +314,7 @@ const mod = {
 
 	EMLBrowseDispatchEligible () {
 		if (mod._ValueDocumentRemainder < 1 && !mod.DataIsEligible()) {
-			return mod.ControlFundGate();
+			return mod.OLSKFundDocumentGate();
 		}
 
 		return true;
@@ -512,14 +477,16 @@ const mod = {
 		mod._ValueZDRWrap.ZDRStorageClient().stopSync();
 	},
 
-	OLSKFundDispatchReceive (inputData) {
-		mod._OLSKWebView.modPublic.OLSKModalViewClose();
-
-		return mod.OLSKFundDispatchPersist(inputData);
+	OLSKFundSetupDispatchClue () {
+		return mod.DataSetting('EMLSettingFundClue') || null;
+	},
+	
+	_OLSKFundSetupDispatchUpdate (inputData) {
+		mod[inputData] = mod[inputData]; // #purge-svelte-force-update
 	},
 
 	OLSKFundDispatchPersist (inputData) {
-		mod._ValueFundClue = inputData;
+		mod._ValueFundClue = inputData; // #hotfix-missing-persist
 
 		if (!inputData) {
 			return mod._ValueZDRWrap.App.EMLSetting.ZDRModelDeleteObject({
@@ -540,22 +507,10 @@ const mod = {
 		});
 	},
 
-	OLSKFundDispatchProgress (inputData) {
-		mod._ValueOLSKFundProgress = inputData;
-	},
-
-	OLSKFundDispatchFail () {
-		mod.OLSKFundDispatchPersist(null);
-	},
-
-	OLSKFundDispatchGrant (inputData) {
-		mod._ValueOLSKFundGrant = OLSKRemoteStorage.OLSKRemoteStoragePostJSONParse(inputData);
-	},
-
 	// REACT
 
 	ReactDocumentRemainder () {
-		mod._ValueDocumentRemainder = OLSKFund.OLSKFundRemainder(EMLTrackLogic.EMLTrackDocumentCount(mod._ValueJournalsAll), parseInt('EML_FUND_DOCUMENT_LIMIT_SWAP_TOKEN'));
+		mod.OLSKFundDocumentRemainder && mod.OLSKFundDocumentRemainder(EMLTrackLogic.EMLTrackDocumentCount(mod._ValueJournalsAll));
 	},
 
 	// SETUP
@@ -564,6 +519,8 @@ const mod = {
 		await mod.SetupStorageClient();
 
 		await mod.SetupValueJournalsAll();
+
+		await mod.SetupSettingsAll();
 
 		mod.SetupCollectionAPI();
 
@@ -638,6 +595,12 @@ const mod = {
 		mod.ReactDocumentRemainder();
 	},
 
+	async SetupSettingsAll () {
+		mod._ValueSettingsAll = Object.fromEntries((await mod._ValueZDRWrap.App.EMLSetting.EMLSettingList()).map(function (e) {
+			return [e.EMLSettingKey, e.EMLSettingValue];
+		}));
+	},
+
 	SetupCollectionAPI () {
 		mod._ValueCollectionAPI = OLSKCollectionLogic.OLSKCollectionAPI({
 			OLSKCollectionItems: mod._ValueJournalsAll,
@@ -650,16 +613,18 @@ const mod = {
 	},
 
 	async SetupFund () {
-		if (OLSK_SPEC_UI() && window.location.search.match('FakeOLSKFundResponseIsPresent=true')) {
-			OLSKFund._OLSKFundFakeGrantResponseRandom();
-		}
-
-		mod._ValueFundClue = await mod.DataSettingValue('EMLSettingFundClue');
-
-		await OLSKFund.OLSKFundSetupPostPay({
-			ParamExistingClue: mod._ValueFundClue || null,
-			OLSKFundDispatchPersist: mod.OLSKFundDispatchPersist,
+		OLSKFund.OLSKFundSetup({
+			ParamMod: mod,
+			OLSKLocalized,
+			ParamFormURL: 'OLSK_FUND_FORM_URL_SWAP_TOKEN',
+			ParamProject: 'RP_007',
+			ParamSpecUI: OLSK_SPEC_UI(),
+			ParamDocumentLimit: parseInt('OLSK_FUND_DOCUMENT_LIMIT_SWAP_TOKEN'),
 		});
+
+		mod.ReactDocumentRemainder();
+
+		await OLSKFund.OLSKFundSetupPostPay(mod);
 
 		if (!mod._ValueCloudIdentity) {
 			return;
