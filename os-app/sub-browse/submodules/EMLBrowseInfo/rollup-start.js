@@ -41,6 +41,7 @@ mod.LifecycleModuleDidLoad();
 const EMLBrowseInfo = new RollupStart({
 	target: document.body,
 	props: Object.assign({
+		EMLBrowseInfoItem: null,
 		EMLBrowseInfoDispatchBack: (function () {
 			window.TestEMLBrowseInfoDispatchBack.innerHTML = parseInt(window.TestEMLBrowseInfoDispatchBack.innerHTML) + 1;
 		}),

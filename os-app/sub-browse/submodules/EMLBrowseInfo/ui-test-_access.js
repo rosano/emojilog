@@ -26,9 +26,7 @@ Object.entries({
 describe('EMLBrowseInfo_Access', function () {
 
 	before(function () {
-		return browser.OLSKVisit(kDefaultRoute, {
-			EMLBrowseInfoItem: null,
-		});
+		return browser.OLSKVisit(kDefaultRoute);
 	});
 
 	it('shows EMLBrowseInfo', function () {

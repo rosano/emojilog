@@ -54,7 +54,7 @@ describe('EMLBrowse_Access', function () {
 	});
 
 	it('shows OLSKPlaceholder', function () {
-		browser.assert.elements('.OLSKPlaceholder', 1);
+		browser.assert.elements('.OLSKCatalogDetail .OLSKPlaceholder', 1);
 	});
 
 	it('hides EMLBrowseInfoForm', function () {
@@ -80,7 +80,7 @@ describe('EMLBrowse_Access', function () {
 		});
 
 		it('hides OLSKPlaceholder', function () {
-			browser.assert.elements('.OLSKPlaceholder', 0);
+			browser.assert.elements('.OLSKCatalogDetail .OLSKPlaceholder', 0);
 		});
 
 		it('shows EMLBrowseInfoForm', function () {
@@ -108,7 +108,7 @@ describe('EMLBrowse_Access', function () {
 		});
 
 		it('shows OLSKPlaceholder', function () {
-			browser.assert.elements('.OLSKPlaceholder', 1);
+			browser.assert.elements('.OLSKCatalogDetail .OLSKPlaceholder', 1);
 		});
 
 		it('hides EMLBrowseInfoForm', function () {
