@@ -50,11 +50,11 @@ Time is visually represented in a circle with divisions based on the duration:
 | `OLSKTransportLauncherItemImportJSONText` | Launcher |
 | `OLSKTransportLauncherItemExportJSONText` | Launcher |
 
-| List of memos ||
+| Memo catalog ||
 :--- | ---
-| Create new card | `AccessKey+n` |
-| Select previous or next card, if filter field is focused | `Up` or `Down` |
-| Clear filter text and selected card, focus filter field | `Escape` |
+| Create new item | `AccessKey+n` |
+| Select previous or next item, if filter field is focused | `Up` or `Down` |
+| Clear filter text and selected item, focus filter field | `Escape` |
 | Close, if filter field is focused | `Escape` |
 | `EMLTrackLauncherItemExportSelectedJSONText` | Launcher |
 | `EMLBrowseInfoLauncherItemDebugText` | Launcher |
