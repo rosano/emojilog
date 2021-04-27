@@ -1,9 +1,5 @@
 const EMLTrackTimerLogic = require('../open-track/submodules/EMLTrackTimer/ui-logic.js');
 
-exports.OLSKControllerUseLivereload = function () {
-	return process.env.NODE_ENV === 'development';
-};
-
 exports.OLSKControllerRoutes = function () {
 	return [{
 		OLSKRoutePath: '/guide',
