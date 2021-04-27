@@ -268,6 +268,7 @@ import EMLTemplate from '../sub-template/main.svelte';
 	bind:this={ mod._OLSKCatalog }
 
 	OLSKCollectionItemAccessibilitySummaryFunction={ mod.OLSKCollectionItemAccessibilitySummaryFunction }
+	OLSKCollectionItemClass={ 'OLSKCommonEdgeBottom' }
 
 	OLSKCatalogSortFunction={ EMLBrowseLogic.EMLBrowseSortFunction }
 	OLSKCatalogIsMatch={ EMLBrowseLogic.EMLBrowseIsMatch }

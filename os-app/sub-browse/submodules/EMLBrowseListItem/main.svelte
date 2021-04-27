@@ -5,7 +5,7 @@ import { OLSKLocalized } from 'OLSKInternational';
 import OLSKString from 'OLSKString';
 </script>
 
-<div class="EMLBrowseListItem OLSKCommonEdgeBottom">
+<div class="EMLBrowseListItem">
 
 <div class="EMLBrowseListItemEventDate">{ EMLBrowseListItemObject.EMLMemoEventDate.toLocaleString() }</div>
 <div class="EMLBrowseListItemNotesSnippet">{ OLSKString.OLSKStringSnippet(EMLBrowseListItemObject.EMLMemoNotes) }</div>
