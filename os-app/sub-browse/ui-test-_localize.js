@@ -6,7 +6,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		return OLSKTestingLocalized(inputData, OLSKRoutingLanguage);
 	};
 
-	describe(`EMLBrowse_Localize-${ OLSKRoutingLanguage }`, function () {
+	describe('EMLBrowse_Localize-' + OLSKRoutingLanguage, function () {
 
 		before(function () {
 			return browser.OLSKVisit(kDefaultRoute, {
