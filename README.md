@@ -1,4 +1,4 @@
-<a href="https://emojilog.rosano.ca"><img alt="Project logo" src="https://rosano.s3.amazonaws.com/public/emojilog/identity.svg" width="64" /></a>
+<a href="https://emojilog.rosano.ca"><img alt="Project logo" src="https://static.rosano.ca/emojilog/identity.svg" width="64" /></a>
 
 # Emoji Log
 
@@ -6,7 +6,7 @@ _Measure your progress_
 
 <a href="https://emojilog.rosano.ca">Emoji Log</a> helps you measure your progress by making it simple to track when meaningful steps are taken. Read the <a href="https://emojilog.rosano.ca/guide">guide</a> for more details.
 
-<a href="https://emojilog.rosano.ca/track"><img alt="Open app" src="http://rosano.s3.amazonaws.com/public/_shared/_RCSAppButton.svg" /></a>
+<a href="https://emojilog.rosano.ca/track"><img alt="Open app" src="http://static.rosano.ca/_shared/_RCSAppButton.svg" /></a>
 
 ## Architecture
 
