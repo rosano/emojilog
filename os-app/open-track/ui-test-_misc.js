@@ -18,6 +18,10 @@ describe('EMLTrack_Misc', function () {
 		browser.assert.attribute('meta[name=apple-mobile-web-app-capable]', 'content', 'yes');
 	});
 
+	it('sets manifest', function () {
+		browser.assert.attribute('link[rel="manifest"]', 'href', require('../tech-manifest/controller.js').OLSKControllerRoutes().shift().OLSKRoutePath);
+	});
+
 	describe('EMLTrackViewportFooter', function test_EMLTrackViewportFooter () {
 
 		it('classes OLSKMobileViewFooter', function () {
