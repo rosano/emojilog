@@ -11,6 +11,8 @@ Object.entries({
 
 	EMLVitrineGazetteHeading: '.EMLVitrineGazetteHeading',
 
+	EMLVitrineJarHeading: '.EMLVitrineJarHeading',
+
 	EMLVitrineSupportHeading: '.EMLVitrineSupportHeading',
 	EMLVitrineSupportBlurb: '.EMLVitrineSupportBlurb',
 }).map(function (e) {
@@ -77,6 +79,14 @@ describe('EMLVitrine_Access', function () {
 
 	it('shows OLSKGazette', function () {
 		browser.assert.elements('.OLSKGazette', 1);
+	});
+
+	it('shows EMLVitrineJarHeading', function () {
+		browser.assert.elements(EMLVitrineJarHeading, 1);
+	});
+
+	it('shows OLSKJar', function () {
+		browser.assert.elements('.OLSKJar', 1);
 	});
 
 	it('shows SWARLink', function () {
