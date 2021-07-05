@@ -16,7 +16,7 @@
 					require('./os-app/_shared/EMLTransport/main.js').default,
 				],
 			}],
-			_ZDRParamDispatchJSONPreStringify: require('OLSKObject').default.OLSKObjectSafeCopy,
+			_ZDRParamDispatchJSONPreStringify: require('OLSKObject').OLSKObjectSafeCopy,
 		});
 	});
 
