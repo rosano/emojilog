@@ -9,8 +9,6 @@ Object.entries({
 
 	EMLVitrineGuideButton: '.EMLVitrineGuideButton',
 
-	EMLVitrineGazetteHeading: '.EMLVitrineGazetteHeading',
-
 	EMLVitrineJarHeading: '.EMLVitrineJarHeading',
 
 	EMLVitrineSupportHeading: '.EMLVitrineSupportHeading',
@@ -61,8 +59,8 @@ describe('EMLVitrine_Access', function () {
 		browser.assert.elements(EMLVitrineGuideButton, 1);
 	});
 
-	it('shows EMLVitrineGazetteHeading', function () {
-		browser.assert.elements(EMLVitrineGazetteHeading, 1);
+	it('shows ROCOGazette', function () {
+		browser.assert.elements('.ROCOGazette', 1);
 	});
 
 	it('shows EMLVitrineSupportHeading', function () {
@@ -71,14 +69,6 @@ describe('EMLVitrine_Access', function () {
 
 	it('shows EMLVitrineSupportBlurb', function () {
 		browser.assert.elements(EMLVitrineSupportBlurb, 1);
-	});
-
-	it('shows OLSKFollow', function () {
-		browser.assert.elements('.OLSKFollow', 1);
-	});
-
-	it('shows ROCOBulletin', function () {
-		browser.assert.elements('.ROCOBulletin', 1);
 	});
 
 	it('shows EMLVitrineJarHeading', function () {
