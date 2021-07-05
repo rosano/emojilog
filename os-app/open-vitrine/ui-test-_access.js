@@ -77,8 +77,8 @@ describe('EMLVitrine_Access', function () {
 		browser.assert.elements('.OLSKFollow', 1);
 	});
 
-	it('shows OLSKGazette', function () {
-		browser.assert.elements('.OLSKGazette', 1);
+	it('shows ROCOBulletin', function () {
+		browser.assert.elements('.ROCOBulletin', 1);
 	});
 
 	it('shows EMLVitrineJarHeading', function () {
