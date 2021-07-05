@@ -9,8 +9,6 @@ Object.entries({
 
 	EMLVitrineGuideButton: '.EMLVitrineGuideButton',
 
-	EMLVitrineJarHeading: '.EMLVitrineJarHeading',
-
 	EMLVitrineSupportHeading: '.EMLVitrineSupportHeading',
 	EMLVitrineSupportBlurb: '.EMLVitrineSupportBlurb',
 }).map(function (e) {
@@ -69,10 +67,6 @@ describe('EMLVitrine_Access', function () {
 
 	it('shows EMLVitrineSupportBlurb', function () {
 		browser.assert.elements(EMLVitrineSupportBlurb, 1);
-	});
-
-	it('shows EMLVitrineJarHeading', function () {
-		browser.assert.elements(EMLVitrineJarHeading, 1);
 	});
 
 	it('shows OLSKJar', function () {
