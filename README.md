@@ -1,6 +1,6 @@
 <a href="https://emojilog.rosano.ca"><img alt="Project logo" src="https://static.rosano.ca/emojilog/identity.svg" width="64" /></a>
 
-# Emoji Log
+# [Emoji Log](https://emojilog.rosano.ca)
 
 _Measure your progress_
 
