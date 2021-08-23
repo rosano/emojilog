@@ -122,7 +122,7 @@ import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 	</div>
 
 	<div class="OLSKToolbarElementGroup">
-		<button class="EMLBrowseInfoToolbarDiscardButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseInfoToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('EMLBrowseInfoDiscardConfirmText')) && EMLBrowseInfoDispatchDiscard(EMLBrowseInfoItem) }>
+		<button class="EMLBrowseInfoToolbarDiscardButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLBrowseInfoToolbarDiscardButtonText') } on:click={ () => window.confirm(OLSKLocalized('OLSKWordingConfirmText')) && EMLBrowseInfoDispatchDiscard(EMLBrowseInfoItem) }>
 			<div class="EMLBrowseInfoToolbarDiscardButtonImage">{@html _OLSKSharedDiscard }</div>
 		</button>
 	</div>

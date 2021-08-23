@@ -101,7 +101,7 @@ import EMLTemplateParamForm from './submodules/EMLTemplateParamForm/main.svelte'
 <hr role="presentation" />
 
 <p>
-	<button class="EMLTemplateDiscardButton OLSKDecorPress OLSKDecorPressDestroy" on:click={ () => window.confirm(OLSKLocalized('EMLTemplateDiscardConfirmText')) && EMLTemplateDispatchDiscard(EMLTemplateItem) }>{ OLSKLocalized('EMLTemplateDiscardButtonText') }</button>
+	<button class="EMLTemplateDiscardButton OLSKDecorPress OLSKDecorPressDestroy" on:click={ () => window.confirm(OLSKLocalized('OLSKWordingConfirmText')) && EMLTemplateDispatchDiscard(EMLTemplateItem) }>{ OLSKLocalized('EMLTemplateDiscardButtonText') }</button>
 </p>
 
 </div>

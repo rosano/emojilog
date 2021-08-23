@@ -46,7 +46,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			it('localizes EMLTemplateDiscardConfirm', function() {
 				browser.assert.OLSKConfirmQuestion(function () {
 					return browser.pressButton(EMLTemplateDiscardButton);
-				}, uLocalized('EMLTemplateDiscardConfirmText'));
+				}, uLocalized('OLSKWordingConfirmText'));
 			});
 		
 		});
