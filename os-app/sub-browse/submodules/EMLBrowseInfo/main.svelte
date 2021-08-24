@@ -107,14 +107,14 @@ import _OLSKSharedDiscard from '../../../_shared/__external/OLSKUIAssets/_OLSKSh
 import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedClone.svg';
 </script>
 
-<div class="EMLBrowseInfo">
+<div class="EMLBrowseInfo ROCOStandardView">
 
 {#if !EMLBrowseInfoItem}
 <OLSKPlaceholder />
 {/if}
 
 {#if EMLBrowseInfoItem}
-<header class="EMLBrowseInfoToolbar OLSKMobileViewHeader OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeBottom">
+<header class="EMLBrowseInfoToolbar OLSKMobileViewHeader OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeBottom ROCOStandardViewHead">
 	<div class="OLSKToolbarElementGroup">
 		<button class="EMLBrowseInfoToolbarBackButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton OLSKVisibilityMobile" title={ OLSKLocalized('EMLBrowseInfoToolbarBackButtonText') } on:click={ EMLBrowseInfoDispatchBack }>
 			<div class="EMLBrowseInfoToolbarBackButtonImage">{@html _OLSKSharedBack }</div>
@@ -128,7 +128,7 @@ import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 	</div>
 </header>
 
-<div class="EMLBrowseInfoForm OLSKDecor OLSKDecorBigForm">
+<div class="EMLBrowseInfoForm OLSKDecor OLSKDecorBigForm ROCOStandardViewBody">
 
 {#each EMLBrowseInfoFields as item }
 <p>

@@ -13,6 +13,14 @@ describe('EMLBrowseInfo_Misc', function () {
 		});
 	});
 
+	describe('EMLBrowseInfo', function test_EMLBrowseInfo() {
+
+		it('classes ROCOStandardView', function () {
+			browser.assert.hasClass(EMLBrowseInfo, 'ROCOStandardView');
+		});
+
+	});
+
 	describe('EMLBrowseInfoToolbar', function test_EMLBrowseInfoToolbar() {
 
 		it('classes OLSKMobileViewHeader', function () {
@@ -29,6 +37,10 @@ describe('EMLBrowseInfo_Misc', function () {
 
 		it('classes OLSKCommonEdgeBottom', function () {
 			browser.assert.hasClass(EMLBrowseInfoToolbar, 'OLSKCommonEdgeBottom');
+		});
+
+		it('classes ROCOStandardViewHead', function () {
+			browser.assert.hasClass(EMLBrowseInfoToolbar, 'ROCOStandardViewHead');
 		});
 
 	});
@@ -127,6 +139,10 @@ describe('EMLBrowseInfo_Misc', function () {
 
 		it('classes OLSKDecorBigForm', function () {
 			browser.assert.hasClass(EMLBrowseInfoForm, 'OLSKDecorBigForm');
+		});
+
+		it('classes ROCOStandardViewBody', function () {
+			browser.assert.hasClass(EMLBrowseInfoForm, 'ROCOStandardViewBody');
 		});
 
 	});
