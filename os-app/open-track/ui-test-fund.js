@@ -6,7 +6,7 @@ describe('EMLTrack_Fund', function () {
 		
 		kDefaultRoute,
 
-		ParamProject: 'RP_007',
+		ParamProject: process.env.ROCO_SHARED_PROJECT_ID,
 		
 		ParamTriggerGate () {
 			return browser.pressButton('.EMLBrowseCreateButton');
