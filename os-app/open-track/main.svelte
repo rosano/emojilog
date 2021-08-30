@@ -760,5 +760,3 @@ import OLSKApropos from 'OLSKApropos';
 </OLSKModalView>
 
 </div>
-
-<style src="./ui-style.css"></style>
