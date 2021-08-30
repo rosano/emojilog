@@ -2,14 +2,14 @@ const { throws, deepEqual } = require('assert');
 
 const mod = require('./ui-logic.js').default;
 
-const EMLTrackTimerLogic = require('../EMLTrackTimer/ui-logic.js');
+const EMLTrackTimerLogic = require('./submodules/EMLTrackTimer/ui-logic.js');
 const OLSKMoment = require('OLSKMoment');
 
 const uLocalized = function (inputData) {
 	return inputData + '-LOCALIZED';
 };
 
-describe('EMLTrackMasterSort', function test_EMLTrackMasterSort() {
+describe('EMLTrackJournalsSort', function test_EMLTrackJournalsSort() {
 
 	it('sorts by EMLJournalTouchDate descending', function() {
 		const item1 = {
@@ -19,7 +19,7 @@ describe('EMLTrackMasterSort', function test_EMLTrackMasterSort() {
 			EMLJournalTouchDate: new Date(1),
 		};
 
-		deepEqual([item1, item2].sort(mod.EMLTrackMasterSort), [item2, item1]);
+		deepEqual([item1, item2].sort(mod.EMLTrackJournalsSort), [item2, item1]);
 	});
 
 	it('sorts EMLJournalTouchDate below if one has none', function() {
@@ -30,7 +30,7 @@ describe('EMLTrackMasterSort', function test_EMLTrackMasterSort() {
 			EMLJournalModificationDate: new Date(1),
 		};
 
-		deepEqual([item1, item2].sort(mod.EMLTrackMasterSort), [item2, item1]);
+		deepEqual([item1, item2].sort(mod.EMLTrackJournalsSort), [item2, item1]);
 	});
 
 	it('sorts by EMLJournalModificationDate descending', function() {
@@ -41,7 +41,7 @@ describe('EMLTrackMasterSort', function test_EMLTrackMasterSort() {
 			EMLJournalModificationDate: new Date(1),
 		};
 
-		deepEqual([item1, item2].sort(mod.EMLTrackMasterSort), [item2, item1]);
+		deepEqual([item1, item2].sort(mod.EMLTrackJournalsSort), [item2, item1]);
 	});
 
 	it('sorts by EMLJournalCreationDate descending if no EMLJournalModificationDate', function() {
@@ -52,33 +52,33 @@ describe('EMLTrackMasterSort', function test_EMLTrackMasterSort() {
 			EMLJournalCreationDate: new Date(1),
 		};
 
-		deepEqual([item1, item2].sort(mod.EMLTrackMasterSort), [item2, item1]);
+		deepEqual([item1, item2].sort(mod.EMLTrackJournalsSort), [item2, item1]);
 	});
 
 });
 
-describe('EMLTrackMasterChunkFunction', function test_EMLTrackMasterChunkFunction() {
+describe('EMLTrackJournalsChunkFunction', function test_EMLTrackJournalsChunkFunction() {
 
-	const _EMLTrackMasterChunkFunction = function (inputData) {
-		return mod.EMLTrackMasterChunkFunction([stub], uLocalized);
+	const _EMLTrackJournalsChunkFunction = function (inputData) {
+		return mod.EMLTrackJournalsChunkFunction([stub], uLocalized);
 	};
 
 	it('throws if not array', function () {
 		throws(function () {
-			mod.EMLTrackMasterChunkFunction(null);
+			mod.EMLTrackJournalsChunkFunction(null);
 		}, /EMLErrorInputNotValid/);
 	});
 
 	it('returns object', function() {
-		deepEqual(mod.EMLTrackMasterChunkFunction([]), {});
+		deepEqual(mod.EMLTrackJournalsChunkFunction([]), {});
 	});
 
 	it('groups if no touch', function() {
 		const item = {
 			[Math.random().toString()]: Math.random().toString(),
 		};
-		deepEqual(mod.EMLTrackMasterChunkFunction([item], uLocalized), {
-			[uLocalized('EMLTrackMasterGroupReadyText')]: [item],
+		deepEqual(mod.EMLTrackJournalsChunkFunction([item], uLocalized), {
+			[uLocalized('EMLTrackJournalsGroupReadyText')]: [item],
 		});
 	});
 
@@ -86,8 +86,8 @@ describe('EMLTrackMasterChunkFunction', function test_EMLTrackMasterChunkFunctio
 		const item = {
 			EMLJournalTouchDate: new Date(OLSKMoment.OLSKMomentPerceptionDate(new Date()).valueOf() + uRandomElement(EMLTrackTimerLogic.EMLTrackTimerFrameMinute(), EMLTrackTimerLogic.EMLTrackTimerFrameHour(), EMLTrackTimerLogic.EMLTrackTimerFrameDay()) * Math.random()),
 		};
-		deepEqual(mod.EMLTrackMasterChunkFunction([item], uLocalized), {
-			[uLocalized('EMLTrackMasterGroupTodayText')]: [item],
+		deepEqual(mod.EMLTrackJournalsChunkFunction([item], uLocalized), {
+			[uLocalized('EMLTrackJournalsGroupTodayText')]: [item],
 		});
 	});
 
@@ -95,8 +95,8 @@ describe('EMLTrackMasterChunkFunction', function test_EMLTrackMasterChunkFunctio
 		const item = {
 			EMLJournalTouchDate: new Date(OLSKMoment.OLSKMomentPerceptionDate(new Date()) - Math.max(EMLTrackTimerLogic.EMLTrackTimerFrameDay(), Math.min(EMLTrackTimerLogic.EMLTrackTimerFrameMonth(), uRandomElement(EMLTrackTimerLogic.EMLTrackTimerFrames()) * Math.random())) + 1),
 		};
-		deepEqual(mod.EMLTrackMasterChunkFunction([item], uLocalized), {
-			[uLocalized('EMLTrackMasterGroupEarlierText')]: [item],
+		deepEqual(mod.EMLTrackJournalsChunkFunction([item], uLocalized), {
+			[uLocalized('EMLTrackJournalsGroupEarlierText')]: [item],
 		});
 	});
 
@@ -104,8 +104,8 @@ describe('EMLTrackMasterChunkFunction', function test_EMLTrackMasterChunkFunctio
 		const item = {
 			EMLJournalTouchDate: new Date(OLSKMoment.OLSKMomentPerceptionDate(new Date()) - Math.max(EMLTrackTimerLogic.EMLTrackTimerFrameMonth(), EMLTrackTimerLogic.EMLTrackTimerFrameYear() * Math.random())),
 		};
-		deepEqual(mod.EMLTrackMasterChunkFunction([item], uLocalized), {
-			[uLocalized('EMLTrackMasterGroupOverMonthText')]: [item],
+		deepEqual(mod.EMLTrackJournalsChunkFunction([item], uLocalized), {
+			[uLocalized('EMLTrackJournalsGroupOverMonthText')]: [item],
 		});
 	});
 
@@ -113,48 +113,48 @@ describe('EMLTrackMasterChunkFunction', function test_EMLTrackMasterChunkFunctio
 		const item = {
 			EMLJournalTouchDate: new Date(OLSKMoment.OLSKMomentPerceptionDate(new Date()) - EMLTrackTimerLogic.EMLTrackTimerFrameYear() - 1),
 		};
-		deepEqual(mod.EMLTrackMasterChunkFunction([item], uLocalized), {
-			[uLocalized('EMLTrackMasterGroupOverYearText')]: [item],
+		deepEqual(mod.EMLTrackJournalsChunkFunction([item], uLocalized), {
+			[uLocalized('EMLTrackJournalsGroupOverYearText')]: [item],
 		});
 	});
 
 });
 
-describe('EMLTrackMasterAccessibilitySummary', function test_EMLTrackMasterAccessibilitySummary() {
+describe('EMLTrackJournalsAccessibilitySummary', function test_EMLTrackJournalsAccessibilitySummary() {
 
 	it('returns EMLJournalName', function() {
 		const EMLJournalName = Math.random().toString();
-		deepEqual(mod.EMLTrackMasterAccessibilitySummary({
+		deepEqual(mod.EMLTrackJournalsAccessibilitySummary({
 			EMLJournalName,
 		}), EMLJournalName);
 	});
 
-	it('returns EMLTrackMasterListItemUntitledText if no EMLJournalName', function() {
-		deepEqual(mod.EMLTrackMasterAccessibilitySummary({
+	it('returns EMLTrackJournalsListItemUntitledText if no EMLJournalName', function() {
+		deepEqual(mod.EMLTrackJournalsAccessibilitySummary({
 			EMLJournalName: '',
-		}, uLocalized), uLocalized('EMLTrackMasterListItemUntitledText'));
+		}, uLocalized), uLocalized('EMLTrackJournalsListItemUntitledText'));
 	});
 
 });
 
-describe('EMLTrackMasterSymbol', function test_EMLTrackMasterSymbol() {
+describe('EMLTrackJournalsSymbol', function test_EMLTrackJournalsSymbol() {
 
 	it('returns EMLJournalName', function() {
 		const EMLJournalName = Math.random().toString();
-		deepEqual(mod.EMLTrackMasterSymbol({
+		deepEqual(mod.EMLTrackJournalsSymbol({
 			EMLJournalName,
 		}), EMLJournalName);
 	});
 
 	it('splits if space', function() {
 		const item = Math.random().toString();
-		deepEqual(mod.EMLTrackMasterSymbol({
+		deepEqual(mod.EMLTrackJournalsSymbol({
 			EMLJournalName: item + ' ' + Math.random().toString(),
 		}), item);
 	});
 
 	it('returns alternate', function() {
-		deepEqual(mod.EMLTrackMasterSymbol({
+		deepEqual(mod.EMLTrackJournalsSymbol({
 			EMLJournalName: '',
 		}), '?');
 	});

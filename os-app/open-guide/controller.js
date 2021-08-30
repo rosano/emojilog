@@ -1,4 +1,4 @@
-const EMLTrackTimerLogic = require('../open-track/submodules/EMLTrackTimer/ui-logic.js');
+const EMLTrackTimerLogic = require('../sub-journals/submodules/EMLTrackTimer/ui-logic.js');
 
 exports.OLSKControllerRoutes = function () {
 	return [{

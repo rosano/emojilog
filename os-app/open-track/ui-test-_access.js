@@ -14,12 +14,12 @@ describe('EMLTrack_Access', function () {
 		return browser.OLSKVisit(kDefaultRoute);
 	});
 
-	it('shows EMLTrackMaster', function () {
-		browser.assert.elements('.EMLTrackMaster', 1);
+	it('shows EMLTrackJournals', function () {
+		browser.assert.elements('.EMLTrackJournals', 1);
 	});
 
-	it('hides EMLTrackMasterListItem', function () {
-		browser.assert.elements('.EMLTrackMasterListItem', 0);
+	it('hides EMLTrackJournalsListItem', function () {
+		browser.assert.elements('.EMLTrackJournalsListItem', 0);
 	});
 
 	it('hides OLSKCatalog', function () {
@@ -82,8 +82,8 @@ describe('EMLTrack_Access', function () {
 		return browser.assert.OLSKLauncherItems('OLSKFundLauncherFakeItemProxy', 1);
 	});
 
-	it('shows EMLTrackMasterLauncherFakeItemProxy', function () {
-		return browser.assert.OLSKLauncherItems('EMLTrackMasterLauncherFakeItemProxy', 1);
+	it('shows EMLTrackJournalsLauncherFakeItemProxy', function () {
+		return browser.assert.OLSKLauncherItems('EMLTrackJournalsLauncherFakeItemProxy', 1);
 	});
 
 	it('hides EMLBrowseLauncherFakeItemProxy', function () {
@@ -155,11 +155,11 @@ describe('EMLTrack_Access', function () {
 	context('create', function test_create () {
 		
 		before(function () {
-			return browser.pressButton('.EMLTrackMasterCreateButton');
+			return browser.pressButton('.EMLTrackJournalsCreateButton');
 		});
 
-		it('hides EMLTrackMaster', function () {
-			browser.assert.elements('.EMLTrackMaster', 0);
+		it('hides EMLTrackJournals', function () {
+			browser.assert.elements('.EMLTrackJournals', 0);
 		});
 
 		it('show OLSKCatalog', function () {
@@ -186,12 +186,12 @@ describe('EMLTrack_Access', function () {
 			browser.assert.elements('.OLSKCatalog', 0);
 		});
 
-		it('shows EMLTrackMaster', function () {
-			browser.assert.elements('.EMLTrackMaster', 1);
+		it('shows EMLTrackJournals', function () {
+			browser.assert.elements('.EMLTrackJournals', 1);
 		});
 
-		it('shows EMLTrackMasterListItem', function () {
-			browser.assert.elements('.EMLTrackMasterListItem', 1);
+		it('shows EMLTrackJournalsListItem', function () {
+			browser.assert.elements('.EMLTrackJournalsListItem', 1);
 		});
 	
 	});
@@ -199,7 +199,7 @@ describe('EMLTrack_Access', function () {
 	context('delete', function test_delete () {
 
 		before(function () {
-			return browser.click('.EMLTrackMasterListItem');
+			return browser.click('.EMLTrackJournalsListItem');
 		});
 
 		before(function () {
@@ -212,16 +212,16 @@ describe('EMLTrack_Access', function () {
 			});
 		});
 
-		it('hides EMLTrackMasterListItem', function () {
-			browser.assert.elements('.EMLTrackMasterListItem', 0);
+		it('hides EMLTrackJournalsListItem', function () {
+			browser.assert.elements('.EMLTrackJournalsListItem', 0);
 		});
 
 		it('hides OLSKCatalog', function () {
 			browser.assert.elements('.OLSKCatalog', 0);
 		});
 
-		it('shows EMLTrackMaster', function () {
-			browser.assert.elements('.EMLTrackMaster', 1);
+		it('shows EMLTrackJournals', function () {
+			browser.assert.elements('.EMLTrackJournals', 1);
 		});
 		
 	});
@@ -229,15 +229,15 @@ describe('EMLTrack_Access', function () {
 	context('browse', function test_browse () {
 		
 		before(function () {
-			return browser.pressButton('.EMLTrackMasterCreateButton');
+			return browser.pressButton('.EMLTrackJournalsCreateButton');
 		});
 
 		before(function () {
 			return browser.pressButton('.OLSKModalViewCloseButton');
 		});
 
-		it('hides EMLTrackMaster', function () {
-			browser.assert.elements('.EMLTrackMaster', 0);
+		it('hides EMLTrackJournals', function () {
+			browser.assert.elements('.EMLTrackJournals', 0);
 		});
 
 		it('shows OLSKCatalog', function () {
@@ -258,8 +258,8 @@ describe('EMLTrack_Access', function () {
 				return browser.pressButton('.EMLBrowseCloseButton');
 			});
 
-			it('shows EMLTrackMaster', function () {
-				browser.assert.elements('.EMLTrackMaster', 1);
+			it('shows EMLTrackJournals', function () {
+				browser.assert.elements('.EMLTrackJournals', 1);
 			});
 
 			it('hides OLSKCatalog', function () {

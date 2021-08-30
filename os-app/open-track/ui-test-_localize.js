@@ -23,7 +23,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		describe('EMLTrackLauncherItemExportSelectedJSON', function test_EMLTrackLauncherItemExportSelectedJSON () {
 			
 			before(function () {
-				return browser.pressButton('.EMLTrackMasterCreateButton');
+				return browser.pressButton('.EMLTrackJournalsCreateButton');
 			});
 
 			before(function () {

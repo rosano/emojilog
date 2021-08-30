@@ -9,7 +9,7 @@ describe('EMLTrack_Sync', function () {
 	describe('ZDRSchemaDispatchSyncCreateJournal', function test_ZDRSchemaDispatchSyncCreateJournal () {
 
 		before(function () {
-			browser.assert.elements('.EMLTrackMasterListItem', 0);
+			browser.assert.elements('.EMLTrackJournalsListItem', 0);
 		});
 
 		before(function () {
@@ -17,7 +17,7 @@ describe('EMLTrack_Sync', function () {
 		});
 
 		it('adds item', function () {
-			browser.assert.elements('.EMLTrackMasterListItem', 1);
+			browser.assert.elements('.EMLTrackJournalsListItem', 1);
 		});
 
 	});
@@ -25,7 +25,7 @@ describe('EMLTrack_Sync', function () {
 	describe('ZDRSchemaDispatchSyncUpdateJournal', function test_ZDRSchemaDispatchSyncUpdateJournal () {
 
 		before(function () {
-			browser.assert.text('.EMLTrackMasterListItem', 'FakeZDRSchemaDispatchSyncCreateJournal');
+			browser.assert.text('.EMLTrackJournalsListItem', 'FakeZDRSchemaDispatchSyncCreateJournal');
 		});
 
 		before(function () {
@@ -33,13 +33,13 @@ describe('EMLTrack_Sync', function () {
 		});
 
 		it('updates item', function () {
-			browser.assert.text('.EMLTrackMasterListItem', 'FakeZDRSchemaDispatchSyncUpdateJournal');
+			browser.assert.text('.EMLTrackJournalsListItem', 'FakeZDRSchemaDispatchSyncUpdateJournal');
 		});
 
 		context('selected same', function () {
 			
 			before(function () {
-				return browser.click('.EMLTrackMasterListItem');
+				return browser.click('.EMLTrackJournalsListItem');
 			});
 
 			before(function () {
@@ -73,7 +73,7 @@ describe('EMLTrack_Sync', function () {
 		});
 
 		it('removes item', function () {
-			browser.assert.elements('.EMLTrackMasterListItem', 0);
+			browser.assert.elements('.EMLTrackJournalsListItem', 0);
 		});
 
 		context('selected same', function () {
@@ -83,7 +83,7 @@ describe('EMLTrack_Sync', function () {
 			});
 
 			before(function () {
-				return browser.click('.EMLTrackMasterListItem');
+				return browser.click('.EMLTrackJournalsListItem');
 			});
 
 			before(function () {
@@ -101,7 +101,7 @@ describe('EMLTrack_Sync', function () {
 	describe('ZDRSchemaDispatchSyncConflictJournal', function test_ZDRSchemaDispatchSyncConflictJournal () {
 
 		before(function () {
-			return browser.pressButton('.EMLTrackMasterCreateButton');
+			return browser.pressButton('.EMLTrackJournalsCreateButton');
 		});
 
 		before(function () {

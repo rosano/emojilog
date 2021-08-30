@@ -6,7 +6,7 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		return OLSKTestingLocalized(inputData, OLSKRoutingLanguage);
 	};
 
-	describe('EMLTrackMaster_Localize-' + OLSKRoutingLanguage, function () {
+	describe('EMLTrackJournals_Localize-' + OLSKRoutingLanguage, function () {
 
 		before(function() {
 			return browser.OLSKVisit(kDefaultRoute, {
@@ -14,8 +14,8 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			});
 		});
 
-		it('localizes EMLTrackMasterCreateButton', function () {
-			browser.assert.attribute(EMLTrackMasterCreateButton, 'title', uLocalized('EMLTrackMasterCreateButtonText'));
+		it('localizes EMLTrackJournalsCreateButton', function () {
+			browser.assert.attribute(EMLTrackJournalsCreateButton, 'title', uLocalized('EMLTrackJournalsCreateButtonText'));
 		});
 
 	});

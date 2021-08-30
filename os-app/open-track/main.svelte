@@ -17,7 +17,7 @@ import OLSKFund from 'OLSKFund';
 import OLSKPact from 'OLSKPact';
 import OLSKTransport from 'OLSKTransport';
 import EMLTrackLogic from './ui-logic.js';
-import EMLTrackMasterLogic from './submodules/EMLTrackMaster/ui-logic.js';
+import EMLTrackJournalsLogic from '../sub-journals/ui-logic.js';
 import OLSKChain from 'OLSKChain';
 
 import OLSKCollectionLogic from 'OLSKCollection/logic';
@@ -121,8 +121,8 @@ const mod = {
 
 		items.push(...OLSKServiceWorker.OLSKServiceWorkerRecipes(window, mod.DataNavigator(), OLSKLocalized, OLSK_SPEC_UI()));
 
-		if (mod._EMLTrackMaster) {
-			items.push(...mod._EMLTrackMaster.modPublic.EMLTrackMasterRecipes());
+		if (mod._EMLTrackJournals) {
+			items.push(...mod._EMLTrackJournals.modPublic.EMLTrackJournalsRecipes());
 		}
 
 		if (mod._EMLBrowse) {
@@ -150,7 +150,7 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncUpdateJournal',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncUpdateJournal () {
-						return mod.ZDRSchemaDispatchSyncUpdateJournal(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalUpdate(Object.assign(mod._ValueJournalSelected || mod._EMLTrackMaster.modPublic.OLSKCollectionDataItemsAll().filter(function (e) {
+						return mod.ZDRSchemaDispatchSyncUpdateJournal(await mod._ValueZDRWrap.App.EMLJournal.EMLJournalUpdate(Object.assign(mod._ValueJournalSelected || mod._EMLTrackJournals.modPublic.OLSKCollectionDataItemsAll().filter(function (e) {
 							return e.EMLJournalName.match('FakeZDRSchemaDispatchSync');
 						}).pop(), {
 							EMLJournalName: 'FakeZDRSchemaDispatchSyncUpdateJournal',
@@ -160,7 +160,7 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncDeleteJournal',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncDeleteJournal () {
-						return mod.ZDRSchemaDispatchSyncDeleteJournal(await mod._ValueZDRWrap.App.EMLJournal.ZDRModelDeleteObject(mod._ValueJournalSelected || mod._EMLTrackMaster.modPublic.OLSKCollectionDataItemsAll().filter(function (e) {
+						return mod.ZDRSchemaDispatchSyncDeleteJournal(await mod._ValueZDRWrap.App.EMLJournal.ZDRModelDeleteObject(mod._ValueJournalSelected || mod._EMLTrackJournals.modPublic.OLSKCollectionDataItemsAll().filter(function (e) {
 							return e.EMLJournalName.match('FakeZDRSchemaDispatchSync');
 						}).pop()));
 					},
@@ -168,7 +168,7 @@ const mod = {
 				{
 					LCHRecipeName: 'FakeZDRSchemaDispatchSyncConflictJournal',
 					LCHRecipeCallback: async function FakeZDRSchemaDispatchSyncConflictJournal () {
-						const item = mod._ValueJournalSelected || mod._EMLTrackMaster.modPublic.OLSKCollectionDataItemsAll().filter(function (e) {
+						const item = mod._ValueJournalSelected || mod._EMLTrackJournals.modPublic.OLSKCollectionDataItemsAll().filter(function (e) {
 							return e.EMLJournalName.match('FakeZDRSchemaDispatchSyncConflictJournal');
 						}).pop();
 						
@@ -224,7 +224,7 @@ const mod = {
 	async ControlJournalCreate() {
 		const item = await mod._ValueZDRWrap.App.EMLJournal.EMLJournalCreate(mod.DataJournalObjectTemplate());
 
-		mod._EMLTrackMaster.modPublic.OLSKCollectionInsert(item);
+		mod._EMLTrackJournals.modPublic.OLSKCollectionInsert(item);
 
 		mod.ControlJournalSelect(item);
 	},
@@ -241,7 +241,7 @@ const mod = {
 		mod.ControlJournalSelect(null);
 
 		setTimeout(function () { // #hotfix-force-update
-			mod._EMLTrackMaster && mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
+			mod._EMLTrackJournals && mod._EMLTrackJournals.modPublic.OLSKCollectionSort();
 		});
 	},
 
@@ -298,7 +298,7 @@ const mod = {
 		});
 	},
 
-	EMLTrackMasterDispatchCreate () {
+	EMLTrackJournalsDispatchCreate () {
 		mod._ValueShowTemplateForm = true;
 
 		mod.ControlJournalCreate();
@@ -324,7 +324,7 @@ const mod = {
 		mod.ControlJournalSelect(null);
 
 		setTimeout(function () { // #hotfix-force-update
-			mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
+			mod._EMLTrackJournals.modPublic.OLSKCollectionSort();
 		});
 	},
 	
@@ -369,7 +369,7 @@ const mod = {
 	},
 
 	ZDRSchemaDispatchSyncCreateJournal (inputData) {
-		OLSKChain.OLSKChainGather(mod._EMLTrackMaster ? mod._EMLTrackMaster.modPublic : mod._ValueCollectionAPI).OLSKCollectionInsert(inputData).OLSKCollectionSort()
+		OLSKChain.OLSKChainGather(mod._EMLTrackJournals ? mod._EMLTrackJournals.modPublic : mod._ValueCollectionAPI).OLSKCollectionInsert(inputData).OLSKCollectionSort()
 			.OLSKChainExecute();
 	},
 
@@ -378,7 +378,7 @@ const mod = {
 			mod.ControlJournalSelect(inputData);
 		}
 
-		OLSKChain.OLSKChainGather(mod._EMLTrackMaster ? mod._EMLTrackMaster.modPublic : mod._ValueCollectionAPI).OLSKCollectionUpdate(inputData).OLSKCollectionSort()
+		OLSKChain.OLSKChainGather(mod._EMLTrackJournals ? mod._EMLTrackJournals.modPublic : mod._ValueCollectionAPI).OLSKCollectionUpdate(inputData).OLSKCollectionSort()
 			.OLSKChainExecute();
 	},
 
@@ -387,7 +387,7 @@ const mod = {
 			mod.ControlJournalSelect(null);
 		}
 
-		OLSKChain.OLSKChainGather(mod._EMLTrackMaster ? mod._EMLTrackMaster.modPublic : mod._ValueCollectionAPI).OLSKCollectionRemove(inputData).OLSKCollectionSort()
+		OLSKChain.OLSKChainGather(mod._EMLTrackJournals ? mod._EMLTrackJournals.modPublic : mod._ValueCollectionAPI).OLSKCollectionRemove(inputData).OLSKCollectionSort()
 			.OLSKChainExecute();
 	},
 
@@ -590,7 +590,7 @@ const mod = {
 			return mod._ValueJournalsAll.push(e);
 		});
 		
-		mod._EMLTrackMaster.modPublic.OLSKCollectionSort();
+		mod._EMLTrackJournals.modPublic.OLSKCollectionSort();
 
 		mod.ReactDocumentRemainder();
 	},
@@ -608,7 +608,7 @@ const mod = {
 			_OLSKCollectionKeyFunction: (function (inputData) {
 				return inputData.EMLJournalID;
 			}),
-			OLSKCollectionSortFunction: EMLTrackMasterLogic.EMLTrackMasterSort,
+			OLSKCollectionSortFunction: EMLTrackJournalsLogic.EMLTrackJournalsSort,
 		});
 	},
 
@@ -669,7 +669,7 @@ const mod = {
 import { onMount } from 'svelte';
 onMount(mod.LifecycleModuleWillMount);
 
-import EMLTrackMaster from './submodules/EMLTrackMaster/main.svelte';
+import EMLTrackJournals from '../sub-journals/main.svelte';
 import EMLBrowse from '../sub-browse/main.svelte';
 import OLSKAppToolbar from 'OLSKAppToolbar';
 import OLSKServiceWorkerView from '../_shared/__external/OLSKServiceWorker/main.svelte';
@@ -684,11 +684,11 @@ import OLSKApropos from 'OLSKApropos';
 
 <div class="OLSKViewportContent">
 	{#if !mod._ValueJournalSelected }
-		<EMLTrackMaster
-			EMLTrackMasterDispatchCreate={ mod.EMLTrackMasterDispatchCreate }
+		<EMLTrackJournals
+			EMLTrackJournalsDispatchCreate={ mod.EMLTrackJournalsDispatchCreate }
 			OLSKCollectionItems={ mod._ValueJournalsAll }
 			OLSKCollectionDispatchClick={ mod.OLSKCollectionDispatchClick }
-			bind:this={ mod._EMLTrackMaster }
+			bind:this={ mod._EMLTrackJournals }
 			/>
 	{:else}
 		<EMLBrowse

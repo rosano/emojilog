@@ -1,12 +1,12 @@
 <script>
-export let EMLTrackMasterDispatchCreate;
+export let EMLTrackJournalsDispatchCreate;
 export let OLSKCollectionItems;
 export let OLSKCollectionDispatchClick;
-export let EMLTrackMaster_DebugShowLauncherButton = false;
+export let EMLTrackJournals_DebugShowLauncherButton = false;
 
 export const modPublic = {
 
-	EMLTrackMasterRecipes () {
+	EMLTrackJournalsRecipes () {
 		return mod.DataTrackMasterRecipes();
 	},
 
@@ -15,7 +15,7 @@ export const modPublic = {
 import { OLSKLocalized } from 'OLSKInternational';
 import { OLSK_SPEC_UI } from 'OLSKSpec';
 
-import EMLTrackMasterLogic from './ui-logic.js';
+import EMLTrackJournalsLogic from './ui-logic.js';
 
 const mod = {
 
@@ -26,8 +26,8 @@ const mod = {
 
 		if (OLSK_SPEC_UI()) {
 			items.push({
-				LCHRecipeName: 'EMLTrackMasterLauncherFakeItemProxy',
-				LCHRecipeCallback: function EMLTrackMasterLauncherFakeItemProxy () {},
+				LCHRecipeName: 'EMLTrackJournalsLauncherFakeItemProxy',
+				LCHRecipeCallback: function EMLTrackJournalsLauncherFakeItemProxy () {},
 			});
 		}
 		
@@ -41,11 +41,11 @@ const mod = {
 	},
 
 	OLSKCollectionChunkFunction (inputData) {
-		return EMLTrackMasterLogic.EMLTrackMasterChunkFunction(inputData, OLSKLocalized);
+		return EMLTrackJournalsLogic.EMLTrackJournalsChunkFunction(inputData, OLSKLocalized);
 	},
 
 	OLSKCollectionItemAccessibilitySummaryFunction (inputData) {
-		return EMLTrackMasterLogic.EMLTrackMasterAccessibilitySummary(inputData, OLSKLocalized)
+		return EMLTrackJournalsLogic.EMLTrackJournalsAccessibilitySummary(inputData, OLSKLocalized)
 	},
 
 	_OLSKAppToolbarDispatchLauncher () {
@@ -73,19 +73,19 @@ onMount(mod.LifecycleModuleWillMount);
 
 import OLSKStandardView from 'OLSKStandardView';
 import OLSKCollection from 'OLSKCollection';
-import EMLTrackTimer from '../EMLTrackTimer/main.svelte';
-import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSharedCreate.svg';
+import EMLTrackTimer from './submodules/EMLTrackTimer/main.svelte';
+import _OLSKSharedCreate from '../_shared/__external/OLSKUIAssets/_OLSKSharedCreate.svg';
 </script>
 
-<div class="EMLTrackMaster">
+<div class="EMLTrackJournals">
 
 <OLSKStandardView>
 
-<div class="EMLTrackMasterHead OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeBottom" slot="OLSKStandardViewHead">
+<div class="EMLTrackJournalsHead OLSKToolbar OLSKToolbarJustify OLSKCommonEdgeBottom" slot="OLSKStandardViewHead">
 	<div class="OLSKToolbarElementGroup"></div>
 	<div class="OLSKToolbarElementGroup">
-		<button class="EMLTrackMasterCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLTrackMasterCreateButtonText') } on:click={ EMLTrackMasterDispatchCreate } accesskey="n">
-			<div class="EMLTrackMasterCreateButtonImage">{@html _OLSKSharedCreate }</div>
+		<button class="EMLTrackJournalsCreateButton OLSKDecorButtonNoStyle OLSKDecorTappable OLSKToolbarButton" title={ OLSKLocalized('EMLTrackJournalsCreateButtonText') } on:click={ EMLTrackJournalsDispatchCreate } accesskey="n">
+			<div class="EMLTrackJournalsCreateButtonImage">{@html _OLSKSharedCreate }</div>
 		</button>
 	</div>
 </div>
@@ -93,7 +93,7 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 <OLSKCollection
 	bind:this={ mod._OLSKCollection }
 	
-	OLSKCollectionSortFunction={ EMLTrackMasterLogic.EMLTrackMasterSort }
+	OLSKCollectionSortFunction={ EMLTrackJournalsLogic.EMLTrackJournalsSort }
 	_OLSKCollectionDispatchKey={ mod._OLSKCollectionDispatchKey }
 
 	OLSKCollectionChunkFunction={ mod.OLSKCollectionChunkFunction }
@@ -105,10 +105,10 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 
 	let:OLSKCollectionItem
 	>
-	<div slot="OLSKCollectionItem" class="EMLTrackMasterListItem" >
+	<div slot="OLSKCollectionItem" class="EMLTrackJournalsListItem" >
 		<EMLTrackTimer
 			EMLTrackTimerEventDate={ OLSKCollectionItem.EMLJournalTouchDate }
-			EMLTrackTimerText={ EMLTrackMasterLogic.EMLTrackMasterSymbol(OLSKCollectionItem) }
+			EMLTrackTimerText={ EMLTrackJournalsLogic.EMLTrackJournalsSymbol(OLSKCollectionItem) }
 			/>
 	</div>
 </OLSKCollection>
@@ -117,36 +117,36 @@ import _OLSKSharedCreate from '../../../_shared/__external/OLSKUIAssets/_OLSKSha
 
 </div>
 
-{#if OLSK_SPEC_UI() && EMLTrackMaster_DebugShowLauncherButton }
+{#if OLSK_SPEC_UI() && EMLTrackJournals_DebugShowLauncherButton }
 	<button class="OLSKAppToolbarLauncherButton" on:click={ mod._OLSKAppToolbarDispatchLauncher }></button>
 {/if}
 
 <style>
-.EMLTrackMaster {
+.EMLTrackJournals {
 	width: 100%;
 }
 
-.EMLTrackMaster :global(.OLSKCollection, .OLSKCollectionChunk, .OLSKCollectionChunkItems) {
+.EMLTrackJournals :global(.OLSKCollection, .OLSKCollectionChunk, .OLSKCollectionChunkItems) {
 	display: flex;
 	flex-direction: column;
 }
 
-.EMLTrackMaster :global(.OLSKCollectionChunkItems) {
+.EMLTrackJournals :global(.OLSKCollectionChunkItems) {
 	padding: 10px;
 	
 	flex-direction: unset;
 	flex-wrap: wrap;
 }
 
-.EMLTrackMaster :global(.OLSKCollectionChunk:nth-child(3)) {
+.EMLTrackJournals :global(.OLSKCollectionChunk:nth-child(3)) {
 	opacity: 0.7;
 }
 
-.EMLTrackMaster :global(.OLSKCollectionChunk:nth-child(4)) {
+.EMLTrackJournals :global(.OLSKCollectionChunk:nth-child(4)) {
 	opacity: 0.5;
 }
 
-.EMLTrackMaster :global(.OLSKCollectionChunk:nth-child(5)) {
+.EMLTrackJournals :global(.OLSKCollectionChunk:nth-child(5)) {
 	opacity: 0.3;
 }
 </style>

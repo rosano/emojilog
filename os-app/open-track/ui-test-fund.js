@@ -13,7 +13,7 @@ describe('EMLTrack_Fund', function () {
 		},
 
 		async ParamBeforeCreate () {
-			await browser.pressButton('.EMLTrackMasterCreateButton');
+			await browser.pressButton('.EMLTrackJournalsCreateButton');
 
 			return browser.pressButton('.OLSKModalViewCloseButton');
 		},

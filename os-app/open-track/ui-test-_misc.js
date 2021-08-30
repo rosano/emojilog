@@ -81,7 +81,7 @@ describe('EMLTrack_Misc', function () {
 		});
 
 		before(function () {
-			return browser.pressButton(EMLTrackMasterCreateButton);
+			return browser.pressButton('.EMLTrackJournalsCreateButton');
 		});
 
 		it('focuses EMLTemplateNameField', function() {

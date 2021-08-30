@@ -1,4 +1,4 @@
-import EMLTrackTimerLogic from '../EMLTrackTimer/ui-logic.js';
+import EMLTrackTimerLogic from './submodules/EMLTrackTimer/ui-logic.js';
 import OLSKMoment from 'OLSKMoment';
 
 const uDescending = function (a, b) {
@@ -7,7 +7,7 @@ const uDescending = function (a, b) {
 
 const mod = {
 
-	EMLTrackMasterSort (a, b) {
+	EMLTrackJournalsSort (a, b) {
 		if (!(a.EMLJournalTouchDate && b.EMLJournalTouchDate)) {
 			return a.EMLJournalTouchDate ? 1 : -1;
 		}
@@ -19,48 +19,48 @@ const mod = {
 		}).shift());
 	},
 
-	_EMLTrackMasterChunk (inputData) {
+	_EMLTrackJournalsChunk (inputData) {
 		if (!inputData.EMLJournalTouchDate) {
-			return 'EMLTrackMasterGroupReadyText';
+			return 'EMLTrackJournalsGroupReadyText';
 		}
 
 		const groupingDate = OLSKMoment.OLSKMomentPerceptionDate(new Date());
 
 		if (inputData.EMLJournalTouchDate >= groupingDate) {
-			return 'EMLTrackMasterGroupTodayText';
+			return 'EMLTrackJournalsGroupTodayText';
 		}
 
 		const delta = groupingDate - inputData.EMLJournalTouchDate;
 
 		if (delta < EMLTrackTimerLogic.EMLTrackTimerFrameMonth()) {
-			return 'EMLTrackMasterGroupEarlierText';
+			return 'EMLTrackJournalsGroupEarlierText';
 		}
 
 		if (delta <= EMLTrackTimerLogic.EMLTrackTimerFrameYear()) {
-			return 'EMLTrackMasterGroupOverMonthText';
+			return 'EMLTrackJournalsGroupOverMonthText';
 		}
 
-		return 'EMLTrackMasterGroupOverYearText';
+		return 'EMLTrackJournalsGroupOverYearText';
 	},
 
-	EMLTrackMasterChunkFunction (inputData, OLSKLocalized) {
+	EMLTrackJournalsChunkFunction (inputData, OLSKLocalized) {
 		if (!Array.isArray(inputData)) {
 			throw new Error('EMLErrorInputNotValid');
 		}
 
 		return inputData.reduce(function (coll, item) {
-			const group = OLSKLocalized(mod._EMLTrackMasterChunk(item));
+			const group = OLSKLocalized(mod._EMLTrackJournalsChunk(item));
 			return Object.assign(coll, {
 				[group]: (coll[group] || []).concat(item),
 			});
 		}, {});
 	},
 
-	EMLTrackMasterAccessibilitySummary (inputData, OLSKLocalized) {
-		return inputData.EMLJournalName || OLSKLocalized('EMLTrackMasterListItemUntitledText');
+	EMLTrackJournalsAccessibilitySummary (inputData, OLSKLocalized) {
+		return inputData.EMLJournalName || OLSKLocalized('EMLTrackJournalsListItemUntitledText');
 	},
 
-	EMLTrackMasterSymbol (inputData) {
+	EMLTrackJournalsSymbol (inputData) {
 		return (inputData.EMLJournalName || '?').split(' ').shift();
 	},
 

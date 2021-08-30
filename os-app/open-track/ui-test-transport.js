@@ -50,7 +50,7 @@ describe('EMLTrack_Transport', function () {
 		context('click', function () {
 
 			before(function () {
-				return browser.click('.EMLTrackMasterListItem');
+				return browser.click('.EMLTrackJournalsListItem');
 			});
 			
 			it('creates memo', function () {
@@ -97,7 +97,7 @@ describe('EMLTrack_Transport', function () {
 		});
 
 		before(function () {
-			return browser.pressButton('.EMLTrackMasterCreateButton');
+			return browser.pressButton('.EMLTrackJournalsCreateButton');
 		});
 
 		before(function () {
