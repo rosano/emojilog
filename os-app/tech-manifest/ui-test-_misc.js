@@ -3,7 +3,7 @@ const kDefaultRoute = require('./controller.js').OLSKControllerRoutes().shift();
 describe('EMLManifest_Misc', function () {
 
 	it('sends json', async function () {
-		browser.assert.deepEqual(await (await browser.fetch('http://loc.tests' + kDefaultRoute.OLSKRoutePath)).json(), {
+		browser.assert.deepEqual(await (await browser.fetch('http://localhost' + kDefaultRoute.OLSKRoutePath)).json(), {
 			name: 'Emoji Log',
 			short_name: 'Emoji Log',
 			start_url: require('../open-track/controller.js').OLSKControllerRoutes().shift().OLSKRoutePath,
