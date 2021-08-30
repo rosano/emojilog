@@ -70,12 +70,6 @@ export default {
 					});
 				}))];
 			})));
-
-			return Promise.all(inputData.map(async function (journal) {
-				return Object.assign(OLSKRemoteStorage.OLSKRemoteStorageSafeCopy(journal), {
-					
-				});
-			}));
 		},
 
 	},
