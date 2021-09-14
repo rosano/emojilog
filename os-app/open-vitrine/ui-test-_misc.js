@@ -37,7 +37,7 @@ describe('EMLVitrine_Misc', function () {
 	describe('EMLVitrineVideo', function () {
 
 		it('classes OLSKCommonVideoListItemMobile', function () {
-			browser.assert.hasClass(EMLVitrineVideo, 'OLSKCommonVideoListItemMobile');
+			browser.assert.hasClass('.EMLVitrineVideo', 'OLSKCommonVideoListItemMobile');
 		});
 
 		it('sets src', function () {
