@@ -9,7 +9,7 @@ Object.entries({
 
 	EMLVitrineGuideButton: '.EMLVitrineGuideButton',
 
-	EMLVitrineGlossaryHeading: '.EMLVitrineGlossaryHeading',
+	EMLVitrineDeeperHeading: '.EMLVitrineDeeperHeading',
 	EMLVitrineGlossary: '.EMLVitrineGlossary',
 
 	EMLVitrineSupportHeading: '.EMLVitrineSupportHeading',
@@ -60,8 +60,8 @@ describe('EMLVitrine_Access', function () {
 		browser.assert.elements(EMLVitrineGuideButton, 1);
 	});
 
-	it('shows EMLVitrineGlossaryHeading', function () {
-		browser.assert.elements(EMLVitrineGlossaryHeading, 1);
+	it('shows EMLVitrineDeeperHeading', function () {
+		browser.assert.elements(EMLVitrineDeeperHeading, 1);
 	});
 
 	it('shows EMLVitrineGlossary', function () {
