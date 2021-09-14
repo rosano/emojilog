@@ -9,6 +9,9 @@ Object.entries({
 
 	EMLVitrineGuideButton: '.EMLVitrineGuideButton',
 
+	EMLVitrineGlossaryHeading: '.EMLVitrineGlossaryHeading',
+	EMLVitrineGlossary: '.EMLVitrineGlossary',
+
 	EMLVitrineSupportHeading: '.EMLVitrineSupportHeading',
 	EMLVitrineSupportBlurb: '.EMLVitrineSupportBlurb',
 }).map(function (e) {
@@ -55,6 +58,18 @@ describe('EMLVitrine_Access', function () {
 
 	it('shows EMLVitrineGuideButton', function () {
 		browser.assert.elements(EMLVitrineGuideButton, 1);
+	});
+
+	it('shows EMLVitrineGlossaryHeading', function () {
+		browser.assert.elements(EMLVitrineGlossaryHeading, 1);
+	});
+
+	it('shows EMLVitrineGlossary', function () {
+		browser.assert.elements(EMLVitrineGlossary, 1);
+	});
+
+	it('shows ROCOGlossary', function () {
+		browser.assert.elements('.ROCOGlossary', 1);
 	});
 
 	it('shows ROCOGazette', function () {

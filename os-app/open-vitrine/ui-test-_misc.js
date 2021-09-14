@@ -74,6 +74,14 @@ describe('EMLVitrine_Misc', function () {
 	
 	});
 
+	describe('EMLVitrineGlossary', function test_EMLVitrineGlossary () {
+
+		it('classes OLSKDecorGlossary', function () {
+			browser.assert.hasClass(EMLVitrineGlossary, 'OLSKDecorGlossary');
+		});
+		
+	});
+
 	describe('ROCOGazette', function test_ROCOGazette () {
 
 		it('sets ROCOBulletinProject', function () {
