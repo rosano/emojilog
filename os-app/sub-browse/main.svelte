@@ -352,7 +352,7 @@ import EMLTemplate from '../sub-template/main.svelte';
 	overflow: auto;
 }
 
-:global(.OLSKCatalog+.OLSKModalView .OLSKModalViewContainer .OLSKStandardViewBody, .OLSKCatalog+.OLSKModalView .OLSKModalViewContainer .OLSKStandardViewBody > *) {
+:global(.OLSKCatalog+.OLSKModalView .OLSKModalViewContainer .OLSKStandardViewBody), :global(.OLSKCatalog+.OLSKModalView .OLSKModalViewContainer .OLSKStandardViewBody > *) {
 	height: 100%;
 }
 </style>

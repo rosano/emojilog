@@ -126,7 +126,7 @@ import _OLSKSharedCreate from '../_shared/__external/OLSKUIAssets/_OLSKSharedCre
 	width: 100%;
 }
 
-.EMLTrackJournals :global(.OLSKCollection, .OLSKCollectionChunk, .OLSKCollectionChunkItems) {
+.EMLTrackJournals :global(.OLSKCollection), :global(.OLSKCollectionChunk), :global(.OLSKCollectionChunkItems) {
 	display: flex;
 	flex-direction: column;
 }
