@@ -6,6 +6,6 @@
 	color: var(--OLSKCommonForeground);
 }
 
-:global(.OLSKBanner) {
+.OLSKBanner {
 	display: none;
 }
