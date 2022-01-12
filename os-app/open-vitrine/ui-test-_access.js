@@ -92,10 +92,6 @@ describe('EMLVitrine_Access', function () {
 		browser.assert.elements(EMLVitrineSupportBlurb, 1);
 	});
 
-	it('shows ROCOEphemerataLink', function () {
-		browser.assert.elements('.ROCOEphemerataLink', 1);
-	});
-
 	it('shows SWARLink', function() {
 		browser.assert.elements('.SWARLink', 1);
 	});
