@@ -11,7 +11,7 @@ Object.entries({
 	
 	EMLTemplateDiscardButton: '.EMLTemplateDiscardButton',
 }).map(function (e) {
-	return global[e.shift()]  = e.pop();
+	return global[e.shift()] = e.pop();
 });
 
 describe('EMLTemplate_Access', function () {

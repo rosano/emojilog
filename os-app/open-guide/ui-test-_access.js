@@ -8,7 +8,7 @@ Object.entries({
 
 	EMLGuideContent: '.EMLGuideContent',
 }).map(function (e) {
-	return global[e.shift()]  = e.pop();
+	return global[e.shift()] = e.pop();
 });
 
 describe('EMLGuide_Access', function () {

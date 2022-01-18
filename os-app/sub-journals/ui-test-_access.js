@@ -9,7 +9,7 @@ Object.entries({
 
 	EMLTrackJournalsListItem: '.EMLTrackJournalsListItem',
 }).map(function (e) {
-	return global[e.shift()]  = e.pop();
+	return global[e.shift()] = e.pop();
 });
 
 describe('EMLTrackJournals_Access', function () {

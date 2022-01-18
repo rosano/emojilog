@@ -7,7 +7,7 @@ Object.entries({
 	
 	EMLTemplateParamFormDoneButton: '.EMLTemplateParamFormDoneButton',
 }).map(function (e) {
-	return global[e.shift()]  = e.pop();
+	return global[e.shift()] = e.pop();
 });
 
 describe('EMLTemplateParamForm_Access', function () {

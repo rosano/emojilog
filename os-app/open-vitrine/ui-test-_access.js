@@ -15,7 +15,7 @@ Object.entries({
 	EMLVitrineSupportHeading: '.EMLVitrineSupportHeading',
 	EMLVitrineSupportBlurb: '.EMLVitrineSupportBlurb',
 }).map(function (e) {
-	return global[e.shift()]  = e.pop();
+	return global[e.shift()] = e.pop();
 });
 
 describe('EMLVitrine_Access', function () {
