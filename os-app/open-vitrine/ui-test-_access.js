@@ -76,10 +76,6 @@ describe('EMLVitrine_Access', function () {
 		browser.assert.elements('.ROCOGazette', 1);
 	});
 
-	it('shows OLSKJar', function () {
-		browser.assert.elements('.OLSKJar', 1);
-	});
-
 	it('shows OLSKEdit', function () {
 		browser.assert.elements('.OLSKEdit', 1);
 	});
