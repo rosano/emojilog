@@ -34,6 +34,14 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(EMLVitrineDeeperHeading, uLocalized('OLSKWordingDeeperHeading'));
 		});
 
+		it('localizes EMLVitrineGlossaryKaizenLink', function () {
+			browser.assert.text(EMLVitrineGlossaryKaizenLink, uLocalized('EMLVitrineGlossaryKaizenLinkText'));
+		});
+
+		it('localizes EMLVitrineGlossaryKaizenBlurb', function () {
+			browser.assert.text(EMLVitrineGlossaryKaizenBlurb, uLocalized('EMLVitrineGlossaryKaizenBlurbText'));
+		});
+
 		it('localizes EMLVitrineSupportHeading', function () {
 			browser.assert.text(EMLVitrineSupportHeading, uLocalized('OLSKWordingFeedbackHeading'));
 		});

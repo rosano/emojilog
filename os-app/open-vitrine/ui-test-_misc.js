@@ -82,6 +82,18 @@ describe('EMLVitrine_Misc', function () {
 		
 	});
 
+	describe('EMLVitrineGlossaryKaizenLink', function test_EMLVitrineGlossaryKaizenLink () {
+
+		it('sets target', function () {
+			browser.assert.attribute(EMLVitrineGlossaryKaizenLink, 'target', 	'_blank');
+		});
+
+		it('sets href', function () {
+			browser.assert.attribute(EMLVitrineGlossaryKaizenLink, 'href', process.env.EML_VITRINE_KAIZEN_URL);
+		});
+	
+	});
+
 	describe('ROCOGazette', function test_ROCOGazette () {
 
 		it('sets ROCOBulletinProject', function () {

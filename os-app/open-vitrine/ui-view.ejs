@@ -46,6 +46,8 @@ locals.OLSKPagePublicConstants = {
 <h1 class="EMLVitrineDeeperHeading"><%= OLSKLocalized('OLSKWordingDeeperHeading') %></h1>
 
 <dl class="EMLVitrineGlossary OLSKDecorGlossary">
+	<dt><a class="EMLVitrineGlossaryKaizenLink" href="<%= process.env.EML_VITRINE_KAIZEN_URL %>" target="_blank"><%= OLSKLocalized('EMLVitrineGlossaryKaizenLinkText') %></a></dt>
+	<dd class="EMLVitrineGlossaryKaizenBlurb"><%= OLSKLocalized('EMLVitrineGlossaryKaizenBlurbText') %></dd>
 	<%- include('../../node_modules/ROCOGlossary/main.ejs') %>
 </dl>
 
