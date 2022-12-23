@@ -58,6 +58,14 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(EMLVitrineGlossaryMeasureBlurb, uLocalized('EMLVitrineGlossaryMeasureBlurbText'));
 		});
 
+		it('localizes EMLVitrineGlossaryBooksLink', function () {
+			browser.assert.text(EMLVitrineGlossaryBooksLink, uLocalized('EMLVitrineGlossaryBooksLinkText'));
+		});
+
+		it('localizes EMLVitrineGlossaryBooksBlurb', function () {
+			browser.assert.text(EMLVitrineGlossaryBooksBlurb, uLocalized('EMLVitrineGlossaryBooksBlurbText'));
+		});
+
 		it('localizes EMLVitrineSupportHeading', function () {
 			browser.assert.text(EMLVitrineSupportHeading, uLocalized('OLSKWordingFeedbackHeading'));
 		});

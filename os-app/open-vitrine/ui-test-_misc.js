@@ -122,6 +122,18 @@ describe('EMLVitrine_Misc', function () {
 	
 	});
 
+	describe('EMLVitrineGlossaryBooksLink', function test_EMLVitrineGlossaryBooksLink () {
+
+		it('sets target', function () {
+			browser.assert.attribute(EMLVitrineGlossaryBooksLink, 'target', 	'_blank');
+		});
+
+		it('sets href', function () {
+			browser.assert.attribute(EMLVitrineGlossaryBooksLink, 'href', process.env.EML_VITRINE_BOOKS_URL);
+		});
+	
+	});
+
 	describe('ROCOGazette', function test_ROCOGazette () {
 
 		it('sets ROCOBulletinProject', function () {
