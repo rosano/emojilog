@@ -13,6 +13,8 @@ Object.entries({
 	EMLVitrineGlossary: '.EMLVitrineGlossary',
 	EMLVitrineGlossaryKaizenLink: '.EMLVitrineGlossaryKaizenLink',
 	EMLVitrineGlossaryKaizenBlurb: '.EMLVitrineGlossaryKaizenBlurb',
+	EMLVitrineGlossaryWetwareLink: '.EMLVitrineGlossaryWetwareLink',
+	EMLVitrineGlossaryWetwareBlurb: '.EMLVitrineGlossaryWetwareBlurb',
 
 	EMLVitrineSupportHeading: '.EMLVitrineSupportHeading',
 	EMLVitrineSupportBlurb: '.EMLVitrineSupportBlurb',
@@ -76,6 +78,14 @@ describe('EMLVitrine_Access', function () {
 
 	it('shows EMLVitrineGlossaryKaizenBlurb', function () {
 		browser.assert.elements(EMLVitrineGlossaryKaizenBlurb, 1);
+	});
+
+	it('shows EMLVitrineGlossaryWetwareLink', function () {
+		browser.assert.elements(EMLVitrineGlossaryWetwareLink, 1);
+	});
+
+	it('shows EMLVitrineGlossaryWetwareBlurb', function () {
+		browser.assert.elements(EMLVitrineGlossaryWetwareBlurb, 1);
 	});
 
 	it('shows ROCOGlossary', function () {

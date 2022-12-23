@@ -94,6 +94,22 @@ describe('EMLVitrine_Misc', function () {
 	
 	});
 
+	describe('EMLVitrineGlossaryWetwareLink', function test_EMLVitrineGlossaryWetwareLink () {
+
+		it('sets lang', function () {
+			browser.assert.attribute(EMLVitrineGlossaryWetwareLink, 'lang', 	'en');
+		});
+
+		it('sets target', function () {
+			browser.assert.attribute(EMLVitrineGlossaryWetwareLink, 'target', 	'_blank');
+		});
+
+		it('sets href', function () {
+			browser.assert.attribute(EMLVitrineGlossaryWetwareLink, 'href', process.env.EML_VITRINE_WETWARE_URL);
+		});
+	
+	});
+
 	describe('ROCOGazette', function test_ROCOGazette () {
 
 		it('sets ROCOBulletinProject', function () {

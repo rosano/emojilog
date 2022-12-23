@@ -42,6 +42,14 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 			browser.assert.text(EMLVitrineGlossaryKaizenBlurb, uLocalized('EMLVitrineGlossaryKaizenBlurbText'));
 		});
 
+		it('localizes EMLVitrineGlossaryWetwareLink', function () {
+			browser.assert.text(EMLVitrineGlossaryWetwareLink, 'Wetware');
+		});
+
+		it('localizes EMLVitrineGlossaryWetwareBlurb', function () {
+			browser.assert.text(EMLVitrineGlossaryWetwareBlurb, uLocalized('EMLVitrineGlossaryWetwareBlurbText'));
+		});
+
 		it('localizes EMLVitrineSupportHeading', function () {
 			browser.assert.text(EMLVitrineSupportHeading, uLocalized('OLSKWordingFeedbackHeading'));
 		});
