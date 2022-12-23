@@ -110,6 +110,18 @@ describe('EMLVitrine_Misc', function () {
 	
 	});
 
+	describe('EMLVitrineGlossaryMeasureLink', function test_EMLVitrineGlossaryMeasureLink () {
+
+		it('sets target', function () {
+			browser.assert.attribute(EMLVitrineGlossaryMeasureLink, 'target', 	'_blank');
+		});
+
+		it('sets href', function () {
+			browser.assert.attribute(EMLVitrineGlossaryMeasureLink, 'href', process.env.EML_VITRINE_MEASURE_URL);
+		});
+	
+	});
+
 	describe('ROCOGazette', function test_ROCOGazette () {
 
 		it('sets ROCOBulletinProject', function () {
