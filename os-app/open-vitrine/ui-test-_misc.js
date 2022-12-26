@@ -34,7 +34,7 @@ describe('EMLVitrine_Misc', function () {
 	
 	});
 
-	describe('EMLVitrineVideo', function () {
+	describe('EMLVitrineVideo', function test_EMLVitrineVideo () {
 
 		it('classes OLSKCommonVideoListItemMobile', function () {
 			browser.assert.hasClass('.EMLVitrineVideo', 'OLSKCommonVideoListItemMobile');
@@ -42,6 +42,10 @@ describe('EMLVitrine_Misc', function () {
 
 		it('sets src', function () {
 			browser.assert.attribute(EMLVitrineVideo, 'src', process.env.EML_VITRINE_VIDEO_URL);
+		});
+
+		it('sets allow', function () {
+			browser.assert.attribute(EMLVitrineVideo, 'allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
 		});
 
 		it('sets allowfullscreen', function () {
