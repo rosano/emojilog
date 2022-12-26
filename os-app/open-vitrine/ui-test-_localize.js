@@ -104,7 +104,6 @@ kDefaultRoute.OLSKRouteLanguageCodes.forEach(function (OLSKRoutingLanguage) {
 		
 		});
 
-
 	});
 
 });
