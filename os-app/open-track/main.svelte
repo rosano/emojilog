@@ -13,7 +13,6 @@ import EMLTransport from '../_shared/EMLTransport/main.js';
 import RemoteStorage from 'remotestoragejs';
 import OLSKString from 'OLSKString';
 import OLSKLanguageSwitcher from 'OLSKLanguageSwitcher';
-import OLSKFund from 'OLSKFund';
 import OLSKPact from 'OLSKPact';
 import OLSKTransport from 'OLSKTransport';
 import EMLTrackLogic from './ui-logic.js';
@@ -75,28 +74,8 @@ const mod = {
 		}).pop() || {}).EMLSettingValue;
 	},
 
-	DataIsEligible (inputData = {}) {
-		return OLSKFund.OLSKFundIsEligible(Object.assign({
-			ParamMinimumTier: 1,
-			ParamCurrentProject: 'ROCO_SHARED_PROJECT_ID_SWAP_TOKEN',
-			ParamBundleProjects: ['FakeBundleProject'],
-			ParamGrantTier: OLSKFund.OLSKFundTier('OLSK_FUND_PRICING_STRING_SWAP_TOKEN', mod._ValueOLSKFundGrant),
-			ParamGrantProject: mod._ValueOLSKFundGrant ? mod._ValueOLSKFundGrant.OLSKPactGrantProject : '',
-		}, inputData));
-	},
-
 	DataTrackRecipes () {
 		const items = [];
-
-		items.push(...OLSKFund.OLSKFundRecipes({
-			OLSKLocalized,
-			ParamConnected: !!mod._ValueCloudIdentity,
-			ParamAuthorized: !!mod._ValueFundClue,
-			OLSKFundDispatchGrant: mod.OLSKFundDispatchGrant,
-			OLSKFundDispatchPersist: mod.OLSKFundDispatchPersist,
-			ParamMod: mod,
-			ParamSpecUI: OLSK_SPEC_UI(),
-		}));
 
 		items.push(...zerodatawrap.ZDRRecipes({
 			ParamMod: mod,
@@ -187,17 +166,6 @@ const mod = {
 					LCHRecipeName: 'EMLTrackLauncherItemDebug_AlertFakeExportSelectedSerialized',
 					LCHRecipeCallback: async function EMLTrackLauncherItemDebug_AlertFakeExportSelectedSerialized () {
 						return this.api.OLSKTransportLauncherFakeItemExportSerialized(await mod._OLSKTransportDispatchExportInput([mod._ValueJournalSelected]));
-					},
-				},
-				{
-					LCHRecipeName: 'FakeFundDocumentLimit',
-					LCHRecipeCallback: async function FakeFundDocumentLimit () {
-						await mod._ValueZDRWrap.App.EMLJournal.EMLJournalCreate({
-							EMLJournalName: Math.random().toString(),
-							EMLJournalChildCount: mod._ValueDocumentRemainder,
-						});
-
-						return mod.SetupValueJournalsAll();
 					},
 				},
 			]);
@@ -312,14 +280,6 @@ const mod = {
 		mod.ControlJournalSelect(inputData);
 	},
 
-	EMLBrowseDispatchEligible () {
-		if (mod._ValueDocumentRemainder < 1 && !mod.DataIsEligible()) {
-			return mod.OLSKFundDocumentGate();
-		}
-
-		return true;
-	},
-
 	EMLBrowseListDispatchClose () {
 		mod.ControlJournalSelect(null);
 
@@ -338,8 +298,6 @@ const mod = {
 		mod.ControlJournalSave(Object.assign(mod._ValueJournalSelected, {
 			EMLJournalChildCount,
 		}));
-
-		mod.ReactDocumentRemainder();
 	},
 
 	EMLTemplateDispatchUpdate () {
@@ -483,42 +441,6 @@ const mod = {
 		mod._ValueZDRWrap.ZDRStorageClient().stopSync();
 	},
 
-	OLSKFundSetupDispatchClue () {
-		return mod.DataSetting('EMLSettingFundClue') || null;
-	},
-	
-	_OLSKFundSetupDispatchUpdate (inputData) {
-		mod[inputData] = mod[inputData]; // #purge-svelte-force-update
-	},
-
-	OLSKFundDispatchPersist (inputData) {
-		mod._ValueFundClue = inputData; // #hotfix-missing-persist
-
-		if (!inputData) {
-			return mod._ValueZDRWrap.App.EMLSetting.ZDRModelDeleteObject({
-				EMLSettingKey: 'EMLSettingFundClue',
-			});
-		}
-
-		return mod._ValueZDRWrap.App.EMLSetting.ZDRModelWriteObject({
-			EMLSettingKey: 'EMLSettingFundClue',
-			EMLSettingValue: inputData,
-		}).then(function () {
-			if (OLSK_SPEC_UI()) {
-				return;
-			}
-			setTimeout(function () {
-				window.location.reload();
-			}, mod._ValueZDRWrap.ZDRStorageProtocol === zerodatawrap.ZDRProtocolFission() ? 1000 : 0); // #hotfix-fission-delay
-		});
-	},
-
-	// REACT
-
-	ReactDocumentRemainder () {
-		mod.OLSKFundDocumentRemainder && mod.OLSKFundDocumentRemainder(EMLTrackLogic.EMLTrackDocumentCount(mod._ValueJournalsAll));
-	},
-
 	// SETUP
 
 	async SetupEverything () {
@@ -530,7 +452,7 @@ const mod = {
 
 		mod.SetupCollectionAPI();
 
-		mod.SetupFund();
+		await mod.SetupCleanup();
 
 		mod._ValueIsLoading = false;
 	},
@@ -598,8 +520,6 @@ const mod = {
 		});
 		
 		mod._EMLTrackJournals.modPublic.OLSKCollectionSort();
-
-		mod.ReactDocumentRemainder();
 	},
 
 	async SetupSettingsAll () {
@@ -619,50 +539,12 @@ const mod = {
 		});
 	},
 
-	async SetupFund () {
-		OLSKFund.OLSKFundSetup({
-			ParamMod: mod,
-			OLSKLocalized,
-			ParamFormURL: 'OLSK_FUND_FORM_URL_SWAP_TOKEN',
-			ParamProject: 'ROCO_SHARED_PROJECT_ID_SWAP_TOKEN',
-			ParamSpecUI: OLSK_SPEC_UI(),
-			ParamDocumentLimit: parseInt('OLSK_FUND_DOCUMENT_LIMIT_SWAP_TOKEN'),
+	SetupCleanup() {
+		window.localStorage.removeItem('OLSK_FUND_GRANT_DATA');
+
+		return mod._ValueSettingsAll.EMLSettingFundClue && mod._ValueZDRWrap.App.EMLSetting.ZDRModelDeleteObject({
+			EMLSettingKey: 'EMLSettingFundClue',
 		});
-
-		mod.ReactDocumentRemainder();
-
-		await OLSKFund.OLSKFundSetupPostPay(mod);
-
-		if (!mod._ValueCloudIdentity) {
-			return;
-		}
-
-		if (!mod._ValueFundClue) {
-			return;
-		}
-
-		const item = {
-			OLSK_CRYPTO_PAIR_RECEIVER_PRIVATE: `OLSK_CRYPTO_PAIR_RECEIVER_PRIVATE_SWAP_TOKEN${ '' }`, // #purge
-			OLSK_CRYPTO_PAIR_SENDER_PUBLIC: 'OLSK_CRYPTO_PAIR_SENDER_PUBLIC_SWAP_TOKEN',
-			OLSK_FUND_API_URL: 'OLSK_FUND_API_URL_SWAP_TOKEN',
-			ParamBody: {
-				OLSKPactAuthType: mod._ValueZDRWrap.ZDRStorageProtocol === zerodatawrap.ZDRProtocolRemoteStorage() ? OLSKPact.OLSKPactAuthTypeRemoteStorage() : OLSKPact.OLSKPactAuthTypeFission(),
-				OLSKPactAuthIdentity: mod._ValueCloudIdentity,
-				OLSKPactAuthProof: mod._ValueCloudToken,
-				OLSKPactAuthMetadata: {
-					OLSKPactAuthMetadataModuleName: 'emojilog',
-					OLSKPactAuthMetadataFolderPath: EMLJournal.EMLJournalDirectory() + '/',
-				},
-				OLSKPactPayIdentity: mod._ValueCloudIdentity,
-				OLSKPactPayClue: mod._ValueFundClue,
-			},
-			OLSKLocalized,
-			OLSKFundDispatchProgress: mod.OLSKFundDispatchProgress,
-			OLSKFundDispatchFail: mod.OLSKFundDispatchFail,
-			OLSKFundDispatchGrant: mod.OLSKFundDispatchGrant,
-		};
-
-		return OLSKFund.OLSKFundSetupGrant(item);
 	},
 
 	// LIFECYCLE
@@ -705,7 +587,6 @@ import OLSKApropos from 'OLSKApropos';
 			EMLBrowseShowTemplateForm={ mod._ValueShowTemplateForm }
 			EMLBrowseListDispatchClose={ mod.EMLBrowseListDispatchClose }
 			EMLBrowseListDispatchTouch={ mod.EMLBrowseListDispatchTouch }
-			EMLBrowseDispatchEligible={ mod.EMLBrowseDispatchEligible }
 			OLSKCatalogDispatchQuantity={ mod.OLSKCatalogDispatchQuantity }
 			EMLTemplateDispatchDiscard={ mod.EMLTemplateDispatchDiscard }
 			EMLTemplateDispatchUpdate={ mod.EMLTemplateDispatchUpdate }
@@ -739,13 +620,10 @@ import OLSKApropos from 'OLSKApropos';
 		OLSKAppToolbarDispatchApropos={ mod.OLSKAppToolbarDispatchApropos }
 		OLSKAppToolbarDispatchTongue={ mod.OLSKAppToolbarDispatchTongue }
 		OLSKAppToolbarGuideURL={ window.OLSKCanonical('EMLGuideRoute') }
-		OLSKAppToolbarFundShowProgress={ mod._ValueOLSKFundProgress }
-		OLSKAppToolbarFundLimitText={ mod._ValueDocumentRemainder }
 		OLSKAppToolbarErrorText={ mod._OLSKAppToolbarErrorText }
 		OLSKAppToolbarCloudConnected={ !!mod._ValueCloudIdentity }
 		OLSKAppToolbarCloudOffline={ mod._ValueCloudIsOffline }
 		OLSKAppToolbarCloudError={ !!mod._ValueCloudErrorText }
-		OLSKAppToolbarDispatchFund={ mod._ValueOLSKFundGrant || OLSKFund.OLSKFundResponseIsPresent() ? null : mod.OLSKAppToolbarDispatchFund }
 		OLSKAppToolbarDispatchCloud={ mod.OLSKAppToolbarDispatchCloud }
 		OLSKAppToolbarDispatchLauncher={ mod.OLSKAppToolbarDispatchLauncher }
 		/>
@@ -757,13 +635,9 @@ import OLSKApropos from 'OLSKApropos';
 	{/if}
 </footer>
 
-{#if !!mod._ValueCloudIdentity }
-	<OLSKWebView OLSKModalViewTitleText={ OLSKLocalized('OLSKFundWebViewTitleText') } OLSKWebViewURL={ mod._ValueFundURL } bind:this={ mod._OLSKWebView } DEBUG_OLSKWebViewDataSource={ OLSK_SPEC_UI() } />
-{/if}
-
 <OLSKModalView OLSKModalViewTitleText={ OLSKLocalized('OLSKAproposHeadingText') } bind:this={ mod._OLSKModalView } OLSKModalViewIsCapped={ true }>
 	<OLSKApropos
-		OLSKAproposFeedbackValue={ `javascript:window.location.href = window.atob('${ window.btoa(OLSKString.OLSKStringFormatted(window.atob('OLSK_APROPOS_FEEDBACK_EMAIL_SWAP_TOKEN'), 'ROCO_SHARED_PROJECT_ID_SWAP_TOKEN' + (mod._ValueFundClue ? '+' + mod._ValueFundClue : ''))) }')` }
+		OLSKAproposFeedbackValue={ `javascript:window.location.href = window.atob('${ window.btoa(OLSKString.OLSKStringFormatted(window.atob('OLSK_APROPOS_FEEDBACK_EMAIL_SWAP_TOKEN'), 'ROCO_SHARED_PROJECT_ID_SWAP_TOKEN')) }')` }
 		/>
 </OLSKModalView>
 

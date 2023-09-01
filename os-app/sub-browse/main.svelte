@@ -7,7 +7,6 @@ export let EMLBrowseShowTemplateForm = false;
 export let OLSKCatalogDispatchQuantity;
 export let EMLBrowseListDispatchClose;
 export let EMLBrowseListDispatchTouch;
-export let EMLBrowseDispatchEligible;
 export let EMLTemplateDispatchUpdate;
 export let EMLTemplateDispatchDiscard;
 export let EMLBrowse_DEBUG = false;
@@ -126,10 +125,6 @@ const mod = {
 	// CONTROL
 
 	async ControlMemoCreate(inputData) {
-		if (!EMLBrowseDispatchEligible()) {
-			return;
-		}
-
 		const item = await EMLBrowseStorageClient.App.EMLMemo.EMLMemoCreate(mod.DataMemoObjectTemplate(), inputData);
 
 		mod.ControlMemoActivate(mod._OLSKCatalog.modPublic.OLSKCatalogInsert(item));

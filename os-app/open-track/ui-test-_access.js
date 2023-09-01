@@ -78,10 +78,6 @@ describe('EMLTrack_Access', function () {
 		return browser.assert.OLSKLauncherItems('OLSKServiceWorkerLauncherFakeItemProxy', 1);
 	});
 
-	it('shows OLSKFundLauncherFakeItemProxy', function () {
-		return browser.assert.OLSKLauncherItems('OLSKFundLauncherFakeItemProxy', 1);
-	});
-
 	it('shows EMLTrackJournalsLauncherFakeItemProxy', function () {
 		return browser.assert.OLSKLauncherItems('EMLTrackJournalsLauncherFakeItemProxy', 1);
 	});

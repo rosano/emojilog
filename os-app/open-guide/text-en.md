@@ -69,8 +69,6 @@ Time is visually represented in a circle with divisions based on the duration:
 | Global (when cloud is connected) ||
 :--- | ---
 | `OLSKRemoteStorageLauncherItemCopyLoginLinkText` | Launcher |
-| `OLSKFundLauncherItemEnterClueText` | Launcher |
-| `OLSKFundLauncherItemClearClueText` | Launcher |
 | `OLSKRemoteStorageLauncherItemDebugFlushDataText` | Launcher |
 
 # Add to Home screen on mobile and tablet devices

@@ -19,9 +19,6 @@ import zerodatawrap from 'zerodatawrap';
 						],
 				}],
 			}),
-			EMLBrowseDispatchEligible: (function () {
-				return true;
-			}),
 			OLSKCatalogDispatchQuantity: (function () {}),
 			EMLTemplateDispatchUpdate: (function () {}),
 			EMLTemplateDispatchDiscard: (function () {}),
