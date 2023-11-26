@@ -23,7 +23,7 @@ const mod = {
 			throw new Error('EMLErrorInputNotValid');
 		}
 
-		return [param1.EMLMemoNotes].filter(function (e) {
+		return [param1.EMLMemoNotes].concat(Object.values(param1.EMLMemoCustomData || {})).filter(function (e) {
 			if (!e) {
 				return false;
 			}

@@ -53,6 +53,26 @@ describe('EMLBrowseIsMatch', function test_EMLBrowseIsMatch() {
 		}, uRandomElement('alf', 'alfa', 'ALF')), true);
 	});
 
+	context('custom field', function () {
+
+		it('returns false if no match', function() {
+			deepEqual(mod.EMLBrowseIsMatch({
+				EMLMemoCustomData: {
+					[Math.random().toString()]: Math.random().toString(),
+				},
+			}, Math.random().toString()), false);
+		});
+
+		it('matches OLSKStringMatch', function() {
+			deepEqual(mod.EMLBrowseIsMatch({
+				EMLMemoCustomData: {
+					[Math.random().toString()]: uRandomElement('alfa', 'álfa'),
+				},
+			}, uRandomElement('alf', 'alfa', 'ALF')), true);
+		});
+	
+	});
+
 });
 
 describe('EMLBrowseExactSortFunction', function test_EMLBrowseExactSortFunction() {
