@@ -52,7 +52,9 @@ const mod = {
 	// INTERFACE
 
 	InterfaceCustomFieldDidInput (field, event) {
-		Object.assign(EMLBrowseInfoItem, {
+		Object.assign(EMLBrowseInfoItem, Object.keys(EMLBrowseInfoItem).includes(field.EMLFieldName) ? {
+			[field.EMLFieldName] : event.target.value,
+		} : {
 			EMLMemoCustomData: Object.assign(EMLBrowseInfoItem.EMLMemoCustomData || {}, {
 				[field.EMLFieldID]: event.target.value,
 			})
@@ -132,7 +134,7 @@ import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 
 {#each EMLBrowseInfoFields as item }
 <p>
-	<input class="EMLBrowseInfoFormCustomField" placeholder={ item.EMLFieldName || OLSKLocalized('EMLParamUntitledText') } type="text" value={ (EMLBrowseInfoItem.EMLMemoCustomData || {})[item.EMLFieldID] || '' } on:input={ (event) => mod.InterfaceCustomFieldDidInput(item, event) } />
+	<input class="EMLBrowseInfoFormCustomField" placeholder={ item.EMLFieldName || OLSKLocalized('EMLParamUntitledText') } type="text" value={ (Object.keys(EMLBrowseInfoItem).includes(item.EMLFieldName) ? EMLBrowseInfoItem[item.EMLFieldName] : (EMLBrowseInfoItem.EMLMemoCustomData || {})[item.EMLFieldID]) || '' } on:input={ (event) => mod.InterfaceCustomFieldDidInput(item, event) } />
 </p>
 {/each}
 
