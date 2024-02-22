@@ -58,6 +58,7 @@ const EMLBrowseInfo = new RollupStart({
 			window.TestEMLBrowseInfoDispatchDebug.innerHTML = parseInt(window.TestEMLBrowseInfoDispatchDebug.innerHTML) + 1;
 			window.TestEMLBrowseInfoDispatchDebugData.innerHTML = JSON.stringify(inputData);
 		}),
+		DEBUG_EMLBrowseInfoJournal: {},
 		EMLBrowseInfo_DebugShowLauncherButton: true,
 	}, params),
 });

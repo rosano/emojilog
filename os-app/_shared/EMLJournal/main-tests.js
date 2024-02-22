@@ -134,6 +134,26 @@ describe('EMLJournalErrors', function test_EMLJournalErrors() {
 
 	});
 
+	context('EMLJournalFieldsOnParent', function () {
+
+		it('returns object if not boolean', function () {
+			deepEqual(mod.EMLJournalErrors(StubJournalObjectValid({
+				EMLJournalFieldsOnParent: 'true',
+			})), {
+				EMLJournalFieldsOnParent: [
+					'EMLErrorNotBoolean',
+				],
+			});
+		});
+
+		it('returns null', function () {
+			deepEqual(mod.EMLJournalErrors(StubJournalObjectValid({
+				EMLJournalFieldsOnParent: true,
+			})), null);
+		});
+
+	});
+
 });
 
 describe('EMLFieldErrors', function test_EMLFieldErrors() {

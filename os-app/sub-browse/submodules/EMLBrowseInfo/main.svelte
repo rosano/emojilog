@@ -5,6 +5,7 @@ export let EMLBrowseInfoDispatchBack;
 export let EMLBrowseInfoDispatchUpdate;
 export let EMLBrowseInfoDispatchDiscard;
 export let EMLBrowseInfoDispatchDebug;
+export let DEBUG_EMLBrowseInfoJournal;
 export let EMLBrowseInfo_DebugShowLauncherButton = false;
 
 export const modPublic = {
@@ -52,7 +53,8 @@ const mod = {
 	// INTERFACE
 
 	InterfaceCustomFieldDidInput (field, event) {
-		Object.assign(EMLBrowseInfoItem, Object.keys(EMLBrowseInfoItem).includes(field.EMLFieldName) ? {
+		
+		Object.assign(EMLBrowseInfoItem, DEBUG_EMLBrowseInfoJournal.EMLJournalFieldsOnParent ? {
 			[field.EMLFieldName] : event.target.value,
 		} : {
 			EMLMemoCustomData: Object.assign(EMLBrowseInfoItem.EMLMemoCustomData || {}, {
@@ -134,7 +136,7 @@ import _OLSKSharedClone from '../../../_shared/__external/OLSKUIAssets/_OLSKShar
 
 {#each EMLBrowseInfoFields as item }
 <p>
-	<input class="EMLBrowseInfoFormCustomField" placeholder={ item.EMLFieldName || OLSKLocalized('EMLParamUntitledText') } type="text" value={ (Object.keys(EMLBrowseInfoItem).includes(item.EMLFieldName) ? EMLBrowseInfoItem[item.EMLFieldName] : (EMLBrowseInfoItem.EMLMemoCustomData || {})[item.EMLFieldID]) || '' } on:input={ (event) => mod.InterfaceCustomFieldDidInput(item, event) } />
+	<input class="EMLBrowseInfoFormCustomField" placeholder={ item.EMLFieldName || OLSKLocalized('EMLParamUntitledText') } type="text" value={ (DEBUG_EMLBrowseInfoJournal.EMLJournalFieldsOnParent ? EMLBrowseInfoItem[item.EMLFieldName] : (EMLBrowseInfoItem.EMLMemoCustomData || {})[item.EMLFieldID]) || '' } on:input={ (event) => mod.InterfaceCustomFieldDidInput(item, event) } />
 </p>
 {/each}
 

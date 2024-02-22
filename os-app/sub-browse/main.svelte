@@ -318,6 +318,7 @@ import EMLTemplate from '../sub-template/main.svelte';
 			EMLBrowseInfoDispatchDiscard={ mod.EMLBrowseInfoDispatchDiscard }
 			EMLBrowseInfoDispatchUpdate={ mod.EMLBrowseInfoDispatchUpdate }
 			EMLBrowseInfoDispatchDebug={ mod.EMLBrowseInfoDispatchDebug }
+			DEBUG_EMLBrowseInfoJournal={ EMLBrowseJournal }
 			bind:this={ mod._EMLBrowseInfo }
 			/>
 	</div>

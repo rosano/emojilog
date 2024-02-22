@@ -69,6 +69,14 @@ const mod = {
 			}
 		}
 
+		if (typeof inputData.EMLJournalFieldsOnParent !== 'undefined') {
+			if (typeof inputData.EMLJournalFieldsOnParent !== 'boolean') {
+				errors.EMLJournalFieldsOnParent = [
+					'EMLErrorNotBoolean',
+				];
+			}
+		}
+
 		return Object.entries(errors).length ? errors : null;
 	},
 
