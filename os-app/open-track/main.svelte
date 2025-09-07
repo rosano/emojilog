@@ -13,7 +13,7 @@ import EMLTransport from '../_shared/EMLTransport/main.js';
 import RemoteStorage from 'remotestoragejs';
 import OLSKString from 'OLSKString';
 import OLSKLanguageSwitcher from 'OLSKLanguageSwitcher';
-import OLSKPact from 'OLSKPact';
+
 import OLSKTransport from 'OLSKTransport';
 import EMLTrackLogic from './ui-logic.js';
 import EMLTrackJournalsLogic from '../sub-journals/ui-logic.js';
